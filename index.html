@@ -68,8 +68,12 @@
   .site-footer .meta{font-size:11px;color:var(--text-sec);letter-spacing:0.04em;}
 
   /* lang visibility */
-  .en{display:none;}.id{display:block;}
-  body.en .en{display:block;} body.en .id{display:none;}
+  :not(body)[class~="en"] { display:none !important; }
+  body.en :not(body)[class~="en"] { display:block !important; }
+  body.en :not(body)[class~="id"] { display:none !important; }
+  body.en span[class~="en"] { display:inline !important; }
+  span[class~="id"] { display:inline; }
+  body.en span[class~="id"] { display:none !important; }
 
   @media(max-width:540px){.paper-grid{grid-template-columns:1fr;}.deep-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:22px;}}
 </style>
@@ -102,8 +106,8 @@
 </div>
 
 <!-- OVERVIEW -->
-<div class="section-label id">Gambaran Lengkap</div>
-<div class="section-label en">Full Overview</div>
+<div class="section-label id lang-only">Gambaran Lengkap</div>
+<div class="section-label en lang-only">Full Overview</div>
 <div class="main-card">
   <a class="card-link" href="cho_series_complete.html">
     <span class="card-tag id">Index · Semua Paper</span>
@@ -117,8 +121,8 @@
 </div>
 
 <!-- PAPERS -->
-<div class="section-label id" style="margin-top:32px;">4 Paper · 4 Variabel</div>
-<div class="section-label en" style="margin-top:32px;">4 Papers · 4 Variables</div>
+<div class="section-label id lang-only" style="margin-top:32px;">4 Paper · 4 Variabel</div>
+<div class="section-label en lang-only" style="margin-top:32px;">4 Papers · 4 Variables</div>
 <div class="paper-grid">
   <a class="paper-card p1" href="cho_series_complete.html">
     <div class="pc-num">Paper 1 · WHY</div>
@@ -157,8 +161,8 @@
 </div>
 
 <!-- DEEP DIVES -->
-<div class="section-label id" style="margin-top:32px;">Deep Dive per Variabel</div>
-<div class="section-label en" style="margin-top:32px;">Deep Dive per Variable</div>
+<div class="section-label id lang-only" style="margin-top:32px;">Deep Dive per Variabel</div>
+<div class="section-label en lang-only" style="margin-top:32px;">Deep Dive per Variable</div>
 <div class="deep-grid">
   <a class="deep-card" href="grand_formula_architecture.html">
     <div class="dc-icon">🗺</div>
@@ -203,17 +207,10 @@
 
 <div class="site-footer">
   <div class="fml">(Consciousness × Calculation) ^ <em>Humanity</em> &lt; Transcendence</div>
-  <div class="meta">渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; gokiantik@gmail.com &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
+  <div class="meta">渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3848c888a828d978a88a3848e828a8fcd808c8e">[email&#160;protected]</a> &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function setLang(l){
-  document.body.className=l;
-  document.getElementById('btn-id').className='lang-btn'+(l==='id'?' active':'');
-  document.getElementById('btn-en').className='lang-btn'+(l==='en'?' active':'');
-  localStorage.setItem('cho-lang',l);
-}
-(function(){var l=localStorage.getItem('cho-lang')||'id';setLang(l);})();
-</script>
-</body>
-</html>
+  document.body.className=(document.body.className.replace(/\bid\b|\ben\b/g,'')+' '+l).trim();
+  document.getElementById('btn-id').className='lang-btn'+(l==='id'?' activ
