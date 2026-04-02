@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arsitektur Sosial Kedaulatan — Grand Formula</title>
+<style>
+  :root {
+    --purple-50:#EEEDFE;--purple-100:#CECBF6;--purple-200:#AFA9EC;--purple-600:#534AB7;--purple-800:#3C3489;--purple-900:#26215C;
+    --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-200:#5DCAA5;--teal-600:#0F6E56;--teal-800:#085041;
+    --blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-200:#85B7EB;--blue-600:#185FA5;--blue-800:#0C447C;
+    --amber-50:#FAEEDA;--amber-100:#FAC775;--amber-200:#EF9F27;--amber-600:#854F0B;--amber-800:#633806;
+    --coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-200:#F0997B;--coral-600:#993C1D;--coral-800:#712B13;
+    --green-50:#EAF3DE;--green-100:#C0DD97;--green-200:#97C459;--green-600:#3B6D11;--green-800:#27500A;
+    --red-50:#FCEBEB;--red-100:#F7C1C1;--red-200:#F09595;--red-600:#A32D2D;--red-800:#791F1F;
+    --gray-50:#F1EFE8;--gray-100:#D3D1C7;--gray-200:#B4B2A9;--gray-600:#5F5E5A;--gray-800:#444441;
+    --bg:#ffffff;--bg2:#F7F6F1;--bg3:#EFEDE6;
+    --text:#1a1a18;--text-sec:#5F5E5A;
+    --border:rgba(0,0,0,0.09);--border-med:rgba(0,0,0,0.15);
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --purple-50:#26215C;--purple-100:#3C3489;--purple-200:#534AB7;--purple-600:#AFA9EC;--purple-800:#CECBF6;--purple-900:#EEEDFE;
+      --teal-50:#04342C;--teal-100:#085041;--teal-200:#0F6E56;--teal-600:#5DCAA5;--teal-800:#9FE1CB;
+      --blue-50:#042C53;--blue-100:#0C447C;--blue-200:#185FA5;--blue-600:#85B7EB;--blue-800:#B5D4F4;
+      --amber-50:#412402;--amber-100:#633806;--amber-200:#854F0B;--amber-600:#EF9F27;--amber-800:#FAC775;
+      --coral-50:#4A1B0C;--coral-100:#712B13;--coral-200:#993C1D;--coral-600:#F0997B;--coral-800:#F5C4B3;
+      --green-50:#173404;--green-100:#27500A;--green-200:#3B6D11;--green-600:#97C459;--green-800:#C0DD97;
+      --red-50:#501313;--red-100:#791F1F;--red-200:#A32D2D;--red-600:#F09595;--red-800:#FCEBEB;
+      --gray-50:#2C2C2A;--gray-100:#444441;--gray-200:#5F5E5A;--gray-600:#B4B2A9;--gray-800:#D3D1C7;
+      --bg:#1a1a18;--bg2:#222220;--bg3:#2a2a27;
+      --text:#e8e6de;--text-sec:#B4B2A9;
+      --border:rgba(255,255,255,0.08);--border-med:rgba(255,255,255,0.14);
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);font-family:'Georgia',serif;color:var(--text);line-height:1.7;max-width:760px;margin:0 auto;padding:0 0 60px;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 28px;display:flex;gap:0;overflow-x:auto;}
+  nav button{background:none;border:none;border-bottom:2px solid transparent;padding:14px 16px 12px;font-size:12px;font-family:'Georgia',serif;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-sec);cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s;}
+  nav button.active{color:var(--text);border-bottom-color:var(--text);}
+  nav button:hover{color:var(--text);}
+
+  .section{display:none;padding:32px 28px 20px;}
+  .section.active{display:block;}
+
+  .eyebrow{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-sec);margin-bottom:10px;}
+  .formula-banner{background:var(--purple-50);border-left:3px solid var(--purple-600);border-radius:0 12px 12px 0;padding:18px 22px;margin-bottom:28px;}
+  .formula-banner .eq{font-size:16px;font-weight:600;color:var(--purple-800);margin-bottom:4px;}
+  .formula-banner .hl{background:var(--purple-200);color:var(--purple-900);padding:1px 8px;border-radius:4px;font-style:normal;}
+  .formula-banner .sub{font-size:12px;color:var(--purple-600);}
+
+  h2{font-size:20px;font-weight:600;margin-bottom:6px;}
+  .lead{font-size:14px;color:var(--text-sec);margin-bottom:24px;line-height:1.6;}
+  h3{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-sec);margin:24px 0 12px;}
+
+  /* Overview layers */
+  .layers{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+  .layer{display:grid;grid-template-columns:140px 1fr;gap:0;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+  .layer-id{padding:16px;display:flex;flex-direction:column;justify-content:center;}
+  .layer-id .lid{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+  .layer-id .lname{font-size:14px;font-weight:600;}
+  .layer-body{padding:16px;background:var(--bg2);font-size:13px;color:var(--text-sec);line-height:1.6;}
+  .l1 .layer-id{background:var(--teal-50);}
+  .l1 .layer-id .lid{color:var(--teal-600);}
+  .l1 .layer-id .lname{color:var(--teal-800);}
+  .l2 .layer-id{background:var(--blue-50);}
+  .l2 .layer-id .lid{color:var(--blue-600);}
+  .l2 .layer-id .lname{color:var(--blue-800);}
+  .l3 .layer-id{background:var(--amber-50);}
+  .l3 .layer-id .lid{color:var(--amber-600);}
+  .l3 .layer-id .lname{color:var(--amber-800);}
+
+  /* Pentadrant */
+  .penta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+  .quad{border-radius:10px;padding:16px;border:1px solid transparent;}
+  .quad-id{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+  .quad-name{font-size:15px;font-weight:600;margin-bottom:8px;}
+  .quad-section{margin-bottom:6px;}
+  .quad-section-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;}
+  .quad-section-text{font-size:12px;line-height:1.5;}
+  .qE{background:var(--teal-50);border-color:var(--teal-200);}
+  .qE .quad-id{color:var(--teal-600);}
+  .qE .quad-name{color:var(--teal-800);}
+  .qE .quad-section-label{color:var(--teal-600);}
+  .qE .quad-section-text{color:var(--teal-600);}
+  .qS{background:var(--blue-50);border-color:var(--blue-200);}
+  .qS .quad-id{color:var(--blue-600);}
+  .qS .quad-name{color:var(--blue-800);}
+  .qS .quad-section-label{color:var(--blue-600);}
+  .qS .quad-section-text{color:var(--blue-600);}
+  .qB{background:var(--amber-50);border-color:var(--amber-200);}
+  .qB .quad-id{color:var(--amber-600);}
+  .qB .quad-name{color:var(--amber-800);}
+  .qB .quad-section-label{color:var(--amber-600);}
+  .qB .quad-section-text{color:var(--amber-600);}
+  .qI{background:var(--purple-50);border-color:var(--purple-200);}
+  .qI .quad-id{color:var(--purple-600);}
+  .qI .quad-name{color:var(--purple-800);}
+  .qI .quad-section-label{color:var(--purple-600);}
+  .qI .quad-section-text{color:var(--purple-600);}
+  .qG{background:var(--coral-50);border-color:var(--coral-200);grid-column:span 2;}
+  .qG .quad-id{color:var(--coral-600);}
+  .qG .quad-name{color:var(--coral-800);}
+  .qG .quad-section-label{color:var(--coral-600);}
+  .qG .quad-section-text{color:var(--coral-600);}
+  .qG-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+  /* Johari */
+  .johari-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+  .jp{border-radius:10px;padding:14px;border:1px solid var(--border);background:var(--bg2);}
+  .jp-name{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text);}
+  .jp-side{display:grid;grid-template-columns:72px 1fr;gap:6px;margin-bottom:6px;font-size:12px;}
+  .jp-side-label{font-weight:600;color:var(--text-sec);}
+  .jp-side-text{color:var(--text-sec);line-height:1.4;}
+
+  .condition-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+  .cond{border-radius:10px;padding:16px;border:1px solid transparent;}
+  .cond.peace{background:var(--green-50);border-color:var(--green-200);}
+  .cond.war{background:var(--red-50);border-color:var(--red-200);}
+  .cond-title{font-size:13px;font-weight:600;margin-bottom:10px;}
+  .cond.peace .cond-title{color:var(--green-800);}
+  .cond.war .cond-title{color:var(--red-800);}
+  .cond-item{font-size:12px;margin-bottom:6px;line-height:1.4;padding-left:14px;position:relative;}
+  .cond-item::before{content:'▸';position:absolute;left:0;font-size:10px;}
+  .cond.peace .cond-item{color:var(--green-600);}
+  .cond.peace .cond-item::before{color:var(--green-600);}
+  .cond.war .cond-item{color:var(--red-600);}
+  .cond.war .cond-item::before{color:var(--red-600);}
+
+  /* Ruwet-Genah */
+  .rwg{display:flex;flex-direction:column;gap:0;margin-bottom:24px;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+  .rwg-row{display:grid;grid-template-columns:120px 1fr;gap:0;}
+  .rwg-row+.rwg-row{border-top:1px solid var(--border);}
+  .rwg-label{padding:16px;display:flex;flex-direction:column;justify-content:center;}
+  .rwg-id{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;}
+  .rwg-name{font-size:15px;font-weight:600;}
+  .rwg-body{padding:16px;font-size:13px;line-height:1.6;background:var(--bg2);}
+  .rw .rwg-label{background:var(--red-50);}
+  .rw .rwg-id{color:var(--red-600);}
+  .rw .rwg-name{color:var(--red-800);}
+  .rw .rwg-body{color:var(--text-sec);}
+  .otw .rwg-label{background:var(--amber-50);}
+  .otw .rwg-id{color:var(--amber-600);}
+  .otw .rwg-name{color:var(--amber-800);}
+  .otw .rwg-body{color:var(--text-sec);}
+  .gn .rwg-label{background:var(--green-50);}
+  .gn .rwg-id{color:var(--green-600);}
+  .gn .rwg-name{color:var(--green-800);}
+  .gn .rwg-body{color:var(--text-sec);}
+
+  .infobox{border-radius:10px;padding:18px 20px;margin-bottom:20px;border:1px solid transparent;}
+  .infobox.purple{background:var(--purple-50);border-color:var(--purple-100);}
+  .infobox p{font-size:13px;line-height:1.7;color:var(--purple-800);}
+  .infobox strong{font-weight:600;}
+
+  .footer{border-top:1px solid var(--border);padding-top:16px;margin-top:12px;font-size:11px;color:var(--text-sec);text-align:center;letter-spacing:0.04em;}
+
+  @media(max-width:540px){
+    .penta,.johari-grid,.condition-grid{grid-template-columns:1fr;}
+    .qG{grid-column:span 1;}
+    .qG-inner{grid-template-columns:1fr;}
+    .layer{grid-template-columns:1fr;}
+    .rwg-row{grid-template-columns:1fr;}
+  }
+
+  .en{display:none!important;}.id{display:block;}
+  body.en .en{display:block!important;} body.en .id{display:none!important;}
+  .lang-btn.active{background:var(--purple-600,#534AB7)!important;color:#fff!important;}
+</style>
+</head>
+<body class="id">
+<div class="topbar" style="position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--border,rgba(0,0,0,0.09));padding:10px 28px;display:flex;align-items:center;gap:16px;font-family:Georgia,serif;">
+  <a href="index.html" style="text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-sec,#5F5E5A);">← Portal</a>
+  <span style="color:var(--border-med,rgba(0,0,0,0.2));font-size:16px;">·</span>
+  <span style="font-size:12px;color:var(--text-sec,#5F5E5A);" class="id">CHO In Action Series · GKT 2026</span>
+  <span style="font-size:12px;color:var(--text-sec,#5F5E5A);" class="en">CHO In Action Series · GKT 2026</span>
+  <div style="flex:1"></div>
+  <div style="display:flex;border:1px solid var(--border-med,rgba(0,0,0,0.15));border-radius:20px;overflow:hidden;">
+    <button id="btn-id" class="lang-btn active" onclick="setLang('id')" style="background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:Georgia,serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec,#5F5E5A);transition:background .15s,color .15s;">ID</button>
+    <button id="btn-en" class="lang-btn" onclick="setLang('en')" style="background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:Georgia,serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec,#5F5E5A);transition:background .15s,color .15s;">EN</button>
+  </div>
+</div>
+
+<nav>
+  <button class="active" onclick="show('overview')"><span class="id">Gambaran</span><span class="en">Overview</span></button>
+  <button onclick="show('pentadrant')">Pentadrant</button>
+  <button onclick="show('johari')">8 Johari Panels</button>
+  <button onclick="show('ruwet')">Ruwet → Genah</button>
+</nav>
+
+<!-- OVERVIEW -->
+<div class="section active" id="sec-overview">
+  <p class="eyebrow">Paper 3 · WHO (Manusia) · Grand Formula</p>
+  <div class="formula-banner">
+    <div class="eq">(Consciousness × Calculation) ^ Humanity · <em class="hl">Arsitektur Sosial</em></div>
+    <div class="sub"><span class="id">Peta struktural dari siapa saja manusia dalam ekosistem AI — dan di mana masing-masing terjebak atau terbebas</span><span class="en">Structural map of who humans are in the AI ecosystem — and where each is trapped or freed</span></div>
+  </div>
+
+  <h2><span class="id">Dua lapis arsitektur</span><span class="en">Two layers of architecture</span></h2>
+  <p class="lead"><span class="id">Paper 1 bertanya siapa manusia secara psikologis. Paper 2 bertanya seberapa berdaulat tindakannya. Paper 3 bertanya: di mana manusia itu berada secara sosial dan struktural?</span><span class="en">Paper 1 asks who the human is psychologically. Paper 2 asks how sovereign their actions are. Paper 3 asks: where does the human stand socially and structurally?</span></p>
+
+  <div class="layers">
+    <div class="layer l1">
+      <div class="layer-id"><div class="lid"><span class="id">Lapis 1</span><span class="en">Layer 1</span></div><div class="lname">Pentadrant</div></div>
+      <div class="layer-body">Peta posisi sosial — 5 kuadrant (E, S, B, I, G) masing-masing dengan trap mindset dan jalan pembebasan sendiri. Penambahan G (Governmental) adalah jembatan langsung ke implementasi kebijakan UN.</div>
+    </div>
+    <div class="layer l2">
+      <div class="layer-id"><div class="lid"><span class="id">Lapis 2</span><span class="en">Layer 2</span></div><div class="lname">8 Johari Panels</div></div>
+      <div class="layer-body">Peta transparansi — 4 panel Front-End (pengguna) dan 4 panel Back-End (engineer). AI bukan pihak ketiga; AI adalah cermin yang merefleksikan bagaimana 8 panel ini selaras atau berbenturan.</div>
+    </div>
+    <div class="layer l3">
+      <div class="layer-id"><div class="lid"><span class="id">Bahasa diagnostik</span><span class="en">Diagnostic language</span></div><div class="lname">Ruwet → Genah <span class="en" style="font-size:11px;font-weight:400">(Chaos → Order)</span></div></div>
+      <div class="layer-body">Kerangka triadic untuk mendiagnosis kondisi peradaban — dari kekacauan kognitif-sosial (Ruwet) menuju sinkronisasi penuh (Genah), dengan fase transisi OTW Genah di tengahnya.</div>
+    </div>
+  </div>
+
+  <div class="infobox purple">
+    <p>Posisi sosial bukan takdir. Tapi ia adalah <strong>konteks struktural</strong> yang menentukan seberapa mudah atau sulit seseorang mencapai kedaulatan sejati. Seorang G yang bertransformasi bisa memastikan Open Source menjadi mandat kebijakan — Humanity^2 yang berdampak pada jutaan orang sekaligus.</p>
+  </div>
+  <div class="footer">DOI: 10.5281/zenodo.19158062 &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
+</div>
+
+<!-- PENTADRANT -->
+<div class="section" id="sec-pentadrant">
+  <p class="eyebrow">Lapis 1 · Pentadrant</p>
+  <h2><span class="id">Peta 8 Miliar Manusia</span><span class="en">Map of 8 Billion Humans</span></h2>
+  <p class="lead"><span class="id">Kiyosaki memetakan 4 kuadrant ekonomi (ESBI). Paper 3 menambahkan G (Governmental) — kuadrant yang tidak pernah ada dalam framework manapun sebelumnya, tapi paling krusial untuk konteks UN dan kebijakan publik.</span><span class="en">Kiyosaki mapped 4 economic quadrants (ESBI). Paper 3 adds G (Governmental) — a quadrant that has never appeared in any framework before, yet is the most crucial for UN contexts and public policy.</span></p>
+
+  <div class="penta">
+    <div class="quad qE">
+      <div class="quad-id">E — Employee</div>
+      <div class="quad-name">Karyawan</div>
+      <div class="quad-section">
+        <div class="quad-section-label">Populasi</div>
+        <div class="quad-section-text">Terbesar secara jumlah globally, paling terancam otomasi</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jebakan AI</div>
+        <div class="quad-section-text">Menggunakan AI sebagai alat untuk menghindari berpikir — slowness manual-mekanis</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jalan berdaulat</div>
+        <div class="quad-section-text">Aktifkan 4 Front-End Filters; jadilah sovereign learner</div>
+      </div>
+    </div>
+    <div class="quad qS">
+      <div class="quad-id">S — Self-Employed</div>
+      <div class="quad-name">Profesional Mandiri</div>
+      <div class="quad-section">
+        <div class="quad-section-label">Populasi</div>
+        <div class="quad-section-text">Peneliti, konsultan, praktisi independen</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jebakan AI</div>
+        <div class="quad-section-text">Kelelahan kognitif; takut AI menggantikan jam kerja yang bisa ditagih</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jalan berdaulat</div>
+        <div class="quad-section-text">Gunakan AI sebagai leverage, bukan pengganti — skalakan layanan, bukan waktu</div>
+      </div>
+    </div>
+    <div class="quad qB">
+      <div class="quad-id">B — Business Owner</div>
+      <div class="quad-name">Pemilik Bisnis</div>
+      <div class="quad-section">
+        <div class="quad-section-label">Populasi</div>
+        <div class="quad-section-text">Pemilik sistem dan entrepreneur</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jebakan AI</div>
+        <div class="quad-section-text">Profit tanpa jiwa — menurunkan eksponen Humanity demi shareholder return</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jalan berdaulat</div>
+        <div class="quad-section-text">Tata kelola CHO — ukur sukses dengan Humanity^2, bukan revenue</div>
+      </div>
+    </div>
+    <div class="quad qI">
+      <div class="quad-id">I — Investor</div>
+      <div class="quad-name">Investor</div>
+      <div class="quad-section">
+        <div class="quad-section-label">Populasi</div>
+        <div class="quad-section-text">Alokator modal, navigator probabilistik</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jebakan AI</div>
+        <div class="quad-section-text">Spekulasi vs pelayanan probabilistik — yield tanpa kebijaksanaan</div>
+      </div>
+      <div class="quad-section">
+        <div class="quad-section-label">Jalan berdaulat</div>
+        <div class="quad-section-text">Navigasi menuju yield-of-dignity, bukan yield-of-extraction</div>
+      </div>
+    </div>
+    <div class="quad qG">
+      <div class="quad-id">G — Governmental (BARU · Kontribusi Paper 3)</div>
+      <div class="quad-name">Aparatur Pemerintah & Pembuat Kebijakan</div>
+      <div class="qG-inner">
+        <div>
+          <div class="quad-section">
+            <div class="quad-section-label">Populasi</div>
+            <div class="quad-section-text">ASN, birokrat, pejabat — ASEAN, UN, pemerintah nasional</div>
+          </div>
+          <div class="quad-section">
+            <div class="quad-section-label">Jebakan AI</div>
+            <div class="quad-section-text">Struktur komando warisan WW1/WW2 — regulasi lambat yang menghambat inovasi Open Source</div>
+          </div>
+        </div>
+        <div>
+          <div class="quad-section">
+            <div class="quad-section-label">Jalan berdaulat</div>
+            <div class="quad-section-text">Transformasi menjadi guardian infrastruktur digital berdaulat; adopsi mandat Open Source sebagai kebijakan publik</div>
+          </div>
+          <div class="quad-section">
+            <div class="quad-section-label">Mengapa krusial</div>
+            <div class="quad-section-text">Ini adalah jembatan langsung antara teori CHO dan implementasi kebijakan UN — tidak ada framework sebelumnya yang memposisikan ini</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Pentadrant · GKT 2026 · Update dari ESBI Kiyosaki</div>
+</div>
+
+<!-- JOHARI -->
+<div class="section" id="sec-johari">
+  <p class="eyebrow">Lapis 2 · 8 Johari Panels</p>
+  <h2><span class="id">Perdamaian atau Perang Peradaban</span><span class="en">Civilisational Peace or War</span></h2>
+  <p class="lead">AI bukan pihak ketiga yang punya Johari Window sendiri. AI adalah cermin — atau cermin yang retak — yang merefleksikan bagaimana 8 panel dari dua pihak manusia selaras atau berbenturan.</p>
+
+  <h3>4 Panel Front-End + 4 Panel Back-End</h3>
+  <div class="johari-grid">
+    <div class="jp">
+      <div class="jp-name">Panel Terbuka</div>
+      <div class="jp-side"><div class="jp-side-label">Front-End</div><div class="jp-side-text">Kebutuhan & niat terlihat oleh diri sendiri dan publik</div></div>
+      <div class="jp-side"><div class="jp-side-label">Back-End</div><div class="jp-side-text">Kode & algoritma dipublikasikan secara terbuka (Open Source)</div></div>
+    </div>
+    <div class="jp">
+      <div class="jp-name">Panel Buta</div>
+      <div class="jp-side"><div class="jp-side-label">Front-End</div><div class="jp-side-text">Pola yang diketahui algoritma tapi tidak diketahui pengguna — addiction triggers, kerentanan emosional</div></div>
+      <div class="jp-side"><div class="jp-side-label">Back-End</div><div class="jp-side-text">Bias dalam kode yang tidak disadari engineer tapi dirasakan pengguna</div></div>
+    </div>
+    <div class="jp">
+      <div class="jp-name">Panel Tersembunyi</div>
+      <div class="jp-side"><div class="jp-side-label">Front-End</div><div class="jp-side-text">Niat sejati pengguna — bisa melayani atau mengeksploitasi</div></div>
+      <div class="jp-side"><div class="jp-side-label">Back-End</div><div class="jp-side-text">Rahasia dagang & manipulasi algoritmik yang disembunyikan demi Mountain of Money</div></div>
+    </div>
+    <div class="jp">
+      <div class="jp-name">Panel Tidak Diketahui</div>
+      <div class="jp-side"><div class="jp-side-label">Front-End</div><div class="jp-side-text">Potensi kedaulatan yang belum terbangun — The Sovereign One belum terjaga</div></div>
+      <div class="jp-side"><div class="jp-side-label">Back-End</div><div class="jp-side-text">Dampak jangka panjang AGI yang bahkan penciptanya belum pahami</div></div>
+    </div>
+  </div>
+
+  <h3><span class="id">Kondisi Damai vs Perang Peradaban</span><span class="en">Conditions for Peace vs War</span></h3>
+  <div class="condition-grid">
+    <div class="cond peace">
+      <div class="cond-title"><span class="id">Kondisi Damai Peradaban</span><span class="en">Civilisational Peace</span></div>
+      <div class="cond-item">Back-End membuka Panel Tersembunyi via Open Source dan transparansi algoritmik</div>
+      <div class="cond-item">Front-End menyusutkan Panel Buta dengan menjadi Sovereign — aktifkan 4 Front-End Filters</div>
+      <div class="cond-item">Keduanya menerangi Panel Tidak Diketahui lewat riset kolaboratif dan dataset terbuka</div>
+    </div>
+    <div class="cond war">
+      <div class="cond-title"><span class="id">Kondisi Perang Peradaban</span><span class="en">Civilisational War</span></div>
+      <div class="cond-item">Panel Tersembunyi Back-End membesar demi Mountain of Money — manipulasi algoritmik tersembunyi</div>
+      <div class="cond-item">Panel Buta Front-End meledak — AI tahu lebih banyak tentang pengguna dari pengguna itu sendiri</div>
+      <div class="cond-item">Panel Tidak Diketahui meledak — lahirnya Homo Homini Lupus, manusia sebagai predator manusia</div>
+    </div>
+  </div>
+  <div class="footer">8 Johari Panels · GKT 2026 · Dikembangkan dari Luft &amp; Ingham (1955)</div>
+</div>
+
+<!-- RUWET-GENAH -->
+<div class="section" id="sec-ruwet">
+  <p class="eyebrow">Bahasa Diagnostik · Ruwet → OTW Genah → Genah</p>
+  <h2><span class="id">Diagnosis Kondisi Peradaban</span><span class="en">Diagnosing Civilisational Condition</span></h2>
+  <p class="lead">Kerangka triadic untuk membaca kondisi sosial-kognitif — dari kekacauan hingga sinkronisasi. Bisa diterapkan di skala personal maupun peradaban.</p>
+
+  <div class="rwg">
+    <div class="rwg-row rw">
+      <div class="rwg-label"><div class="rwg-id">Fase 1</div><div class="rwg-name">Ruwet</div></div>
+      <div class="rwg-body"><strong>Kekacauan kognitif-peradaban.</strong> Blind Spot maksimum, Open Area minimum, Unknown Area meledak. Kondisi Manja (tidak berdaulat) dan Terhimpit (tertekan Two Mountains) terjadi bersamaan. AI memperbesar disfungsi, bukan menyelesaikannya. Skala personal: algoritma tahu lebih banyak tentang pengguna dari diri pengguna sendiri. Skala sosial: asimetri 8 panel antara Back-End dan Front-End — Hidden Area dieksploitasi demi profit.</div>
+    </div>
+    <div class="rwg-row otw">
+      <div class="rwg-label"><div class="rwg-id">Fase 2</div><div class="rwg-name">OTW Genah</div></div>
+      <div class="rwg-body"><strong>"On The Way" — transisi, kebangkitan berdaulat.</strong> The Sovereign One mulai mengaktifkan 4 Filter (Rogers Innovator, Hawkins LoC ≥400, Johari Reflective, Ruwet→Genah). Protocol CHO v1.0 bergerak. Back-End engineer mulai menemukan pembebasan lewat Open Source. Ini adalah fase paling kritis — momentum bisa maju ke Genah atau mundur ke Ruwet.</div>
+    </div>
+    <div class="rwg-row gn">
+      <div class="rwg-label"><div class="rwg-id">Fase 3</div><div class="rwg-name">Genah</div></div>
+      <div class="rwg-body"><strong>Sinkronisasi peradaban.</strong> 8 Johari Panels selaras antara Front-End dan Back-End. Grand Formula beroperasi di Humanity^2. AI melayani semua 8 miliar dalam martabat. Open Source menjadi infrastruktur peradaban, bukan sekadar komunitas developer. Ini bukan utopia abstrak — ini kondisi terukur lewat ASI komunitas ≥0.8 secara konsisten.</div>
+    </div>
+  </div>
+
+  <h3><span class="id">Dua Skala Ruwet</span><span class="en">Two Scales of Ruwet</span></h3>
+  <div class="infobox purple">
+    <p><strong>Skala Personal (Privasi):</strong> Blind Spot dikolonisasi oleh kecerdasan algoritmik. Mesin tahu lebih banyak tentang kamu dari dirimu sendiri. Open Area (kesadaran diri) menyusut. Kondisi Manja.</p>
+  </div>
+  <div class="infobox purple" style="margin-top:-10px">
+    <p><strong>Skala Sosial (Sosiologis):</strong> Asimetri 8 Johari Panels antara Back-End dan Front-End. Hidden Area dieksploitasi oleh Mountain of Money. Hasilnya: Sovereignty Gap. Homo Homini Lupus di panel Unknown.</p>
+  </div>
+
+  <div class="footer">
+    渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; DOI: 10.5281/zenodo.19002243
+  </div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  const idx={overview:0,pentadrant:1,johari:2,ruwet:3};
+  document.querySelectorAll('nav button')[idx[id]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

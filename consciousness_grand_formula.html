@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consciousness dalam Grand Formula</title>
+<style>
+  :root {
+    --purple-50: #EEEDFE; --purple-100: #CECBF6; --purple-200: #AFA9EC;
+    --purple-600: #534AB7; --purple-800: #3C3489; --purple-900: #26215C;
+    --teal-50: #E1F5EE; --teal-200: #5DCAA5; --teal-600: #0F6E56; --teal-800: #085041;
+    --coral-50: #FAECE7; --coral-200: #F0997B; --coral-600: #993C1D; --coral-800: #712B13;
+    --amber-50: #FAEEDA; --amber-200: #EF9F27; --amber-600: #854F0B; --amber-800: #633806;
+    --gray-50: #F1EFE8; --gray-200: #B4B2A9; --gray-600: #5F5E5A; --gray-800: #444441;
+    --bg: #ffffff;
+    --bg2: #F7F6F1;
+    --text: #1a1a18;
+    --text-sec: #5F5E5A;
+    --border: rgba(0,0,0,0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --purple-50: #26215C; --purple-100: #3C3489; --purple-200: #534AB7;
+      --purple-600: #AFA9EC; --purple-800: #CECBF6; --purple-900: #EEEDFE;
+      --teal-50: #04342C; --teal-200: #0F6E56; --teal-600: #5DCAA5; --teal-800: #9FE1CB;
+      --coral-50: #4A1B0C; --coral-200: #993C1D; --coral-600: #F0997B; --coral-800: #F5C4B3;
+      --amber-50: #412402; --amber-200: #854F0B; --amber-600: #EF9F27; --amber-800: #FAC775;
+      --gray-50: #2C2C2A; --gray-200: #5F5E5A; --gray-600: #B4B2A9; --gray-800: #D3D1C7;
+      --bg: #1a1a18; --bg2: #222220;
+      --text: #e8e6de; --text-sec: #B4B2A9;
+      --border: rgba(255,255,255,0.10);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    font-family: 'Georgia', serif;
+    color: var(--text);
+    padding: 36px 28px 56px;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    margin-bottom: 10px;
+  }
+
+  .formula-strip {
+    background: var(--purple-50);
+    border-left: 3px solid var(--purple-600);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .formula-strip .eq {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--purple-800);
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+  }
+  .formula-strip .highlight {
+    display: inline-block;
+    background: var(--purple-200);
+    color: var(--purple-900);
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-style: normal;
+  }
+  .formula-strip .sub {
+    font-size: 12px;
+    color: var(--purple-600);
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .lead {
+    font-size: 14px;
+    color: var(--text-sec);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  /* Two-column ownership cards */
+  .ownership {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .own-card {
+    border-radius: 10px;
+    padding: 18px 16px;
+    border: 1px solid transparent;
+  }
+  .own-card.frontend { background: var(--teal-50); border-color: var(--teal-200); }
+  .own-card.backend  { background: var(--amber-50); border-color: var(--amber-200); }
+  .own-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .frontend .own-label { color: var(--teal-600); }
+  .backend  .own-label { color: var(--amber-600); }
+  .own-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .frontend .own-title { color: var(--teal-800); }
+  .backend  .own-title { color: var(--amber-800); }
+  .own-desc { font-size: 12px; line-height: 1.5; }
+  .frontend .own-desc { color: var(--teal-600); }
+  .backend  .own-desc { color: var(--amber-600); }
+
+  /* Zero condition */
+  .zero-box {
+    background: var(--coral-50);
+    border: 1px solid var(--coral-200);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+  }
+  .zero-box .zero-head {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--coral-800);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .zero-badge {
+    background: var(--coral-200);
+    color: var(--coral-800);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .zero-box p { font-size: 13px; color: var(--coral-600); line-height: 1.6; }
+  .zero-math {
+    font-family: 'Courier New', monospace;
+    background: var(--coral-200);
+    color: var(--coral-800);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  /* QSI scale */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-sec);
+    margin-bottom: 12px;
+  }
+  .qsi-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+  .qsi-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .qsi-num {
+    font-size: 12px;
+    font-weight: 600;
+    width: 28px;
+    min-width: 28px;
+    text-align: center;
+    color: var(--text-sec);
+  }
+  .qsi-bar-wrap {
+    width: 60px;
+    min-width: 60px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .qsi-bar { height: 100%; border-radius: 3px; }
+  .qsi-q { font-size: 12px; color: var(--text); flex: 1; }
+  .qsi-loc { font-size: 11px; color: var(--text-sec); white-space: nowrap; }
+
+  /* Insight box */
+  .insight {
+    background: var(--purple-50);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+    border: 1px solid var(--purple-100);
+  }
+  .insight p { font-size: 13px; color: var(--purple-800); line-height: 1.7; }
+  .insight strong { color: var(--purple-900); }
+
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    font-size: 11px;
+    color: var(--text-sec);
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 520px) {
+    .ownership { grid-template-columns: 1fr; }
+  }
+
+  .en{display:none!important;}.id{display:block;}
+  body.en .en{display:block!important;} body.en .id{display:none!important;}
+  .lang-btn.active{background:var(--purple-600,#534AB7)!important;color:#fff!important;}
+</style>
+</head>
+<body class="id">
+<div class="topbar" style="position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--border,rgba(0,0,0,0.09));padding:10px 28px;display:flex;align-items:center;gap:16px;font-family:Georgia,serif;">
+  <a href="index.html" style="text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-sec,#5F5E5A);">← Portal</a>
+  <span style="color:var(--border-med,rgba(0,0,0,0.2));font-size:16px;">·</span>
+  <span style="font-size:12px;color:var(--text-sec,#5F5E5A);" class="id">CHO In Action Series · GKT 2026</span>
+  <span style="font-size:12px;color:var(--text-sec,#5F5E5A);" class="en">CHO In Action Series · GKT 2026</span>
+  <div style="flex:1"></div>
+  <div style="display:flex;border:1px solid var(--border-med,rgba(0,0,0,0.15));border-radius:20px;overflow:hidden;">
+    <button id="btn-id" class="lang-btn active" onclick="setLang('id')" style="background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:Georgia,serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec,#5F5E5A);transition:background .15s,color .15s;">ID</button>
+    <button id="btn-en" class="lang-btn" onclick="setLang('en')" style="background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:Georgia,serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec,#5F5E5A);transition:background .15s,color .15s;">EN</button>
+  </div>
+</div>
+
+<p class="eyebrow">Grand Formula · CHO In Action Series · GKT 2026</p>
+
+<div class="formula-strip">
+  <div class="eq">(<em class="highlight">Consciousness</em> × Calculation) ^ Humanity &lt; Transcendence</div>
+  <div class="sub"><span class="id">Consciousness — satu-satunya variabel yang murni manusiawi</span><span class="en">Consciousness — the only purely human variable</span></div>
+</div>
+
+<h2><span class="id">Consciousness bukan milik AI</span><span class="en">Consciousness does not belong to AI</span></h2>
+<p class="lead"><span class="id">AI menyumbang Calculation — komputasi yang mendekati tak terbatas. Tapi Consciousness hanya bisa datang dari dua pihak manusia. Tidak bisa didelegasikan, tidak bisa digantikan.</span><span class="en">AI contributes Calculation — computation approaching infinity. But Consciousness can only come from two human parties. It cannot be delegated, cannot be replaced.</span></p>
+
+<div class="section-label"><span class="id">Dua pemilik Consciousness</span><span class="en">Two owners of Consciousness</span></div>
+<div class="ownership">
+  <div class="own-card frontend">
+    <div class="own-label">Front-End</div>
+    <div class="own-title"><span class="id">Pengguna berdaulat</span><span class="en">Sovereign user</span></div>
+    <div class="own-desc"><span class="id">Membawa pertanyaan, arah, dan niat. Memutuskan <em>untuk apa</em> AI digunakan. Menanggung konsekuensi.</span><span class="en">Brings questions, direction, and intent. Decides <em>what</em> AI is used for. Bears the consequences.</span></div>
+  </div>
+  <div class="own-card backend">
+    <div class="own-label">Back-End</div>
+    <div class="own-title"><span class="id">Engineer pembangun AI</span><span class="en">AI-building engineer</span></div>
+    <div class="own-desc"><span class="id">Merancang sistem dengan niat pelayanan publik — atau sebaliknya, profit. Jika niat ini hilang, Consciousness runtuh dari dalam.</span><span class="en">Designs systems with public service intent — or conversely, profit. If this intent is lost, Consciousness collapses from within.</span></div>
+  </div>
+</div>
+
+<div class="zero-box">
+  <div class="zero-head">
+    <span class="id">Kondisi Manja</span><span class="en">The Manja Condition</span>
+    <span class="zero-badge"><span class="id">ancaman utama</span><span class="en">primary threat</span></span>
+  </div>
+  <p><span class="id">Manja adalah ketika manusia menyerahkan proses berpikirnya ke AI — menggunakannya sebagai <em>cognitive babysitter</em>, bukan thinking partner. Hasilnya bukan formula yang melemah, tapi formula yang <strong>runtuh ke nol</strong>.</span><span class="en">Manja is when a human surrenders their thinking process to AI — using it as a <em>cognitive babysitter</em>, not a thinking partner. The result is not a weakened formula, but a formula that <strong>collapses to zero</strong>.</span></p>
+  <div class="zero-math">(0 × ∞) ^ Humanity = 0</div>
+</div>
+
+<div class="section-label">Question Shift Index (QSI) — <span class="id">cara mengukur Consciousness</span><span class="en">how to measure Consciousness</span></div>
+<div class="qsi-row">
+  <div class="qsi-item">
+    <div class="qsi-num">QSI 1</div>
+    <div class="qsi-bar-wrap"><div class="qsi-bar" style="width:20%;background:#E24B4A"></div></div>
+    <div class="qsi-q">"Apa jawaban yang benar?"</div>
+    <div class="qsi-loc">LoC &lt;200</div>
+  </div>
+  <div class="qsi-item">
+    <div class="qsi-num">QSI 2</div>
+    <div class="qsi-bar-wrap"><div class="qsi-bar" style="width:35%;background:#EF9F27"></div></div>
+    <div class="qsi-q">"Apa pendapatmu tentang jawabanku?"</div>
+    <div class="qsi-loc">LoC 200–310</div>
+  </div>
+  <div class="qsi-item">
+    <div class="qsi-num">QSI 3</div>
+    <div class="qsi-bar-wrap"><div class="qsi-bar" style="width:52%;background:#EF9F27"></div></div>
+    <div class="qsi-q">"Di mana asumsi saya bisa salah?"</div>
+    <div class="qsi-loc">LoC 310–400</div>
+  </div>
+  <div class="qsi-item">
+    <div class="qsi-num">QSI 4</div>
+    <div class="qsi-bar-wrap"><div class="qsi-bar" style="width:72%;background:#1D9E75"></div></div>
+    <div class="qsi-q">"Apa yang tidak bisa dijawab AI tentang ini?"</div>
+    <div class="qsi-loc">LoC 400–500</div>
+  </div>
+  <div class="qsi-item">
+    <div class="qsi-num">QSI 5</div>
+    <div class="qsi-bar-wrap"><div class="qsi-bar" style="width:100%;background:#1D9E75"></div></div>
+    <div class="qsi-q">"Bagaimana insight ini mengubah cara saya melayani orang lain?"</div>
+    <div class="qsi-loc">LoC &gt;500</div>
+  </div>
+</div>
+
+<div class="insight">
+  <p><strong><span class="id">Intinya</span><span class="en">The core</span>:</strong> <span class="id">Consciousness adalah alasan mengapa AI tidak bisa menggantikan manusia dalam formula ini. Bukan karena AI tidak cukup pintar — tapi karena formula itu sendiri membutuhkan <strong>niat, arah, dan tanggung jawab atas konsekuensi</strong> yang secara struktural hanya bisa datang dari manusia.</span><span class="en">Consciousness is the reason AI cannot replace humans in this formula. Not because AI is not smart enough — but because the formula itself requires <strong>intent, direction, and responsibility for consequences</strong> that structurally can only come from humans.</span></p>
+</div>
+
+<div class="footer">
+  渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class=

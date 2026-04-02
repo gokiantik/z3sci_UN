@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Formula Architecture — CHO In Action Series</title>
+<style>
+  :root {
+    --purple-50: #EEEDFE; --purple-200: #AFA9EC; --purple-600: #534AB7; --purple-800: #3C3489; --purple-900: #26215C;
+    --teal-50: #E1F5EE; --teal-200: #5DCAA5; --teal-600: #0F6E56; --teal-800: #085041;
+    --blue-50: #E6F1FB; --blue-200: #85B7EB; --blue-600: #185FA5; --blue-800: #0C447C;
+    --amber-50: #FAEEDA; --amber-200: #EF9F27; --amber-600: #854F0B; --amber-800: #633806;
+    --coral-50: #FAECE7; --coral-200: #F0997B; --coral-600: #993C1D; --coral-800: #712B13;
+    --gray-50: #F1EFE8; --gray-200: #B4B2A9; --gray-600: #5F5E5A; --gray-800: #444441;
+    --bg: #ffffff;
+    --text-primary: #1a1a18;
+    --text-secondary: #5F5E5A;
+    --border: rgba(0,0,0,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --purple-50: #26215C; --purple-200: #534AB7; --purple-600: #AFA9EC; --purple-800: #CECBF6;
+      --teal-50: #04342C; --teal-200: #0F6E56; --teal-600: #5DCAA5; --teal-800: #9FE1CB;
+      --blue-50: #042C53; --blue-200: #185FA5; --blue-600: #85B7EB; --blue-800: #B5D4F4;
+      --amber-50: #412402; --amber-200: #854F0B; --amber-600: #EF9F27; --amber-800: #FAC775;
+      --coral-50: #4A1B0C; --coral-200: #993C1D; --coral-600: #F0997B; --coral-800: #F5C4B3;
+      --gray-50: #2C2C2A; --gray-200: #5F5E5A; --gray-600: #B4B2A9; --gray-800: #D3D1C7;
+      --bg: #1a1a18;
+      --text-primary: #e8e6de;
+      --text-secondary: #B4B2A9;
+      --border: rgba(255,255,255,0.12);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    font-family: 'Georgia', serif;
+    padding: 32px 24px 48px;
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--text-primary);
+  }
+  h1 {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .formula-banner {
+    background: var(--purple-50);
+    border: 1px solid var(--purple-200);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .formula-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--purple-800);
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .formula-sub {
+    font-size: 12px;
+    color: var(--purple-600);
+    letter-spacing: 0.06em;
+  }
+  .papers-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .paper-card {
+    border-radius: 10px;
+    padding: 16px 12px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid transparent;
+  }
+  .paper-card:hover { transform: translateY(-2px); }
+  .paper-card.p1 { background: var(--teal-50); border-color: var(--teal-200); }
+  .paper-card.p2 { background: var(--blue-50); border-color: var(--blue-200); }
+  .paper-card.p3 { background: var(--amber-50); border-color: var(--amber-200); }
+  .paper-card.p4 { background: var(--coral-50); border-color: var(--coral-200); }
+  .paper-num { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .p1 .paper-num { color: var(--teal-600); }
+  .p2 .paper-num { color: var(--blue-600); }
+  .p3 .paper-num { color: var(--amber-600); }
+  .p4 .paper-num { color: var(--coral-600); }
+  .paper-role { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .p1 .paper-role { color: var(--teal-800); }
+  .p2 .paper-role { color: var(--blue-800); }
+  .p3 .paper-role { color: var(--amber-800); }
+  .p4 .paper-role { color: var(--coral-800); }
+  .paper-title { font-size: 11px; margin-bottom: 8px; line-height: 1.4; }
+  .p1 .paper-title { color: var(--teal-600); }
+  .p2 .paper-title { color: var(--blue-600); }
+  .p3 .paper-title { color: var(--amber-600); }
+  .p4 .paper-title { color: var(--coral-600); }
+  .paper-tag { font-size: 11px; padding: 3px 8px; border-radius: 20px; display: inline-block; }
+  .p1 .paper-tag { background: var(--teal-200); color: var(--teal-800); }
+  .p2 .paper-tag { background: var(--blue-200); color: var(--blue-800); }
+  .p3 .paper-tag { background: var(--amber-200); color: var(--amber-800); }
+  .p4 .paper-tag { background: var(--coral-200); color: var(--coral-800); }
+  .arrows-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .arrow-down { color: var(--text-secondary); font-size: 18px; line-height: 1; }
+  .vars-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .var-card {
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid transparent;
+  }
+  .var-card.v1 { background: var(--teal-50); border-color: var(--teal-200); }
+  .var-card.v2 { background: var(--blue-50); border-color: var(--blue-200); }
+  .var-card.v3 { background: var(--amber-50); border-color: var(--amber-200); }
+  .var-card.v4 { background: var(--coral-50); border-color: var(--coral-200); }
+  .var-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .v1 .var-name { color: var(--teal-800); }
+  .v2 .var-name { color: var(--blue-800); }
+  .v3 .var-name { color: var(--amber-800); }
+  .v4 .var-name { color: var(--coral-800); }
+  .var-desc { font-size: 11px; }
+  .v1 .var-desc { color: var(--teal-600); }
+  .v2 .var-desc { color: var(--blue-600); }
+  .v3 .var-desc { color: var(--amber-600); }
+  .v4 .var-desc { color: var(--coral-600); }
+  .converge-arrow {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 4px 0 8px;
+    letter-spacing: 0.05em;
+  }
+  .synthesis-box {
+    background: var(--purple-50);
+    border: 1.5px solid var(--purple-200);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .synthesis-box:hover { transform: translateY(-1px); }
+  .synthesis-title { font-size: 15px; font-weight: 600; color: var(--purple-800); margin-bottom: 4px; }
+  .synthesis-sub { font-size: 12px; color: var(--purple-600); }
+  .transcendence-arrow { text-align: center; color: var(--text-secondary); font-size: 18px; margin: 4px 0 8px; }
+  .transcendence-box {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 16px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .transcendence-title { font-size: 14px; font-weight: 600; color: var(--gray-800); margin-bottom: 3px; }
+  .transcendence-sub { font-size: 12px; color: var(--gray-600); }
+  .footer-text {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  @media (max-width: 600px) {
+    .papers-row, .arrows-row, .vars-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .en{display:none!important;}.id{display:block;}
+  body.en .en{display:block!important;} body.en .id{display:none!important;}
+  .lang-btn.active{background:var(--purple-600,#534AB7)!important;color:#fff!important;}
+</style>
+</head>
+<body class="id">
+<div class="topbar" style="position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--border,rgba(0,0,0,0.09));padding:10px 28px;display:flex;align-items:center;gap:16px;font-family:Georgia,serif;">
+  <a href="index.html" style="text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-sec,#5F5E5A);">← Portal</a>
+  <span style="color:var(--border-med,rgba(0,0,0,0.2));font-size:16px;">·</span>
+  <span style="font-size:12px;color:var(--text-sec,#5F5E5A);" class="id">CHO In Action Series · GKT 2026</span>
+  <span style="font-size:12px;color:var(--text-sec,#5F5E5A);" class="en">CHO In Action Series · GKT 2026</span>
+  <div style="flex:1"></div>
+  <div style="display:flex;border:1px solid var(--border-med,rgba(0,0,0,0.15));border-radius:20px;overflow:hidden;">
+    <button id="btn-id" class="lang-btn active" onclick="setLang('id')" style="background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:Georgia,serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec,#5F5E5A);transition:background .15s,color .15s;">ID</button>
+    <button id="btn-en" class="lang-btn" onclick="setLang('en')" style="background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:Georgia,serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec,#5F5E5A);transition:background .15s,color .15s;">EN</button>
+  </div>
+</div>
+
+<h1>CHO In Action Series · UN Open Source Week 2026</h1>
+
+<div class="formula-banner">
+  <div class="formula-text">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div>
+  <div class="formula-sub">Grand Formula · Go Kian Tik (GKT) · 2026</div>
+</div>
+
+<div class="papers-row">
+  <div class="paper-card p1">
+    <div class="paper-num">Paper 1</div>
+    <div class="paper-role">WHY</div>
+    <div class="paper-title">From Laggard to Dignity</div>
+    <span class="paper-tag">6 masalah peradaban</span>
+  </div>
+  <div class="paper-card p2">
+    <div class="paper-num">Paper 2</div>
+    <div class="paper-role">HOW</div>
+    <div class="paper-title">From Formula to the Field</div>
+    <span class="paper-tag">Protocol CHO v1.0</span>
+  </div>
+  <div class="paper-card p3">
+    <div class="paper-num">Paper 3</div>
+    <div class="paper-role">WHO (manusia)</div>
+    <div class="paper-title">The Sovereign One</div>
+    <span class="paper-tag">Pentadrant + Johari</span>
+  </div>
+  <div class="paper-card p4">
+    <div class="paper-num">Paper 4</div>
+    <div class="paper-role">WHO (AI)</div>
+    <div class="paper-title">Testing the Calculator</div>
+    <span class="paper-tag">Abrahamic Stress Test</span>
+  </div>
+</div>
+
+<div class="arrows-row">
+  <div class="arrow-down">↓</div>
+  <div class="arrow-down">↓</div>
+  <div class="arrow-down">↓</div>
+  <div class="arrow-down">↓</div>
+</div>
+
+<div class="vars-row">
+  <div class="var-card v1">
+    <div class="var-name">Consciousness</div>
+    <div class="var-desc">Siapa manusianya</div>
+  </div>
+  <div class="var-card v2">
+    <div class="var-name">^Humanity</div>
+    <div class="var-desc">Seberapa berdaulat</div>
+  </div>
+  <div class="var-card v3">
+    <div class="var-name">Arsitektur sosial</div>
+    <div class="var-desc">Peta 8 miliar manusia</div>
+  </div>
+  <div class="var-card v4">
+    <div class="var-name">Calculation</div>
+    <div class="var-desc">Kualitas AI-nya</div>
+  </div>
+</div>
+
+<div class="converge-arrow">↘ &nbsp;&nbsp;&nbsp;&nbsp; ↓ &nbsp;&nbsp;&nbsp;&nbsp; ↓ &nbsp;&nbsp;&nbsp;&nbsp; ↙</div>
+
+<div class="synthesis-box">
+  <div class="synthesis-title"><span class="id">Satu rangkaian argumen utuh</span><span class="en">One complete chain of argument</span></div>
+  <div class="synthesis-sub"><span class="id">Grand Formula dioperasionalkan satu variabel per paper</span><span class="en">Grand Formula operationalised one variable per paper</span></div>
+</div>
+
+<div class="transcendence-arrow">↓</div>
+
+<div class="transcendence-box">
+  <div class="transcendence-title">&lt; Transcendence</div>
+  <div class="transcendence-sub"><span class="id">Formula tidak pernah selesai · kerendahan hati struktural</span><span class="en">The formula is never finished · structural humility</span></div>
+</div>
+
+<div class="footer-text">
+  Ruwet → OTW Genah → Genah &nbsp;·&nbsp; 渡己 → 渡人 &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class=
