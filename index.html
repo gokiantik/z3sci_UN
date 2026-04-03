@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHO In Action Series — Portal</title>
+<style>
+  :root{--purple-50:#EEEDFE;--purple-100:#CECBF6;--purple-200:#AFA9EC;--purple-400:#7F77DD;--purple-600:#534AB7;--purple-800:#3C3489;--purple-900:#26215C;--teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-200:#5DCAA5;--teal-600:#0F6E56;--teal-800:#085041;--blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-200:#85B7EB;--blue-600:#185FA5;--blue-800:#0C447C;--amber-50:#FAEEDA;--amber-100:#FAC775;--amber-200:#EF9F27;--amber-600:#854F0B;--amber-800:#633806;--coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-200:#F0997B;--coral-600:#993C1D;--coral-800:#712B13;--gray-50:#F1EFE8;--gray-100:#D3D1C7;--gray-200:#B4B2A9;--gray-600:#5F5E5A;--gray-800:#444441;--bg:#fff;--bg2:#F7F6F1;--bg3:#EFEDE6;--text:#1a1a18;--text-sec:#5F5E5A;--border:rgba(0,0,0,0.09);--border-med:rgba(0,0,0,0.15);}
+  @media(prefers-color-scheme:dark){:root{--purple-50:#26215C;--purple-100:#3C3489;--purple-200:#534AB7;--purple-400:#7F77DD;--purple-600:#AFA9EC;--purple-800:#CECBF6;--purple-900:#EEEDFE;--teal-50:#04342C;--teal-100:#085041;--teal-200:#0F6E56;--teal-600:#5DCAA5;--teal-800:#9FE1CB;--blue-50:#042C53;--blue-100:#0C447C;--blue-200:#185FA5;--blue-600:#85B7EB;--blue-800:#B5D4F4;--amber-50:#412402;--amber-100:#633806;--amber-200:#854F0B;--amber-600:#EF9F27;--amber-800:#FAC775;--coral-50:#4A1B0C;--coral-100:#712B13;--coral-200:#993C1D;--coral-600:#F0997B;--coral-800:#F5C4B3;--gray-50:#2C2C2A;--gray-100:#444441;--gray-200:#5F5E5A;--gray-600:#B4B2A9;--gray-800:#D3D1C7;--bg:#1a1a18;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text-sec:#B4B2A9;--border:rgba(255,255,255,0.08);--border-med:rgba(255,255,255,0.14);}}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);font-family:'Georgia',serif;color:var(--text);line-height:1.7;min-height:100vh;}
+
+  /* TOPBAR */
+  .topbar{position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;align-items:center;gap:16px;}
+  .topbar-site{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-sec);}
+  .topbar-spacer{flex:1;}
+  .lang-toggle{display:flex;border:1px solid var(--border-med);border-radius:20px;overflow:hidden;}
+  .lang-btn{background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:'Georgia',serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec);transition:background .15s,color .15s;}
+  .lang-btn.active{background:var(--purple-600);color:#fff;}
+
+  /* HERO */
+  .hero{padding:48px 28px 36px;max-width:800px;margin:0 auto;}
+  .hero-eyebrow{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-sec);margin-bottom:16px;}
+  .hero-title{font-size:28px;font-weight:600;line-height:1.25;margin-bottom:12px;}
+  .hero-title em{font-style:normal;color:var(--purple-600);}
+  .hero-sub{font-size:14px;color:var(--text-sec);max-width:560px;margin-bottom:28px;line-height:1.6;}
+  .formula-strip{background:var(--purple-50);border:1px solid var(--purple-200);border-radius:12px;padding:20px 24px;margin-bottom:44px;}
+  .formula-strip .eq{font-size:17px;font-weight:600;color:var(--purple-800);letter-spacing:0.02em;margin-bottom:4px;}
+  .formula-strip .sub{font-size:12px;color:var(--purple-600);}
+
+  .section-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-sec);padding:0 28px;max-width:800px;margin:0 auto 14px;}
+  .main-card{max-width:800px;margin:0 auto 12px;padding:0 28px;}
+  .card-link{display:block;text-decoration:none;border-radius:14px;border:1.5px solid var(--purple-200);background:var(--purple-50);padding:24px 28px;transition:transform .15s,box-shadow .15s;position:relative;}
+  .card-link:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(83,74,183,0.12);}
+  .card-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px;background:var(--purple-200);color:var(--purple-900);}
+  .card-title{font-size:18px;font-weight:600;color:var(--purple-800);margin-bottom:4px;}
+  .card-desc{font-size:13px;color:var(--purple-600);line-height:1.5;}
+  .card-arrow{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--purple-400);}
+
+  .paper-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:800px;margin:0 auto 12px;padding:0 28px;}
+  .paper-card{display:block;text-decoration:none;border-radius:12px;padding:20px;border:1px solid transparent;transition:transform .15s;position:relative;}
+  .paper-card:hover{transform:translateY(-2px);}
+  .paper-card.p1{background:var(--teal-50);border-color:var(--teal-200);}
+  .paper-card.p2{background:var(--blue-50);border-color:var(--blue-200);}
+  .paper-card.p3{background:var(--amber-50);border-color:var(--amber-200);}
+  .paper-card.p4{background:var(--coral-50);border-color:var(--coral-200);}
+  .pc-num{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+  .p1 .pc-num{color:var(--teal-600);}.p2 .pc-num{color:var(--blue-600);}.p3 .pc-num{color:var(--amber-600);}.p4 .pc-num{color:var(--coral-600);}
+  .pc-role{font-size:15px;font-weight:600;margin-bottom:4px;}
+  .p1 .pc-role{color:var(--teal-800);}.p2 .pc-role{color:var(--blue-800);}.p3 .pc-role{color:var(--amber-800);}.p4 .pc-role{color:var(--coral-800);}
+  .pc-title{font-size:12px;margin-bottom:10px;line-height:1.4;}
+  .p1 .pc-title{color:var(--teal-600);}.p2 .pc-title{color:var(--blue-600);}.p3 .pc-title{color:var(--amber-600);}.p4 .pc-title{color:var(--coral-600);}
+  .pc-var{font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-block;}
+  .p1 .pc-var{background:var(--teal-100);color:var(--teal-800);}.p2 .pc-var{background:var(--blue-100);color:var(--blue-800);}.p3 .pc-var{background:var(--amber-100);color:var(--amber-800);}.p4 .pc-var{background:var(--coral-100);color:var(--coral-800);}
+  .pc-arrow{position:absolute;right:16px;bottom:16px;font-size:14px;opacity:0.4;}
+  .p1 .pc-arrow{color:var(--teal-600);}.p2 .pc-arrow{color:var(--blue-600);}.p3 .pc-arrow{color:var(--amber-600);}.p4 .pc-arrow{color:var(--coral-600);}
+
+  .deep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:800px;margin:0 auto 48px;padding:0 28px;}
+  .deep-card{display:block;text-decoration:none;border-radius:10px;padding:16px;background:var(--bg2);border:1px solid var(--border);transition:transform .15s;}
+  .deep-card:hover{transform:translateY(-2px);}
+  .dc-icon{font-size:20px;margin-bottom:8px;}
+  .dc-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
+  .dc-desc{font-size:11px;color:var(--text-sec);line-height:1.4;}
+
+  .site-footer{background:var(--bg3);border-top:1px solid var(--border);padding:32px 28px;text-align:center;}
+  .site-footer .fml{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;}
+  .site-footer .fml em{font-style:normal;color:var(--purple-600);}
+  .site-footer .meta{font-size:11px;color:var(--text-sec);letter-spacing:0.04em;}
+
+  /* lang visibility */
+  :not(body)[class~="en"] { display:none !important; }
+  body.en :not(body)[class~="en"] { display:block !important; }
+  body.en :not(body)[class~="id"] { display:none !important; }
+  body.en span[class~="en"] { display:inline !important; }
+  span[class~="id"] { display:inline; }
+  body.en span[class~="id"] { display:none !important; }
+
+  @media(max-width:540px){.paper-grid{grid-template-columns:1fr;}.deep-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:22px;}}
+</style>
+</head>
+<body class="id">
+
+<div class="topbar">
+  <span class="topbar-site">CHO In Action Series</span>
+  <div class="topbar-spacer"></div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-id" onclick="setLang('id')">ID</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">CHO In Action Series · UN Open Source Week 2026 · Go Kian Tik (Mbah Hogi Bejo™)</div>
+
+  <h1 class="hero-title id">Grand Formula:<br><em>Satu Argumen Utuh</em></h1>
+  <h1 class="hero-title en">Grand Formula:<br><em>One Complete Argument</em></h1>
+
+  <p class="hero-sub id">4 paper, 4 variabel, satu arsitektur lengkap untuk memahami kedaulatan manusia di era Artificial General Intelligence — dari Global South, untuk 8 miliar manusia.</p>
+  <p class="hero-sub en">4 papers, 4 variables, one complete architecture for understanding human sovereignty in the age of Artificial General Intelligence — from the Global South, for 8 billion humans.</p>
+
+  <div class="formula-strip">
+    <div class="eq">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div>
+    <div class="sub id">Grand Formula · Go Kian Tik (GKT) · 2026 · Satu variabel per paper dioperasionalkan</div>
+    <div class="sub en">Grand Formula · Go Kian Tik (GKT) · 2026 · One variable per paper operationalised</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section-label id lang-only">Gambaran Lengkap</div>
+<div class="section-label en lang-only">Full Overview</div>
+<div class="main-card">
+  <a class="card-link" href="cho_series_complete.html">
+    <span class="card-tag id">Index · Semua Paper</span>
+    <span class="card-tag en">Index · All Papers</span>
+    <div class="card-title id">CHO In Action Series — Semua Paper</div>
+    <div class="card-title en">CHO In Action Series — All Papers</div>
+    <div class="card-desc id">5 tab navigasi: Gambaran Umum + Paper 1 sampai Paper 4 dalam satu halaman. Mulai dari sini.</div>
+    <div class="card-desc en">5 navigation tabs: Overview + Paper 1 through Paper 4 in one page. Start here.</div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<!-- PAPERS -->
+<div class="section-label id lang-only" style="margin-top:32px;">4 Paper · 4 Variabel</div>
+<div class="section-label en lang-only" style="margin-top:32px;">4 Papers · 4 Variables</div>
+<div class="paper-grid">
+  <a class="paper-card p1" href="cho_series_complete.html">
+    <div class="pc-num">Paper 1 · WHY</div>
+    <div class="pc-role">From Laggard to Dignity</div>
+    <div class="pc-title id">6 masalah peradaban + bukti empiris + Grand Formula</div>
+    <div class="pc-title en">6 civilisational problems + empirical evidence + Grand Formula</div>
+    <span class="pc-var">Consciousness</span>
+    <span class="pc-arrow">→</span>
+  </a>
+  <a class="paper-card p2" href="cho_series_complete.html">
+    <div class="pc-num">Paper 2 · HOW</div>
+    <div class="pc-role">From Formula to the Field</div>
+    <div class="pc-title id">Protocol CHO v1.0 · QSI · ASI · 3 studi kasus lapangan</div>
+    <div class="pc-title en">Protocol CHO v1.0 · QSI · ASI · 3 field case studies</div>
+    <span class="pc-var">^Humanity</span>
+    <span class="pc-arrow">→</span>
+  </a>
+  <a class="paper-card p3" href="cho_series_complete.html">
+    <div class="pc-num id">Paper 3 · WHO (Manusia)</div>
+    <div class="pc-num en">Paper 3 · WHO (Human)</div>
+    <div class="pc-role">The Sovereign One</div>
+    <div class="pc-title id">Pentadrant · 8 Johari Panels · Ruwet → Genah</div>
+    <div class="pc-title en">Pentadrant · 8 Johari Panels · Ruwet → Genah (Chaos → Order)</div>
+    <span class="pc-var id">Arsitektur sosial</span>
+    <span class="pc-var en">Social architecture</span>
+    <span class="pc-arrow">→</span>
+  </a>
+  <a class="paper-card p4" href="cho_series_complete.html">
+    <div class="pc-num">Paper 4 · WHO (AI)</div>
+    <div class="pc-role">Testing the Calculator</div>
+    <div class="pc-title id">Abrahamic Stress Test · Humanity Alignment Score · Temuan empiris</div>
+    <div class="pc-title en">Abrahamic Stress Test · Humanity Alignment Score · Empirical findings</div>
+    <span class="pc-var">Calculation</span>
+    <span class="pc-arrow">→</span>
+  </a>
+</div>
+
+<!-- DEEP DIVES -->
+<div class="section-label id lang-only" style="margin-top:32px;">Deep Dive per Variabel</div>
+<div class="section-label en lang-only" style="margin-top:32px;">Deep Dive per Variable</div>
+<div class="deep-grid">
+  <a class="deep-card" href="grand_formula_architecture.html">
+    <div class="dc-icon">🗺</div>
+    <div class="dc-title id">Peta Grand Formula</div>
+    <div class="dc-title en">Grand Formula Map</div>
+    <div class="dc-desc id">Visual arsitektur 4 paper dalam satu diagram</div>
+    <div class="dc-desc en">Visual architecture of all 4 papers in one diagram</div>
+  </a>
+  <a class="deep-card" href="consciousness_grand_formula.html">
+    <div class="dc-icon">🧠</div>
+    <div class="dc-title">Consciousness</div>
+    <div class="dc-desc id">Variabel manusiawi · QSI scale · kondisi Manja</div>
+    <div class="dc-desc en">Human-only variable · QSI scale · the Manja condition</div>
+  </a>
+  <a class="deep-card" href="humanity_eksponen.html">
+    <div class="dc-icon">^</div>
+    <div class="dc-title">^Humanity</div>
+    <div class="dc-desc id">Eksponen moral · ASI · ^0 vs ^1 vs ^2</div>
+    <div class="dc-desc en">Moral exponent · ASI · ^0 vs ^1 vs ^2</div>
+  </a>
+  <a class="deep-card" href="arsitektur_sosial_kedaulatan.html">
+    <div class="dc-icon">🗂</div>
+    <div class="dc-title id">Arsitektur Sosial</div>
+    <div class="dc-title en">Social Architecture</div>
+    <div class="dc-desc id">Pentadrant · 8 Johari Panels · Ruwet→Genah</div>
+    <div class="dc-desc en">Pentadrant · 8 Johari Panels · Chaos→Order</div>
+  </a>
+  <a class="deep-card" href="calculation_grand_formula.html">
+    <div class="dc-icon">⚙</div>
+    <div class="dc-title">Calculation</div>
+    <div class="dc-desc id">AI Matrix · Abrahamic Stress Test · Scoring</div>
+    <div class="dc-desc en">AI Matrix · Abrahamic Stress Test · Scoring rubric</div>
+  </a>
+  <a class="deep-card" href="cho_series_complete.html">
+    <div class="dc-icon">◎</div>
+    <div class="dc-title id">Semua Paper</div>
+    <div class="dc-title en">All Papers</div>
+    <div class="dc-desc id">Kembali ke index lengkap 5 tab</div>
+    <div class="dc-desc en">Back to full 5-tab index</div>
+  </a>
+  <a class="deep-card" href="https://gokiantik.github.io/z3sci_UN/WBP_and_DOI.html" target="_blank" rel="noopener">
+    <div class="dc-icon">行</div>
+    <div class="dc-title id">Walking Books Philosophy</div>
+    <div class="dc-title en">Walking Books Philosophy</div>
+    <div class="dc-desc id">行走的书 · Z3 SCI · Filosofi & DOI lengkap Mbah Hogi Bejo™</div>
+    <div class="dc-desc en">行走的书 · Z3 SCI · Full philosophy & DOI index by Mbah Hogi Bejo™</div>
+  </a>
+</div>
+
+<div class="site-footer">
+  <div class="fml">(Consciousness × Calculation) ^ <em>Humanity</em> &lt; Transcendence</div>
+  <div class="meta">渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3848c888a828d978a88a3848e828a8fcd808c8e">[email&#160;protected]</a> &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function setLang(l){
+  document.body.className=(document.body.className.replace(/\bid\b|\ben\b/g,'')+' '+l).trim();
+  document.getElementById('btn-id').className='lang-btn'+(l==='id'?' activ
