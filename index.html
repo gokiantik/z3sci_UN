@@ -76,6 +76,21 @@
   body.en span[class~="id"] { display:none !important; }
 
   @media(max-width:540px){.paper-grid{grid-template-columns:1fr;}.deep-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:22px;}}
+
+  /* DROPDOWN MENU */
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-btn{background:none;border:1px solid var(--border-med);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:600;font-family:'Georgia',serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec);display:flex;align-items:center;gap:5px;transition:background .15s,color .15s;white-space:nowrap;}
+  .nav-dropdown-btn:hover,.nav-dropdown.open .nav-dropdown-btn{background:var(--purple-50);color:var(--purple-600);border-color:var(--purple-200);}
+  .nav-dropdown-btn .chevron{font-size:9px;transition:transform .2s;}
+  .nav-dropdown.open .nav-dropdown-btn .chevron{transform:rotate(180deg);}
+  .nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 7px);right:0;min-width:220px;background:var(--bg);border:1px solid var(--border-med);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.12);overflow:hidden;z-index:300;}
+  .nav-dropdown.open .nav-dropdown-menu{display:block;}
+  .nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:12px;font-weight:500;font-family:'Georgia',serif;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:background .12s;}
+  .nav-dropdown-menu a:last-child{border-bottom:none;}
+  .nav-dropdown-menu a:hover{background:var(--purple-50);color:var(--purple-600);}
+  .nav-dropdown-menu a .item-icon{font-size:14px;flex-shrink:0;}
+  .nav-dropdown-menu a .item-label{flex:1;}
+  .nav-dropdown-menu a .item-badge{font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 6px;border-radius:8px;background:var(--purple-200);color:var(--purple-900);}
 </style>
 </head>
 <body class="id">
@@ -83,6 +98,20 @@
 <div class="topbar">
   <span class="topbar-site">CHO In Action Series</span>
   <div class="topbar-spacer"></div>
+  <div class="nav-dropdown" id="dd-airt">
+    <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-airt')">
+      <span class="id">AI Red Teamer</span>
+      <span class="en">AI Red Teamer</span>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="nav-dropdown-menu">
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_interactive_prompt" target="_blank" rel="noopener">
+        <span class="item-icon">🛡</span>
+        <span class="item-label">AIRT Anti-Plagiarism V4.1</span>
+        <span class="item-badge">NEW</span>
+      </a>
+    </div>
+  </div>
   <div class="lang-toggle">
     <button class="lang-btn active" id="btn-id" onclick="setLang('id')">ID</button>
     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
@@ -218,6 +247,16 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleDropdown(id){
+  var dd=document.getElementById(id);
+  var isOpen=dd.classList.contains('open');
+  document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
+  if(!isOpen)dd.classList.add('open');
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.nav-dropdown'))
+    document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
+});
 function setLang(l){
   document.body.className=(document.body.className.replace(/\bid\b|\ben\b/g,'')+' '+l).trim();
   document.getElementById('btn-id').className='lang-btn'+(l==='id'?' activ
