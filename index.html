@@ -83,8 +83,8 @@
   .nav-dropdown-btn:hover,.nav-dropdown.open .nav-dropdown-btn{background:var(--purple-50);color:var(--purple-600);border-color:var(--purple-200);}
   .nav-dropdown-btn .chevron{font-size:9px;transition:transform .2s;}
   .nav-dropdown.open .nav-dropdown-btn .chevron{transform:rotate(180deg);}
-  .nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 7px);right:0;min-width:220px;background:var(--bg);border:1px solid var(--border-med);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.12);overflow:hidden;z-index:300;}
-  .nav-dropdown.open .nav-dropdown-menu{display:block;}
+  .nav-dropdown-menu{position:absolute;top:calc(100% + 7px);right:0;min-width:220px;background:var(--bg);border:1px solid var(--border-med);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.12);overflow:hidden;z-index:300;visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s,visibility .15s;}
+  .nav-dropdown.open .nav-dropdown-menu{visibility:visible !important;opacity:1 !important;pointer-events:auto !important;transform:translateY(0) !important;}
   .nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:12px;font-weight:500;font-family:'Georgia',serif;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:background .12s;}
   .nav-dropdown-menu a:last-child{border-bottom:none;}
   .nav-dropdown-menu a:hover{background:var(--purple-50);color:var(--purple-600);}
@@ -100,8 +100,7 @@
   <div class="topbar-spacer"></div>
   <div class="nav-dropdown" id="dd-airt">
     <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-airt')">
-      <span class="id">AI Red Teamer</span>
-      <span class="en">AI Red Teamer</span>
+      AI Red Teamer
       <span class="chevron">▾</span>
     </button>
     <div class="nav-dropdown-menu">
@@ -259,4 +258,7 @@ document.addEventListener('click',function(e){
 });
 function setLang(l){
   document.body.className=(document.body.className.replace(/\bid\b|\ben\b/g,'')+' '+l).trim();
-  document.getElementById('btn-id').className='lang-btn'+(l==='id'?' activ
+  document.getElementById('btn-id').className='lang-btn'+(l==='id'?' active':'');
+  document.getElementById('btn-en').className='lang-btn'+(l==='en'?' active':'');
+}
+</script>
