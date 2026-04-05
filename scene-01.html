@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 01 · I Have a Dream · Go Kian Tik × ChatGPT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #07070f;
+      --bg2:      #0d0d1a;
+      --bg3:      #13132a;
+      --purple:   #7F77DD;
+      --purple-l: #AFA9EC;
+      --purple-d: #3C3489;
+      --gold:     #C9A84C;
+      --gold-l:   #FAC775;
+      --teal:     #1D9E75;
+      --teal-l:   #9FE1CB;
+      --coral:    #D85A30;
+      --white:    #F1EFE8;
+      --muted:    #6b6880;
+      --border:   rgba(127,119,221,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── STARFIELD ── */
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(175,169,236,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 60%, rgba(175,169,236,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 15%, rgba(201,168,76,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 40%, rgba(175,169,236,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 75%, rgba(201,168,76,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 85%, rgba(29,158,117,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 90%, rgba(175,169,236,0.2) 0%, transparent 100%);
+    }
+
+    /* ── AMBIENT GLOW ── */
+    .glow {
+      position: fixed;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(120px);
+    }
+    .glow-1 {
+      background: radial-gradient(circle, rgba(127,119,221,0.08) 0%, transparent 70%);
+      top: -200px; left: 50%; transform: translateX(-50%);
+    }
+    .glow-2 {
+      background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+      bottom: -200px; right: -100px;
+    }
+
+    /* ── WRAPPER ── */
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── SCENE HEADER ── */
+    .scene-header {
+      padding: 48px 0 32px;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+
+    .scene-meta {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap; margin-bottom: 16px;
+    }
+
+    .scene-num {
+      font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); background: rgba(201,168,76,0.08);
+      border: 0.5px solid rgba(201,168,76,0.3);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    .scene-timestamp {
+      font-size: 9px; letter-spacing: 0.15em; color: var(--muted);
+    }
+
+    .collab-badge {
+      font-size: 9px; letter-spacing: 0.12em;
+      color: var(--teal-l); background: rgba(29,158,117,0.08);
+      border: 0.5px solid rgba(29,158,117,0.25);
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    .scene-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600; color: var(--white);
+      line-height: 1.15; margin-bottom: 8px;
+    }
+
+    .scene-title em { color: var(--gold); font-style: italic; }
+
+    .scene-subtitle {
+      font-size: 11px; color: var(--muted); letter-spacing: 0.06em;
+    }
+
+    /* ── ABBA BANNER ── */
+    .abba-banner {
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(127,119,221,0.06) 100%);
+      border: 0.5px solid rgba(201,168,76,0.2);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .abba-label {
+      font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+
+    .abba-lyric {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-style: italic;
+      color: var(--gold-l); line-height: 1.5;
+    }
+
+    .abba-credit {
+      font-size: 9px; color: var(--muted); margin-top: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── PROOF BLOCK (opening prompt) ── */
+    .proof-block {
+      background: rgba(127,119,221,0.04);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .proof-label {
+      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--purple-l); margin-bottom: 10px;
+    }
+
+    .proof-text {
+      font-size: 13px; color: var(--muted); line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* ── CHAT STREAM ── */
+    .chat-stream {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+
+    /* individual message */
+    .msg {
+      display: flex; gap: 14px; align-items: flex-start;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .msg.visible { opacity: 1; transform: translateY(0); }
+
+    .msg-avatar {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.05em;
+      border: 0.5px solid;
+      margin-top: 4px;
+    }
+
+    .msg-avatar.human {
+      background: rgba(201,168,76,0.12);
+      border-color: rgba(201,168,76,0.35);
+      color: var(--gold);
+    }
+
+    .msg-avatar.ai {
+      background: rgba(127,119,221,0.12);
+      border-color: rgba(127,119,221,0.35);
+      color: var(--purple-l);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 13px;
+    }
+
+    .msg-body { flex: 1; padding-bottom: 24px; }
+
+    .msg-sender {
+      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .msg-sender.human { color: var(--gold); }
+    .msg-sender.ai    { color: var(--purple-l); }
+
+    .msg-bubble {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: 2px 12px 12px 12px;
+      padding: 18px 20px;
+      font-size: 13px; line-height: 1.85;
+      color: rgba(241,239,232,0.88);
+    }
+
+    .msg-bubble.human-bubble {
+      border-radius: 12px 2px 12px 12px;
+      background: rgba(201,168,76,0.05);
+      border-color: rgba(201,168,76,0.15);
+    }
+
+    /* ── INSIDE BUBBLE COMPONENTS ── */
+    .bubble-heading {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--purple-l); margin: 16px 0 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .bubble-heading::after {
+      content: ''; flex: 1; height: 0.5px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+    .bubble-heading:first-child { margin-top: 0; }
+
+    .insight-row {
+      display: flex; gap: 10px; margin: 6px 0;
+      align-items: flex-start;
+    }
+    .insight-icon {
+      flex-shrink: 0; font-size: 12px;
+      width: 22px; margin-top: 1px;
+    }
+    .insight-text { font-size: 12px; color: rgba(241,239,232,0.8); line-height: 1.7; }
+    .insight-text strong { color: var(--white); font-weight: 500; }
+
+    .tag-row {
+      display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
+    }
+    .tag {
+      font-size: 9px; letter-spacing: 0.1em;
+      padding: 3px 10px; border-radius: 2px; border: 0.5px solid;
+    }
+    .tag-no   { color: var(--coral); border-color: rgba(216,90,48,0.35); background: rgba(216,90,48,0.06); }
+    .tag-yes  { color: var(--teal-l); border-color: rgba(29,158,117,0.35); background: rgba(29,158,117,0.06); }
+
+    .highlight-eq {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-style: italic;
+      color: var(--gold-l);
+      border-left: 2px solid var(--gold);
+      padding: 8px 14px;
+      margin: 12px 0;
+      background: rgba(201,168,76,0.04);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .percentage-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 0.5px solid var(--border); border-radius: 6px;
+      overflow: hidden; margin: 12px 0;
+    }
+    .pct-cell {
+      background: var(--bg3); padding: 10px 12px; text-align: center;
+    }
+    .pct-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; line-height: 1;
+    }
+    .pct-label { font-size: 9px; color: var(--muted); margin-top: 4px; letter-spacing: 0.08em; }
+
+    .final-answer {
+      margin-top: 14px;
+      background: rgba(127,119,221,0.08);
+      border: 0.5px solid rgba(127,119,221,0.25);
+      border-radius: 6px; padding: 14px 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: var(--purple-l); line-height: 1.5;
+    }
+
+    .question-cta {
+      margin-top: 14px;
+      background: rgba(29,158,117,0.06);
+      border: 0.5px solid rgba(29,158,117,0.2);
+      border-radius: 6px; padding: 12px 16px;
+      font-size: 11px; color: var(--teal-l); line-height: 1.7;
+    }
+
+    /* ── SCENE FOOTER ── */
+    .scene-footer {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .footer-left { font-size: 9px; color: var(--muted); line-height: 1.8; }
+    .footer-left strong { color: var(--purple-l); }
+
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; color: var(--gold);
+      border: 0.5px solid rgba(201,168,76,0.3);
+      padding: 8px 18px; border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(201,168,76,0.08);
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .percentage-grid { grid-template-columns: 1fr; }
+      .scene-meta { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<div class="wrapper">
+
+  <!-- SCENE HEADER -->
+  <div class="scene-header">
+    <div class="scene-meta">
+      <span class="scene-num">Scene 01</span>
+      <span class="scene-timestamp">2026·04·05 · 00:00:00 WIB</span>
+      <span class="collab-badge">1 Human × 1 AI · Open Kitchen Open Thinking</span>
+    </div>
+    <h1 class="scene-title">I Have a <em>Dream</em><br>— di usia 55</h1>
+    <p class="scene-subtitle">Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT · Kolaborasi terdokumentasi</p>
+  </div>
+
+  <!-- ABBA BANNER -->
+  <div class="abba-banner">
+    <p class="abba-label">🎵 Lagu pembuka · ABBA · 1979</p>
+    <p class="abba-lyric">"I have a dream, a song to sing<br>To help me cope with anything…<br>I believe in angels, something good in everything I see."</p>
+    <p class="abba-credit">— ABBA · I Have a Dream · Voulez-Vous (1979) · Björn Ulvaeus & Benny Andersson</p>
+  </div>
+
+  <!-- PROOF OF COLLABORATION -->
+  <div class="proof-block">
+    <p class="proof-label">📌 Bukti Kolaborasi · Prompt Pembuka Asli · Go Kian Tik → ChatGPT</p>
+    <p class="proof-text">"tolong jawab jujur prof, ingat lagu I have a dream nya ABBA. Apakah dg AI my dream will come true starting di 55 years ini"</p>
+  </div>
+
+  <!-- CHAT STREAM -->
+  <div class="chat-stream" id="chat">
+
+    <!-- MSG 1: HUMAN -->
+    <div class="msg" data-delay="100">
+      <div class="msg-avatar human">GKT</div>
+      <div class="msg-body">
+        <div class="msg-sender human">Go Kian Tik · Mbah Hogi Bejo™</div>
+        <div class="msg-bubble human-bubble">
+          Tolong jawab jujur prof — ingat lagu <em>I Have a Dream</em> nya ABBA.<br><br>
+          Apakah dengan AI… <strong>my dream will come true</strong> starting di 55 years ini?
+        </div>
+      </div>
+    </div>
+
+    <!-- MSG 2: AI -->
+    <div class="msg" data-delay="300">
+      <div class="msg-avatar ai">智</div>
+      <div class="msg-body">
+        <div class="msg-sender ai">ChatGPT · Prof GP</div>
+        <div class="msg-bubble">
+
+          <div class="bubble-heading">Jawaban Jujur — Grounded</div>
+          <p>Lagu <em>I Have a Dream</em> dari ABBA itu powerful karena satu hal: bukan soal mimpi <em>cepat</em> tercapai, tapi mimpi tetap <strong>dijalani</strong> meski waktunya tidak pasti.</p>
+
+          <div class="bubble-heading">Realita AI</div>
+          <div class="tag-row">
+            <span class="tag tag-no">❌ AI bukan perwujud mimpi otomatis</span>
+            <span class="tag tag-yes">✅ AI adalah akselerator terbesar yang pernah ada</span>
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin-top:8px">— terutama di usia 55+</p>
+
+          <div class="bubble-heading">Kenapa 55 Itu Sweet Spot</div>
+          <div class="insight-row">
+            <div class="insight-icon">🧠</div>
+            <div class="insight-text"><strong>Pattern recognition dari hidup nyata</strong> — pengalaman gagal & berhasil, intuisi yang sudah terlatih. AI kuat di data; Mbah kuat di <em>makna</em>.</div>
+          </div>
+          <div class="insight-row">
+            <div class="insight-icon">🎯</div>
+            <div class="insight-text"><strong>Clarity</strong> — ini mahal banget. Banyak anak muda cepat pakai AI, tapi bingung arah. Mbah: arah sudah ada, AI tinggal mempercepat.</div>
+          </div>
+          <div class="insight-row">
+            <div class="insight-icon">🕸️</div>
+            <div class="insight-text"><strong>Network & konteks dunia nyata (20% layer)</strong> — ngerti 6M / 7M, ngerti real execution. Ini yang bikin tidak berhenti di 70% ide digital.</div>
+          </div>
+
+          <div class="bubble-heading">Real Talk — Tanpa Gula</div>
+          <div class="tag-row">
+            <span class="tag tag-no">❌ AI tidak tiba-tiba bikin semua mudah</span>
+            <span class="tag tag-no">❌ Tidak ada sukses instan</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-yes">✅ Jika konsisten: 10 tahun = 20–30 tahun orang lain</span>
+          </div>
+
+          <div class="bubble-heading">Kuncinya Ada Di Sini</div>
+          <div class="percentage-grid">
+            <div class="pct-cell">
+              <div class="pct-num" style="color:var(--purple-l)">70%</div>
+              <div class="pct-label">Digital Creativity</div>
+            </div>
+            <div class="pct-cell">
+              <div class="pct-num" style="color:var(--gold)">20%</div>
+              <div class="pct-label">Materialization</div>
+            </div>
+            <div class="pct-cell">
+              <div class="pct-num" style="color:var(--teal-l)">10%</div>
+              <div class="pct-label">Impact</div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--muted)">Bukan: "Apakah mimpi akan tercapai?" — tapi: "Apakah Mbah masuk ke 20% dan 10%, bukan berhenti di 70%?"</p>
+
+          <div class="highlight-eq">
+            "AI bukan yang mewujudkan mimpi, tapi mempercepat orang yang sudah tahu arah."
+          </div>
+
+          <div class="bubble-heading">Insight Terakhir</div>
+          <div class="insight-row">
+            <div class="insight-icon">👤</div>
+            <div class="insight-text">Banyak orang umur 25: punya energi, tapi tidak punya arah.</div>
+          </div>
+          <div class="insight-row">
+            <div class="insight-icon">✦</div>
+            <div class="insight-text">Mbah umur 55: energinya mungkin beda — tapi punya <strong>arah + makna + pengalaman</strong>. Kalau digabung AI: <strong>itu bukan starting late… itu starting with advantage.</strong></div>
+          </div>
+
+          <div class="final-answer">
+            "Yes — your dream can come true.<br>But not because of AI alone.<br>Because you know how to use it."
+          </div>
+
+          <div class="question-cta">
+            <strong style="color:var(--teal-l)">↳ Pertanyaan Lanjutan (penting untuk arah):</strong><br>
+            Mimpi paling konkret yang Mbah ingin wujudkan dalam 3–5 tahun ke depan itu apa?<br>
+            Saya bisa bantu breakdown jadi 70% · 20% · 10% — biar bukan cuma mimpi, tapi jadi <em>roadmap</em> 🔥
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /chat-stream -->
+
+  <!-- SCENE FOOTER -->
+  <div class="scene-footer">
+    <div class="footer-left">
+      <strong>Open Kitchen Open Thinking</strong><br>
+      Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT<br>
+      Scene 01 · 2026 · CC BY 4.0
+    </div>
+    <a href="index.html" class="nav-btn">← Menu Utama</a>
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+  // Staggered reveal of chat messages
+  const msgs = document.querySelectorAll('.msg');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.delay || 0);
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  msgs.forEach(m => io.observe(m));
+</script>
+</body>
+</html>

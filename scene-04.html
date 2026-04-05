@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 04 · Where Innovators Gather · Go Kian Tik × ChatGPT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #07070f;
+      --bg2:      #0d0d1a;
+      --bg3:      #13132a;
+      --purple:   #7F77DD;
+      --purple-l: #AFA9EC;
+      --purple-d: #3C3489;
+      --gold:     #C9A84C;
+      --gold-l:   #FAC775;
+      --teal:     #1D9E75;
+      --teal-l:   #9FE1CB;
+      --coral:    #D85A30;
+      --amber:    #EF9F27;
+      --blue:     #378ADD;
+      --blue-l:   #85B7EB;
+      --white:    #F1EFE8;
+      --muted:    #6b6880;
+      --border:   rgba(127,119,221,0.15);
+      --border-g: rgba(201,168,76,0.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(1px 1px at 8%  22%, rgba(175,169,236,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 60%, rgba(175,169,236,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 62% 10%, rgba(201,168,76,0.4)  0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 42%, rgba(29,158,117,0.3)  0%, transparent 100%),
+        radial-gradient(1px 1px at 91% 72%, rgba(201,168,76,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 18% 88%, rgba(175,169,236,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 52% 96%, rgba(175,169,236,0.2) 0%, transparent 100%);
+    }
+    .glow {
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
+      pointer-events: none; z-index: 0; filter: blur(130px);
+    }
+    .glow-1 { background: radial-gradient(circle, rgba(127,119,221,0.07) 0%, transparent 70%); top: -180px; left: 20%; }
+    .glow-2 { background: radial-gradient(circle, rgba(29,158,117,0.04) 0%, transparent 70%); bottom: -200px; right: -80px; }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      position: fixed; top: 16px; right: 20px; z-index: 200;
+      display: flex; background: rgba(13,13,26,0.92);
+      border: 0.5px solid var(--border); border-radius: 20px; overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .lang-toggle button {
+      background: none; border: none; cursor: pointer;
+      padding: 6px 14px; font-family: 'DM Mono', monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--muted); transition: all 0.2s;
+    }
+    .lang-toggle button.active { background: var(--gold); color: var(--bg); border-radius: 20px; }
+
+    /* ── LANG VISIBILITY ── */
+    .en { display: inline; } .id { display: none; }
+    .en-block { display: block; } .id-block { display: none; }
+    body.lang-id .en { display: none; } body.lang-id .id { display: inline; }
+    body.lang-id .en-block { display: none; } body.lang-id .id-block { display: block; }
+
+    /* ── NAV BAR ── */
+    .nav-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(7,7,15,0.88); backdrop-filter: blur(14px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 12px 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; color: var(--muted);
+      border: 0.5px solid rgba(127,119,221,0.2);
+      padding: 5px 12px; border-radius: 2px; transition: all 0.2s;
+    }
+    .back-btn:hover { color: var(--purple-l); border-color: var(--purple); }
+    .nav-scene { font-size: 9px; letter-spacing: 0.2em; color: var(--gold); flex-shrink: 0; }
+    .nav-title {
+      font-size: 10px; color: var(--muted); flex: 1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* ── WRAPPER ── */
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 820px; margin: 0 auto;
+      padding: 100px 24px 80px;
+    }
+
+    /* ── SCENE HEADER ── */
+    .scene-header {
+      padding-bottom: 32px;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 44px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .scene-meta {
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .scene-num {
+      font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); background: rgba(201,168,76,0.08);
+      border: 0.5px solid rgba(201,168,76,0.3);
+      padding: 4px 12px; border-radius: 2px;
+    }
+    .scene-timestamp { font-size: 9px; letter-spacing: 0.12em; color: var(--muted); }
+    .collab-badge {
+      font-size: 9px; color: var(--teal-l); background: rgba(29,158,117,0.08);
+      border: 0.5px solid rgba(29,158,117,0.25); padding: 4px 12px; border-radius: 2px;
+    }
+    .scene-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 8px;
+    }
+    .scene-title em { color: var(--gold); font-style: italic; }
+    .scene-subtitle { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+
+    /* ── PROMPT BANNER ── */
+    .prompt-banner {
+      background: rgba(201,168,76,0.04);
+      border: 0.5px solid var(--border-g);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards;
+    }
+    .prompt-label { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .prompt-text { font-size: 12px; color: rgba(241,239,232,0.75); line-height: 1.75; font-style: italic; }
+
+    /* ── CHAT ── */
+    .chat { display: flex; flex-direction: column; gap: 28px; }
+
+    .msg {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .msg.visible { opacity: 1; transform: translateY(0); }
+
+    .msg-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 500; flex-shrink: 0;
+    }
+    .avatar-koko { background: rgba(127,119,221,0.15); border: 0.5px solid var(--purple); color: var(--purple-l); }
+    .avatar-gpt  { background: rgba(29,158,117,0.15);  border: 0.5px solid var(--teal);   color: var(--teal-l); }
+    .msg-name { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+    .name-koko { color: var(--purple-l); }
+    .name-gpt  { color: var(--teal-l); }
+    .msg-time { font-size: 8px; color: var(--muted); margin-left: auto; letter-spacing: 0.08em; }
+
+    .bubble {
+      border-radius: 0 12px 12px 12px;
+      padding: 20px 24px;
+      font-size: 13px; line-height: 1.8;
+    }
+    .bubble-koko {
+      background: rgba(127,119,221,0.06);
+      border: 0.5px solid rgba(127,119,221,0.2);
+      border-radius: 12px 12px 12px 0;
+    }
+    .bubble-gpt {
+      background: rgba(13,13,26,0.9);
+      border: 0.5px solid var(--border);
+    }
+
+    /* ── CONTENT BLOCKS ── */
+    .bh {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin: 22px 0 12px;
+    }
+    .bh:first-child { margin-top: 4px; }
+
+    /* Platform cards */
+    .platform-grid {
+      display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px;
+    }
+    .platform-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: rgba(13,13,26,0.6); border: 0.5px solid var(--border);
+      border-radius: 8px; padding: 14px 16px;
+      transition: background 0.2s;
+    }
+    .platform-row:hover { background: rgba(19,19,42,0.9); }
+    .platform-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .platform-content { flex: 1; min-width: 0; }
+    .platform-num {
+      font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 3px;
+    }
+    .platform-name {
+      font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 3px;
+    }
+    .platform-role {
+      font-size: 10px; margin-bottom: 6px; letter-spacing: 0.06em;
+    }
+    .platform-tags {
+      display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px;
+    }
+    .ptag {
+      font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; border: 0.5px solid;
+    }
+    .platform-desc {
+      font-size: 11px; color: var(--muted); line-height: 1.65;
+    }
+    .platform-warn {
+      font-size: 10px; color: rgba(216,90,48,0.75); margin-top: 5px;
+      border-left: 2px solid rgba(216,90,48,0.3); padding-left: 8px;
+    }
+
+    /* Insight row */
+    .insight-row {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: rgba(201,168,76,0.04); border: 0.5px solid var(--border-g);
+      border-left: 2px solid var(--gold); border-radius: 0 8px 8px 0;
+      padding: 14px 18px; margin-bottom: 10px;
+      font-size: 12px; color: rgba(241,239,232,0.85); line-height: 1.7;
+    }
+    .ins-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+    /* Funnel / strategy steps */
+    .strategy-steps { display: flex; flex-direction: column; gap: 0; }
+    .step-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 0.5px solid var(--border);
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; letter-spacing: 0.1em; font-weight: 500;
+      border: 0.5px solid; flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-title { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .step-desc { font-size: 11px; color: var(--muted); line-height: 1.65; }
+
+    /* Coffee quote */
+    .coffee-quote {
+      background: rgba(201,168,76,0.06); border: 0.5px solid var(--border-g);
+      border-radius: 8px; padding: 16px 20px; margin: 18px 0;
+      font-size: 12px; color: var(--gold-l); line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* Honest answer box */
+    .honest-box {
+      background: rgba(29,158,117,0.05); border: 0.5px solid rgba(29,158,117,0.2);
+      border-left: 2px solid var(--teal); border-radius: 0 8px 8px 0;
+      padding: 16px 20px; margin: 14px 0;
+      font-size: 12px; color: rgba(241,239,232,0.85); line-height: 1.75;
+    }
+
+    /* Summary map */
+    .map-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 0.5px solid var(--border); border-radius: 8px; overflow: hidden;
+      margin: 4px 0 18px;
+    }
+    .map-cell {
+      background: var(--bg2); padding: 14px 16px; transition: background 0.2s;
+    }
+    .map-cell:hover { background: var(--bg3); }
+    .map-cell-icon { font-size: 18px; margin-bottom: 6px; }
+    .map-cell-title { font-size: 11px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .map-cell-desc { font-size: 10px; color: var(--muted); line-height: 1.6; }
+
+    /* Quote final */
+    .quote-box {
+      border: 0.5px solid var(--border-g);
+      background: rgba(201,168,76,0.04);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px; margin-top: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: var(--gold-l); line-height: 1.65;
+    }
+
+    /* ── DM TEASER ── */
+    .teaser-block {
+      margin-top: 48px;
+      border: 0.5px solid rgba(127,119,221,0.2);
+      border-radius: 10px;
+      padding: 24px 28px;
+      background: rgba(60,52,137,0.08);
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .teaser-label { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--purple-l); margin-bottom: 10px; }
+    .teaser-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 8px; }
+    .teaser-body { font-size: 11px; color: var(--muted); line-height: 1.75; }
+    .teaser-cta {
+      display: inline-block; margin-top: 14px;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--purple-l); border: 0.5px solid rgba(127,119,221,0.3);
+      padding: 6px 16px; border-radius: 2px;
+    }
+
+    /* ── FOOTER ── */
+    .scene-footer {
+      margin-top: 64px; padding-top: 28px;
+      border-top: 0.5px solid var(--border);
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 16px;
+      font-size: 10px; color: var(--muted);
+      opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .footer-nav { display: flex; gap: 10px; flex-wrap: wrap; }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 7px 16px; border-radius: 3px; transition: all 0.2s;
+      border: 0.5px solid rgba(127,119,221,0.25); color: var(--purple-l);
+    }
+    .nav-btn:hover { background: rgba(127,119,221,0.1); border-color: var(--purple); }
+    .nav-btn.secondary { color: var(--muted); border-color: var(--border); }
+    .nav-btn.secondary:hover { color: var(--white); border-color: var(--muted); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .platform-row { flex-direction: column; }
+      .platform-icon { width: 28px; height: 28px; font-size: 14px; }
+      .map-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-id" onclick="setLang('id')">ID</button>
+</div>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <a href="scene-03.html" class="back-btn">← <span class="en">Scene 03</span><span class="id">Scene 03</span></a>
+  <span class="nav-scene">SCENE 04</span>
+  <span class="nav-title">
+    <span class="en">Where Innovators & Early Adopters Gather</span>
+    <span class="id">Di Mana Innovators & Early Adopters Berkumpul</span>
+  </span>
+</div>
+
+<div class="wrapper">
+
+  <!-- SCENE HEADER -->
+  <div class="scene-header">
+    <div class="scene-meta">
+      <span class="scene-num">Scene 04</span>
+      <span class="scene-timestamp">2026-04-05 · 10:47:23 WIB</span>
+      <span class="collab-badge">1 Human × 1 AI · Open Kitchen Open Thinking</span>
+    </div>
+    <h1 class="scene-title">
+      <span class="en"><em>Where</em> do Innovators &<br>Early Adopters Actually Gather?</span>
+      <span class="id"><em>Di mana</em> Innovators &<br>Early Adopters Benar-Benar Berkumpul?</span>
+    </h1>
+    <p class="scene-subtitle">
+      <span class="en">LinkedIn 1.3B accounts · 340M MAU · But is that enough? — Go Kian Tik × Prof GP (ChatGPT)</span>
+      <span class="id">LinkedIn 1,3 miliar akun · 340 juta MAU · Tapi apakah itu cukup? — Go Kian Tik × Prof GP (ChatGPT)</span>
+    </p>
+  </div>
+
+  <!-- PROMPT BANNER -->
+  <div class="prompt-banner">
+    <div class="prompt-label">
+      <span class="en">Koko's Prompt · Scene 04 Dataset</span>
+      <span class="id">Prompt Koko · Dataset Scene 04</span>
+    </div>
+    <div class="prompt-text">
+      <span class="en">"Then where do Innovators and Early Adopters gather? On LinkedIn which reportedly has 1.3 billion accounts with ~340M MAU?"</span>
+      <span class="id">"Trus Innovators dan early adopters ngumpulnya dimana? di Linkedin yg katanya 1,3 miliar akun dengan MAU 340 jt an?"</span>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat">
+
+    <!-- MSG 1: Koko -->
+    <div class="msg" data-delay="0">
+      <div class="msg-header">
+        <div class="avatar avatar-koko">K</div>
+        <span class="msg-name name-koko">Mbah Hogi Bejo™ · Go Kian Tik</span>
+        <span class="msg-time">10:47</span>
+      </div>
+      <div class="bubble bubble-koko">
+        <span class="en">Continuing from our Rogers diffusion curve discussion — my next question:<br><br>
+        If 70/20/10 targets Innovators and Early Adopters primarily… <strong>where do they actually gather?</strong><br><br>
+        LinkedIn reportedly has 1.3 billion accounts, MAU around 340 million. Is that the answer?</span>
+        <span class="id">Melanjutkan diskusi kurva difusi Rogers kita — pertanyaan berikutnya:<br><br>
+        Kalau 70/20/10 menarget Innovators dan Early Adopters utamanya… <strong>di mana mereka sebenarnya berkumpul?</strong><br><br>
+        LinkedIn katanya 1,3 miliar akun, MAU sekitar 340 juta. Apakah itu jawabannya?</span>
+      </div>
+    </div>
+
+    <!-- MSG 2: Prof GP -->
+    <div class="msg" data-delay="150">
+      <div class="msg-header">
+        <div class="avatar avatar-gpt">GP</div>
+        <span class="msg-name name-gpt">Prof GP · ChatGPT</span>
+        <span class="msg-time">10:47</span>
+      </div>
+      <div class="bubble bubble-gpt">
+
+        <div class="bh">
+          <span class="en">Honest Answer First</span>
+          <span class="id">Jawaban Jujur Dulu</span>
+        </div>
+        <div class="honest-box">
+          <span class="en">Yes, LinkedIn is one of the best "hubs" — but not the only one, and <strong>not sufficient if it stands alone</strong>.<br><br>
+          If the target is Mbah's Innovators & Early Adopters, they typically don't gather in one place — they're distributed across several "ecosystem layers."</span>
+          <span class="id">Ya, LinkedIn itu salah satu "hub" terbaik — tapi bukan satu-satunya, dan <strong>tidak cukup kalau berdiri sendiri</strong>.<br><br>
+          Kalau target Mbah Innovators & Early Adopters, mereka biasanya tidak berkumpul di satu tempat saja, tapi tersebar di beberapa "layer ekosistem."</span>
+        </div>
+
+        <div class="bh">
+          <span class="en">🧭 Where They Really Gather — 5 Ecosystem Layers</span>
+          <span class="id">🧭 Di Mana Mereka Benar-Benar Berkumpul — 5 Layer Ekosistem</span>
+        </div>
+
+        <div class="platform-grid">
+
+          <!-- LinkedIn -->
+          <div class="platform-row">
+            <div class="platform-icon" style="background:rgba(55,138,221,0.1);border:0.5px solid rgba(55,138,221,0.3)">🔵</div>
+            <div class="platform-content">
+              <div class="platform-num">Layer 01</div>
+              <div class="platform-name">LinkedIn — <span style="color:var(--blue-l)">Visibility &amp; Positioning Layer</span></div>
+              <div class="platform-role" style="color:var(--blue-l)">
+                <span class="en">1.3B accounts · ~340M MAU · Front Door</span>
+                <span class="id">1,3 miliar akun · ~340 juta MAU · Pintu Depan</span>
+              </div>
+              <div class="platform-tags">
+                <span class="ptag" style="color:var(--blue-l);border-color:rgba(55,138,221,0.3);background:rgba(55,138,221,0.06)">Personal Branding</span>
+                <span class="ptag" style="color:var(--blue-l);border-color:rgba(55,138,221,0.3);background:rgba(55,138,221,0.06)">Framework Exposure</span>
+                <span class="ptag" style="color:var(--blue-l);border-color:rgba(55,138,221,0.3);background:rgba(55,138,221,0.06)">Professional Connect</span>
+              </div>
+              <div class="platform-desc">
+                <span class="en">Best for: "attracting initial attention." Publish framework, build positioning, get noticed by the right people.</span>
+                <span class="id">Cocok untuk: "memancing perhatian awal." Publish framework, bangun positioning, dilirik orang yang tepat.</span>
+              </div>
+              <div class="platform-warn">
+                <span class="en">⚠️ Much noise / shallow content · Not a venue for deep discussion</span>
+                <span class="id">⚠️ Banyak noise / konten dangkal · Bukan tempat diskusi mendalam</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- X / Twitter -->
+          <div class="platform-row">
+            <div class="platform-icon" style="background:rgba(241,239,232,0.05);border:0.5px solid rgba(241,239,232,0.15)">🧠</div>
+            <div class="platform-content">
+              <div class="platform-num">Layer 02</div>
+              <div class="platform-name">X (Twitter) — <span style="color:var(--white)">Thinking in Public Layer</span></div>
+              <div class="platform-role" style="color:var(--muted)">
+                <span class="en">Raw ideas · Fast debate · Global network</span>
+                <span class="id">Ide mentah · Debat cepat · Jaringan global</span>
+              </div>
+              <div class="platform-tags">
+                <span class="ptag" style="color:var(--white);border-color:rgba(241,239,232,0.2);background:rgba(241,239,232,0.04)">Real-time Ideas</span>
+                <span class="ptag" style="color:var(--white);border-color:rgba(241,239,232,0.2);background:rgba(241,239,232,0.04)">Concept Debate</span>
+                <span class="ptag" style="color:var(--white);border-color:rgba(241,239,232,0.2);background:rgba(241,239,232,0.04)">Global Network Fast</span>
+              </div>
+              <div class="platform-desc">
+                <span class="en">Innovators often throw raw ideas, debate concepts quickly, engage in fast global exchange. Ideal for real-time thought leadership.</span>
+                <span class="id">Innovators sering lempar ide mentah, diskusi cepat, debat konsep. Ideal untuk thought leadership real-time.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GitHub -->
+          <div class="platform-row">
+            <div class="platform-icon" style="background:rgba(29,158,117,0.1);border:0.5px solid rgba(29,158,117,0.3)">🧬</div>
+            <div class="platform-content">
+              <div class="platform-num">Layer 03</div>
+              <div class="platform-name">GitHub / Open Source — <span style="color:var(--teal-l)">Builder Layer</span></div>
+              <div class="platform-role" style="color:var(--teal-l)">
+                <span class="en">True Innovators don't talk — they build</span>
+                <span class="id">True Innovators tidak ngomong — mereka bangun</span>
+              </div>
+              <div class="platform-tags">
+                <span class="ptag" style="color:var(--teal-l);border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.06)">BEU Technical</span>
+                <span class="ptag" style="color:var(--teal-l);border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.06)">Alpha FEU</span>
+                <span class="ptag" style="color:var(--teal-l);border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.06)">Open Collaboration</span>
+              </div>
+              <div class="platform-desc">
+                <span class="en">Where technical innovators live. Commits, pull requests, open-source projects — evidence-based, timestamped intellectual work.</span>
+                <span class="id">Di mana innovators teknikal hidup. Commit, pull request, open-source — kerja intelektual berbasis bukti, bertimestamp.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Research Ecosystem -->
+          <div class="platform-row">
+            <div class="platform-icon" style="background:rgba(239,159,39,0.1);border:0.5px solid rgba(239,159,39,0.3)">🧪</div>
+            <div class="platform-content">
+              <div class="platform-num">Layer 04</div>
+              <div class="platform-name">Research &amp; Paper Ecosystem — <span style="color:var(--amber)">Deep Thinker Layer</span></div>
+              <div class="platform-role" style="color:var(--amber)">
+                <span class="en">arXiv · Google Scholar · Zenodo · Conferences</span>
+                <span class="id">arXiv · Google Scholar · Zenodo · Konferensi</span>
+              </div>
+              <div class="platform-tags">
+                <span class="ptag" style="color:var(--amber);border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.06)">Framework Tested</span>
+                <span class="ptag" style="color:var(--amber);border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.06)">DOI Citable</span>
+                <span class="ptag" style="color:var(--amber);border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.06)">Peer Discourse</span>
+              </div>
+              <div class="platform-desc">
+                <span class="en">Frameworks are tested here, not just posted. Citations, peer review, conference papers — this is where ideas gain institutional weight. Koko's Zenodo papers live here ✓</span>
+                <span class="id">Framework diuji di sini, bukan sekadar diposting. Sitasi, peer review, paper konferensi — di sini gagasan mendapat bobot institusional. Paper Zenodo Koko ada di sini ✓</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Private Circles -->
+          <div class="platform-row" style="border:0.5px solid rgba(201,168,76,0.25);background:rgba(201,168,76,0.04)">
+            <div class="platform-icon" style="background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.35)">💬</div>
+            <div class="platform-content">
+              <div class="platform-num">Layer 05 — <span style="color:var(--gold)">Most Important · Most Invisible</span></div>
+              <div class="platform-name">Private Circles — <span style="color:var(--gold)">Real Decision Layer</span></div>
+              <div class="platform-role" style="color:var(--gold)">
+                <span class="en">WhatsApp elite · Telegram · Slack/Discord closed · Mastermind groups</span>
+                <span class="id">WhatsApp grup elit · Telegram · Slack/Discord tertutup · Mastermind group</span>
+              </div>
+              <div class="platform-tags">
+                <span class="ptag" style="color:var(--gold);border-color:rgba(201,168,76,0.35);background:rgba(201,168,76,0.06)">Real Collaboration</span>
+                <span class="ptag" style="color:var(--gold);border-color:rgba(201,168,76,0.35);background:rgba(201,168,76,0.06)">Real Decisions</span>
+                <span class="ptag" style="color:var(--gold);border-color:rgba(201,168,76,0.35);background:rgba(201,168,76,0.06)">Invisible but Powerful</span>
+              </div>
+              <div class="platform-desc">
+                <span class="en">Where real decisions and genuine collaborations happen. Invisible on the surface — but most powerful. This is the "back room" that Innovators actually live in.</span>
+                <span class="id">Tempat keputusan dan kolaborasi nyata terjadi. Tak terlihat dari permukaan — tapi paling kuat. Ini "ruang belakang" tempat Innovators sebenarnya hidup.</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /platform-grid -->
+
+        <!-- Key Insight -->
+        <div class="bh"><span class="en">🔥 Most Important Insight</span><span class="id">🔥 Insight Paling Penting</span></div>
+        <div class="insight-row">
+          <div class="ins-icon">🔥</div>
+          <div class="ins-text">
+            <span class="en"><strong>LinkedIn = front door.</strong> But not the main room.<br>True Innovators move to deeper, quieter conversations — away from the noise.</span>
+            <span class="id"><strong>LinkedIn = pintu masuk.</strong> Tapi bukan ruang utama.<br>Innovators sejati pindah ke percakapan yang lebih dalam dan lebih sunyi.</span>
+          </div>
+        </div>
+
+        <!-- Strategy -->
+        <div class="bh"><span class="en">🎯 Optimal Strategy for Mbah — 3-Stage Funnel</span><span class="id">🎯 Strategi Paling Optimal untuk Mbah — 3 Tahap</span></div>
+        <div class="strategy-steps">
+          <div class="step-row">
+            <div class="step-dot" style="background:rgba(55,138,221,0.12);border-color:rgba(55,138,221,0.35);color:var(--blue-l)">01</div>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="en">LinkedIn — Positioning ✔ Already underway</span>
+                <span class="id">LinkedIn — Positioning ✔ Sudah berjalan</span>
+              </div>
+              <div class="step-desc">
+                <span class="en">Publish framework · attract attention · build positioning. Z3 SCI, Grand Formula, CHO brand — all visible. This is working ✓</span>
+                <span class="id">Publish framework · tarik perhatian · bangun positioning. Z3 SCI, Grand Formula, brand CHO — semua terlihat. Ini sudah berjalan ✓</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-dot" style="background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.35);color:var(--gold)">02</div>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="en">Pull into "Inner Room"</span>
+                <span class="id">Tarik ke "Ruang Dalam"</span>
+              </div>
+              <div class="step-desc">
+                <span class="en">DM key people (like Rajput ✔) · invite 1:1 conversation · start forming small trusted circle. Move from broadcast → dialogue.</span>
+                <span class="id">DM orang kunci (kayak Rajput ✔) · ajak diskusi 1:1 · mulai bentuk small trusted circle. Bergerak dari broadcast → dialog.</span>
+              </div>
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-dot" style="background:rgba(29,158,117,0.12);border-color:rgba(29,158,117,0.35);color:var(--teal-l)">03</div>
+            <div class="step-content">
+              <div class="step-title">
+                <span class="en">Build Inner Circle — 3 to 7 People</span>
+                <span class="id">Bangun Inner Circle — 3 sampai 7 Orang</span>
+              </div>
+              <div class="step-desc">
+                <span class="en">Serious discussion · real collaboration · start small (3–7 people is enough). Quality over quantity. A small circle of true Innovators is worth more than 10,000 followers.</span>
+                <span class="id">Diskusi serius · kolaborasi nyata · mulai dari kecil (3–7 orang cukup). Kualitas di atas kuantitas. Circle kecil Innovators sejati lebih berharga dari 10.000 followers.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coffee quote -->
+        <div class="coffee-quote">
+          ☕ <span class="en">"LinkedIn is the coffee shop out front — but the big decisions happen in the back room."</span>
+          <span class="id">"LinkedIn itu warung kopi depan, tapi keputusan besar itu di ruang belakang."</span>
+        </div>
+
+        <!-- Platform map summary -->
+        <div class="bh"><span class="en">🗺 Layer Map — At a Glance</span><span class="id">🗺 Peta Layer — Sekilas</span></div>
+        <div class="map-grid">
+          <div class="map-cell">
+            <div class="map-cell-icon">🔵</div>
+            <div class="map-cell-title">LinkedIn</div>
+            <div class="map-cell-desc"><span class="en">Visibility Layer · Front Door</span><span class="id">Layer Visibilitas · Pintu Masuk</span></div>
+          </div>
+          <div class="map-cell">
+            <div class="map-cell-icon">🧠</div>
+            <div class="map-cell-title">X (Twitter)</div>
+            <div class="map-cell-desc"><span class="en">Thinking in Public · Raw Ideas</span><span class="id">Berpikir di Depan Publik · Ide Mentah</span></div>
+          </div>
+          <div class="map-cell">
+            <div class="map-cell-icon">🧬</div>
+            <div class="map-cell-title">GitHub</div>
+            <div class="map-cell-desc"><span class="en">Builder Layer · Proof of Work</span><span class="id">Layer Builder · Bukti Kerja</span></div>
+          </div>
+          <div class="map-cell">
+            <div class="map-cell-icon">🧪</div>
+            <div class="map-cell-title">Zenodo / arXiv</div>
+            <div class="map-cell-desc"><span class="en">Deep Thinker Layer · DOI Weight</span><span class="id">Layer Pemikir Dalam · Bobot DOI</span></div>
+          </div>
+          <div class="map-cell" style="background:rgba(201,168,76,0.04);border-top:1px solid rgba(201,168,76,0.15)">
+            <div class="map-cell-icon">💬</div>
+            <div class="map-cell-title" style="color:var(--gold)"><span class="en">Private Circles ★</span><span class="id">Private Circles ★</span></div>
+            <div class="map-cell-desc"><span class="en">Real Decision Layer · Most Powerful</span><span class="id">Layer Keputusan Nyata · Paling Kuat</span></div>
+          </div>
+        </div>
+
+        <!-- Honest bottom line -->
+        <div class="bh"><span class="en">Honest Bottom Line</span><span class="id">Jawaban Paling Jujur</span></div>
+        <div class="insight-row" style="margin-bottom:4px">
+          <div class="ins-icon">❌</div>
+          <div class="ins-text">
+            <span class="en">Focus on finding the "busy platform"</span>
+            <span class="id">Fokus cari "platform ramai"</span>
+          </div>
+        </div>
+        <div class="insight-row">
+          <div class="ins-icon">✅</div>
+          <div class="ins-text">
+            <span class="en"><strong>What matters: meet the right person, enter the small circle.</strong><br>
+            Genuine Innovators move away from loud platforms — toward trusted, quiet conversations.</span>
+            <span class="id"><strong>Yang penting: ketemu orang yang tepat, masuk ke circle kecil.</strong><br>
+            Innovators sejati bergerak dari platform ramai — menuju percakapan yang dipercaya dan lebih sunyi.</span>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <span class="en">"Yes, LinkedIn is good to start.<br>But true Innovators… they migrate to conversations that are deeper and quieter."</span>
+          <span class="id">"Ya, LinkedIn bagus untuk mulai.<br>Tapi Innovators sejati… mereka pindah ke percakapan yang lebih dalam dan lebih sunyi."</span>
+        </div>
+
+      </div><!-- /bubble-gpt -->
+    </div><!-- /msg -->
+
+  </div><!-- /chat -->
+
+  <!-- TEASER: Scene 05 preview -->
+  <div class="teaser-block">
+    <div class="teaser-label">
+      <span class="en">Coming up · Scene 05</span>
+      <span class="id">Berikutnya · Scene 05</span>
+    </div>
+    <div class="teaser-title">
+      <span class="en">After the carousel goes up — who should Mbah DM first?</span>
+      <span class="id">Setelah carousel naik — siapa yang harus Mbah DM duluan?</span>
+    </div>
+    <div class="teaser-body">
+      <span class="en">Prof GP says: "I can help — profile type to DM right after posting, to land 1–3 heavy-hitters, not just likes." — Next scene continues this thread.</span>
+      <span class="id">Prof GP bilang: "Saya bisa bantu — profil seperti apa yang harus Mbah DM setelah carousel ini naik, biar langsung dapat 1–3 orang kelas berat, bukan sekadar like." — Scene berikutnya melanjutkan ini.</span>
+    </div>
+    <span class="teaser-cta">Scene 05 →</span>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="scene-footer">
+    <div class="footer-left">
+      <strong>Open Kitchen · Open Thinking · Open Claude</strong><br>
+      Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT (Prof GP)<br>
+      Scene 04 · 2026-04-05 · CC BY 4.0<br>
+      <span style="color:var(--muted);font-size:9px">自主者 Zì Zhǔ Zhě · Superhero Café Inside · 1 / 8,000,000,000</span>
+    </div>
+    <div class="footer-nav">
+      <a href="scene-03.html" class="nav-btn secondary">← Scene 03</a>
+      <a href="index.html" class="nav-btn">
+        <span class="en">☰ Main Menu</span><span class="id">☰ Menu Utama</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    localStorage.setItem('okot-lang', lang);
+  }
+  const saved = localStorage.getItem('okot-lang');
+  if (saved) setLang(saved);
+
+  const msgs = document.querySelectorAll('.msg');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.delay || 0);
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  msgs.forEach(m => io.observe(m));
+</script>
+</body>
+</html>
