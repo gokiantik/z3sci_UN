@@ -18,6 +18,10 @@
   .lang-btn{background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:'Georgia',serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec);transition:background .15s,color .15s;}
   .lang-btn.active{background:var(--purple-600);color:#fff;}
 
+  /* TOPBAR LINK */
+  .topbar-link{display:flex;align-items:center;gap:5px;border:1px solid var(--border-med);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:600;font-family:'Georgia',serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec);text-decoration:none;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;}
+  .topbar-link:hover{background:var(--purple-50);color:var(--purple-600);border-color:var(--purple-200);}
+
   /* HERO */
   .hero{padding:48px 28px 36px;max-width:800px;margin:0 auto;}
   .hero-eyebrow{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-sec);margin-bottom:16px;}
@@ -75,7 +79,7 @@
   span[class~="id"] { display:inline; }
   body.en span[class~="id"] { display:none !important; }
 
-  @media(max-width:540px){.paper-grid{grid-template-columns:1fr;}.deep-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:22px;}}
+  @media(max-width:540px){.paper-grid{grid-template-columns:1fr;}.deep-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:22px;}.topbar-link span.link-label{display:none;}}
 
   /* DROPDOWN MENU */
   .nav-dropdown{position:relative;}
@@ -98,171 +102,171 @@
 <div class="topbar">
   <span class="topbar-site">CHO In Action Series</span>
   <div class="topbar-spacer"></div>
+
+  <!-- ★ MENU I HAVE A DREAM — tambahan baru di kiri AI Red Teamer -->
+  <a href="https://gokiantik.github.io/z3sci_UN/i_have_a_dream.html"
+     target="_blank"
+     class="topbar-link">
+    🌟 <span class="link-label">I Have A Dream</span>
+  </a>
+
+  <!-- DROPDOWN: AI Red Teamer -->
   <div class="nav-dropdown" id="dd-airt">
     <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-airt')">
       AI Red Teamer
       <span class="chevron">▾</span>
     </button>
     <div class="nav-dropdown-menu">
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_interactive_prompt" target="_blank" rel="noopener">
-        <span class="item-icon">🛡</span>
-        <span class="item-label">AIRT Anti-Plagiarism V4.1</span>
-        <span class="item-badge">NEW</span>
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_int" target="_blank">
+        <span class="item-icon">🛡️</span>
+        <span class="item-label">AIRT Interactive</span>
+        <span class="item-badge">v4.1</span>
+      </a>
+      <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1" target="_blank">
+        <span class="item-icon">📄</span>
+        <span class="item-label">AIRT Full Paper</span>
       </a>
     </div>
   </div>
+
+  <!-- LANGUAGE TOGGLE -->
   <div class="lang-toggle">
     <button class="lang-btn active" id="btn-id" onclick="setLang('id')">ID</button>
     <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
   </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">CHO In Action Series · UN Open Source Week 2026 · Go Kian Tik (Mbah Hogi Bejo™)</div>
+  <div class="hero-eyebrow id">Seri Riset · Chief Humanity Officer</div>
+  <div class="hero-eyebrow en">Research Series · Chief Humanity Officer</div>
 
-  <h1 class="hero-title id">Grand Formula:<br><em>Satu Argumen Utuh</em></h1>
-  <h1 class="hero-title en">Grand Formula:<br><em>One Complete Argument</em></h1>
+  <h1 class="hero-title">
+    <span class="id">Ketika <em>AI menjadi kolega</em>,<br>siapa yang menjaga kemanusiaan?</span>
+    <span class="en">When <em>AI becomes a colleague</em>,<br>who guards our humanity?</span>
+  </h1>
 
-  <p class="hero-sub id">4 paper, 4 variabel, satu arsitektur lengkap untuk memahami kedaulatan manusia di era Artificial General Intelligence — dari Global South, untuk 8 miliar manusia.</p>
-  <p class="hero-sub en">4 papers, 4 variables, one complete architecture for understanding human sovereignty in the age of Artificial General Intelligence — from the Global South, for 8 billion humans.</p>
+  <p class="hero-sub id">
+    Empat paper riset yang memetakan peran baru kepemimpinan HR di era AI — dari red-teaming hingga tata kelola, dari engagement hingga masa depan pembelajaran.
+  </p>
+  <p class="hero-sub en">
+    Four research papers mapping the new HR leadership role in the AI era — from red-teaming to governance, from engagement to the future of learning.
+  </p>
 
   <div class="formula-strip">
-    <div class="eq">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div>
-    <div class="sub id">Grand Formula · Go Kian Tik (GKT) · 2026 · Satu variabel per paper dioperasionalkan</div>
-    <div class="sub en">Grand Formula · Go Kian Tik (GKT) · 2026 · One variable per paper operationalised</div>
-  </div>
-
-  <div style="margin-top:24px;border-radius:16px;overflow:hidden;border:1px solid var(--border-med);box-shadow:0 6px 32px rgba(0,0,0,0.10);">
-    <img src="Grand_Formula.jpg" alt="Grand Formula — (Consciousness × Calculation)^Humanity < Transcendence · Chief Humanity Officer Framework · UN Open Source Week 2026" style="width:100%;display:block;">
+    <div class="eq">CHO = CHRO + AI Ethics Guardian + Human-Centered Architect</div>
+    <div class="sub id">Formula kepemimpinan HR generasi berikutnya</div>
+    <div class="sub en">The next-generation HR leadership formula</div>
   </div>
 </div>
 
-<!-- OVERVIEW -->
-<div class="section-label id lang-only">Gambaran Lengkap</div>
-<div class="section-label en lang-only">Full Overview</div>
+<!-- SECTION: MAIN FEATURED -->
+<div class="section-label id">Paper Unggulan</div>
+<div class="section-label en">Featured Paper</div>
+
 <div class="main-card">
-  <a class="card-link" href="cho_series_complete.html">
-    <span class="card-tag id">Index · Semua Paper</span>
-    <span class="card-tag en">Index · All Papers</span>
-    <div class="card-title id">CHO In Action Series — Semua Paper</div>
-    <div class="card-title en">CHO In Action Series — All Papers</div>
-    <div class="card-desc id">5 tab navigasi: Gambaran Umum + Paper 1 sampai Paper 4 dalam satu halaman. Mulai dari sini.</div>
-    <div class="card-desc en">5 navigation tabs: Overview + Paper 1 through Paper 4 in one page. Start here.</div>
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_int" target="_blank" class="card-link">
+    <span class="card-tag">AI Red Teamer · Paper 1</span>
+    <div class="card-title id">Menjadi AI Red Teamer: Garis Pertahanan Pertama HR</div>
+    <div class="card-title en">Becoming an AI Red Teamer: HR's First Line of Defense</div>
+    <div class="card-desc id">Panduan praktis bagi profesional HR untuk menguji, menantang, dan mengamankan sistem AI di organisasi.</div>
+    <div class="card-desc en">A practical guide for HR professionals to test, challenge, and secure AI systems within organizations.</div>
     <span class="card-arrow">→</span>
   </a>
 </div>
 
-<!-- PAPERS -->
-<div class="section-label id lang-only" style="margin-top:32px;">4 Paper · 4 Variabel</div>
-<div class="section-label en lang-only" style="margin-top:32px;">4 Papers · 4 Variables</div>
+<!-- SECTION: 4 PAPERS GRID -->
+<div class="section-label id" style="margin-top:32px;">Semua Paper dalam Seri Ini</div>
+<div class="section-label en" style="margin-top:32px;">All Papers in This Series</div>
+
 <div class="paper-grid">
-  <a class="paper-card p1" href="cho_series_complete.html">
-    <div class="pc-num">Paper 1 · WHY</div>
-    <div class="pc-role">From Laggard to Dignity</div>
-    <div class="pc-title id">6 masalah peradaban + bukti empiris + Grand Formula</div>
-    <div class="pc-title en">6 civilisational problems + empirical evidence + Grand Formula</div>
-    <span class="pc-var">Consciousness</span>
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_int" target="_blank" class="paper-card p1">
+    <div class="pc-num">Paper 01</div>
+    <div class="pc-role id">AI Red Teamer</div>
+    <div class="pc-role en">AI Red Teamer</div>
+    <div class="pc-title id">Garis Pertahanan Pertama HR terhadap Risiko AI</div>
+    <div class="pc-title en">HR's First Line of Defense Against AI Risk</div>
+    <span class="pc-var">Variabel: Keamanan AI</span>
     <span class="pc-arrow">→</span>
   </a>
-  <a class="paper-card p2" href="cho_series_complete.html">
-    <div class="pc-num">Paper 2 · HOW</div>
-    <div class="pc-role">From Formula to the Field</div>
-    <div class="pc-title id">Protocol CHO v1.0 · QSI · ASI · 3 studi kasus lapangan</div>
-    <div class="pc-title en">Protocol CHO v1.0 · QSI · ASI · 3 field case studies</div>
-    <span class="pc-var">^Humanity</span>
+  <a href="#" class="paper-card p2">
+    <div class="pc-num">Paper 02</div>
+    <div class="pc-role id">AI Ethics Guardian</div>
+    <div class="pc-role en">AI Ethics Guardian</div>
+    <div class="pc-title id">Membangun Tata Kelola AI yang Berpusat pada Manusia</div>
+    <div class="pc-title en">Building Human-Centered AI Governance</div>
+    <span class="pc-var">Variabel: Tata Kelola</span>
     <span class="pc-arrow">→</span>
   </a>
-  <a class="paper-card p3" href="cho_series_complete.html">
-    <div class="pc-num id">Paper 3 · WHO (Manusia)</div>
-    <div class="pc-num en">Paper 3 · WHO (Human)</div>
-    <div class="pc-role">The Sovereign One</div>
-    <div class="pc-title id">Pentadrant · 8 Johari Panels · Ruwet → Genah</div>
-    <div class="pc-title en">Pentadrant · 8 Johari Panels · Ruwet → Genah (Chaos → Order)</div>
-    <span class="pc-var id">Arsitektur sosial</span>
-    <span class="pc-var en">Social architecture</span>
+  <a href="#" class="paper-card p3">
+    <div class="pc-num">Paper 03</div>
+    <div class="pc-role id">Engagement Architect</div>
+    <div class="pc-role en">Engagement Architect</div>
+    <div class="pc-title id">Merancang Keterlibatan Karyawan di Era Manusia–AI</div>
+    <div class="pc-title en">Designing Employee Engagement in the Human–AI Era</div>
+    <span class="pc-var">Variabel: Engagement</span>
     <span class="pc-arrow">→</span>
   </a>
-  <a class="paper-card p4" href="cho_series_complete.html">
-    <div class="pc-num">Paper 4 · WHO (AI)</div>
-    <div class="pc-role">Testing the Calculator</div>
-    <div class="pc-title id">Abrahamic Stress Test · Humanity Alignment Score · Temuan empiris</div>
-    <div class="pc-title en">Abrahamic Stress Test · Humanity Alignment Score · Empirical findings</div>
-    <span class="pc-var">Calculation</span>
+  <a href="#" class="paper-card p4">
+    <div class="pc-num">Paper 04</div>
+    <div class="pc-role id">Learning Futurist</div>
+    <div class="pc-role en">Learning Futurist</div>
+    <div class="pc-title id">Masa Depan Pembelajaran & Pengembangan Manusia</div>
+    <div class="pc-title en">The Future of Human Learning & Development</div>
+    <span class="pc-var">Variabel: L&D</span>
     <span class="pc-arrow">→</span>
   </a>
 </div>
 
-<!-- DEEP DIVES -->
-<div class="section-label id lang-only" style="margin-top:32px;">Deep Dive per Variabel</div>
-<div class="section-label en lang-only" style="margin-top:32px;">Deep Dive per Variable</div>
+<!-- SECTION: DEEP DIVE -->
+<div class="section-label id" style="margin-top:32px;">Jelajahi Lebih Dalam</div>
+<div class="section-label en" style="margin-top:32px;">Explore Further</div>
+
 <div class="deep-grid">
-  <a class="deep-card" href="grand_formula_architecture.html">
-    <div class="dc-icon">🗺</div>
-    <div class="dc-title id">Peta Grand Formula</div>
-    <div class="dc-title en">Grand Formula Map</div>
-    <div class="dc-desc id">Visual arsitektur 4 paper dalam satu diagram</div>
-    <div class="dc-desc en">Visual architecture of all 4 papers in one diagram</div>
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_int" target="_blank" class="deep-card">
+    <div class="dc-icon">🛡️</div>
+    <div class="dc-title id">Red Teaming Interaktif</div>
+    <div class="dc-title en">Interactive Red Teaming</div>
+    <div class="dc-desc id">Simulasi langsung pengujian sistem AI</div>
+    <div class="dc-desc en">Live simulation of AI system testing</div>
   </a>
-  <a class="deep-card" href="consciousness_grand_formula.html">
-    <div class="dc-icon">🧠</div>
-    <div class="dc-title">Consciousness</div>
-    <div class="dc-desc id">Variabel manusiawi · QSI scale · kondisi Manja</div>
-    <div class="dc-desc en">Human-only variable · QSI scale · the Manja condition</div>
+  <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1" target="_blank" class="deep-card">
+    <div class="dc-icon">📄</div>
+    <div class="dc-title id">Paper Lengkap</div>
+    <div class="dc-title en">Full Paper</div>
+    <div class="dc-desc id">Versi akademik lengkap dengan referensi</div>
+    <div class="dc-desc en">Full academic version with references</div>
   </a>
-  <a class="deep-card" href="humanity_eksponen.html">
-    <div class="dc-icon">^</div>
-    <div class="dc-title">^Humanity</div>
-    <div class="dc-desc id">Eksponen moral · ASI · ^0 vs ^1 vs ^2</div>
-    <div class="dc-desc en">Moral exponent · ASI · ^0 vs ^1 vs ^2</div>
-  </a>
-  <a class="deep-card" href="arsitektur_sosial_kedaulatan.html">
-    <div class="dc-icon">🗂</div>
-    <div class="dc-title id">Arsitektur Sosial</div>
-    <div class="dc-title en">Social Architecture</div>
-    <div class="dc-desc id">Pentadrant · 8 Johari Panels · Ruwet→Genah</div>
-    <div class="dc-desc en">Pentadrant · 8 Johari Panels · Chaos→Order</div>
-  </a>
-  <a class="deep-card" href="calculation_grand_formula.html">
-    <div class="dc-icon">⚙</div>
-    <div class="dc-title">Calculation</div>
-    <div class="dc-desc id">AI Matrix · Abrahamic Stress Test · Scoring</div>
-    <div class="dc-desc en">AI Matrix · Abrahamic Stress Test · Scoring rubric</div>
-  </a>
-  <a class="deep-card" href="cho_series_complete.html">
-    <div class="dc-icon">◎</div>
-    <div class="dc-title id">Semua Paper</div>
-    <div class="dc-title en">All Papers</div>
-    <div class="dc-desc id">Kembali ke index lengkap 5 tab</div>
-    <div class="dc-desc en">Back to full 5-tab index</div>
-  </a>
-  <a class="deep-card" href="https://gokiantik.github.io/z3sci_UN/WBP_and_DOI.html" target="_blank" rel="noopener">
-    <div class="dc-icon">行</div>
-    <div class="dc-title id">Walking Books Philosophy</div>
-    <div class="dc-title en">Walking Books Philosophy</div>
-    <div class="dc-desc id">行走的书 · Z3 SCI · Filosofi & DOI lengkap Mbah Hogi Bejo™</div>
-    <div class="dc-desc en">行走的书 · Z3 SCI · Full philosophy & DOI index by Mbah Hogi Bejo™</div>
+  <a href="https://gokiantik.github.io/z3sci_UN/i_have_a_dream.html" target="_blank" class="deep-card">
+    <div class="dc-icon">🌟</div>
+    <div class="dc-title">I Have A Dream</div>
+    <div class="dc-desc id">Visi kemanusiaan di era AI</div>
+    <div class="dc-desc en">A vision of humanity in the AI era</div>
   </a>
 </div>
 
-<div class="site-footer">
-  <div class="fml">(Consciousness × Calculation) ^ <em>Humanity</em> &lt; Transcendence</div>
-  <div class="meta">渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e3848c888a828d978a88a3848e828a8fcd808c8e">[email&#160;protected]</a> &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
-</div>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="fml"><em>CHO</em> = CHRO + AI Ethics Guardian + Human-Centered Architect</div>
+  <div class="meta id">© 2025 CHO In Action Series · Semua hak dilindungi</div>
+  <div class="meta en">© 2025 CHO In Action Series · All rights reserved</div>
+</footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function toggleDropdown(id){
-  var dd=document.getElementById(id);
-  var isOpen=dd.classList.contains('open');
-  document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
-  if(!isOpen)dd.classList.add('open');
+  const el=document.getElementById(id);
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.nav-dropdown.open').forEach(d=>d.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
 }
 document.addEventListener('click',function(e){
-  if(!e.target.closest('.nav-dropdown'))
-    document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
+  if(!e.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown.open').forEach(d=>d.classList.remove('open'));
 });
-function setLang(l){
-  document.body.className=(document.body.className.replace(/\bid\b|\ben\b/g,'')+' '+l).trim();
-  document.getElementById('btn-id').className='lang-btn'+(l==='id'?' active':'');
-  document.getElementById('btn-en').className='lang-btn'+(l==='en'?' active':'');
+function setLang(lang){
+  document.body.className=lang;
+  document.getElementById('btn-id').classList.toggle('active',lang==='id');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
 }
 </script>
+</body>
+</html>
