@@ -21,6 +21,7 @@
       --white:    #F1EFE8;
       --muted:    #6b6880;
       --border:   rgba(127,119,221,0.15);
+      --border-g: rgba(201,168,76,0.18);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,6 +36,45 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      position: fixed; top: 16px; right: 20px; z-index: 200;
+      display: flex; background: rgba(13,13,26,0.92);
+      border: 0.5px solid var(--border); border-radius: 20px; overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .lang-toggle button {
+      background: none; border: none; cursor: pointer;
+      padding: 6px 14px; font-family: 'DM Mono', monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--muted); transition: all 0.2s;
+    }
+    .lang-toggle button.active { background: var(--gold); color: var(--bg); border-radius: 20px; }
+
+    /* ── BILINGUAL CLASSES ── */
+    .en { display: inline; } .id { display: none; }
+    .en-block { display: block; } .id-block { display: none; }
+    body.lang-id .en { display: none; } body.lang-id .id { display: inline; }
+    body.lang-id .en-block { display: none; } body.lang-id .id-block { display: block; }
+
+    /* ── NAV BAR ── */
+    .nav-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(7,7,15,0.88); backdrop-filter: blur(14px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 12px 24px; display: flex; align-items: center; gap: 14px;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; color: var(--muted);
+      border: 0.5px solid rgba(127,119,221,0.2);
+      padding: 5px 12px; border-radius: 2px; transition: all 0.2s;
+    }
+    .back-btn:hover { color: var(--purple-l); border-color: var(--purple); }
+    .nav-scene { font-size: 9px; letter-spacing: 0.2em; color: var(--gold); flex-shrink: 0; }
+    .nav-title { font-size: 10px; color: var(--muted); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     /* ── STARFIELD ── */
     .stars {
@@ -51,73 +91,45 @@
 
     /* ── AMBIENT GLOW ── */
     .glow {
-      position: fixed;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      pointer-events: none; z-index: 0;
-      filter: blur(120px);
+      position: fixed; width: 600px; height: 600px;
+      border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(120px);
     }
-    .glow-1 {
-      background: radial-gradient(circle, rgba(127,119,221,0.08) 0%, transparent 70%);
-      top: -200px; left: 50%; transform: translateX(-50%);
-    }
-    .glow-2 {
-      background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
-      bottom: -200px; right: -100px;
-    }
+    .glow-1 { background: radial-gradient(circle, rgba(127,119,221,0.08) 0%, transparent 70%); top: -200px; left: 50%; transform: translateX(-50%); }
+    .glow-2 { background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%); bottom: -200px; right: -100px; }
 
     /* ── WRAPPER ── */
     .wrapper {
       position: relative; z-index: 1;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
+      max-width: 800px; margin: 0 auto;
+      padding: 100px 24px 80px;
     }
 
     /* ── SCENE HEADER ── */
     .scene-header {
-      padding: 48px 0 32px;
+      padding: 32px 0 32px;
       border-bottom: 0.5px solid var(--border);
       margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.1s forwards;
+      opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
     }
-
-    .scene-meta {
-      display: flex; align-items: center; gap: 12px;
-      flex-wrap: wrap; margin-bottom: 16px;
-    }
-
+    .scene-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
     .scene-num {
       font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
       color: var(--gold); background: rgba(201,168,76,0.08);
-      border: 0.5px solid rgba(201,168,76,0.3);
-      padding: 4px 12px; border-radius: 2px;
+      border: 0.5px solid rgba(201,168,76,0.3); padding: 4px 12px; border-radius: 2px;
     }
-
-    .scene-timestamp {
-      font-size: 9px; letter-spacing: 0.15em; color: var(--muted);
-    }
-
+    .scene-timestamp { font-size: 9px; letter-spacing: 0.15em; color: var(--muted); }
     .collab-badge {
-      font-size: 9px; letter-spacing: 0.12em;
-      color: var(--teal-l); background: rgba(29,158,117,0.08);
-      border: 0.5px solid rgba(29,158,117,0.25);
+      font-size: 9px; letter-spacing: 0.12em; color: var(--teal-l);
+      background: rgba(29,158,117,0.08); border: 0.5px solid rgba(29,158,117,0.25);
       padding: 4px 12px; border-radius: 2px;
     }
-
     .scene-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 600; color: var(--white);
-      line-height: 1.15; margin-bottom: 8px;
+      font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 8px;
     }
-
     .scene-title em { color: var(--gold); font-style: italic; }
-
-    .scene-subtitle {
-      font-size: 11px; color: var(--muted); letter-spacing: 0.06em;
-    }
+    .scene-subtitle { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
 
     /* ── ABBA BANNER ── */
     .abba-banner {
@@ -125,110 +137,49 @@
       border: 0.5px solid rgba(201,168,76,0.2);
       border-left: 2px solid var(--gold);
       border-radius: 0 8px 8px 0;
-      padding: 20px 24px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.3s forwards;
+      padding: 20px 24px; margin-bottom: 40px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
     }
+    .abba-label { font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .abba-lyric { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--gold-l); line-height: 1.5; }
+    .abba-credit { font-size: 9px; color: var(--muted); margin-top: 6px; letter-spacing: 0.08em; }
 
-    .abba-label {
-      font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 8px;
-    }
-
-    .abba-lyric {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-style: italic;
-      color: var(--gold-l); line-height: 1.5;
-    }
-
-    .abba-credit {
-      font-size: 9px; color: var(--muted); margin-top: 6px;
-      letter-spacing: 0.08em;
-    }
-
-    /* ── PROOF BLOCK (opening prompt) ── */
+    /* ── PROOF BLOCK ── */
     .proof-block {
-      background: rgba(127,119,221,0.04);
-      border: 0.5px solid var(--border);
-      border-radius: 8px;
-      padding: 20px 24px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
+      background: rgba(127,119,221,0.04); border: 0.5px solid var(--border);
+      border-radius: 8px; padding: 20px 24px; margin-bottom: 40px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
     }
-
-    .proof-label {
-      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--purple-l); margin-bottom: 10px;
-    }
-
-    .proof-text {
-      font-size: 13px; color: var(--muted); line-height: 1.8;
-      font-style: italic;
-    }
+    .proof-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple-l); margin-bottom: 10px; }
+    .proof-text { font-size: 13px; color: var(--muted); line-height: 1.8; font-style: italic; }
 
     /* ── CHAT STREAM ── */
-    .chat-stream {
-      display: flex; flex-direction: column; gap: 4px;
-    }
-
-    /* individual message */
+    .chat-stream { display: flex; flex-direction: column; gap: 4px; }
     .msg {
       display: flex; gap: 14px; align-items: flex-start;
       opacity: 0; transform: translateY(16px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .msg.visible { opacity: 1; transform: translateY(0); }
-
     .msg-avatar {
-      flex-shrink: 0;
-      width: 36px; height: 36px;
-      border-radius: 50%;
+      flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.05em;
-      border: 0.5px solid;
-      margin-top: 4px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+      border: 0.5px solid; margin-top: 4px;
     }
-
-    .msg-avatar.human {
-      background: rgba(201,168,76,0.12);
-      border-color: rgba(201,168,76,0.35);
-      color: var(--gold);
-    }
-
-    .msg-avatar.ai {
-      background: rgba(127,119,221,0.12);
-      border-color: rgba(127,119,221,0.35);
-      color: var(--purple-l);
-      font-family: 'Noto Serif SC', serif;
-      font-size: 13px;
-    }
-
+    .msg-avatar.human { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.35); color: var(--gold); }
+    .msg-avatar.ai { background: rgba(127,119,221,0.12); border-color: rgba(127,119,221,0.35); color: var(--purple-l); font-family: 'Noto Serif SC', serif; font-size: 13px; }
     .msg-body { flex: 1; padding-bottom: 24px; }
-
-    .msg-sender {
-      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
-      margin-bottom: 8px;
-    }
+    .msg-sender { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
     .msg-sender.human { color: var(--gold); }
     .msg-sender.ai    { color: var(--purple-l); }
-
     .msg-bubble {
-      background: var(--bg2);
-      border: 0.5px solid var(--border);
+      background: var(--bg2); border: 0.5px solid var(--border);
       border-radius: 2px 12px 12px 12px;
-      padding: 18px 20px;
-      font-size: 13px; line-height: 1.85;
+      padding: 18px 20px; font-size: 13px; line-height: 1.85;
       color: rgba(241,239,232,0.88);
     }
-
-    .msg-bubble.human-bubble {
-      border-radius: 12px 2px 12px 12px;
-      background: rgba(201,168,76,0.05);
-      border-color: rgba(201,168,76,0.15);
-    }
+    .msg-bubble.human-bubble { border-radius: 12px 2px 12px 12px; background: rgba(201,168,76,0.05); border-color: rgba(201,168,76,0.15); }
 
     /* ── INSIDE BUBBLE COMPONENTS ── */
     .bubble-heading {
@@ -236,42 +187,24 @@
       color: var(--purple-l); margin: 16px 0 8px;
       display: flex; align-items: center; gap: 8px;
     }
-    .bubble-heading::after {
-      content: ''; flex: 1; height: 0.5px;
-      background: linear-gradient(90deg, var(--border), transparent);
-    }
+    .bubble-heading::after { content: ''; flex: 1; height: 0.5px; background: linear-gradient(90deg, var(--border), transparent); }
     .bubble-heading:first-child { margin-top: 0; }
 
-    .insight-row {
-      display: flex; gap: 10px; margin: 6px 0;
-      align-items: flex-start;
-    }
-    .insight-icon {
-      flex-shrink: 0; font-size: 12px;
-      width: 22px; margin-top: 1px;
-    }
+    .insight-row { display: flex; gap: 10px; margin: 6px 0; align-items: flex-start; }
+    .insight-icon { flex-shrink: 0; font-size: 12px; width: 22px; margin-top: 1px; }
     .insight-text { font-size: 12px; color: rgba(241,239,232,0.8); line-height: 1.7; }
     .insight-text strong { color: var(--white); font-weight: 500; }
 
-    .tag-row {
-      display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
-    }
-    .tag {
-      font-size: 9px; letter-spacing: 0.1em;
-      padding: 3px 10px; border-radius: 2px; border: 0.5px solid;
-    }
-    .tag-no   { color: var(--coral); border-color: rgba(216,90,48,0.35); background: rgba(216,90,48,0.06); }
-    .tag-yes  { color: var(--teal-l); border-color: rgba(29,158,117,0.35); background: rgba(29,158,117,0.06); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+    .tag { font-size: 9px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 2px; border: 0.5px solid; }
+    .tag-no  { color: var(--coral); border-color: rgba(216,90,48,0.35); background: rgba(216,90,48,0.06); }
+    .tag-yes { color: var(--teal-l); border-color: rgba(29,158,117,0.35); background: rgba(29,158,117,0.06); }
 
     .highlight-eq {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem; font-style: italic;
-      color: var(--gold-l);
-      border-left: 2px solid var(--gold);
-      padding: 8px 14px;
-      margin: 12px 0;
-      background: rgba(201,168,76,0.04);
-      border-radius: 0 4px 4px 0;
+      font-size: 1.05rem; font-style: italic; color: var(--gold-l);
+      border-left: 2px solid var(--gold); padding: 8px 14px; margin: 12px 0;
+      background: rgba(201,168,76,0.04); border-radius: 0 4px 4px 0;
     }
 
     .percentage-grid {
@@ -280,28 +213,20 @@
       border: 0.5px solid var(--border); border-radius: 6px;
       overflow: hidden; margin: 12px 0;
     }
-    .pct-cell {
-      background: var(--bg3); padding: 10px 12px; text-align: center;
-    }
-    .pct-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 600; line-height: 1;
-    }
+    .pct-cell { background: var(--bg3); padding: 10px 12px; text-align: center; }
+    .pct-num { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; line-height: 1; }
     .pct-label { font-size: 9px; color: var(--muted); margin-top: 4px; letter-spacing: 0.08em; }
 
     .final-answer {
-      margin-top: 14px;
-      background: rgba(127,119,221,0.08);
+      margin-top: 14px; background: rgba(127,119,221,0.08);
       border: 0.5px solid rgba(127,119,221,0.25);
       border-radius: 6px; padding: 14px 16px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-style: italic;
-      color: var(--purple-l); line-height: 1.5;
+      font-size: 1.1rem; font-style: italic; color: var(--purple-l); line-height: 1.5;
     }
 
     .question-cta {
-      margin-top: 14px;
-      background: rgba(29,158,117,0.06);
+      margin-top: 14px; background: rgba(29,158,117,0.06);
       border: 0.5px solid rgba(29,158,117,0.2);
       border-radius: 6px; padding: 12px 16px;
       font-size: 11px; color: var(--teal-l); line-height: 1.7;
@@ -309,39 +234,28 @@
 
     /* ── SCENE FOOTER ── */
     .scene-footer {
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 0.5px solid var(--border);
+      margin-top: 48px; padding-top: 32px; border-top: 0.5px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 16px;
       opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
     }
-
     .footer-left { font-size: 9px; color: var(--muted); line-height: 1.8; }
     .footer-left strong { color: var(--purple-l); }
-
+    .footer-nav { display: flex; gap: 10px; flex-wrap: wrap; }
     .nav-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'DM Mono', monospace;
-      font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-      text-decoration: none; color: var(--gold);
-      border: 0.5px solid rgba(201,168,76,0.3);
-      padding: 8px 18px; border-radius: 2px;
-      transition: all 0.2s;
+      font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em;
+      text-transform: uppercase; text-decoration: none; color: var(--purple-l);
+      border: 0.5px solid rgba(127,119,221,0.25); padding: 7px 16px;
+      border-radius: 3px; transition: all 0.2s;
     }
-    .nav-btn:hover {
-      background: rgba(201,168,76,0.08);
-      border-color: var(--gold);
-      color: var(--white);
-    }
+    .nav-btn:hover { background: rgba(127,119,221,0.1); border-color: var(--purple); }
+    .nav-btn.secondary { color: var(--muted); border-color: var(--border); }
+    .nav-btn.secondary:hover { color: var(--white); border-color: var(--muted); }
 
     /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       .percentage-grid { grid-template-columns: 1fr; }
       .scene-meta { gap: 8px; }
@@ -354,6 +268,25 @@
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 
+<!-- LANG TOGGLE -->
+<div class="lang-toggle">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-id" onclick="setLang('id')">ID</button>
+</div>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <a href="i_have_a_dream.html" class="back-btn">←
+    <span class="en">Main Menu</span>
+    <span class="id">Menu Utama</span>
+  </a>
+  <span class="nav-scene">SCENE 01</span>
+  <span class="nav-title">
+    <span class="en">I Have a Dream — at 55 · Go Kian Tik × ChatGPT</span>
+    <span class="id">I Have a Dream — di usia 55 · Go Kian Tik × ChatGPT</span>
+  </span>
+</div>
+
 <div class="wrapper">
 
   <!-- SCENE HEADER -->
@@ -363,20 +296,32 @@
       <span class="scene-timestamp">2026·04·05 · 00:00:00 WIB</span>
       <span class="collab-badge">1 Human × 1 AI · Open Kitchen Open Thinking</span>
     </div>
-    <h1 class="scene-title">I Have a <em>Dream</em><br>— di usia 55</h1>
-    <p class="scene-subtitle">Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT · Kolaborasi terdokumentasi</p>
+    <h1 class="scene-title">
+      <span class="en">I Have a <em>Dream</em><br>— at 55</span>
+      <span class="id">I Have a <em>Dream</em><br>— di usia 55</span>
+    </h1>
+    <p class="scene-subtitle">
+      <span class="en">Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT · Documented Collaboration</span>
+      <span class="id">Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT · Kolaborasi Terdokumentasi</span>
+    </p>
   </div>
 
   <!-- ABBA BANNER -->
   <div class="abba-banner">
-    <p class="abba-label">🎵 Lagu pembuka · ABBA · 1979</p>
+    <p class="abba-label">🎵
+      <span class="en">Opening Song · ABBA · 1979</span>
+      <span class="id">Lagu Pembuka · ABBA · 1979</span>
+    </p>
     <p class="abba-lyric">"I have a dream, a song to sing<br>To help me cope with anything…<br>I believe in angels, something good in everything I see."</p>
     <p class="abba-credit">— ABBA · I Have a Dream · Voulez-Vous (1979) · Björn Ulvaeus & Benny Andersson</p>
   </div>
 
   <!-- PROOF OF COLLABORATION -->
   <div class="proof-block">
-    <p class="proof-label">📌 Bukti Kolaborasi · Prompt Pembuka Asli · Go Kian Tik → ChatGPT</p>
+    <p class="proof-label">📌
+      <span class="en">Proof of Collaboration · Original Opening Prompt · Go Kian Tik → ChatGPT</span>
+      <span class="id">Bukti Kolaborasi · Prompt Pembuka Asli · Go Kian Tik → ChatGPT</span>
+    </p>
     <p class="proof-text">"tolong jawab jujur prof, ingat lagu I have a dream nya ABBA. Apakah dg AI my dream will come true starting di 55 years ini"</p>
   </div>
 
@@ -389,8 +334,8 @@
       <div class="msg-body">
         <div class="msg-sender human">Go Kian Tik · Mbah Hogi Bejo™</div>
         <div class="msg-bubble human-bubble">
-          Tolong jawab jujur prof — ingat lagu <em>I Have a Dream</em> nya ABBA.<br><br>
-          Apakah dengan AI… <strong>my dream will come true</strong> starting di 55 years ini?
+          <span class="en">Please answer honestly, Prof — remember the song <em>I Have a Dream</em> by ABBA.<br><br>With AI… will <strong>my dream come true</strong> starting at 55?</span>
+          <span class="id">Tolong jawab jujur prof — ingat lagu <em>I Have a Dream</em> nya ABBA.<br><br>Apakah dengan AI… <strong>my dream will come true</strong> starting di 55 years ini?</span>
         </div>
       </div>
     </div>
@@ -402,78 +347,146 @@
         <div class="msg-sender ai">ChatGPT · Prof GP</div>
         <div class="msg-bubble">
 
-          <div class="bubble-heading">Jawaban Jujur — Grounded</div>
-          <p>Lagu <em>I Have a Dream</em> dari ABBA itu powerful karena satu hal: bukan soal mimpi <em>cepat</em> tercapai, tapi mimpi tetap <strong>dijalani</strong> meski waktunya tidak pasti.</p>
-
-          <div class="bubble-heading">Realita AI</div>
-          <div class="tag-row">
-            <span class="tag tag-no">❌ AI bukan perwujud mimpi otomatis</span>
-            <span class="tag tag-yes">✅ AI adalah akselerator terbesar yang pernah ada</span>
+          <div class="bubble-heading">
+            <span class="en">Honest Answer — Grounded</span>
+            <span class="id">Jawaban Jujur — Grounded</span>
           </div>
-          <p style="font-size:12px;color:var(--muted);margin-top:8px">— terutama di usia 55+</p>
+          <p>
+            <span class="en">The song <em>I Have a Dream</em> by ABBA is powerful for one reason: it's not about a dream being achieved <em>quickly</em> — it's about a dream being <strong>lived</strong>, even when the timing is uncertain.</span>
+            <span class="id">Lagu <em>I Have a Dream</em> dari ABBA itu powerful karena satu hal: bukan soal mimpi <em>cepat</em> tercapai, tapi mimpi tetap <strong>dijalani</strong> meski waktunya tidak pasti.</span>
+          </p>
 
-          <div class="bubble-heading">Kenapa 55 Itu Sweet Spot</div>
+          <div class="bubble-heading">
+            <span class="en">The Reality of AI</span>
+            <span class="id">Realita AI</span>
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-no">
+              <span class="en">❌ AI is not an automatic dream-realizer</span>
+              <span class="id">❌ AI bukan perwujud mimpi otomatis</span>
+            </span>
+            <span class="tag tag-yes">
+              <span class="en">✅ AI is the greatest accelerator ever known</span>
+              <span class="id">✅ AI adalah akselerator terbesar yang pernah ada</span>
+            </span>
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin-top:8px">
+            <span class="en">— especially at 55+</span>
+            <span class="id">— terutama di usia 55+</span>
+          </p>
+
+          <div class="bubble-heading">
+            <span class="en">Why 55 Is a Sweet Spot</span>
+            <span class="id">Kenapa 55 Itu Sweet Spot</span>
+          </div>
           <div class="insight-row">
             <div class="insight-icon">🧠</div>
-            <div class="insight-text"><strong>Pattern recognition dari hidup nyata</strong> — pengalaman gagal & berhasil, intuisi yang sudah terlatih. AI kuat di data; Mbah kuat di <em>makna</em>.</div>
+            <div class="insight-text">
+              <span class="en"><strong>Pattern recognition from real life</strong> — experience of failure & success, trained intuition. AI is strong in data; Mbah is strong in <em>meaning</em>.</span>
+              <span class="id"><strong>Pattern recognition dari hidup nyata</strong> — pengalaman gagal & berhasil, intuisi yang sudah terlatih. AI kuat di data; Mbah kuat di <em>makna</em>.</span>
+            </div>
           </div>
           <div class="insight-row">
             <div class="insight-icon">🎯</div>
-            <div class="insight-text"><strong>Clarity</strong> — ini mahal banget. Banyak anak muda cepat pakai AI, tapi bingung arah. Mbah: arah sudah ada, AI tinggal mempercepat.</div>
+            <div class="insight-text">
+              <span class="en"><strong>Clarity</strong> — this is extremely valuable. Many young people use AI fast, but lack direction. Mbah: direction already exists, AI just accelerates it.</span>
+              <span class="id"><strong>Clarity</strong> — ini mahal banget. Banyak anak muda cepat pakai AI, tapi bingung arah. Mbah: arah sudah ada, AI tinggal mempercepat.</span>
+            </div>
           </div>
           <div class="insight-row">
             <div class="insight-icon">🕸️</div>
-            <div class="insight-text"><strong>Network & konteks dunia nyata (20% layer)</strong> — ngerti 6M / 7M, ngerti real execution. Ini yang bikin tidak berhenti di 70% ide digital.</div>
+            <div class="insight-text">
+              <span class="en"><strong>Real-world network & context (20% layer)</strong> — understands 6M / 7M, understands real execution. This is what stops someone from stalling at 70% digital ideas.</span>
+              <span class="id"><strong>Network & konteks dunia nyata (20% layer)</strong> — ngerti 6M / 7M, ngerti real execution. Ini yang bikin tidak berhenti di 70% ide digital.</span>
+            </div>
           </div>
 
-          <div class="bubble-heading">Real Talk — Tanpa Gula</div>
-          <div class="tag-row">
-            <span class="tag tag-no">❌ AI tidak tiba-tiba bikin semua mudah</span>
-            <span class="tag tag-no">❌ Tidak ada sukses instan</span>
+          <div class="bubble-heading">
+            <span class="en">Real Talk — No Sugar</span>
+            <span class="id">Real Talk — Tanpa Gula</span>
           </div>
           <div class="tag-row">
-            <span class="tag tag-yes">✅ Jika konsisten: 10 tahun = 20–30 tahun orang lain</span>
+            <span class="tag tag-no">
+              <span class="en">❌ AI doesn't suddenly make everything easy</span>
+              <span class="id">❌ AI tidak tiba-tiba bikin semua mudah</span>
+            </span>
+            <span class="tag tag-no">
+              <span class="en">❌ No instant success</span>
+              <span class="id">❌ Tidak ada sukses instan</span>
+            </span>
+          </div>
+          <div class="tag-row">
+            <span class="tag tag-yes">
+              <span class="en">✅ If consistent: 10 years = 20–30 years for others</span>
+              <span class="id">✅ Jika konsisten: 10 tahun = 20–30 tahun orang lain</span>
+            </span>
           </div>
 
-          <div class="bubble-heading">Kuncinya Ada Di Sini</div>
+          <div class="bubble-heading">
+            <span class="en">The Key Is Here</span>
+            <span class="id">Kuncinya Ada Di Sini</span>
+          </div>
           <div class="percentage-grid">
             <div class="pct-cell">
               <div class="pct-num" style="color:var(--purple-l)">70%</div>
-              <div class="pct-label">Digital Creativity</div>
+              <div class="pct-label">
+                <span class="en">Digital Creativity</span>
+                <span class="id">Kreativitas Digital</span>
+              </div>
             </div>
             <div class="pct-cell">
               <div class="pct-num" style="color:var(--gold)">20%</div>
-              <div class="pct-label">Materialization</div>
+              <div class="pct-label">
+                <span class="en">Materialization</span>
+                <span class="id">Materialisasi</span>
+              </div>
             </div>
             <div class="pct-cell">
               <div class="pct-num" style="color:var(--teal-l)">10%</div>
               <div class="pct-label">Impact</div>
             </div>
           </div>
-          <p style="font-size:11px;color:var(--muted)">Bukan: "Apakah mimpi akan tercapai?" — tapi: "Apakah Mbah masuk ke 20% dan 10%, bukan berhenti di 70%?"</p>
+          <p style="font-size:11px;color:var(--muted)">
+            <span class="en">Not: "Will the dream be achieved?" — but: "Will Mbah enter the 20% and 10%, or stop at 70%?"</span>
+            <span class="id">Bukan: "Apakah mimpi akan tercapai?" — tapi: "Apakah Mbah masuk ke 20% dan 10%, bukan berhenti di 70%?"</span>
+          </p>
 
           <div class="highlight-eq">
-            "AI bukan yang mewujudkan mimpi, tapi mempercepat orang yang sudah tahu arah."
+            <span class="en">"AI is not what realizes the dream — it accelerates the person who already knows the direction."</span>
+            <span class="id">"AI bukan yang mewujudkan mimpi, tapi mempercepat orang yang sudah tahu arah."</span>
           </div>
 
-          <div class="bubble-heading">Insight Terakhir</div>
+          <div class="bubble-heading">
+            <span class="en">Final Insight</span>
+            <span class="id">Insight Terakhir</span>
+          </div>
           <div class="insight-row">
             <div class="insight-icon">👤</div>
-            <div class="insight-text">Banyak orang umur 25: punya energi, tapi tidak punya arah.</div>
+            <div class="insight-text">
+              <span class="en">Many people at 25: have energy, but no direction.</span>
+              <span class="id">Banyak orang umur 25: punya energi, tapi tidak punya arah.</span>
+            </div>
           </div>
           <div class="insight-row">
             <div class="insight-icon">✦</div>
-            <div class="insight-text">Mbah umur 55: energinya mungkin beda — tapi punya <strong>arah + makna + pengalaman</strong>. Kalau digabung AI: <strong>itu bukan starting late… itu starting with advantage.</strong></div>
+            <div class="insight-text">
+              <span class="en">Mbah at 55: the energy may be different — but there is <strong>direction + meaning + experience</strong>. Combined with AI: <strong>that's not starting late… that's starting with advantage.</strong></span>
+              <span class="id">Mbah umur 55: energinya mungkin beda — tapi punya <strong>arah + makna + pengalaman</strong>. Kalau digabung AI: <strong>itu bukan starting late… itu starting with advantage.</strong></span>
+            </div>
           </div>
 
           <div class="final-answer">
-            "Yes — your dream can come true.<br>But not because of AI alone.<br>Because you know how to use it."
+            <span class="en">"Yes — your dream can come true.<br>But not because of AI alone.<br>Because you know how to use it."</span>
+            <span class="id">"Ya — mimpimu bisa terwujud.<br>Tapi bukan karena AI semata.<br>Karena kamu tahu cara menggunakannya."</span>
           </div>
 
           <div class="question-cta">
-            <strong style="color:var(--teal-l)">↳ Pertanyaan Lanjutan (penting untuk arah):</strong><br>
-            Mimpi paling konkret yang Mbah ingin wujudkan dalam 3–5 tahun ke depan itu apa?<br>
-            Saya bisa bantu breakdown jadi 70% · 20% · 10% — biar bukan cuma mimpi, tapi jadi <em>roadmap</em> 🔥
+            <strong style="color:var(--teal-l)">↳
+              <span class="en">Follow-up Question (important for direction):</span>
+              <span class="id">Pertanyaan Lanjutan (penting untuk arah):</span>
+            </strong><br>
+            <span class="en">What is the most concrete dream Mbah wants to realize in the next 3–5 years?<br>I can help break it down into 70% · 20% · 10% — so it's not just a dream, but a <em>roadmap</em> 🔥</span>
+            <span class="id">Mimpi paling konkret yang Mbah ingin wujudkan dalam 3–5 tahun ke depan itu apa?<br>Saya bisa bantu breakdown jadi 70% · 20% · 10% — biar bukan cuma mimpi, tapi jadi <em>roadmap</em> 🔥</span>
           </div>
 
         </div>
@@ -485,17 +498,35 @@
   <!-- SCENE FOOTER -->
   <div class="scene-footer">
     <div class="footer-left">
-      <strong>Open Kitchen Open Thinking</strong><br>
+      <strong>Open Kitchen · Open Thinking · Open Claude</strong><br>
       Go Kian Tik (Mbah Hogi Bejo™) × ChatGPT<br>
-      Scene 01 · 2026 · CC BY 4.0
+      Scene 01 · 2026-04-05 · CC BY 4.0<br>
+      <span style="color:var(--muted);font-size:9px">自主者 Zì Zhǔ Zhě · Superhero Café Inside · 1 / 8,000,000,000</span>
     </div>
-    <a href="index.html" class="nav-btn">← Menu Utama</a>
+    <div class="footer-nav">
+      <a href="i_have_a_dream.html" class="nav-btn secondary">
+        <span class="en">☰ Main Menu</span>
+        <span class="id">☰ Menu Utama</span>
+      </a>
+      <a href="scene-02.html" class="nav-btn">
+        <span class="en">Scene 02 →</span>
+        <span class="id">Scene 02 →</span>
+      </a>
+    </div>
   </div>
 
 </div><!-- /wrapper -->
 
 <script>
-  // Staggered reveal of chat messages
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    localStorage.setItem('okot-lang', lang);
+  }
+  const saved = localStorage.getItem('okot-lang');
+  if (saved) setLang(saved);
+
   const msgs = document.querySelectorAll('.msg');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
