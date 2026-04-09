@@ -7,20 +7,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@500&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
         .formula-font { font-family: 'JetBrains Mono', monospace; }
+        [lang="en"] { display: none; } /* Default sembunyikan Inggris */
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
 
+    <div class="fixed top-6 right-6 z-50">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-slate-900 text-white px-6 py-2 rounded-full font-bold shadow-2xl hover:bg-amber-600 transition-colors border-2 border-amber-500">
+            Switch to ENGLISH
+        </button>
+    </div>
+
     <div class="min-h-screen p-6 md:p-12">
         <header class="max-w-5xl mx-auto text-center border-b-4 border-amber-500 pb-10 mb-12">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight uppercase">
                 MY OPEN KITCHEN
             </h1>
-            <p class="text-xl md:text-2xl italic text-slate-600 mb-8">
-                "Di Balik Layar Arsitektur Kognitif Human-AI"
-            </p>
+            <p lang="id" class="text-xl md:text-2xl italic text-slate-600 mb-8">"Di Balik Layar Arsitektur Kognitif Human-AI"</p>
+            <p lang="en" class="text-xl md:text-2xl italic text-slate-600 mb-8">"Behind the Scenes of Human-AI Cognitive Architecture"</p>
+            
             <div class="inline-block bg-white px-6 py-4 md:px-10 md:py-6 rounded-2xl shadow-xl border border-amber-200 transition-transform hover:scale-105">
                 <span class="formula-font text-lg md:text-2xl font-bold text-amber-600">
                     (Consciousness × Calculation) ^ Humanity &lt; Transcendence
@@ -31,57 +38,109 @@
         <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <section class="col-span-1 md:col-span-2 bg-white p-8 rounded-3xl shadow-sm border-l-8 border-amber-500">
-                <h2 class="text-2xl font-bold mb-4 text-slate-900">Ruang Transparansi Radikal</h2>
-                <p class="text-lg leading-relaxed mb-6 text-slate-700">
-                    Selamat datang di dapur kognitif[cite: 54, 228]. Tempat di mana metodologi <strong>Master Leveling Prompt (MLP)</strong> diracik melalui praktik <em>AI Red Teaming</em> harian[cite: 9, 83, 280]. Kami tidak hanya menyajikan solusi strategis; kami memperlihatkan proses bagaimana probabilitas menjadi resonansi[cite: 267].
-                </p>
-                <blockquote class="border-l-4 border-slate-300 pl-4 italic text-slate-500 py-2">
-                    "Kejujuran kognitif adalah mata uang utama di dapur ini. AI yang jujur tentang keterbatasannya jauh lebih berguna daripada AI yang pura-pura paham." [cite: 61, 235]
-                </blockquote>
+                <div lang="id">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900">Ruang Transparansi Radikal</h2>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-700">
+                        Selamat datang di dapur kognitif. Tempat di mana metodologi <strong>Master Leveling Prompt (MLP)</strong> diracik melalui praktik <em>AI Red Teaming</em> harian. Kami tidak hanya menyajikan solusi strategis; kami memperlihatkan proses bagaimana probabilitas menjadi resonansi.
+                    </p>
+                    <blockquote class="border-l-4 border-slate-300 pl-4 italic text-slate-500 py-2">
+                        "Kejujuran kognitif adalah mata uang utama di dapur ini. AI yang jujur tentang keterbatasannya jauh lebih berguna daripada AI yang pura-pura paham."
+                    </blockquote>
+                </div>
+                <div lang="en">
+                    <h2 class="text-2xl font-bold mb-4 text-slate-900">Radical Transparency Space</h2>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-700">
+                        Welcome to the cognitive kitchen. The place where the <strong>Master Leveling Prompt (MLP)</strong> methodology is forged through daily <em>AI Red Teaming</em> practice. We don't just serve strategic solutions; we show the process of how probability becomes resonance.
+                    </p>
+                    <blockquote class="border-l-4 border-slate-300 pl-4 italic text-slate-500 py-2">
+                        "Cognitive honesty is the primary currency here. An AI that is honest about its limitations is far more useful than one that pretends to understand."
+                    </blockquote>
+                </div>
             </section>
 
             <section class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-lg transition-all border border-slate-100">
-                <h3 class="text-xl font-bold text-amber-700 mb-4 flex items-center">
-                    <span class="mr-2">⚡</span> FEU ↔ AI ↔ BEU
-                </h3>
-                <p class="text-md mb-6 text-slate-600 leading-relaxed">
-                    Menjembatani <strong>Front-End User</strong> (Praktisi Berdaulat) dengan inovasi dari para <strong>Back-End User</strong> (Insinyur Model)[cite: 28, 143, 342]. Kami mengoptimalkan mesin probabilitas lingua menjadi alat resonansi kognitif harian.
-                </p>
-                <ul class="space-y-3 text-sm font-semibold text-slate-500">
-                    <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Navigasi Mesin Probabilitas</li>
-                    <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Intervensi Kognitif Lintas Platform [cite: 9, 175]</li>
-                    <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Sinkronisasi Visi Materialisasi</li>
-                </ul>
+                <div lang="id">
+                    <h3 class="text-xl font-bold text-amber-700 mb-4 flex items-center">⚡ FEU ↔ AI ↔ BEU</h3>
+                    <p class="text-md mb-6 text-slate-600 leading-relaxed">
+                        Menjembatani <strong>Front-End User</strong> (Praktisi Berdaulat) dengan inovasi dari para <strong>Back-End User</strong> (Insinyur Model). Kami mengoptimalkan mesin probabilitas lingua menjadi alat resonansi kognitif harian.
+                    </p>
+                    <ul class="space-y-3 text-sm font-semibold text-slate-500">
+                        <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Navigasi Mesin Probabilitas</li>
+                        <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Intervensi Kognitif Lintas Platform</li>
+                        <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Sinkronisasi Visi Materialisasi</li>
+                    </ul>
+                </div>
+                <div lang="en">
+                    <h3 class="text-xl font-bold text-amber-700 mb-4 flex items-center">⚡ FEU ↔ AI ↔ BEU</h3>
+                    <p class="text-md mb-6 text-slate-600 leading-relaxed">
+                        Bridging the <strong>Front-End User</strong> (Sovereign Practitioner) with innovations from <strong>Back-End Users</strong> (Model Engineers). We optimize the lingua-probability engine into a daily cognitive resonance tool.
+                    </p>
+                    <ul class="space-y-3 text-sm font-semibold text-slate-500">
+                        <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Lingua-Probability Navigation</li>
+                        <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Cross-Platform Cognitive Intervention</li>
+                        <li class="flex items-center"><div class="w-2 h-2 bg-amber-500 rounded-full mr-3"></div> Materialization Vision Sync</li>
+                    </ul>
+                </div>
             </section>
 
             <section class="bg-slate-900 text-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all border border-slate-800">
-                <h3 class="text-xl font-bold text-amber-400 mb-4 flex items-center">
-                    <span class="mr-2">🚀</span> Semesta Materialisasi (20%)
-                </h3>
-                <p class="text-md mb-6 text-slate-300 leading-relaxed">
-                    Ditujukan bagi Business Owners, Pemerintah, dan Entrepreneur agresif yang mencari kedaulatan kognitif tanpa ketergantungan infrastruktur berat[cite: 305].
-                </p>
-                <ul class="space-y-3 text-sm font-medium text-slate-400">
-                    <li class="flex items-start"><span class="mr-2">•</span> Strategic Decision Support</li>
-                    <li class="flex items-start"><span class="mr-2">•</span> Institutional Readiness (Human Capital Focus) [cite: 306, 367]</li>
-                    <li class="flex items-start"><span class="mr-2">•</span> Trickle Down AI Fluency [cite: 107, 304]</li>
-                </ul>
+                <div lang="id">
+                    <h3 class="text-xl font-bold text-amber-400 mb-4 flex items-center">🚀 Semesta Materialisasi (20%)</h3>
+                    <p class="text-md mb-6 text-slate-300 leading-relaxed">
+                        Ditujukan bagi Business Owners, Pemerintah, dan Entrepreneur agresif yang mencari kedaulatan kognitif tanpa ketergantungan infrastruktur berat.
+                    </p>
+                    <ul class="space-y-3 text-sm font-medium text-slate-400">
+                        <li>• Strategic Decision Support</li>
+                        <li>• Institutional Readiness (Human Capital Focus)</li>
+                        <li>• Trickle Down AI Fluency</li>
+                    </ul>
+                </div>
+                <div lang="en">
+                    <h3 class="text-xl font-bold text-amber-400 mb-4 flex items-center">🚀 Materialization Universe (20%)</h3>
+                    <p class="text-md mb-6 text-slate-300 leading-relaxed">
+                        Dedicated to Business Owners, Government, and aggressive Entrepreneurs seeking cognitive sovereignty without heavy infrastructure dependency.
+                    </p>
+                    <ul class="space-y-3 text-sm font-medium text-slate-400">
+                        <li>• Strategic Decision Support</li>
+                        <li>• Institutional Readiness (Human Capital Focus)</li>
+                        <li>• Trickle Down AI Fluency</li>
+                    </ul>
+                </div>
             </section>
 
             <section class="col-span-1 md:col-span-2 bg-amber-50 p-8 rounded-3xl border border-amber-200">
-                <h3 class="text-xl font-bold mb-6 text-slate-900">Integrity Logs: Apa yang Kami Masak?</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100">
-                        <h4 class="font-bold text-amber-600 mb-2">Layer 0 Audit</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Verifikasi integritas melalui deklarasi Full/Partial Load sebelum sesi dimulai[cite: 57, 231].</p>
+                <div lang="id">
+                    <h3 class="text-xl font-bold mb-6 text-slate-900">Integrity Logs: Apa yang Kami Masak?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                            <h4 class="font-bold text-amber-600 mb-1">Audit Layer 0</h4>
+                            <p class="text-[10px] text-slate-500 leading-tight">Verifikasi integritas melalui deklarasi Full/Partial Load.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                            <h4 class="font-bold text-amber-600 mb-1">Sintesis Multi-AI</h4>
+                            <p class="text-[10px] text-slate-500 leading-tight">Konvergensi makna dari platform berbeda (Claude, GPT, Gemini).</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                            <h4 class="font-bold text-amber-600 mb-1">Sovereignty Mirror</h4>
+                            <p class="text-[10px] text-slate-500 leading-tight">Menjaga posisi manusia sebagai evaluator tertinggi.</p>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100">
-                        <h4 class="font-bold text-amber-600 mb-2">Multi-AI Synthesis</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Konvergensi makna dari platform berbeda untuk menghasilkan satu kebenaran operasional[cite: 79, 261].</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-amber-100">
-                        <h4 class="font-bold text-amber-600 mb-2">Sovereignty Mirror</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Memastikan posisi manusia tetap sebagai evaluator tertinggi dalam siklus AI[cite: 91, 288].</p>
+                </div>
+                <div lang="en">
+                    <h3 class="text-xl font-bold mb-6 text-slate-900">Integrity Logs: What's Cooking?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                            <h4 class="font-bold text-amber-600 mb-1">Layer 0 Audit</h4>
+                            <p class="text-[10px] text-slate-500 leading-tight">Integrity verification via Full/Partial Load declaration.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                            <h4 class="font-bold text-amber-600 mb-1">Multi-AI Synthesis</h4>
+                            <p class="text-[10px] text-slate-500 leading-tight">Converging meaning from different platforms (Claude, GPT, Gemini).</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100">
+                            <h4 class="font-bold text-amber-600 mb-1">Sovereignty Mirror</h4>
+                            <p class="text-[10px] text-slate-500 leading-tight">Ensuring the human remains the supreme evaluator.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -89,18 +148,32 @@
 
         <footer class="max-w-5xl mx-auto mt-20 text-center text-slate-500 text-sm">
             <div class="mb-6 opacity-60">
-                <p>Status Metodologi: MLP v1.9 [cite: 18, 184, 249]</p>
-                <p>Validator Utama: Claude, Prof GP, Mini, Desi, Coco [cite: 79, 261]</p>
+                <p>Status Metodologi: MLP v1.9 | Validator: Claude, Prof GP, Mini, Desi, Coco</p>
             </div>
             <p class="font-bold text-slate-800 tracking-widest mb-2 uppercase">CHIEF HUMANITY OFFICER | GO KIAN TIK (MBAH HOGI BEJO)</p>
-            <p class="mb-4">Zì Zhǔ Zhě 自主者 © 2026 • Licensed under CC BY-NC-ND 4.0 [cite: 3, 169]</p>
-            <div class="flex justify-center space-x-4">
-                <a href="#" class="text-amber-600 hover:text-amber-700 font-semibold underline">Portal Utama</a>
-                <span class="text-slate-300">|</span>
-                <a href="#" class="text-amber-600 hover:text-amber-700 font-semibold underline">AIRT Methodology</a>
-            </div>
+            <p>Zì Zhǔ Zhě 自主者 © 2026 • CC BY-NC-ND 4.0</p>
         </footer>
     </div>
 
+    <script>
+        let currentLang = 'id';
+        function toggleLanguage() {
+            const idElements = document.querySelectorAll('[lang="id"]');
+            const enElements = document.querySelectorAll('[lang="en"]');
+            const btn = document.getElementById('langBtn');
+
+            if (currentLang === 'id') {
+                idElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                btn.innerText = 'Ganti ke B. INDONESIA';
+                currentLang = 'en';
+            } else {
+                idElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                btn.innerText = 'Switch to ENGLISH';
+                currentLang = 'id';
+            }
+        }
+    </script>
 </body>
 </html>
