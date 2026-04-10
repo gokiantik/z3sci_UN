@@ -81,7 +81,7 @@
     body.lang-id .en-block { display: none; } body.lang-id .id-block { display: block; }
 
     /* WRAPPER */
-    .wrapper { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 80px 24px 100px; }
+    .wrapper { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 100px 24px 100px; }
 
     /* HERO */
     .hero {
@@ -300,7 +300,22 @@
       opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
     }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    /* NAV BACK */
+    .nav-back {
+      position: fixed; top: 16px; left: 20px; z-index: 200;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .nav-back a {
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(13,13,26,0.92); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 6px 13px;
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      backdrop-filter: blur(10px); transition: all 0.2s;
+    }
+    .nav-back a:hover { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+  
 
     @media (max-width: 600px) {
       .scenes-grid { grid-template-columns: 1fr; }
@@ -309,16 +324,21 @@
     }
   </style>
 </head>
-<body>
+<body class="lang-id">
 
 <div class="stars"></div>
 <div class="glow glow-1"></div>
 <div class="glow glow-2"></div>
 <div class="glow glow-3"></div>
 
+<div class="nav-back">
+  <a href="https://gokiantik.github.io/z3sci_UN/i_have_a_dream.html">← Main Menu</a>
+  <a href="https://gokiantik.github.io/z3sci_UN/index.html">⌂ Portal</a>
+</div>
+
 <div class="lang-toggle">
-  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-  <button id="btn-id" onclick="setLang('id')">ID</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-id" class="active" onclick="setLang('id')">ID</button>
 </div>
 
 <div class="wrapper">
