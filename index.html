@@ -271,10 +271,10 @@
 
 <div class="site-footer">
   <div class="fml">(Consciousness × Calculation) ^ <em>Humanity</em> &lt; Transcendence</div>
-  <div class="meta">渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; gokiantik@gmail.com &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
+  <div class="meta">渡己 → 渡人 &nbsp;·&nbsp; Ruwet → OTW Genah → Genah &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23444c484a424d574a4863444e424a4f0d404c4e">[email&#160;protected]</a> &nbsp;·&nbsp; CC BY-NC-ND 4.0</div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function toggleDropdown(id){
   var dd=document.getElementById(id);
   var isOpen=dd.classList.contains('open');
@@ -282,8 +282,13 @@ function toggleDropdown(id){
   if(!isOpen)dd.classList.add('open');
 }
 document.addEventListener('click',function(e){
-  if(!e.target.closest('.nav-dropdown'))
+  if(!e.target.closest('.nav-dropdown')){
     document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
+  }
 });
-function setLang(l){
-  document.body.className=(document.body.className.repla
+function setLang(lang){
+  document.body.className=lang;
+  document.getElementById('btn-id').classList.toggle('active',lang==='id');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+}
+</script>
