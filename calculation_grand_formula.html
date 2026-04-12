@@ -305,11 +305,21 @@
   <div class="infobox purple">
     <p>Paper 4 melengkapi apa yang Paper 1 dan 2 asumsikan. AI yang layak menjadi Cognitive-Soulmate harus lulus dua uji sekaligus: <strong>cukup pintar</strong> untuk tugasnya (AI Epistemic Capacity Matrix) dan <strong>cukup bermartabat</strong> untuk manusia yang dilayaninya (Humanity Alignment Score). Bersama-sama: <em>Calculation yang benar-benar layak.</em></p>
   </div>
-  <div class="footer">DOI: forthcoming · Python: MIT License · CC BY-NC-ND 4.0</div>
+  <div class="footer">DOI: forthcoming · Python: MIT License ·  · CC BY-NC-ND 4.0</div>
 </div>
 
 <script>
 function show(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sec-'+id).classList.
+  document.getElementById('sec-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function setLang(lang){
+  document.body.className=lang;
+  document.getElementById('btn-id').classList.toggle('active',lang==='id');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+}
+</script>
+</body>
+</html>
