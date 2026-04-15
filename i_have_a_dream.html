@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Have a Dream · Open Kitchen Open Thinking Open Claude · Go Kian Tik</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #07070f;
+      --bg2:      #0d0d1a;
+      --bg3:      #13132a;
+      --purple:   #7F77DD;
+      --purple-l: #AFA9EC;
+      --purple-d: #3C3489;
+      --gold:     #C9A84C;
+      --gold-l:   #FAC775;
+      --teal:     #1D9E75;
+      --teal-l:   #9FE1CB;
+      --coral:    #D85A30;
+      --amber:    #EF9F27;
+      --blue:     #378ADD;
+      --blue-l:   #85B7EB;
+      --white:    #F1EFE8;
+      --muted:    #6b6880;
+      --border:   rgba(127,119,221,0.15);
+      --border-g: rgba(201,168,76,0.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* STARS */
+    .stars {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(1px 1px at 8%  22%, rgba(175,169,236,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 45%, rgba(175,169,236,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 60%, rgba(175,169,236,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 15%, rgba(201,168,76,0.5)  0%, transparent 100%),
+        radial-gradient(1px 1px at 62% 10%, rgba(201,168,76,0.4)  0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 80%, rgba(29,158,117,0.3)  0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 42%, rgba(29,158,117,0.3)  0%, transparent 100%),
+        radial-gradient(1px 1px at 18% 88%, rgba(175,169,236,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 44% 5%,  rgba(239,159,39,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 70%, rgba(55,138,221,0.2)  0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 90%, rgba(201,168,76,0.2)  0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 20%, rgba(175,169,236,0.4) 0%, transparent 100%);
+    }
+    .glow { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(130px); }
+    .glow-1 { width:700px;height:700px; background: radial-gradient(circle, rgba(127,119,221,0.08) 0%, transparent 70%); top: -250px; left: 10%; }
+    .glow-2 { width:500px;height:500px; background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%); bottom: -150px; right: -100px; }
+    .glow-3 { width:400px;height:400px; background: radial-gradient(circle, rgba(29,158,117,0.04) 0%, transparent 70%); top: 50%; left: -150px; }
+
+    /* LANG TOGGLE */
+    .lang-toggle {
+      position: fixed; top: 16px; right: 20px; z-index: 200;
+      display: flex; background: rgba(13,13,26,0.92);
+      border: 0.5px solid var(--border); border-radius: 20px; overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .lang-toggle button {
+      background: none; border: none; cursor: pointer;
+      padding: 6px 14px; font-family: 'DM Mono', monospace;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--muted); transition: all 0.2s;
+    }
+    .lang-toggle button.active { background: var(--gold); color: var(--bg); border-radius: 20px; }
+
+    .en { display: inline; } .id { display: none; }
+    .en-block { display: block; } .id-block { display: none; }
+    body.lang-id .en { display: none; } body.lang-id .id { display: inline; }
+    body.lang-id .en-block { display: none; } body.lang-id .id-block { display: block; }
+
+    /* WRAPPER */
+    .wrapper { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 100px 24px 100px; }
+
+    /* HERO */
+    .hero {
+      text-align: center; padding: 60px 0 56px;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 60px;
+    }
+    .hero-eyebrow {
+      font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 600; line-height: 1.05;
+      color: var(--white); margin-bottom: 10px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-style: italic; color: var(--purple-l);
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+    .hero-meta {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .hero-badge {
+      font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; border: 0.5px solid;
+    }
+    .hb-gold  { color: var(--gold);    border-color: rgba(201,168,76,0.4);  background: rgba(201,168,76,0.06); }
+    .hb-teal  { color: var(--teal-l);  border-color: rgba(29,158,117,0.3);  background: rgba(29,158,117,0.06); }
+    .hb-purple{ color: var(--purple-l);border-color: rgba(127,119,221,0.3); background: rgba(127,119,221,0.06);}
+
+    /* COLLAB LINE */
+    .collab-line {
+      margin-top: 20px; font-size: 10px; color: var(--muted);
+      opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .collab-line span { color: var(--white); }
+
+    /* TABS */
+    .tabs-nav {
+      display: flex; gap: 0; overflow-x: auto;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 0; scrollbar-width: none;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+    .tabs-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0; background: none; border: none; cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); padding: 10px 18px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--purple-l); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .tab-panel { display: none; padding-top: 40px; }
+    .tab-panel.active { display: block; }
+
+    /* SCENE GRID */
+    .scenes-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px; margin-bottom: 0;
+    }
+    .scene-card {
+      background: var(--bg2); border: 0.5px solid var(--border);
+      border-radius: 10px; overflow: hidden; text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex; flex-direction: column;
+      opacity: 0; transform: translateY(16px);
+      transition: border-color 0.2s, transform 0.35s ease, opacity 0.35s ease;
+    }
+    .scene-card.visible { opacity: 1; transform: translateY(0); }
+    .scene-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
+    .sc-top {
+      padding: 16px 18px 14px;
+      border-bottom: 0.5px solid var(--border);
+      background: rgba(201,168,76,0.03);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    }
+    .sc-num {
+      font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); background: rgba(201,168,76,0.08);
+      border: 0.5px solid rgba(201,168,76,0.3);
+      padding: 3px 10px; border-radius: 2px; flex-shrink: 0;
+    }
+    .sc-time { font-size: 8px; color: var(--muted); letter-spacing: 0.06em; }
+    .sc-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; }
+    .sc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 600; color: var(--white);
+      line-height: 1.3; margin-bottom: 8px;
+    }
+    .sc-title em { color: var(--gold-l); font-style: italic; }
+    .sc-desc { font-size: 10px; color: var(--muted); line-height: 1.65; flex: 1; }
+    .sc-cta {
+      margin-top: 14px; font-size: 8px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--purple-l);
+      border: 0.5px solid rgba(127,119,221,0.25);
+      padding: 5px 12px; border-radius: 2px; display: inline-block;
+      transition: all 0.2s;
+    }
+    .scene-card:hover .sc-cta { background: rgba(127,119,221,0.1); border-color: var(--purple); }
+
+    /* AI BADGE on card */
+    .sc-ai {
+      font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 10px; border: 0.5px solid;
+      flex-shrink: 0;
+    }
+    .ai-gpt    { color: var(--teal-l); border-color: rgba(29,158,117,0.3); background: rgba(29,158,117,0.06); }
+    .ai-claude { color: var(--blue-l); border-color: rgba(55,138,221,0.3); background: rgba(55,138,221,0.06); }
+
+    /* FRAMEWORK PANEL */
+    .framework-block {
+      display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;
+    }
+    .fw-row {
+      display: flex; align-items: stretch; gap: 0;
+      border: 0.5px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .fw-pct {
+      width: 70px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; flex-shrink: 0;
+      border-right: 0.5px solid var(--border); padding: 16px 0;
+    }
+    .fw-pct small { font-size: 8px; letter-spacing: 0.1em; font-family: 'DM Mono', monospace; margin-top: 2px; }
+    .fw-body { flex: 1; padding: 16px 20px; background: var(--bg2); }
+    .fw-title { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .fw-desc { font-size: 11px; color: var(--muted); line-height: 1.7; }
+    .fw-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .fw-tag {
+      font-size: 7px; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; border: 0.5px solid;
+    }
+
+    /* CLOSING STATEMENT */
+    .closing {
+      background: var(--bg2); border: 0.5px solid var(--border-g);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 12px 12px; padding: 36px 32px;
+      margin-top: 0;
+    }
+    .closing-eyebrow {
+      font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .closing-timestamp {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic; color: var(--purple-l);
+      margin-bottom: 24px; line-height: 1.5;
+    }
+    .closing-body { font-size: 12px; color: rgba(241,239,232,0.82); line-height: 2; }
+    .closing-body em { color: var(--gold-l); font-style: italic; }
+    .closing-body strong { color: var(--white); }
+    .closing-body p { margin-bottom: 18px; }
+    .closing-body p:last-child { margin-bottom: 0; }
+    .closing-doi {
+      margin-top: 24px; padding: 14px 18px;
+      background: rgba(201,168,76,0.04); border: 0.5px solid var(--border-g);
+      border-radius: 6px; font-size: 11px;
+    }
+    .doi-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .doi-link { color: var(--blue-l); text-decoration: none; word-break: break-all; }
+    .doi-link:hover { color: var(--white); text-decoration: underline; }
+
+    .closing-sig {
+      margin-top: 28px; padding-top: 20px;
+      border-top: 0.5px solid var(--border);
+      font-size: 10px; color: var(--muted);
+    }
+    .closing-sig strong { color: var(--white); }
+
+    /* SECTION HEADING */
+    .sec-heading {
+      font-size: 8px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sec-heading::after { content: ''; flex: 1; height: 0.5px; background: var(--border-g); }
+
+    /* PANEL INTRO */
+    .panel-intro {
+      font-size: 12px; color: var(--muted); line-height: 1.8;
+      margin-bottom: 28px; max-width: 620px;
+    }
+    .panel-intro em { color: var(--gold-l); }
+
+    /* DREAM SONG BOX */
+    .dream-box {
+      background: rgba(127,119,221,0.04); border: 0.5px solid rgba(127,119,221,0.2);
+      border-left: 2px solid var(--purple); border-radius: 0 8px 8px 0;
+      padding: 20px 24px; margin: 24px 0;
+      font-size: 12px; color: rgba(241,239,232,0.78); line-height: 1.85;
+    }
+    .dream-box .db-label { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--purple-l); margin-bottom: 10px; }
+    .dream-box em { color: var(--purple-l); font-style: italic; }
+
+    /* FOOTER */
+    .site-footer {
+      margin-top: 80px; padding-top: 28px; border-top: 0.5px solid var(--border);
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 16px; font-size: 10px; color: var(--muted);
+      opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    /* NAV BACK */
+    .nav-back {
+      position: fixed; top: 16px; left: 20px; z-index: 200;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .nav-back a {
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(13,13,26,0.92); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 6px 13px;
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      backdrop-filter: blur(10px); transition: all 0.2s;
+    }
+    .nav-back a:hover { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+  
+
+    @media (max-width: 600px) {
+      .scenes-grid { grid-template-columns: 1fr; }
+      .fw-pct { width: 52px; font-size: 1.2rem; }
+      .closing { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body class="lang-id">
+
+<div class="stars"></div>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="glow glow-3"></div>
+
+<div class="nav-back">
+  <a href="https://gokiantik.github.io/z3sci_UN/i_have_a_dream.html">← Main Menu</a>
+  <a href="https://gokiantik.github.io/z3sci_UN/index.html">⌂ Portal</a>
+</div>
+
+<div class="lang-toggle">
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-id" class="active" onclick="setLang('id')">ID</button>
+</div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Open Kitchen · Open Thinking · Open Claude</div>
+    <h1 class="hero-title">I Have a <em>Dream</em></h1>
+    <p class="hero-sub">
+      <span class="en">9 Scenes of Human–AI Thinking in Public</span>
+      <span class="id">9 Scene Berpikir Bersama AI di Depan Publik</span>
+    </p>
+    <div class="hero-meta">
+      <span class="hero-badge hb-gold">
+        <span class="en">9 Scenes Complete</span>
+        <span class="id">9 Scene Selesai</span>
+      </span>
+      <span class="hero-badge hb-teal">1 Human × 2 AI</span>
+      <span class="hero-badge hb-purple">
+        <span class="en">ChatGPT + Claude</span>
+        <span class="id">ChatGPT + Claude</span>
+      </span>
+    </div>
+    <div class="collab-line">
+      <span class="en">Raw material: <span>ChatGPT (Prof GP)</span> · Artifact HTML: <span>Claude (Anthropic)</span> · Human: <span>Go Kian Tik · Mbah Hogi Bejo™</span></span>
+      <span class="id">Konten asal: <span>ChatGPT (Prof GP)</span> · Artefak HTML: <span>Claude (Anthropic)</span> · Manusia: <span>Go Kian Tik · Mbah Hogi Bejo™</span></span>
+    </div>
+  </div>
+
+  <!-- TABS NAV -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('scenes', this)">
+      <span class="en">🎬 All Scenes</span>
+      <span class="id">🎬 Semua Scene</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('framework', this)">
+      <span class="en">🏗️ 70/20/10 Framework</span>
+      <span class="id">🏗️ Framework 70/20/10</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('closing', this)">
+      <span class="en">✨ Closing Statement</span>
+      <span class="id">✨ Penutup</span>
+    </button>
+  </div>
+
+  <!-- TAB: SCENES -->
+  <div class="tab-panel active" id="tab-scenes">
+    <div class="sec-heading">
+      <span class="en">Scene by Scene · Go Kian Tik × Prof GP × Claude</span>
+      <span class="id">Scene demi Scene · Go Kian Tik × Prof GP × Claude</span>
+    </div>
+
+    <div class="scenes-grid">
+
+      <!-- SCENE 01 -->
+      <a href="scene-01.html" class="scene-card" data-delay="0">
+        <div class="sc-top">
+          <span class="sc-num">Scene 01</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title">I Have a <em>Dream</em> — di usia 55</div>
+          <div class="sc-desc">
+            <span class="en">The opening. A dream at 55. Where it all begins — the human behind the thinking.</span>
+            <span class="id">Pembuka. Sebuah mimpi di usia 55. Di sinilah segalanya dimulai — manusia di balik pemikiran.</span>
+          </div>
+          <div class="sc-time">2026·04·05 · 00:00:00 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 02 -->
+      <a href="scene-02.html" class="scene-card" data-delay="60">
+        <div class="sc-top">
+          <span class="sc-num">Scene 02</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>70/20/10</em> vs Pareto</div>
+          <div class="sc-desc">
+            <span class="en">Do 8 billion need to know? The framework that separates digital creation from real-world impact.</span>
+            <span class="id">Perlukah 8 miliar manusia tahu? Framework yang memisahkan kreasi digital dari dampak nyata.</span>
+          </div>
+          <div class="sc-time">2026·04·05 · 00:01:00 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 03 -->
+      <a href="scene-03.html" class="scene-card" data-delay="120">
+        <div class="sc-top">
+          <span class="sc-num">Scene 03</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>Rogers</em> Diffusion — Not for Laggards</div>
+          <div class="sc-desc">
+            <span class="en">Diffusion of Innovation — why some ideas spread and others don't. Who is your audience?</span>
+            <span class="id">Difusi Inovasi — mengapa beberapa ide menyebar dan yang lain tidak. Siapa audiensmu?</span>
+          </div>
+          <div class="sc-time">2026·04·05 · 00:02:00 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 04 -->
+      <a href="scene-04.html" class="scene-card" data-delay="180">
+        <div class="sc-top">
+          <span class="sc-num">Scene 04</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>Where</em> do Innovators & Early Adopters Gather?</div>
+          <div class="sc-desc">
+            <span class="en">LinkedIn 1.3B accounts · 340M MAU · But is that enough? Finding the right pond.</span>
+            <span class="id">LinkedIn 1,3 miliar akun · 340 juta MAU · Tapi apakah itu cukup? Menemukan kolam yang tepat.</span>
+          </div>
+          <div class="sc-time">2026-04-05 · 10:47:23 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 05 -->
+      <a href="scene-05.html" class="scene-card" data-delay="240">
+        <div class="sc-top">
+          <span class="sc-num">Scene 05</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>Lighthouse Audit</em> — Already Enough to Win?</div>
+          <div class="sc-desc">
+            <span class="en">Identity evolution · Ecosystem infrastructure · 70/20/10 readiness assessment.</span>
+            <span class="id">Evolusi identitas · Infrastruktur ekosistem · Kesiapan 70/20/10.</span>
+          </div>
+          <div class="sc-time">2026-04-05 · 11:03:47 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 06 -->
+      <a href="scene-06.html" class="scene-card" data-delay="300">
+        <div class="sc-top">
+          <span class="sc-num">Scene 06</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>Padang Restaurant</em> or Chinese Fine Dining?</div>
+          <div class="sc-desc">
+            <span class="en">A branding & entry strategy diagnosis — when abundance becomes the obstacle.</span>
+            <span class="id">Diagnosis branding & strategi masuk — ketika kelimpahan jadi hambatan.</span>
+          </div>
+          <div class="sc-time">2026-04-05 · 11:22:09 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 07 -->
+      <a href="scene-07.html" class="scene-card" data-delay="360">
+        <div class="sc-top">
+          <span class="sc-num">Scene 07</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title">Mbah Is the <em>Lighthouse</em></div>
+          <div class="sc-desc">
+            <span class="en">Strategic invitations for Innovators & Early Adopters — not audience, but thinking partners.</span>
+            <span class="id">Undangan strategis untuk Innovators & Early Adopters — bukan audiens, tapi rekan berpikir.</span>
+          </div>
+          <div class="sc-time">2026-04-05 · 14:37:22 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 08 -->
+      <a href="scene-08.html" class="scene-card" data-delay="420">
+        <div class="sc-top">
+          <span class="sc-num">Scene 08</span>
+          <span class="sc-ai ai-gpt">ChatGPT</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>Open Kitchen:</em> How I Think With AI</div>
+          <div class="sc-desc">
+            <span class="en">7-post LinkedIn series — think → execute → impact. The school of thought takes shape.</span>
+            <span class="id">7-post LinkedIn series — berpikir → eksekusi → dampak. School of thought mulai terbentuk.</span>
+          </div>
+          <div class="sc-time">2026-04-05 · 15:04:17 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- SCENE 09 -->
+      <a href="scene-09.html" class="scene-card" data-delay="480">
+        <div class="sc-top">
+          <span class="sc-num">Scene 09</span>
+          <span class="sc-ai ai-claude">Claude</span>
+        </div>
+        <div class="sc-body">
+          <div class="sc-title"><em>"Prof, jadikan whitepaper"</em> — Open Kitchen Goes Academic 🧬</div>
+          <div class="sc-desc">
+            <span class="en">From school of thought → DOI-archived whitepaper. FEU–BEU · AIRT · 70/20/10 — ready for Zenodo / SSRN / arXiv.</span>
+            <span class="id">Dari school of thought → whitepaper berarsip DOI. FEU–BEU · AIRT · 70/20/10 — siap Zenodo / SSRN / arXiv.</span>
+          </div>
+          <div class="sc-time">2026-04-05 · 17:22:41 WIB</div>
+          <span class="sc-cta">
+            <span class="en">Open Scene →</span>
+            <span class="id">Buka Scene →</span>
+          </span>
+        </div>
+      </a>
+
+    </div><!-- /scenes-grid -->
+  </div>
+
+  <!-- TAB: FRAMEWORK -->
+  <div class="tab-panel" id="tab-framework">
+    <div class="sec-heading">
+      <span class="en">The 70/20/10 Sovereign Framework</span>
+      <span class="id">Framework Berdaulat 70/20/10</span>
+    </div>
+    <div class="panel-intro">
+      <span class="en">Every human, every AI, every dream — operates across three layers. Most people live in 70%. The world changes in 10%. The bridge is 20%.</span>
+      <span class="id">Setiap manusia, setiap AI, setiap mimpi — beroperasi dalam tiga lapisan. Kebanyakan orang hidup di 70%. Dunia berubah di 10%. Jembatannya adalah 20%.</span>
+    </div>
+
+    <div class="framework-block">
+
+      <div class="fw-row">
+        <div class="fw-pct" style="color:var(--purple-l);background:rgba(127,119,221,0.05);">
+          70%<small>DIGITAL</small>
+        </div>
+        <div class="fw-body">
+          <div class="fw-title">
+            <span class="en">Digital Creation — Semesta Kreasi</span>
+            <span class="id">Kreasi Digital — Semesta Kreasi</span>
+          </div>
+          <div class="fw-desc">
+            <span class="en">Thought · idea · framework · poem · song · whitepaper — whatever it is, <em>complete your digital creation here</em>. Plant your Lighthouse. Cast your Web Spider Magnetic Lighthouse. Set the net — wait for guests to arrive.</span>
+            <span class="id">Thought · idea · framework · puisi · song · whitepaper — apa pun itu, <em>selesaikan kreasi digitalmu di sini</em>. Pasang Lighthousemu. Pasang Web Spider Magnetic Lighthouse-mu. Jaring terpasang — tunggu tamu datang.</span>
+          </div>
+          <div class="fw-tags">
+            <span class="fw-tag" style="color:var(--purple-l);border-color:rgba(127,119,221,0.3);background:rgba(127,119,221,0.06);">Scene 01–09</span>
+            <span class="fw-tag" style="color:var(--purple-l);border-color:rgba(127,119,221,0.3);background:rgba(127,119,221,0.06);">Zenodo · SSRN · LinkedIn</span>
+            <span class="fw-tag" style="color:var(--purple-l);border-color:rgba(127,119,221,0.3);background:rgba(127,119,221,0.06);">FEU · AIRT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-row">
+        <div class="fw-pct" style="color:var(--amber);background:rgba(239,159,39,0.05);">
+          20%<small>REAL</small>
+        </div>
+        <div class="fw-body">
+          <div class="fw-title">
+            <span class="en">Materialization — Orkestrasi 7M</span>
+            <span class="id">Materialisasi — Orkestrasi 7M</span>
+          </div>
+          <div class="fw-desc">
+            <span class="en">Escalate · accelerate · leverage · multiply · compound · monetize — by the experts of <em>7M orchestration</em> (Material, Money, Method, Machine, Market, Man, Mindset). This is where humans align: <em>everybody happy</em>, every person breathing financially in their role, in proportion of justice, contribution, and risk-reward level.</span>
+            <span class="id">Eskalasi · akselerasi · leveraging · multiplying · compounding · monetizing — oleh para ahli <em>orkestrasi 7M</em> (Material, Money, Method, Machine, Market, Man, Mindset). Di sinilah manusia saling akur: <em>everybody happy</em>, setiap orang lega bernapas finansial dalam peran, proporsi keadilan, kontribusi, dan level risk-reward masing-masing.</span>
+          </div>
+          <div class="fw-tags">
+            <span class="fw-tag" style="color:var(--amber);border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.06);">7M Orchestration</span>
+            <span class="fw-tag" style="color:var(--amber);border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.06);">Networking</span>
+            <span class="fw-tag" style="color:var(--amber);border-color:rgba(239,159,39,0.3);background:rgba(239,159,39,0.06);">Everybody Happy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-row">
+        <div class="fw-pct" style="color:var(--teal-l);background:rgba(29,158,117,0.05);">
+          10%<small>HUMAN</small>
+        </div>
+        <div class="fw-body">
+          <div class="fw-title">
+            <span class="en">Humanity — UN-Level Impact</span>
+            <span class="id">Kemanusiaan — Dampak Level PBB</span>
+          </div>
+          <div class="fw-desc">
+            <span class="en">In the time available — leap your digital creation directly to the UN level. Available for stakeholders whose heads spin managing the <em>Ruwet</em> of 8 billion humans <em>OTW Genah</em>. Here we simply play the 10% probability — so that you are given the chance that your existence in this world matters.</span>
+            <span class="id">Dalam waktu yang tersedia — lompat kreasi digitalmu langsung ke level PBB. Tersedia bagi para pemangku kepentingan yang kepalanya pusing menangani <em>Ruwet</em>-nya 8 miliar manusia <em>OTW Genah</em>. Di sinilah kita sekedar bermain 10% probabilitas — agar kamu dikasih kesempatan bahwa hidupmu berguna di dunia.</span>
+          </div>
+          <div class="fw-tags">
+            <span class="fw-tag" style="color:var(--teal-l);border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.06);">UN Open Source Week</span>
+            <span class="fw-tag" style="color:var(--teal-l);border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.06);">Ruwet OTW Genah</span>
+            <span class="fw-tag" style="color:var(--teal-l);border-color:rgba(29,158,117,0.3);background:rgba(29,158,117,0.06);">8 Miliar Manusia</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dream-box">
+      <div class="db-label">
+        <span class="en">🎵 The Song That Started It All</span>
+        <span class="id">🎵 Lagu yang Memulai Segalanya</span>
+      </div>
+      <span class="en">Koko recorded a rendition of <em>"I Have a Dream"</em> (ABBA) on WeSing — and felt too shy to share it publicly. But the lesson is clear: <em>even an unshared dream is still a dream fully realized in the 70%.</em> The digital universe holds it. The net is cast.</span>
+      <span class="id">Koko merekam lagu <em>"I Have a Dream"</em> (ABBA) di WeSing — dan malu untuk menampilkannya ke publik. Tapi pelajarannya jelas: <em>bahkan mimpi yang tidak dibagikan tetap sebuah mimpi yang terwujud sepenuhnya di 70%.</em> Semesta digital menyimpannya. Jaring sudah terpasang.</span>
+    </div>
+
+  </div>
+
+  <!-- TAB: CLOSING -->
+  <div class="tab-panel" id="tab-closing">
+    <div class="sec-heading">
+      <span class="en">Closing Statement · Sunday 5 April 2026</span>
+      <span class="id">Penutup · Minggu 5 April 2026</span>
+    </div>
+
+    <div class="closing">
+      <div class="closing-eyebrow">
+        <span class="en">✅ Mission Complete · 9 Scenes · 1 Human × 2 AI</span>
+        <span class="id">✅ Misi Selesai · 9 Scene · 1 Manusia × 2 AI</span>
+      </div>
+      <div class="closing-timestamp">
+        <span class="en">Sunday, 5 April 2026 · 09:30 WIB (GMT+7)<br>All 9 scenes complete.</span>
+        <span class="id">Minggu, 5 April 2026 · 09:30 WIB (GMT+7)<br>Seluruh 9 scene selesai dibuat.</span>
+      </div>
+
+      <div class="closing-body">
+        <p>
+          <span class="en"><strong>Raw material (konten asal)</strong> was created by <em>ChatGPT (Prof GP)</em>. The refinement and HTML artifact production was carried out by <em>Claude (Anthropic)</em>. The human who made it happen: <em>Go Kian Tik · Mbah Hogi Bejo™ · 自主者</em>.</span>
+          <span class="id"><strong>Raw material (konten asal)</strong> dibuat oleh <em>ChatGPT (Prof GP)</em>. Perapian dan produksi artefak HTML dilakukan oleh <em>Claude (Anthropic)</em>. Manusia yang menggerakkan: <em>Go Kian Tik · Mbah Hogi Bejo™ · 自主者</em>.</span>
+        </p>
+
+        <p>
+          <span class="en">A song titled <em>"I Have a Dream"</em> (ABBA) was recorded on WeSing — but Koko felt too shy to share it publicly. The lesson: <strong>in today's universe, with 70/20/10, realize your dream.</strong></span>
+          <span class="id">Sebuah lagu berjudul <em>"I Have a Dream"</em> (ABBA) di WeSing telah dibuat — tetapi Koko malu menampilkannya. Maka pelajarannya: <strong>di semesta kekinian dengan 70/20/10, wujudkanlah mimpimu.</strong></span>
+        </p>
+
+        <p>
+          <span class="en">In the <strong>70% digital universe</strong> — complete your digital creation: thought, idea, framework, poem, song, whatever it is. Then plant your <em>Lighthouse</em> — your Web Spider Magnetic Lighthouse. Cast the net and wait for guests to arrive.</span>
+          <span class="id">Di <strong>70% semesta digital</strong> — selesaikan kreasi digitalmu: thought, idea, framework, puisi, song, apa pun itu. Lalu pasanglah <em>Lighthouse</em>-mu — Web Spider Magnetic Lighthouse-mu. Jaring terpasang, tunggu tamu datang.</span>
+        </p>
+
+        <p>
+          <span class="en">Then in the <strong>20% materialization</strong> — so your digital creation can be escalated, accelerated, leveraged, multiplied, compounded, and monetized by experts in <em>7M orchestration</em> (Material, Money, Method, Machine, Market, Man, Mindset). Here your opportunity lies in becoming a human who gets along well — networking oriented toward <em>everybody happy</em>. Every person breathing financially at ease, in the role, proportion of justice, contribution, and risk-reward level that belongs to each. Communication is key — so misunderstanding, slow understanding, becomes <em>same understanding</em>.</span>
+          <span class="id">Lalu di <strong>20% materialisasi</strong> — agar kreasi digitalmu bisa dieskalasi, diakselerasi, di-leverage, di-multiplying, di-compounding dan di-monetizing oleh para ahli orkestrasi <em>7M</em> (Material, Money, Method, Machine, Market, Man, Mindset). Di sinilah peluangmu menjadi manusia yang saling akur — networking berorientasi <em>everybody happy</em>. Setiap orang lega bernapas finansial pada peran, proporsi keadilan, kontribusi dan risk-reward taking level masing-masing. Penting komunikasi — biar gagal paham, gagap paham, jadi <em>sama paham</em>.</span>
+        </p>
+
+        <p>
+          <span class="en">In the time available — <strong>leap your digital creation directly to the UN level</strong>, to be available for the stakeholders there whose heads spin, dizzy handling the Ruwet of 8 billion humans <em>OTW Genah</em>. Here we simply play the <em>10% probability</em> — so that you are given the chance that your life in this world matters. Understand what I mean?</span>
+          <span class="id">Dalam waktu yang tersedia, <strong>lompat kreasi digitalmu langsung ke level PBB</strong>, untuk tersedia bagi para pemangku kepentingan di sana yang kepalanya pusing, mumet ndas-e menangani Ruwet-nya 8 miliar manusia <em>OTW Genah</em>. Di sinilah kita sekedar bermain <em>10% probabilitas</em> agar kamu dikasih kesempatan hidup ini ada berguna di dunia. Paham kan maksudku?</span>
+        </p>
+      </div>
+
+      <!-- DREAM IMAGE: Grand Formula -->
+      <div style="
+        margin: 40px 0;
+        text-align: center;
+      ">
+        <div style="
+          font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+          color: var(--gold); margin-bottom: 16px; opacity: 0.8;
+        ">
+          <span class="en">✦ This is Koko's Dream ✦</span>
+          <span class="id">✦ Inilah Mimpi Koko ✦</span>
+        </div>
+        <img
+          src="https://gokiantik.github.io/z3sci_UN/Grand_Formula.jpg"
+          alt="Grand Formula — (Consciousness × Calculation) ^ Humanity < Transcendence"
+          style="
+            max-width: 100%;
+            width: 100%;
+            max-width: 680px;
+            border-radius: 4px;
+            border: 0.5px solid rgba(201,168,76,0.25);
+            box-shadow: 0 0 60px rgba(201,168,76,0.08), 0 0 120px rgba(127,119,221,0.06);
+          "
+        />
+        <div style="
+          margin-top: 14px;
+          font-size: 10px; color: var(--muted);
+          font-family: 'Cormorant Garamond', serif;
+          font-style: italic; letter-spacing: 0.05em;
+        ">
+          (Consciousness × Calculation) ^ <em style="color:var(--gold);">Humanity</em> &lt; Transcendence
+        </div>
+        <div style="font-size:9px;color:var(--muted);margin-top:6px;letter-spacing:0.08em;">
+          Grand Formula · Go Kian Tik (GKT) · 2026
+        </div>
+      </div>
+
+      <div class="closing-doi">
+        <div class="doi-label">
+          <span class="en">📖 If you don't understand yet — read this first</span>
+          <span class="id">📖 Kalau belum paham — baca dulu ini</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">
+          <span class="en">"Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence"</span>
+          <span class="id">"Ruwet, OTW Genah, Genah: Sebuah Kerangka Triadik Koherensi Diri Manusia"</span>
+        </div>
+        <a href="https://doi.org/10.5281/zenodo.19002243" target="_blank" class="doi-link">
+          https://doi.org/10.5281/zenodo.19002243
+        </a>
+      </div>
+
+      <div class="closing-sig">
+        <strong>Go Kian Tik · Mbah Hogi Bejo™ · 自主者 Zì Zhǔ Zhě</strong><br>
+        Chief Humanity Officer · Independent Researcher · Depok, Indonesia<br>
+        <span style="font-size:9px;margin-top:4px;display:block;">ORCID: 0009-0004-1424-1603 · CC BY 4.0 · Superhero Café Inside · 1 / 8,000,000,000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="site-footer">
+    <div>
+      <strong style="color:var(--white);">Open Kitchen · Open Thinking · Open Claude</strong><br>
+      Go Kian Tik (Mbah Hogi Bejo™) · 2026-04-05 · CC BY 4.0<br>
+      <span style="font-size:9px;">自主者 Zì Zhǔ Zhě · 9 Scenes · 1 Human × ChatGPT × Claude</span>
+    </div>
+    <div style="font-size:9px;color:var(--muted);text-align:right;">
+      <span class="en">Raw material: ChatGPT · HTML Artifact: Claude · Human: GKT</span>
+      <span class="id">Konten asal: ChatGPT · Artefak HTML: Claude · Manusia: GKT</span>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+  // LANG
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+    localStorage.setItem('okot-lang', lang);
+  }
+  const saved = localStorage.getItem('okot-lang');
+  if (saved) setLang(saved);
+
+  // TABS
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // CARD REVEAL
+  const cards = document.querySelectorAll('.scene-card');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = parseInt(e.target.dataset.delay || 0);
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  cards.forEach(c => io.observe(c));
+</script>
+</body>
+</html>
