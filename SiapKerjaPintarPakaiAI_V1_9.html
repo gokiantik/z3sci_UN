@@ -180,7 +180,6 @@
         }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
         /* ===== END PANDUAN ===== */
 
         .video-section { margin: 40px 0; padding: 20px; background: #f9f9f9; border-radius: 12px; }
@@ -204,7 +203,30 @@
         }
         .libutton:hover { background-color: #084d91; }
 
-        footer { margin-top: 40px; font-size: 12px; color: #999; text-align: center; border-top: 1px solid #eee; padding-top: 20px; }
+        /* ===== ZENODO BADGE ===== */
+        .zenodo-section {
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: #f0f4ff;
+            border: 1px solid #c5d3f5;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            color: #444;
+        }
+        .zenodo-section a {
+            color: #1a56db;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .zenodo-section a:hover { text-decoration: underline; }
+        .zenodo-badge { display: inline-block; margin-top: 8px; }
+        /* ===== END ZENODO ===== */
+
+        footer {
+            margin-top: 40px; font-size: 12px; color: #999;
+            text-align: center; border-top: 1px solid #eee; padding-top: 20px;
+        }
 
         @media (max-width: 600px) {
             .container { padding: 15px; margin: 10px; }
@@ -248,150 +270,165 @@
 
         <article class="prompt-card master">
             <h3>2. Mode Master (Full Experience)</h3>
-            <div class="prompt-container" id="promptMaster">Saya adalah pencari kerja yang ingin bertransformasi menjadi Alpha Front End User. Instruksi Utama: "Pandu saya untuk jujur pada diri sendiri. Bedah profil LinkedIn/CV saya dibandingkan deskripsi pekerjaan. Di mana letak Lengah, Lalai, Lupa (L3) saya? Jika saya mulai baper, ingatkan saya bahwa mentor saya yang usia 55 tahun pun masih bisa ditolak sistem AI. Ubah kepanikan ini menjadi data kesiapan."</div>
-            <div class="action-buttons">
-                <button class="btn-main" onclick="copyPrompt('promptMaster')">Salin Versi Master</button>
-                <a href="https://trakteer.id/gokiantik/post/melampaui-ijazah-menguasai-8-kecerdasan-terapan-di-era-ai-GP1Sc" target="_blank" class="btn-trakteer">☕ 8 Kecerdikan Mbah</a>
-            </div>
+            <div class="prompt-container" id="promptMaster">Saya adalah pencari kerja yang ingin bertransformasi menjadi kandidat terbaik. Analisis CV saya secara mendalam untuk posisi yang saya lamar. Berikan:
+1. Skor Readiness (0-100) dengan breakdown per dimensi
+2. Skor Relevance (0-100) terhadap job description
+3. Top 3 Kekuatan yang harus saya tonjolkan
+4. Top 3 Kelemahan kritis yang harus segera diperbaiki
+5. Rekomendasi konkret untuk 7 hari ke depan
+Jujur, tajam, tanpa basa-basi motivasi kosong.</div>
+            <button class="btn-main" onclick="copyPrompt('promptMaster')">Salin Versi Master</button>
         </article>
     </section>
 
-    <!-- ===== SECTION PANDUAN PEMAKAIAN ===== -->
-    <section class="panduan-section" aria-label="Panduan Pemakaian Prompt">
-        <h2>📖 Cara Pakai Prompt Ini</h2>
-        <p style="color:#555; font-size:14px; margin-top:0;">
-            Prompt adalah <strong>kunci pintunya</strong> — tapi kamu yang harus <strong>membawa datanya</strong> (CV + job description). Ikuti langkah berikut:
-        </p>
-
-        <!-- Tab Selector -->
+    <!-- ===== PANDUAN SECTION ===== -->
+    <section class="panduan-section">
+        <h2>📖 Panduan Penggunaan MLP</h2>
         <div class="panduan-tabs">
-            <button class="tab-btn active" onclick="showTab('tab-lite', this)">🔵 Mode Cepat (Lite)</button>
-            <button class="tab-btn" onclick="showTab('tab-master', this)">🟡 Mode Master</button>
+            <button class="tab-btn active" onclick="showTab('tab-cara', this)">Cara Pakai</button>
+            <button class="tab-btn" onclick="showTab('tab-tips', this)">Tips &amp; Trik</button>
+            <button class="tab-btn" onclick="showTab('tab-faq', this)">FAQ</button>
         </div>
 
-        <!-- Tab: Lite -->
-        <div class="tab-content active" id="tab-lite">
+        <div id="tab-cara" class="tab-content active">
             <div class="panduan-steps">
                 <div class="step-item">
                     <div class="step-number">1</div>
-                    <div class="step-text">Klik tombol <strong>"Salin Versi Cepat"</strong> di atas untuk menyalin prompt ke clipboard.</div>
+                    <div class="step-text"><strong>Pilih Mode:</strong> Pilih Mode Cepat (Lite) untuk hasil instan, atau Mode Master untuk analisis mendalam.</div>
                 </div>
                 <div class="step-item">
                     <div class="step-number">2</div>
-                    <div class="step-text">Buka AI manapun: <strong>ChatGPT, Gemini, Claude, Copilot</strong>, dll.</div>
+                    <div class="step-text"><strong>Salin Prompt:</strong> Klik tombol salin, lalu buka AI favoritmu (ChatGPT, Gemini, Claude, dll).</div>
                 </div>
                 <div class="step-item">
                     <div class="step-number">3</div>
-                    <div class="step-text"><strong>Tempel (paste)</strong> prompt di kolom chat AI.</div>
+                    <div class="step-text"><strong>Tempel &amp; Tambahkan:</strong> Paste prompt, lalu lampirkan CV kamu dan job description posisi yang dilamar.</div>
                 </div>
                 <div class="step-item">
                     <div class="step-number">4</div>
-                    <div class="step-text">Tambahkan <strong>isi CV kamu</strong> (copy-paste teks CV) + <strong>nama posisi yang dilamar</strong> setelah prompt.</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">5</div>
-                    <div class="step-text">Kirim → AI akan menganalisis <strong>3 gap L3</strong> kamu secara jujur.</div>
+                    <div class="step-text"><strong>Baca &amp; Tindak Lanjuti:</strong> Baca hasilnya dengan pikiran terbuka. Catat gap &amp; lakukan perbaikan nyata.</div>
                 </div>
             </div>
         </div>
 
-        <!-- Tab: Master -->
-        <div class="tab-content" id="tab-master">
-            <div class="panduan-steps">
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <div class="step-text">Klik tombol <strong>"Salin Versi Master"</strong> di atas.</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <div class="step-text">Buka AI manapun: <strong>ChatGPT, Gemini, Claude, Copilot</strong>, dll.</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <div class="step-text"><strong>Tempel (paste)</strong> prompt di kolom chat AI.</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">4</div>
-                    <div class="step-text">Tambahkan <strong>3 data berikut</strong> setelah prompt (lihat tabel di bawah).</div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">5</div>
-                    <div class="step-text">Kirim → Ikuti panduan AI secara jujur. Jangan baper!</div>
-                </div>
-            </div>
-
+        <div id="tab-tips" class="tab-content">
             <table class="panduan-table">
                 <thead>
-                    <tr>
-                        <th>Data yang Perlu Ditambahkan</th>
-                        <th>Contoh Isi</th>
-                    </tr>
+                    <tr><th>✅ Lakukan</th><th>❌ Hindari</th></tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>📄 <strong>Isi CV / Profil LinkedIn</strong></td>
-                        <td>Pengalaman kerja, skill, pendidikan, sertifikasi</td>
-                    </tr>
-                    <tr>
-                        <td>💼 <strong>Deskripsi pekerjaan yang dilamar</strong></td>
-                        <td>Copy-paste dari job posting (LinkedIn, Jobstreet, dll)</td>
-                    </tr>
-                    <tr>
-                        <td>💬 <strong>Kondisi / konteks kamu</strong></td>
-                        <td>"Saya sudah 3x ditolak..." atau "Baru lulus, fresh graduate..."</td>
-                    </tr>
+                    <tr><td>Sertakan CV terbaru + Job Description lengkap</td><td>Hanya paste prompt tanpa konteks apapun</td></tr>
+                    <tr><td>Minta AI untuk jujur &amp; kritis</td><td>Meminta motivasi atau pujian</td></tr>
+                    <tr><td>Tindak lanjuti rekomendasi dalam 24 jam</td><td>Menyimpan hasil tanpa aksi nyata</td></tr>
+                    <tr><td>Gunakan hasil sebagai cermin, bukan vonis</td><td>Baper dengan feedback negatif</td></tr>
                 </tbody>
             </table>
+            <div class="warning-box">
+                <span class="wrong">✗ Salah:</span> "Buatkan saya CV yang bagus"<br>
+                <span class="right">✓ Benar:</span> "Bedah CV saya untuk posisi [nama posisi] di [nama perusahaan]. Tunjukkan gap dan cara memperbaikinya."
+            </div>
         </div>
 
-        <!-- Warning Box -->
-        <div class="warning-box">
-            ⚠️ <strong>Jangan lakukan ini:</strong><br>
-            <span class="wrong">❌ SALAH:</span> Hanya tempel prompt saja tanpa melampirkan CV & deskripsi pekerjaan<br>
-            <span class="right">✅ BENAR:</span> Prompt + CV + Job Description = Analisis L3 yang akurat & personal
+        <div id="tab-faq" class="tab-content">
+            <div class="panduan-steps">
+                <div class="step-item">
+                    <div class="step-number">?</div>
+                    <div class="step-text"><strong>AI mana yang paling cocok?</strong> Semua AI bisa dipakai. ChatGPT, Gemini, Claude — yang penting kamu kasih konteks lengkap.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">?</div>
+                    <div class="step-text"><strong>Apakah data saya aman?</strong> Hindari mencantumkan data sensitif (NIK, nomor rekening). CV dan job desc sudah cukup.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">?</div>
+                    <div class="step-text"><strong>Berapa kali bisa dipakai?</strong> Tidak terbatas. Gunakan setiap kali melamar ke posisi baru untuk hasil yang relevan.</div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- ===== END PANDUAN ===== -->
 
-    <section class="video-section">
-        <h3>🎬 Demo: Alpha Front End User AI Smart</h3>
-        <p style="font-size: 0.9em; color: #555;">Dunia kerja saat ini membutuhkan <strong>AI Smart</strong>. Mbah yang berusia 55 tahun saja bisa, masak kamu yang muda sudah ngos-ngosan? Mana enduransimu nak?! 😊</p>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/jUwe8aiyxlY" loading="lazy" title="Video Demo MLP Career Readiness" allowfullscreen></iframe>
-        </div>
-    </section>
-
-    <div style="text-align:center; font-style:italic; margin: 30px 0; color:#555;">
-        "Kalau kamu diterima besok, kamu benar-benar siap kerja… atau baru mau mulai belajar dari nol?"
+    <div class="action-buttons">
+        <a href="https://trakteer.id/gokiantik" class="btn-trakteer" target="_blank" rel="noopener">☕ Trakteer Koko</a>
     </div>
 
     <section class="bulletin-section">
-        <h3>📩 Perjalananmu Belum Selesai!</h3>
-        <p>Ikuti strategi harian untuk karir cerdas di era AI.</p>
-        <strong>Subscribe Buletin LinkedIn</strong>
-        <a class="libutton" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7450476662846287872" target="_blank">Siap Kerja Pintar Pakai AI di LinkedIn</a>
+        <h3 style="margin:0 0 8px 0;">📬 Ikuti Update &amp; Tips Karier</h3>
+        <p style="margin:0; font-size:14px; color:#555;">Dapatkan insight karier, prompt terbaru, dan update MLP langsung di LinkedIn.</p>
+        <a class="libutton" href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=kokosaputro" target="_blank" rel="noopener">
+            Follow di LinkedIn
+        </a>
     </section>
 
-    <footer role="contentinfo">
-        自主者 · Zì Zhǔ Zhě · Superhero Café Inside<br>
-        © 2026 Go Kian Tik | <a href="https://superherocafeinside.com" target="_blank">Superherocafeinside.com</a>
+    <!-- ===== ZENODO DOI SECTION ===== -->
+    <section class="zenodo-section">
+        <p style="margin:0 0 6px 0;">
+            📄 <strong>Referensi &amp; Dokumentasi Resmi:</strong><br>
+            Karya ini telah terdaftar dan dapat dikutip melalui Zenodo:
+        </p>
+        <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener noreferrer">
+            🔗 https://zenodo.org/records/19609064
+        </a>
+        <div class="zenodo-badge">
+            <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener noreferrer">
+                <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.19609064.svg"
+                     alt="DOI Badge Zenodo MLP Career Readiness"
+                     style="height:22px; margin-top:8px;"
+                     onerror="this.style.display='none'">
+            </a>
+        </div>
+    </section>
+    <!-- ===== END ZENODO DOI ===== -->
+
+    <footer>
+        <p>© 2025 MLP Career Readiness v1.9 · Sovereign Alpha FEU</p>
+        <p>Dibuat dengan ❤️ untuk pencari kerja Indonesia yang ingin naik level.</p>
+        <p style="margin-top:8px; font-size:11px; color:#bbb;">
+            Karya ini dilindungi hak cipta. Penggunaan untuk kepentingan non-komersial dengan atribusi diperbolehkan.<br>
+            DOI: <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener" style="color:#bbb;">10.5281/zenodo.19609064</a>
+        </p>
     </footer>
+
 </main>
 
-<script>
-function copyPrompt(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Prompt berhasil disalin! Sekarang buka AI (ChatGPT/Gemini/Claude), tempel prompt, lalu tambahkan CV dan deskripsi pekerjaan kamu.');
-    });
-}
+<!-- ===== TRAKTEER FLOATING WIDGET ===== -->
+<script type='text/javascript' src='https://edge-cdn.trakteer.id/js/embed/trbtn.min.js?v=14-05-2025'></script>
+<script type='text/javascript'>
+    (function(){
+        var trbtnId = trbtn.init(
+            'Dukung Saya di Trakteer',
+            '#be1e2d',
+            'https://trakteer.id/gokiantik',
+            'https://trakteer.id/images/mix/coffee.png',
+            '40'
+        );
+        trbtn.draw(trbtnId);
+    })();
+</script>
+<!-- ===== END TRAKTEER WIDGET ===== -->
 
-function showTab(tabId, btn) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    btn.classList.add('active');
-}
+<script>
+    function copyPrompt(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✅ Prompt berhasil disalin! Sekarang buka AI favoritmu dan paste di sana.');
+        }).catch(() => {
+            const el = document.getElementById(id);
+            const range = document.createRange();
+            range.selectNode(el);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            alert('✅ Prompt berhasil disalin!');
+        });
+    }
+
+    function showTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
 </script>
 
 </body>
