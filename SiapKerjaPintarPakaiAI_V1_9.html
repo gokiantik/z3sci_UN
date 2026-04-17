@@ -370,11 +370,11 @@ Jujur, tajam, tanpa basa-basi motivasi kosong.</div>
             🔗 https://zenodo.org/records/19609064
         </a>
         <div class="zenodo-badge">
-            <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener noreferrer">
-                <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.19609064.svg"
-                     alt="DOI Badge Zenodo MLP Career Readiness"
-                     style="height:22px; margin-top:8px;"
-                     onerror="this.style.display='none'">
+            <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener noreferrer"
+               style="display:inline-block; margin-top:8px; background:#1a56db; color:#fff;
+                      font-family:sans-serif; font-size:12px; font-weight:bold;
+                      padding:4px 10px; border-radius:4px; text-decoration:none; letter-spacing:0.03em;">
+                DOI: 10.5281/zenodo.19609064
             </a>
         </div>
     </section>
@@ -392,18 +392,27 @@ Jujur, tajam, tanpa basa-basi motivasi kosong.</div>
 </main>
 
 <!-- ===== TRAKTEER FLOATING WIDGET ===== -->
-<script type='text/javascript' src='https://edge-cdn.trakteer.id/js/embed/trbtn.min.js?v=14-05-2025'></script>
-<script type='text/javascript'>
-    (function(){
+<script>
+(function(){
+  try {
+    var s = document.createElement('script');
+    s.src = 'https://edge-cdn.trakteer.id/js/embed/trbtn.min.js?v=14-05-2025';
+    s.onload = function(){
+      try {
         var trbtnId = trbtn.init(
-            'Dukung Saya di Trakteer',
-            '#be1e2d',
-            'https://trakteer.id/gokiantik',
-            'https://trakteer.id/images/mix/coffee.png',
-            '40'
+          'Dukung Saya di Trakteer',
+          '#be1e2d',
+          'https://trakteer.id/gokiantik',
+          'https://trakteer.id/images/mix/coffee.png',
+          '40'
         );
         trbtn.draw(trbtnId);
-    })();
+      } catch(e) {}
+    };
+    s.onerror = function(){};
+    document.body.appendChild(s);
+  } catch(e) {}
+})();
 </script>
 <!-- ===== END TRAKTEER WIDGET ===== -->
 
