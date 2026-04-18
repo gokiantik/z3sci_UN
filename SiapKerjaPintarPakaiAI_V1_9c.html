@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLP Career Readiness v1.9 - Siap & Relevan Pake AI</title>
+    <meta name="description" content="MLP v1.9: Framework praktis persiapan karier dengan panduan AI. Tingkatkan Readiness & Relevance kamu sekarang.">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #f39c12;
+            --danger: #e74c3c;
+            --success: #27ae60;
+            --lite: #3498db;
+            --text: #333;
+            --bg: #fdfdfd;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6; color: var(--text); background-color: var(--bg);
+            margin: 0; padding: 0;
+        }
+        .container {
+            max-width: 850px; margin: 20px auto; padding: 30px;
+            border: 1px solid #eee; box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border-radius: 12px;
+        }
+        header { border-bottom: 4px solid var(--accent); padding-bottom: 15px; margin-bottom: 25px; text-align: center; }
+        h1 { color: var(--primary); margin: 0; font-size: 26px; }
+
+        .intro-section {
+            background: #fff; padding: 25px; border-radius: 10px;
+            margin-bottom: 30px; border: 1px solid #e0e0e0;
+        }
+        .intro-quote {
+            font-style: italic; color: #555; border-left: 4px solid var(--accent);
+            padding-left: 15px; margin: 20px 0;
+        }
+
+        .fast-track {
+            background: #fef9e7; border: 2px dashed var(--accent);
+            padding: 20px; text-align: center; border-radius: 10px; margin-bottom: 30px;
+        }
+
+        .mirror-box {
+            background: #fff; border: 2px solid var(--accent); padding: 25px;
+            margin: 25px 0; text-align: center; font-size: 1.2em; font-weight: 700;
+            border-radius: 8px; box-shadow: 4px 4px 0px var(--accent);
+        }
+
+        .prompt-card {
+            border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px;
+            background: #fff;
+        }
+        .prompt-card.lite { border-left: 5px solid var(--lite); }
+        .prompt-card.master { border-left: 5px solid var(--accent); background: #fafafa; }
+
+        .prompt-container {
+            background: #2d3436; color: #dfe6e9; padding: 15px;
+            border-radius: 5px; font-family: 'Courier New', Courier, monospace;
+            font-size: 13px; margin: 10px 0; white-space: pre-wrap;
+        }
+
+        .action-buttons {
+            display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
+        }
+
+        .btn-main {
+            background: var(--success); color: white; border: none; padding: 12px 25px;
+            cursor: pointer; border-radius: 8px; font-weight: bold; transition: 0.3s;
+            font-size: 14px;
+        }
+        .btn-lite {
+            background: var(--lite); color: white; border: none; padding: 12px 25px;
+            cursor: pointer; border-radius: 5px; font-weight: bold;
+        }
+
+        .btn-trakteer {
+            background: #e74c3c; color: white; border: none; padding: 12px 25px;
+            cursor: pointer; border-radius: 8px; font-weight: bold; text-decoration: none;
+            transition: 0.3s; font-size: 14px; display: inline-block;
+        }
+        .btn-trakteer:hover { background: #c0392b; transform: translateY(-2px); }
+        .btn-main:hover { background: #219150; transform: translateY(-2px); }
+
+        /* ===== PANDUAN SECTION ===== */
+        .panduan-section {
+            margin: 35px 0;
+            background: #fff8f0;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        .panduan-section h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        .panduan-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #f0e0c8;
+        }
+        .step-number {
+            background: var(--accent);
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .step-text { font-size: 14px; color: var(--text); }
+        .step-text strong { color: var(--primary); }
+
+        .panduan-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        .panduan-table th {
+            background: var(--accent);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .panduan-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #f0dfc0;
+        }
+        .panduan-table tr:nth-child(even) td { background: #fef9f0; }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #f39c12;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .warning-box .wrong { color: #e74c3c; font-weight: bold; }
+        .warning-box .right  { color: #27ae60; font-weight: bold; }
+
+        .panduan-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 8px 18px;
+            border: 2px solid var(--accent);
+            background: white;
+            color: var(--accent);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        /* ===== END PANDUAN ===== */
+
+        .video-section { margin: 40px 0; padding: 20px; background: #f9f9f9; border-radius: 12px; }
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        .bulletin-section {
+            margin-top: 40px; padding: 25px; background: #e8f4fd;
+            border-radius: 12px; text-align: center; border: 1px solid var(--lite);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .libutton {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 7px; text-align: center; outline: none; text-decoration: none !important;
+            color: #ffffff !important; width: 250px; height: 32px; border-radius: 16px;
+            background-color: #0A66C2; font-family: "SF Pro Text", Helvetica, sans-serif;
+            font-weight: bold; margin-top: 15px; transition: 0.3s;
+        }
+        .libutton:hover { background-color: #084d91; }
+
+        /* ===== ZENODO BADGE ===== */
+        .zenodo-section {
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: #f0f4ff;
+            border: 1px solid #c5d3f5;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            color: #444;
+        }
+        .zenodo-section a {
+            color: #1a56db;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .zenodo-section a:hover { text-decoration: underline; }
+        .zenodo-badge { display: inline-block; margin-top: 8px; }
+        /* ===== END ZENODO ===== */
+
+        footer {
+            margin-top: 40px; font-size: 12px; color: #999;
+            text-align: center; border-top: 1px solid #eee; padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 15px; margin: 10px; }
+            h1 { font-size: 22px !important; }
+            .btn-main, .btn-trakteer { width: 100%; }
+            .panduan-table th, .panduan-table td { padding: 7px 9px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<main class="container">
+    <header>
+        <h1>🧠 MLP Career Readiness v1.9</h1>
+        <p style="font-size: 14px; color: #666; font-style: italic;">Sovereign Alpha FEU · Ready, Relevant, & Resilient</p>
+    </header>
+
+    <section class="intro-section">
+        <p><strong>MLP Career Readiness</strong> adalah sebuah cara memanfaatkan AI apapun mereknya untuk membantu para pencari kerja bercermin diri atas langkah-langkahnya melakukan lamaran kerja.</p>
+        <div class="intro-quote">
+            Halaman ini dibuat oleh seorang praktisi karir yang kenyang pengalaman lapangan; dari sales hingga posisi strategis di kantoran. Dirancang agar kamu lebih <strong>Ready (Siap)</strong> dan <strong>Relevant (Nyambung)</strong> dengan posisi atau pekerjaan yang kamu lamar.
+        </div>
+    </section>
+
+    <section class="fast-track">
+        <p style="margin:0 0 10px 0; font-weight:bold;">🚀 Salin Prompt & Cek Kesiapan (1 Menit):</p>
+        <button class="btn-main" onclick="copyPrompt('promptLite')">SALIN PROMPT CEPAT</button>
+    </section>
+
+    <div class="mirror-box" role="alert">
+        "Kamu melamar karena butuh dan terdesak… atau karena benar-benar siap bekerja?"
+    </div>
+
+    <section class="prompt-selection">
+        <h2>⚡ PILIH MODE EVALUASI:</h2>
+        <article class="prompt-card lite">
+            <h3>1. Mode Cepat (Lite)</h3>
+            <div class="prompt-container" id="promptLite">Bedah kesiapan saya berdasarkan CV dan posisi yang saya lamar ini. Tunjukkan 3 gap (L3: Lengah, Lalai, Lupa) utama saya secara jujur tanpa motivasi kosong.</div>
+            <button class="btn-lite" onclick="copyPrompt('promptLite')">Salin Versi Cepat</button>
+        </article>
+
+        <article class="prompt-card master">
+            <h3>2. Mode Master (Full Experience)</h3>
+            <div class="prompt-container" id="promptMaster">Saya adalah pencari kerja yang ingin bertransformasi menjadi kandidat terbaik. Analisis CV saya secara mendalam untuk posisi yang saya lamar. Berikan:
+1. Skor Readiness (0-100) dengan breakdown per dimensi
+2. Skor Relevance (0-100) terhadap job description
+3. Top 3 Kekuatan yang harus saya tonjolkan
+4. Top 3 Kelemahan kritis yang harus segera diperbaiki
+5. Rekomendasi konkret untuk 7 hari ke depan
+Jujur, tajam, tanpa basa-basi motivasi kosong.</div>
+            <button class="btn-main" onclick="copyPrompt('promptMaster')">Salin Versi Master</button>
+        </article>
+    </section>
+
+    <!-- ===== PANDUAN SECTION ===== -->
+    <section class="panduan-section">
+        <h2>📖 Panduan Penggunaan MLP</h2>
+        <div class="panduan-tabs">
+            <button class="tab-btn active" onclick="showTab('tab-cara', this)">Cara Pakai</button>
+            <button class="tab-btn" onclick="showTab('tab-tips', this)">Tips &amp; Trik</button>
+            <button class="tab-btn" onclick="showTab('tab-faq', this)">FAQ</button>
+        </div>
+
+        <div id="tab-cara" class="tab-content active">
+            <div class="panduan-steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text"><strong>Pilih Mode:</strong> Pilih Mode Cepat (Lite) untuk hasil instan, atau Mode Master untuk analisis mendalam.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text"><strong>Salin Prompt:</strong> Klik tombol salin, lalu buka AI favoritmu (ChatGPT, Gemini, Claude, dll).</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text"><strong>Tempel &amp; Tambahkan:</strong> Paste prompt, lalu lampirkan CV kamu dan job description posisi yang dilamar.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-text"><strong>Baca &amp; Tindak Lanjuti:</strong> Baca hasilnya dengan pikiran terbuka. Catat gap &amp; lakukan perbaikan nyata.</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-tips" class="tab-content">
+            <table class="panduan-table">
+                <thead>
+                    <tr><th>✅ Lakukan</th><th>❌ Hindari</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Sertakan CV terbaru + Job Description lengkap</td><td>Hanya paste prompt tanpa konteks apapun</td></tr>
+                    <tr><td>Minta AI untuk jujur &amp; kritis</td><td>Meminta motivasi atau pujian</td></tr>
+                    <tr><td>Tindak lanjuti rekomendasi dalam 24 jam</td><td>Menyimpan hasil tanpa aksi nyata</td></tr>
+                    <tr><td>Gunakan hasil sebagai cermin, bukan vonis</td><td>Baper dengan feedback negatif</td></tr>
+                </tbody>
+            </table>
+            <div class="warning-box">
+                <span class="wrong">✗ Salah:</span> "Buatkan saya CV yang bagus"<br>
+                <span class="right">✓ Benar:</span> "Bedah CV saya untuk posisi [nama posisi] di [nama perusahaan]. Tunjukkan gap dan cara memperbaikinya."
+            </div>
+        </div>
+
+        <div id="tab-faq" class="tab-content">
+            <div class="panduan-steps">
+                <div class="step-item">
+                    <div class="step-number">?</div>
+                    <div class="step-text"><strong>AI mana yang paling cocok?</strong> Semua AI bisa dipakai. ChatGPT, Gemini, Claude — yang penting kamu kasih konteks lengkap.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">?</div>
+                    <div class="step-text"><strong>Apakah data saya aman?</strong> Hindari mencantumkan data sensitif (NIK, nomor rekening). CV dan job desc sudah cukup.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">?</div>
+                    <div class="step-text"><strong>Berapa kali bisa dipakai?</strong> Tidak terbatas. Gunakan setiap kali melamar ke posisi baru untuk hasil yang relevan.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== END PANDUAN ===== -->
+
+    <div class="action-buttons">
+        <a href="https://trakteer.id/gokiantik" class="btn-trakteer" target="_blank" rel="noopener">☕ Trakteer Koko</a>
+    </div>
+
+    <section class="bulletin-section">
+        <h3 style="margin:0 0 8px 0;">📬 Ikuti Update &amp; Tips Karier</h3>
+        <p style="margin:0; font-size:14px; color:#555;">Dapatkan insight karier, prompt terbaru, dan update MLP langsung di LinkedIn.</p>
+        <a class="libutton" href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=kokosaputro" target="_blank" rel="noopener">
+            Follow di LinkedIn
+        </a>
+    </section>
+
+    <!-- ===== ZENODO DOI SECTION ===== -->
+    <section class="zenodo-section">
+        <p style="margin:0 0 6px 0;">
+            📄 <strong>Referensi &amp; Dokumentasi Resmi:</strong><br>
+            Karya ini telah terdaftar dan dapat dikutip melalui Zenodo:
+        </p>
+        <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener noreferrer">
+            🔗 https://zenodo.org/records/19609064
+        </a>
+        <div class="zenodo-badge">
+            <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener noreferrer">
+                <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.19609064.svg"
+                     alt="DOI Badge Zenodo MLP Career Readiness"
+                     style="height:22px; margin-top:8px;"
+                     onerror="this.style.display='none'">
+            </a>
+        </div>
+    </section>
+    <!-- ===== END ZENODO DOI ===== -->
+
+    <footer>
+        <p>© 2025 MLP Career Readiness v1.9 · Sovereign Alpha FEU</p>
+        <p>Dibuat dengan ❤️ untuk pencari kerja Indonesia yang ingin naik level.</p>
+        <p style="margin-top:8px; font-size:11px; color:#bbb;">
+            Karya ini dilindungi hak cipta. Penggunaan untuk kepentingan non-komersial dengan atribusi diperbolehkan.<br>
+            DOI: <a href="https://zenodo.org/records/19609064" target="_blank" rel="noopener" style="color:#bbb;">10.5281/zenodo.19609064</a>
+        </p>
+    </footer>
+
+</main>
+
+<!-- ===== TRAKTEER FLOATING WIDGET ===== -->
+<script type='text/javascript' src='https://edge-cdn.trakteer.id/js/embed/trbtn.min.js?v=14-05-2025'></script>
+<script type='text/javascript'>
+    (function(){
+        var trbtnId = trbtn.init(
+            'Dukung Saya di Trakteer',
+            '#be1e2d',
+            'https://trakteer.id/gokiantik',
+            'https://trakteer.id/images/mix/coffee.png',
+            '40'
+        );
+        trbtn.draw(trbtnId);
+    })();
+</script>
+<!-- ===== END TRAKTEER WIDGET ===== -->
+
+<script>
+    function copyPrompt(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✅ Prompt berhasil disalin! Sekarang buka AI favoritmu dan paste di sana.');
+        }).catch(() => {
+            const el = document.getElementById(id);
+            const range = document.createRange();
+            range.selectNode(el);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            alert('✅ Prompt berhasil disalin!');
+        });
+    }
+
+    function showTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
