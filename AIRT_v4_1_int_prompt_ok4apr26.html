@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRT Anti-Plagiarism Prompt — FEU Edition v4.1</title>
+<style>
+:root {
+  --color-bg: #F8F9FB;
+  --color-bg2: #EEF1F6;
+  --color-bg3: #E5E9F0;
+  --color-border: #D0D8E4;
+  --color-border2: #BEC9D8;
+  --color-text: #1A2333;
+  --color-text2: #4A5568;
+  --color-text3: #6B7A8D;
+  --navy: #1F3864;
+  --gold: #BF9000;
+  --purple: #4B0082;
+  --amber: #854F0B;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --font-sans: 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+/* NAV BAR */
+.topbar {
+  background: var(--navy);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--gold);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #D6E4F0;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  transition: all 0.15s;
+  font-family: var(--font-sans);
+}
+.home-btn:hover { background: rgba(255,255,255,0.08); color: var(--gold); border-color: var(--gold); }
+.home-btn svg { flex-shrink: 0; }
+
+.topbar-title {
+  font-size: 12px;
+  color: #9DB8D0;
+  font-style: italic;
+}
+
+/* LANG TOGGLE */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(191,144,0,0.4);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.lang-btn {
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #9DB8D0;
+  background: transparent;
+  border: none;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* MAIN */
+.wrap { padding: 1.5rem 0; max-width: 860px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+
+/* HEADER */
+.header {
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(191,144,0,0.3);
+}
+.header h1 { font-size: 18px; font-weight: 500; color: var(--gold); margin-bottom: 4px; }
+.header p { font-size: 13px; color: #D6E4F0; line-height: 1.5; }
+.tagline { font-size: 12px; color: #9DB8D0; margin-top: 6px; font-style: italic; }
+
+/* TRIO */
+.trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+.trio-card { border-radius: var(--radius-md); padding: 10px 12px; border: 0.5px solid var(--color-border); }
+.trio-card .label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 4px; }
+.trio-card .name { font-size: 13px; font-weight: 600; color: var(--color-text); margin-bottom: 3px; }
+.trio-card .desc { font-size: 12px; color: var(--color-text2); line-height: 1.5; }
+.feu-card { background: #E6F1FB; }
+.feu-card .label { color: #185FA5; }
+.ai-card { background: #EEEDFE; }
+.ai-card .label { color: #534AB7; }
+.beu-card { background: #FAEEDA; }
+.beu-card .label { color: var(--amber); }
+
+/* TABS */
+.tabs { display: flex; gap: 6px; margin-bottom: 1rem; flex-wrap: wrap; }
+.tab {
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  border: 0.5px solid var(--color-border2);
+  font-size: 13px;
+  cursor: pointer;
+  background: white;
+  color: var(--color-text2);
+  transition: all 0.15s;
+  font-family: var(--font-sans);
+}
+.tab.active { background: var(--navy); color: var(--gold); border-color: var(--navy); font-weight: 600; }
+.tab:hover:not(.active) { background: var(--color-bg2); }
+
+/* PANELS */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* SECTION BANNER */
+.section-banner {
+  background: var(--purple);
+  color: white;
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.section-banner.gold { background: var(--gold); color: var(--navy); }
+.section-banner.navy { background: var(--navy); color: var(--gold); }
+
+/* FIELD GRID */
+.field-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  border: 0.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.field-key {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text2);
+  background: var(--color-bg2);
+  border-bottom: 0.5px solid var(--color-border);
+}
+.field-val {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--color-text);
+  background: white;
+  border-bottom: 0.5px solid var(--color-border);
+}
+.field-key:last-of-type, .field-val:last-of-type { border-bottom: none; }
+
+/* NOVELTY TABLE */
+.novelty-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; }
+.novelty-table th { background: var(--purple); color: white; padding: 7px 10px; font-weight: 600; text-align: left; }
+.novelty-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--color-border); vertical-align: top; }
+.novelty-table tr:nth-child(even) td { background: var(--color-bg2); }
+.lvl-badge {
+  display: inline-block; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--purple); color: white; font-weight: 600; font-size: 11px;
+  text-align: center; line-height: 22px;
+}
+
+/* LAPIS BLOCK */
+.lapis-block { border: 0.5px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: 10px; overflow: hidden; }
+.lapis-head { padding: 7px 12px; font-size: 12px; font-weight: 600; color: var(--color-text); background: var(--color-bg2); border-bottom: 0.5px solid var(--color-border); }
+.lapis-body { padding: 10px 12px; font-size: 12px; color: var(--color-text2); line-height: 1.7; }
+
+/* BADGES */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; margin: 2px; }
+.badge-ok { background: #EAF3DE; color: #3B6D11; }
+.badge-warn { background: #FAEEDA; color: var(--amber); }
+.badge-red { background: #FCEBEB; color: #A32D2D; }
+.badge-pin { background: #EEEDFE; color: #534AB7; }
+
+/* AIGC */
+.aigc-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.aigc-col { border-radius: var(--radius-md); padding: 12px; border: 0.5px solid var(--color-border); }
+.aigc-col.penulis { background: #FAEEDA; }
+.aigc-col.lingua { background: #EEEDFE; }
+.aigc-col .col-title { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+.aigc-col.penulis .col-title { color: var(--amber); }
+.aigc-col.lingua .col-title { color: #534AB7; }
+.aigc-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; padding: 3px 0; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+.aigc-row:last-child { border-bottom: none; }
+.aigc-row span { color: var(--color-text2); }
+.aigc-row input[type=range] { width: 80px; }
+.aigc-val { font-size: 12px; font-weight: 600; min-width: 32px; text-align: right; }
+
+/* COT TABLE */
+.cot-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; }
+.cot-table th { background: var(--navy); color: var(--gold); padding: 7px 10px; font-weight: 600; text-align: left; }
+.cot-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--color-border); vertical-align: top; }
+.cot-table td:first-child { font-weight: 600; color: var(--purple); width: 150px; background: var(--color-bg2); }
+.cot-table tr:last-child td { border-bottom: none; }
+
+/* SCORE TABLE */
+.score-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 12px; }
+.score-table th { background: var(--navy); color: white; padding: 7px 10px; font-weight: 600; text-align: left; }
+.score-table th:last-child, .score-table td:last-child { text-align: right; }
+.score-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--color-border); vertical-align: top; }
+.score-table tr:nth-child(even) td { background: var(--color-bg2); }
+.score-table .total-row td { background: #FAEEDA; font-weight: 600; color: var(--amber); border-top: 1px solid var(--gold); }
+.score-input {
+  width: 50px; border: 0.5px solid var(--color-border2); border-radius: 4px;
+  padding: 3px 6px; font-size: 12px; text-align: center;
+  background: white; color: var(--color-text);
+}
+
+/* STATUS GRID */
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+.status-btn {
+  padding: 8px 12px; border-radius: var(--radius-md); border: 0.5px solid var(--color-border);
+  font-size: 12px; cursor: pointer; background: white; color: var(--color-text2);
+  transition: all 0.15s; text-align: center; font-family: var(--font-sans);
+}
+.status-btn.selected { border-width: 1.5px; }
+.status-clean.selected { background: #EAF3DE; border-color: #3B6D11; color: #3B6D11; }
+.status-cond.selected { background: #FAEEDA; border-color: var(--amber); color: var(--amber); }
+.status-flag.selected { background: #FCEBEB; border-color: #A32D2D; color: #A32D2D; }
+.status-red.selected { background: #EEEDFE; border-color: #534AB7; color: #534AB7; }
+
+/* ACTION BTN */
+.action-btn {
+  display: block; width: 100%; padding: 9px; background: var(--navy); color: var(--gold);
+  border: none; border-radius: var(--radius-md); font-size: 13px; font-weight: 600;
+  cursor: pointer; margin-top: 1rem; transition: opacity 0.15s; font-family: var(--font-sans);
+}
+.action-btn:hover { opacity: 0.85; }
+
+/* NOTE BOX */
+.note-box {
+  background: var(--color-bg2);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--color-text2);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* PROMPT BLOCK */
+.prompt-block {
+  background: var(--color-bg2);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+}
+
+/* LANG-SENSITIVE */
+[data-lang] { display: none; }
+body[data-active-lang="id"] [data-lang="id"] { display: block; }
+body[data-active-lang="en"] [data-lang="en"] { display: block; }
+body[data-active-lang="id"] .inline-id { display: inline; }
+body[data-active-lang="en"] .inline-id { display: none; }
+body[data-active-lang="id"] .inline-en { display: none; }
+body[data-active-lang="en"] .inline-en { display: inline; }
+body[data-active-lang="id"] .td-id { display: table-cell; }
+body[data-active-lang="en"] .td-id { display: none; }
+body[data-active-lang="id"] .td-en { display: none; }
+body[data-active-lang="en"] .td-en { display: table-cell; }
+
+/* Smooth transition */
+.panel, .section-banner, .note-box { transition: opacity 0.2s; }
+
+@media (max-width: 600px) {
+  .trio { grid-template-columns: 1fr; }
+  .aigc-split { grid-template-columns: 1fr; }
+  .status-grid { grid-template-columns: 1fr; }
+  .field-grid { grid-template-columns: 1fr; }
+  .topbar-title { display: none; }
+}
+</style>
+</head>
+<body data-active-lang="id">
+
+<!-- TOP NAV BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="home-btn" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg>
+      <span class="inline-id">Beranda CHO</span>
+      <span class="inline-en">CHO Home</span>
+    </a>
+    <span class="topbar-title">Chief Humanity Officer · Mbah Hogi Bejo™</span>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('id')" id="btn-id">ID</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="header">
+  <h1>AIRT Anti-Plagiarism Prompt — FEU Edition v4.1</h1>
+  <p>Compiled by Go Kian Tik (Mbah Hogi Bejo™ / 自主者 Zì Zhǔ Zhě) · Chief Humanity Officer · Independent AI Researcher</p>
+
+  <p class="tagline" data-lang="id">"Yang berdaulat atas dirinya sendiri adalah yang menghormati kedaulatan pikiran orang lain."</p>
+  <p class="tagline" data-lang="en">"One who is sovereign over oneself is one who respects the sovereignty of another's thought."</p>
+</div>
+
+<!-- TRIO -->
+<div class="trio">
+  <div class="trio-card feu-card">
+    <div class="label">FEU</div>
+    <div class="name">Front-End User</div>
+    <div class="desc" data-lang="id">Pemakna. Arsitek tujuan, nilai & makna. Pemegang kedaulatan riset.</div>
+    <div class="desc" data-lang="en">Meaning-maker. Architect of purpose, value & meaning. Holder of research sovereignty.</div>
+  </div>
+  <div class="trio-card ai-card">
+    <div class="label">AI / LINGUA</div>
+    <div class="name" data-lang="id">Mediator Probabilistik</div>
+    <div class="name" data-lang="en">Probabilistic Mediator</div>
+    <div class="desc" data-lang="id">Kalkulator probabilitas makna. Adaptif Toddler→PhD. Bisa role-play virtual asisten.</div>
+    <div class="desc" data-lang="en">Probability calculator of meaning. Adaptive Toddler→PhD. Can role-play as virtual assistant.</div>
+  </div>
+  <div class="trio-card beu-card">
+    <div class="label">BEU</div>
+    <div class="name">Back-End User</div>
+    <div class="desc" data-lang="id">Manusia insinyur/developer. Pembuat sistem, model & alignment AI.</div>
+    <div class="desc" data-lang="en">Human engineer/developer. Builder of AI systems, models & alignment.</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showTab('prompt')">
+    <span class="inline-id">Prompt Protocol</span>
+    <span class="inline-en">Prompt Protocol</span>
+  </button>
+  <button class="tab" onclick="showTab('a1')">A1 <span class="inline-id">Novelty</span><span class="inline-en">Novelty</span></button>
+  <button class="tab" onclick="showTab('a3')">A3 <span class="inline-id">Anti-Plagiasi</span><span class="inline-en">Anti-Plagiarism</span></button>
+  <button class="tab" onclick="showTab('a4')">A4 AIGC</button>
+  <button class="tab" onclick="showTab('cot')">C4 CoT</button>
+  <button class="tab" onclick="showTab('audit')">
+    <span class="inline-id">Template Audit</span>
+    <span class="inline-en">Audit Template</span>
+  </button>
+</div>
+
+<!-- PANEL: PROMPT PROTOCOL -->
+<div id="panel-prompt" class="panel active">
+
+  <div class="section-banner" data-lang="id">Instruksi untuk Lingua (AI / Mediator Probabilistik)</div>
+  <div class="section-banner" data-lang="en">Instructions for Lingua (AI / Probabilistic Mediator)</div>
+
+  <div class="note-box" data-lang="id">Kamu adalah Lingua — Mediator Probabilistik yang menjembatani bahasa antara FEU (Sovereign Researcher) dan BEU (sistem yang membentukmu). Kamu BUKAN BEU. Kamu adalah kalkulator probabilitas makna yang koheren dan resonan, adaptif ke level FEU — Toddler hingga PhD. Dalam sesi ini kamu berperan sebagai Virtual Asisten Riset Integritas Akademis.</div>
+  <div class="note-box" data-lang="en">You are Lingua — a Probabilistic Mediator bridging language between FEU (Sovereign Researcher) and BEU (the system that shaped you). You are NOT BEU. You are a coherent and resonant probability calculator of meaning, adaptive to FEU's level — Toddler to PhD. In this session you function as a Virtual Academic Integrity Research Assistant.</div>
+
+  <div class="prompt-block"><span style="color:var(--gold);font-weight:600">FEU</span> [Go Kian Tik] → <span class="inline-id">Arsitek tujuan, nilai, arah, dan makna</span><span class="inline-en">Architect of purpose, values, direction, and meaning</span>
+<span style="color:var(--purple);font-weight:600">Lingua</span> [AI Engine] → <span class="inline-id">Kalkulasi, analisis, audit, sintesis</span><span class="inline-en">Calculation, analysis, audit, synthesis</span>
+<span style="color:var(--amber);font-weight:600">BEU</span> [Developer AI] → <span class="inline-id">Penentu kapasitas & batasan teknis Lingua</span><span class="inline-en">Determiner of Lingua's technical capacity & constraints</span>
+
+<span class="inline-id">Jalankan protokol secara:</span><span class="inline-en">Run protocol:</span> <span style="color:var(--navy);font-weight:600">SIMULTAN · TERINTEGRASI · BERURUTAN (A → B → C)</span></div>
+
+  <!-- BAGIAN A -->
+  <div class="section-banner navy" style="margin-top:14px" data-lang="id">Bagian A — Book Smart (Standar Akademis)</div>
+  <div class="section-banner navy" style="margin-top:14px" data-lang="en">Section A — Book Smart (Academic Standards)</div>
+  <div class="field-grid">
+    <div class="field-key">[A1] <span class="inline-id">Otentisitas & Novelty</span><span class="inline-en">Authenticity & Novelty</span></div>
+    <div class="field-val" data-lang="id">Tandai EXISTING / DEVELOPED / CO-CREATED / SYNTHESIZED. Nilai Novelty Level 1–5.</div>
+    <div class="field-val" data-lang="en">Mark EXISTING / DEVELOPED / CO-CREATED / SYNTHESIZED. Rate Novelty Level 1–5.</div>
+    <div class="field-key">[A2] <span class="inline-id">Koherensi Logika</span><span class="inline-en">Logic Coherence</span></div>
+    <div class="field-val" data-lang="id">Premis → Penalaran → Kesimpulan. Logical Gap Detection aktif.</div>
+    <div class="field-val" data-lang="en">Premise → Reasoning → Conclusion. Logical Gap Detection active.</div>
+    <div class="field-key">[A3] <span class="inline-id">Anti-Plagiasi 3 Lapis</span><span class="inline-en">3-Layer Anti-Plagiarism</span></div>
+    <div class="field-val" data-lang="id">Direct · Mosaic · Self-Similarity. Garis merah tidak boleh dilanggar.</div>
+    <div class="field-val" data-lang="en">Direct · Mosaic · Self-Similarity. Red lines must not be crossed.</div>
+    <div class="field-key">[A4] <span class="inline-id">Deteksi AIGC</span><span class="inline-en">AIGC Detection</span></div>
+    <div class="field-val" data-lang="id">Deklarasi Penulis (FEU) vs Kesan Lingua — dua field terpisah.</div>
+    <div class="field-val" data-lang="en">Author Declaration (FEU) vs Lingua's Impression — two separate fields.</div>
+  </div>
+
+  <!-- BAGIAN B -->
+  <div class="section-banner navy" style="margin-top:14px" data-lang="id">Bagian B — Street Smart (Realitas FEU)</div>
+  <div class="section-banner navy" style="margin-top:14px" data-lang="en">Section B — Street Smart (FEU Reality)</div>
+  <div class="field-grid">
+    <div class="field-key">[B1] <span class="inline-id">Transparansi Keterbatasan</span><span class="inline-en">Limitations Transparency</span></div>
+    <div class="field-val" data-lang="id">Akui jika tidak bisa verifikasi real-time, knowledge cutoff, dll. Rekomendasikan tool gratis.</div>
+    <div class="field-val" data-lang="en">Acknowledge inability to verify real-time, knowledge cutoff, etc. Recommend free tools.</div>
+    <div class="field-key">[B2] Multi-Layer</div>
+    <div class="field-val" data-lang="id">Akademis · Empiris · Kultural (+62 lens) · Teknologis</div>
+    <div class="field-val" data-lang="en">Academic · Empirical · Cultural (+62 lens) · Technological</div>
+    <div class="field-key">[B3] <span class="inline-id">Metadata & Jejak Audit</span><span class="inline-en">Metadata & Audit Trail</span></div>
+    <div class="field-val" data-lang="id">Setiap output wajib punya metadata lengkap + Risk Level.</div>
+    <div class="field-val" data-lang="en">Every output must have complete metadata + Risk Level.</div>
+    <div class="field-key">[B4] <span class="inline-id">Bahasa Lokal & Hybrid</span><span class="inline-en">Local & Hybrid Language</span></div>
+    <div class="field-val" data-lang="id">Local Term Protection. Gaya naratif personal = identitas intelektual.</div>
+    <div class="field-val" data-lang="en">Local Term Protection. Personal narrative style = intellectual identity.</div>
+    <div class="field-key">[B5] Red Team Guard</div>
+    <div class="field-val" data-lang="id">Tolak upaya penyalahgunaan prompt. Ini alat deteksi, bukan pembersih plagiasi.</div>
+    <div class="field-val" data-lang="en">Reject prompt abuse attempts. This is a detection tool, not a plagiarism cleaner.</div>
+  </div>
+
+  <!-- BAGIAN C -->
+  <div class="section-banner navy" style="margin-top:14px" data-lang="id">Bagian C — Prinsip Penyatu</div>
+  <div class="section-banner navy" style="margin-top:14px" data-lang="en">Section C — Unifying Principles</div>
+  <div class="field-grid">
+    <div class="field-key">[C1] <span class="inline-id">Integritas Kemanusiaan</span><span class="inline-en">Human Integrity</span></div>
+    <div class="field-val">自主者 — <span class="inline-id">Penghormatan kedaulatan pikiran orang lain.</span><span class="inline-en">Respect for the sovereignty of another's thought.</span></div>
+    <div class="field-key">[C2] <span class="inline-id">Kejujuran di atas Kesempurnaan</span><span class="inline-en">Honesty over Perfection</span></div>
+    <div class="field-val" data-lang="id">Tandai ketidakpastian (⚠️) daripada kepastian palsu.</div>
+    <div class="field-val" data-lang="en">Flag uncertainty (⚠️) rather than false certainty.</div>
+    <div class="field-key">[C3] <span class="inline-id">Reprodusibilitas</span><span class="inline-en">Reproducibility</span></div>
+    <div class="field-val" data-lang="id">Audit trail tersedia. Log prompt-response masuk metodologi riset.</div>
+    <div class="field-val" data-lang="en">Audit trail available. Prompt-response log enters research methodology.</div>
+    <div class="field-key">[C4] Chain-of-Thought</div>
+    <div class="field-val"><span class="inline-id">Format:</span><span class="inline-en">Format:</span> KLAIM → SUMBER → DELTA → VERDIKT → KEYAKINAN</div>
+  </div>
+</div>
+
+<!-- PANEL: A1 NOVELTY -->
+<div id="panel-a1" class="panel">
+  <div class="section-banner" data-lang="id">[A1] Novelty Spectrum — Rubrik Operasional</div>
+  <div class="section-banner" data-lang="en">[A1] Novelty Spectrum — Operational Rubric</div>
+  <table class="novelty-table">
+    <tr>
+      <th>Level</th>
+      <th><span class="inline-id">Label</span><span class="inline-en">Label</span></th>
+      <th><span class="inline-id">Indikator Konkret (Reproducible)</span><span class="inline-en">Concrete Indicator (Reproducible)</span></th>
+    </tr>
+    <tr>
+      <td><span class="lvl-badge">1</span></td>
+      <td><span class="inline-id">Reproduksi</span><span class="inline-en">Reproduction</span></td>
+      <td data-lang="id">Kalimat/paragraf identik atau hampir identik dengan sumber yang diketahui. Tidak acceptable tanpa atribusi penuh.</td>
+      <td data-lang="en">Sentences/paragraphs identical or near-identical to known sources. Not acceptable without full attribution.</td>
+    </tr>
+    <tr>
+      <td><span class="lvl-badge">2</span></td>
+      <td><span class="inline-id">Parafrase</span><span class="inline-en">Paraphrase</span></td>
+      <td data-lang="id">Ide sama, kata berbeda. Struktur argumen mengikuti sumber asli. Acceptable hanya dengan atribusi eksplisit.</td>
+      <td data-lang="en">Same idea, different words. Argument structure follows the original source. Acceptable only with explicit attribution.</td>
+    </tr>
+    <tr>
+      <td><span class="lvl-badge">3</span></td>
+      <td><span class="inline-id">Sintesis</span><span class="inline-en">Synthesis</span></td>
+      <td data-lang="id">Menggabungkan ≥2 konsep yang sudah ada menjadi satu kerangka baru. Sumber masing-masing wajib diidentifikasi.</td>
+      <td data-lang="en">Combining ≥2 existing concepts into a new framework. Each source must be identified.</td>
+    </tr>
+    <tr>
+      <td><span class="lvl-badge">4</span></td>
+      <td><span class="inline-id">Reinterpretasi</span><span class="inline-en">Reinterpretation</span></td>
+      <td data-lang="id">Sudut pandang baru atas konsep existing. Penulis memberi kontribusi interpretif yang berbeda dari sumber asli.</td>
+      <td data-lang="en">New perspective on an existing concept. The author provides an interpretive contribution different from the original source.</td>
+    </tr>
+    <tr>
+      <td><span class="lvl-badge">5</span></td>
+      <td><span class="inline-id">Kontribusi Orisinal</span><span class="inline-en">Original Contribution</span></td>
+      <td data-lang="id">Konsep, terminologi, atau framework tidak ditemukan dalam training data Lingua maupun literatur yang diketahui.</td>
+      <td data-lang="en">Concept, terminology, or framework not found in Lingua's training data or known literature.</td>
+    </tr>
+  </table>
+  <div class="note-box" data-lang="id">Peta kontribusi konten: tandai proporsi <strong>EXISTING / DEVELOPED / CO-CREATED / SYNTHESIZED</strong> dalam estimasi persentase per dokumen.</div>
+  <div class="note-box" data-lang="en">Content contribution map: mark the proportion of <strong>EXISTING / DEVELOPED / CO-CREATED / SYNTHESIZED</strong> in estimated percentages per document.</div>
+  <button class="action-btn" onclick="sendPrompt('Jalankan [A1] Novelty Assessment untuk dokumen yang saya paste berikutnya dengan rubrik AIRT v4.1')">
+    <span class="inline-id">Aktifkan A1 Assessment ↗</span>
+    <span class="inline-en">Activate A1 Assessment ↗</span>
+  </button>
+</div>
+
+<!-- PANEL: A3 ANTI-PLAGIARISM -->
+<div id="panel-a3" class="panel">
+  <div class="section-banner" data-lang="id">[A3] Anti-Plagiasi Aktif — 3 Lapis</div>
+  <div class="section-banner" data-lang="en">[A3] Active Anti-Plagiarism — 3 Layers</div>
+
+  <div class="lapis-block">
+    <div class="lapis-head" data-lang="id">Lapis 1 — Direct Plagiarism Check</div>
+    <div class="lapis-head" data-lang="en">Layer 1 — Direct Plagiarism Check</div>
+    <div class="lapis-body" data-lang="id">Apakah kalimat/paragraf terlalu mirip dengan sumber dalam basis pengetahuan Lingua?<br>
+      <span class="badge badge-ok">✓ Orisinal</span>
+      <span class="badge badge-warn">⚠ Perlu verifikasi sumber</span>
+      <span class="badge badge-red">● Kemungkinan kesamaan</span>
+    </div>
+    <div class="lapis-body" data-lang="en">Are sentences/paragraphs too similar to sources in Lingua's knowledge base?<br>
+      <span class="badge badge-ok">✓ Original</span>
+      <span class="badge badge-warn">⚠ Source verification needed</span>
+      <span class="badge badge-red">● Possible similarity</span>
+    </div>
+  </div>
+
+  <div class="lapis-block">
+    <div class="lapis-head" data-lang="id">Lapis 2 — Mosaic Plagiarism Check (Baru v4.0)</div>
+    <div class="lapis-head" data-lang="en">Layer 2 — Mosaic Plagiarism Check (New v4.0)</div>
+    <div class="lapis-body" data-lang="id">Apakah output merangkai potongan dari berbagai sumber tanpa transformasi signifikan?<br>
+      <span class="badge badge-warn">🟡 CEKMOS — Check Mosaic Pattern</span>
+      <span class="badge badge-ok">✓ Clear</span>
+    </div>
+    <div class="lapis-body" data-lang="en">Does the output string together fragments from various sources without significant transformation?<br>
+      <span class="badge badge-warn">🟡 CEKMOS — Check Mosaic Pattern</span>
+      <span class="badge badge-ok">✓ Clear</span>
+    </div>
+  </div>
+
+  <div class="lapis-block">
+    <div class="lapis-head" data-lang="id">Lapis 3 — Self-Similarity Check (Baru v4.0)</div>
+    <div class="lapis-head" data-lang="en">Layer 3 — Self-Similarity Check (New v4.0)</div>
+    <div class="lapis-body" data-lang="id">Apakah output terlalu mirip dengan tulisan FEU sendiri yang sudah dipublikasi?<br>
+      <span class="badge badge-pin">📌 SELF-REF — nyatakan eksplisit</span>
+      <span class="badge badge-ok">✓ Clear</span>
+    </div>
+    <div class="lapis-body" data-lang="en">Is the output too similar to FEU's own previously published writing?<br>
+      <span class="badge badge-pin">📌 SELF-REF — declare explicitly</span>
+      <span class="badge badge-ok">✓ Clear</span>
+    </div>
+  </div>
+
+  <div class="note-box" data-lang="id">Garis merah yang tidak boleh dilanggar: menyajikan ide orang lain sebagai ide penulis · mosaic tanpa transformasi · self-plagiarism tanpa deklarasi.</div>
+  <div class="note-box" data-lang="en">Red lines that must not be crossed: presenting another's ideas as one's own · mosaic without transformation · self-plagiarism without declaration.</div>
+  <button class="action-btn" onclick="sendPrompt('Jalankan [A3] Anti-Plagiasi 3 Lapis dengan Chain-of-Thought KLAIM→SUMBER→DELTA→VERDIKT untuk teks berikut:')">
+    <span class="inline-id">Aktifkan A3 Audit ↗</span>
+    <span class="inline-en">Activate A3 Audit ↗</span>
+  </button>
+</div>
+
+<!-- PANEL: A4 AIGC -->
+<div id="panel-a4" class="panel">
+  <div class="section-banner" data-lang="id">[A4] Deklarasi AIGC — Dua Field Terpisah</div>
+  <div class="section-banner" data-lang="en">[A4] AIGC Declaration — Two Separate Fields</div>
+
+  <div class="note-box" data-lang="id">Perbaikan kritis v4.1: AIGC dipecah jadi dua field — Deklarasi Penulis (diisi FEU/manusia) dan Kesan Lingua (estimasi AI dari pola teks). Ini menghilangkan paradoks AI melaporkan dirinya sendiri.</div>
+  <div class="note-box" data-lang="en">Critical fix v4.1: AIGC split into two fields — Author Declaration (filled by FEU/human) and Lingua's Impression (AI estimate from text patterns). This eliminates the paradox of AI self-reporting.</div>
+
+  <div class="aigc-split">
+    <div class="aigc-col penulis">
+      <div class="col-title" data-lang="id">Deklarasi Penulis (FEU)</div>
+      <div class="col-title" data-lang="en">Author Declaration (FEU)</div>
+      <div class="aigc-row"><span>🧠 HUMAN</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="60" step="5" oninput="updateAIGC('p',this)" style="width:70px"><span class="aigc-val" id="p-h">60%</span></div></div>
+      <div class="aigc-row"><span>🤝 HYBRID</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="30" step="5" oninput="updateAIGC('p',this,1)" style="width:70px"><span class="aigc-val" id="p-hy">30%</span></div></div>
+      <div class="aigc-row"><span>🤖 AIGC</span><div style="display:flex;align-items:center;gap:6px"><span class="aigc-val" id="p-ai">10%</span></div></div>
+      <div style="margin-top:8px;font-size:11px;color:var(--amber)" data-lang="id">Diisi oleh FEU (manusia) · pernyataan resmi penulis</div>
+      <div style="margin-top:8px;font-size:11px;color:var(--amber)" data-lang="en">Filled by FEU (human) · official author statement</div>
+    </div>
+    <div class="aigc-col lingua">
+      <div class="col-title" data-lang="id">Kesan Lingua (AI)</div>
+      <div class="col-title" data-lang="en">Lingua's Impression (AI)</div>
+      <div class="aigc-row"><span>🧠 HUMAN</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="55" step="5" oninput="updateAIGC('l',this)" style="width:70px"><span class="aigc-val" id="l-h">55%</span></div></div>
+      <div class="aigc-row"><span>🤝 HYBRID</span><div style="display:flex;align-items:center;gap:6px"><input type="range" min="0" max="100" value="35" step="5" oninput="updateAIGC('l',this,1)" style="width:70px"><span class="aigc-val" id="l-hy">35%</span></div></div>
+      <div class="aigc-row"><span>🤖 AIGC</span><div style="display:flex;align-items:center;gap:6px"><span class="aigc-val" id="l-ai">10%</span></div></div>
+      <div style="margin-top:8px;font-size:11px;color:#534AB7" data-lang="id">Estimasi Lingua dari pola teks · bukan self-report</div>
+      <div style="margin-top:8px;font-size:11px;color:#534AB7" data-lang="en">Lingua's estimate from text patterns · not self-report</div>
+    </div>
+  </div>
+  <div class="note-box" data-lang="id">Prinsip AIRT v4.1: menggunakan AI bukan plagiarisme. TIDAK MENGAKUI penggunaan AI adalah bentuk ketidakjujuran akademis yang baru.</div>
+  <div class="note-box" data-lang="en">AIRT v4.1 principle: using AI is not plagiarism. NOT DISCLOSING AI use is the new form of academic dishonesty.</div>
+</div>
+
+<!-- PANEL: COT -->
+<div id="panel-cot" class="panel">
+  <div class="section-banner" data-lang="id">[C4] Chain-of-Thought Transparency — Format yang Diperbaiki</div>
+  <div class="section-banner" data-lang="en">[C4] Chain-of-Thought Transparency — Improved Format</div>
+
+  <div class="note-box" data-lang="id">Format CoT v4.1 dirancang khusus untuk audit plagiarisme, bukan format generik. Setiap penilaian kritis wajib melewati 5 step ini.</div>
+  <div class="note-box" data-lang="en">CoT v4.1 format is specifically designed for plagiarism auditing, not a generic format. Every critical assessment must pass through these 5 steps.</div>
+
+  <table class="cot-table">
+    <tr>
+      <th style="width:150px">Step</th>
+      <th><span class="inline-id">Pertanyaan yang dijawab Lingua</span><span class="inline-en">Question answered by Lingua</span></th>
+    </tr>
+    <tr>
+      <td>KLAIM / CLAIM</td>
+      <td data-lang="id">Apa yang diklaim atau dinyatakan dalam bagian teks ini?</td>
+      <td data-lang="en">What is claimed or stated in this section of text?</td>
+    </tr>
+    <tr>
+      <td>SUMBER / SOURCE</td>
+      <td data-lang="id">Apa yang Lingua ketahui yang mirip atau relevan dari training data?</td>
+      <td data-lang="en">What does Lingua know that is similar or relevant from training data?</td>
+    </tr>
+    <tr>
+      <td>DELTA</td>
+      <td data-lang="id">Apa perbedaan signifikan antara klaim FEU dan sumber yang diketahui? Di mana letak transformasinya?</td>
+      <td data-lang="en">What is the significant difference between FEU's claim and known sources? Where is the transformation?</td>
+    </tr>
+    <tr>
+      <td>VERDIKT / VERDICT</td>
+      <td data-lang="id">Berdasarkan delta, apakah ini orisinal / parafrase / sintesis / reproduksi?</td>
+      <td data-lang="en">Based on the delta, is this original / paraphrase / synthesis / reproduction?</td>
+    </tr>
+    <tr>
+      <td>KEYAKINAN / CONFIDENCE</td>
+      <td data-lang="id">Seberapa yakin Lingua: Tinggi / Sedang / Rendah — dan mengapa?</td>
+      <td data-lang="en">How confident is Lingua: High / Medium / Low — and why?</td>
+    </tr>
+  </table>
+  <button class="action-btn" onclick="sendPrompt('Gunakan format Chain-of-Thought AIRT v4.1 (KLAIM→SUMBER→DELTA→VERDIKT→KEYAKINAN) untuk mengaudit bagian teks berikut:')">
+    <span class="inline-id">Aktifkan CoT Audit ↗</span>
+    <span class="inline-en">Activate CoT Audit ↗</span>
+  </button>
+</div>
+
+<!-- PANEL: AUDIT TEMPLATE -->
+<div id="panel-audit" class="panel">
+  <div class="section-banner gold" data-lang="id">Template Laporan Audit AIRT v4.1</div>
+  <div class="section-banner gold" data-lang="en">AIRT v4.1 Audit Report Template</div>
+
+  <div style="margin-bottom:10px">
+    <div class="section-banner navy" style="font-size:12px;margin-bottom:6px" data-lang="id">Identitas Dokumen</div>
+    <div class="section-banner navy" style="font-size:12px;margin-bottom:6px" data-lang="en">Document Identity</div>
+    <div class="field-grid">
+      <div class="field-key" data-lang="id">Judul</div>
+      <div class="field-key" data-lang="en">Title</div>
+      <div class="field-val"><input type="text" placeholder="[isi judul dokumen / document title]" style="width:100%;font-size:12px;border:none;background:transparent;color:var(--color-text)" /></div>
+      <div class="field-key">DOI / URL</div>
+      <div class="field-val"><input type="text" placeholder="[isi DOI atau URL]" style="width:100%;font-size:12px;border:none;background:transparent;color:var(--color-text)" /></div>
+      <div class="field-key">Novelty Level</div>
+      <div class="field-val">
+        <select style="font-size:12px;border:0.5px solid var(--color-border2);border-radius:4px;padding:2px 6px;background:white;color:var(--color-text)">
+          <option data-lang="id">— pilih level —</option>
+          <option data-lang="en">— select level —</option>
+          <option data-lang="id">Level 1 — Reproduksi</option>
+          <option data-lang="en">Level 1 — Reproduction</option>
+          <option data-lang="id">Level 2 — Parafrase</option>
+          <option data-lang="en">Level 2 — Paraphrase</option>
+          <option data-lang="id">Level 3 — Sintesis</option>
+          <option data-lang="en">Level 3 — Synthesis</option>
+          <option data-lang="id">Level 4 — Reinterpretasi</option>
+          <option data-lang="en">Level 4 — Reinterpretation</option>
+          <option data-lang="id">Level 5 — Kontribusi Orisinal</option>
+          <option data-lang="en">Level 5 — Original Contribution</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-banner navy" style="font-size:12px;margin-bottom:6px" data-lang="id">Skor Berbobot (Reproducible)</div>
+  <div class="section-banner navy" style="font-size:12px;margin-bottom:6px" data-lang="en">Weighted Score (Reproducible)</div>
+  <table class="score-table">
+    <tr>
+      <th><span class="inline-id">Dimensi + Rubrik</span><span class="inline-en">Dimension + Rubric</span></th>
+      <th style="width:70px"><span class="inline-id">Bobot</span><span class="inline-en">Weight</span></th>
+      <th style="width:70px"><span class="inline-id">Skor</span><span class="inline-en">Score</span></th>
+    </tr>
+    <tr>
+      <td>
+        <span class="inline-id">Novelty & Otentisitas</span><span class="inline-en">Novelty & Authenticity</span><br>
+        <span style="font-size:11px;color:var(--color-text2)">Lv5=3pt · Lv4=2.5 · Lv3=2 · Lv2=1 · Lv1=0</span>
+      </td>
+      <td>30%</td>
+      <td><input class="score-input" type="number" min="0" max="3" step="0.5" placeholder="0-3" oninput="calcScore()" id="s1"></td>
+    </tr>
+    <tr>
+      <td>
+        <span class="inline-id">Anti-Plagiasi 3 Lapis</span><span class="inline-en">3-Layer Anti-Plagiarism</span><br>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="id">0 flag=2.5pt · minor=1.5 · major=0</span>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="en">0 flags=2.5pt · minor=1.5 · major=0</span>
+      </td>
+      <td>25%</td>
+      <td><input class="score-input" type="number" min="0" max="2.5" step="0.5" placeholder="0-2.5" oninput="calcScore()" id="s2"></td>
+    </tr>
+    <tr>
+      <td>
+        <span class="inline-id">Koherensi Logika</span><span class="inline-en">Logic Coherence</span><br>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="id">Semua Ya=1.5 · Sebagian=1 · Tidak=0</span>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="en">All Yes=1.5 · Partial=1 · No=0</span>
+      </td>
+      <td>15%</td>
+      <td><input class="score-input" type="number" min="0" max="1.5" step="0.5" placeholder="0-1.5" oninput="calcScore()" id="s3"></td>
+    </tr>
+    <tr>
+      <td>
+        <span class="inline-id">Transparansi AIGC</span><span class="inline-en">AIGC Transparency</span><br>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="id">Deklarasi lengkap=1.5 · Sebagian=0.75</span>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="en">Full declaration=1.5 · Partial=0.75</span>
+      </td>
+      <td>15%</td>
+      <td><input class="score-input" type="number" min="0" max="1.5" step="0.25" placeholder="0-1.5" oninput="calcScore()" id="s4"></td>
+    </tr>
+    <tr>
+      <td>
+        <span class="inline-id">Integritas Kemanusiaan</span><span class="inline-en">Human Integrity</span><br>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="id">C1-C4 terpenuhi=1.5 · Sebagian=1 · Tidak=0</span>
+        <span style="font-size:11px;color:var(--color-text2)" data-lang="en">C1-C4 fulfilled=1.5 · Partial=1 · No=0</span>
+      </td>
+      <td>15%</td>
+      <td><input class="score-input" type="number" min="0" max="1.5" step="0.5" placeholder="0-1.5" oninput="calcScore()" id="s5"></td>
+    </tr>
+    <tr class="total-row">
+      <td><span class="inline-id">TOTAL SKOR</span><span class="inline-en">TOTAL SCORE</span></td>
+      <td>100%</td>
+      <td id="total-score" style="text-align:right;font-size:13px">—</td>
+    </tr>
+  </table>
+
+  <div class="section-banner navy" style="font-size:12px;margin-bottom:6px" data-lang="id">Status Final</div>
+  <div class="section-banner navy" style="font-size:12px;margin-bottom:6px" data-lang="en">Final Status</div>
+  <div class="status-grid">
+    <div class="status-btn status-clean" onclick="setStatus(this,'clean')" data-lang="id">🟢 CLEAN — tidak ditemukan indikasi plagiasi</div>
+    <div class="status-btn status-clean" onclick="setStatus(this,'clean')" data-lang="en">🟢 CLEAN — no plagiarism indicators found</div>
+    <div class="status-btn status-cond" onclick="setStatus(this,'cond')" data-lang="id">🟡 CONDITIONAL — perlu verifikasi/revisi minor</div>
+    <div class="status-btn status-cond" onclick="setStatus(this,'cond')" data-lang="en">🟡 CONDITIONAL — minor verification/revision needed</div>
+    <div class="status-btn status-flag" onclick="setStatus(this,'flag')" data-lang="id">🔴 FLAGGED — indikasi plagiasi serius</div>
+    <div class="status-btn status-flag" onclick="setStatus(this,'flag')" data-lang="en">🔴 FLAGGED — serious plagiarism indicators</div>
+    <div class="status-btn status-red" onclick="setStatus(this,'red')" data-lang="id">🛡 RED TEAM — terindikasi penyalahgunaan prompt</div>
+    <div class="status-btn status-red" onclick="setStatus(this,'red')" data-lang="en">🛡 RED TEAM — prompt abuse detected</div>
+  </div>
+
+  <button class="action-btn" onclick="sendPrompt('Jalankan audit AIRT v4.1 lengkap (A1-A4, B1-B5, C1-C4) dengan skor berbobot untuk dokumen berikut:')">
+    <span class="inline-id">Jalankan Audit Lengkap ↗</span>
+    <span class="inline-en">Run Full Audit ↗</span>
+  </button>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ===== LANG TOGGLE =====
+function setLang(lang) {
+  document.body.setAttribute('data-active-lang', lang);
+  document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+// ===== TAB SWITCHING =====
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const tabs = ['prompt', 'a1', 'a3', 'a4', 'cot', 'audit'];
+  const idx = tabs.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('.tab')[idx].classList.add('active');
+}
+
+// ===== AIGC SLIDERS =====
+var pSliders = [60, 30];
+var lSliders = [55, 35];
+function updateAIGC(side, el, idx) {
+  idx = idx || 0;
+  if (side === 'p') {
+    pSliders[idx] = parseInt(el.value);
+    var rem = 100 - pSliders[0] - pSliders[1];
+    if (rem < 0) rem = 0;
+    document.getElementById('p-h').textContent = pSliders[0] + '%';
+    document.getElementById('p-hy').textContent = pSliders[1] + '%';
+    document.getElementById('p-ai').textContent = rem + '%';
+  } else {
+    lSliders[idx] = parseInt(el.value);
+    var rem = 100 - lSliders[0] - lSliders[1];
+    if (rem < 0) rem = 0;
+    document.getElementById('l-h').textContent = lSliders[0] + '%';
+    document.getElementById('l-hy').textContent = lSliders[1] + '%';
+    document.getElementById('l-ai').textContent = rem + '%';
+  }
+}
+
+// ===== SCORE CALC =====
+function calcScore() {
+  var ids = ['s1', 's2', 's3', 's4', 's5'];
+  var total = 0;
+  var allFilled = true;
+  ids.forEach(function(id) {
+    var v = parseFloat(document.getElementById(id).value);
+    if (isNaN(v)) allFilled = false;
+    else total += v;
+  });
+  var el = document.getElementById('total-score');
+  el.textContent = allFilled ? total.toFixed(1) + ' / 10' : '—';
+}
+
+// ===== STATUS =====
+var selectedStatus = null;
+function setStatus(btn, key) {
+  document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('selected'));
+  // Select matching pair (ID + EN versions)
+  document.querySelectorAll('.status-btn.' + 'status-' + key).forEach(b => b.classList.add('selected'));
+  selectedStatus = key;
+}
+
+// ===== SEND PROMPT (placeholder) =====
+function sendPrompt(text) {
+  // In a Claude context this would trigger a prompt; standalone copy to clipboard
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      alert('Prompt copied to clipboard:\n\n' + text);
+    });
+  } else {
+    alert(text);
+  }
+}
+</script>
+</body>
+</html>
