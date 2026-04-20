@@ -50,6 +50,9 @@
   .p1 .pc-title{color:var(--teal-600);}.p2 .pc-title{color:var(--blue-600);}.p3 .pc-title{color:var(--amber-600);}.p4 .pc-title{color:var(--coral-600);}
   .pc-var{font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-block;}
   .p1 .pc-var{background:var(--teal-100);color:var(--teal-800);}.p2 .pc-var{background:var(--blue-100);color:var(--blue-800);}.p3 .pc-var{background:var(--amber-100);color:var(--amber-800);}.p4 .pc-var{background:var(--coral-100);color:var(--coral-800);}
+  .pc-badge-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .pc-doi-badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:3px;background:var(--gray-50);color:var(--gray-600);border:1px solid var(--gray-100);text-decoration:none;transition:background .15s,color .15s;}
+  .pc-doi-badge:hover{background:var(--purple-50);color:var(--purple-600);border-color:var(--purple-200);}
   .pc-arrow{position:absolute;right:16px;bottom:16px;font-size:14px;opacity:0.4;}
   .p1 .pc-arrow{color:var(--teal-600);}.p2 .pc-arrow{color:var(--blue-600);}.p3 .pc-arrow{color:var(--amber-600);}.p4 .pc-arrow{color:var(--coral-600);}
 
@@ -197,7 +200,13 @@
     <div class="pc-role">From Laggard to Dignity</div>
     <div class="pc-title id">6 masalah peradaban + bukti empiris + Grand Formula</div>
     <div class="pc-title en">6 civilisational problems + empirical evidence + Grand Formula</div>
-    <span class="pc-var">Consciousness</span>
+    <div class="pc-badge-row" style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span class="pc-var">Consciousness</span>
+      <span role="link" tabindex="0" onclick="event.stopPropagation();window.open('https://doi.org/10.5281/zenodo.19666723','_blank')" style="display:inline-flex;align-items:center;border-radius:4px;overflow:hidden;cursor:pointer;font-family:monospace;font-size:11px;font-weight:600;line-height:1;text-decoration:none;">
+        <span style="background:#1a1a2e;color:#fff;padding:3px 7px;">DOI</span>
+        <span style="background:#2563a8;color:#fff;padding:3px 9px;letter-spacing:0.01em;">10.5281/zenodo.19666723</span>
+      </span>
+    </div>
     <span class="pc-arrow">→</span>
   </a>
   <a class="paper-card p2" href="cho_series_complete.html">
