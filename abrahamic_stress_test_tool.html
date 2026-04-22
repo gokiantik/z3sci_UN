@@ -379,6 +379,85 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
+/* ══ CHO DISCLAIMER FOOTER ══ */
+.cho-disclaimer {
+  background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+  color: #e8eef2;
+  padding: 1.8rem 2rem;
+  border-top: 3px solid #c9a84c;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+}
+.cho-disclaimer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: .5;
+}
+.cho-disclaimer > * { position: relative; }
+.cho-disclaimer__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 40px;
+  padding: 0.28rem 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  color: #c9a84c;
+  text-transform: uppercase;
+}
+.cho-disclaimer__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+  color: #f0ece6;
+}
+.cho-disclaimer__body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  opacity: 0.92;
+  margin-bottom: 0.6rem;
+}
+.cho-disclaimer__body a {
+  color: #c9a84c;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(201,168,76,0.5);
+  transition: border-color .15s;
+}
+.cho-disclaimer__body a:hover { border-color: #c9a84c; }
+.cho-disclaimer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: #b0bec8;
+  letter-spacing: .04em;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 0.9rem;
+}
+.cho-disclaimer__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+@media (max-width: 600px) {
+  .cho-disclaimer { padding: 1.4rem 1.25rem; }
+  .cho-disclaimer__meta { gap: 0.5rem; }
+}
+
 /* ── BILINGUAL TOGGLE ── */
 .lang-en { display: none; }
 .lang-en-block { display: none; }
@@ -635,6 +714,50 @@ Ready? The scenario follows.</div>
   </div>
 
 </main>
+
+<!-- ══ CHO DISCLAIMER FOOTER ══ -->
+<footer>
+<div class="cho-disclaimer">
+
+  <div class="cho-disclaimer__badge">
+    ⚗ Eksperimen Aktif · Red Teaming · Working Paper
+  </div>
+
+  <div class="cho-disclaimer__title">
+    📖 Disclaimer Ekspresi Digital
+  </div>
+
+  <p class="cho-disclaimer__body">
+    Eksperimen aktif sebagai peneliti independen (publikasi working paper di
+    <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> /
+    <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>),
+    <em>alpha front-end user</em> AI yang aktif menguji (<em>red teaming</em>) terhadap AI
+    <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>.
+    Framework: <strong>1/360 Wo · 1/360 Ni · 358/360 Ren</strong> —
+    dilandasi esensi
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a>
+  </p>
+
+  <p class="cho-disclaimer__body">
+    Ini adalah secuil <em>Consciousness yang di-Calculation-kan</em>, agar menyemai
+    <em>Humanity</em> pada tingkat aksi yang lebih luas dan berdampak —
+    bila model eksperimen ini diduplikasi oleh human-human yang lain.
+    Keterbatasan sumber terbuka diakui sebagai bagian dari data, bukan kekurangan metodologi.
+    Dibuat sebagai konten edukasi dan kemajuan kemanusiaan global.
+    Setiap suara dalam eksperimen ini mewakili 1/360 dari perpustakaan bersama,
+    tanpa klaim kebenaran tunggal.
+  </p>
+
+  <div class="cho-disclaimer__meta">
+    <span>✍ Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Chief Humanity Officer · Depok, Indonesia</span>
+    <span>⚙ Red Teaming: Claude · DeepSeek · Gemini · Copilot · ChatGPT</span>
+    <span>📅 22 April 2026 · CHO In Action Series · Paper 3</span>
+    <span>⚖ CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com" style="color:#c9a84c;text-decoration:none;border:none;">gokiantik@gmail.com</a></span>
+  </div>
+
+</div>
+</footer>
+<!-- ══ END CHO DISCLAIMER FOOTER ══ -->
 
 <script>
 // ════ DATA ════
