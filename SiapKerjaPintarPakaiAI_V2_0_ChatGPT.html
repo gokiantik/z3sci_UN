@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLP — Siap Kerja Pakai AI</title>
+
+<style>
+  body { margin:0; font-family:Arial, sans-serif; color:#222; line-height:1.6; }
+  .section { padding:60px 20px; text-align:center; }
+  .container { max-width:800px; margin:auto; }
+  .soft { background:#fff7f0; }
+  .gray { background:#f4f6f8; }
+
+  h1 { font-size:32px; }
+  h2 { font-size:26px; }
+
+  .btn {
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 25px;
+    background:#ff7a18;
+    color:#fff;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+  }
+
+  .card {
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    margin-top:20px;
+  }
+
+  ol { text-align:left; max-width:600px; margin:20px auto; }
+
+  textarea {
+    width:100%;
+    max-width:700px;
+    height:200px;
+    margin-top:15px;
+    padding:10px;
+  }
+
+  .success { margin-top:20px; font-weight:bold; color:green; }
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="section soft">
+  <div class="container">
+    <h1>Mulai dari 1 Latihan Kecil</h1>
+    <p>Tidak perlu paham semua. Mulai dari satu langkah.</p>
+    <a href="#start" class="btn">👉 Mulai Sekarang</a>
+  </div>
+</section>
+
+<!-- START -->
+<section class="section" id="start">
+  <div class="container">
+
+    <h2>Latihan 1 — Perbaiki CV dengan AI</h2>
+
+    <div class="card">
+      <p><b>Upload CV (PDF) atau paste manual</b></p>
+
+      <input type="file" id="pdfUpload" accept="application/pdf">
+
+      <textarea id="cvText" placeholder="Atau paste CV di sini..."></textarea>
+
+      <button class="btn" onclick="processCV()">⚡ Proses CV</button>
+    </div>
+
+    <ol>
+      <li>Upload atau paste CV</li>
+      <li>Klik “Proses CV”</li>
+      <li>AI akan membantu memperbaiki</li>
+    </ol>
+
+    <p class="success" id="status"></p>
+
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="section gray">
+  <div class="container">
+    <h2>Langkah Selanjutnya</h2>
+    <p>Setelah CV, lanjutkan upgrade cara kerja & value diri.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <h2>Lanjutkan 7 Hari</h2>
+
+    <div class="card">
+      <p>✔ Pakai AI untuk kerja nyata</p>
+      <p>✔ Upgrade skill & value</p>
+      <p>✔ Siap kerja lebih cepat</p>
+    </div>
+
+    <a href="https://trakteer.id/gokiantik/post/gelindingkan-XewPC"
+       target="_blank"
+       class="btn">
+       🚀 Lanjutkan Panduan 7 Hari
+    </a>
+  </div>
+</section>
+
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+<script>
+document.getElementById('pdfUpload').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function() {
+    const typedarray = new Uint8Array(this.result);
+
+    pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+      let text = "";
+
+      let pages = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        pages.push(
+          pdf.getPage(i).then(function(page) {
+            return page.getTextContent().then(function(content) {
+              content.items.forEach(item => {
+                text += item.str + " ";
+              });
+            });
+          })
+        );
+      }
+
+      Promise.all(pages).then(() => {
+        document.getElementById("cvText").value = text;
+      });
+    });
+  };
+
+  reader.readAsArrayBuffer(file);
+});
+
+function processCV() {
+  const text = document.getElementById("cvText").value;
+
+  if (!text.trim()) {
+    alert("Masukkan CV dulu");
+    return;
+  }
+
+  const prompt = "Perbaiki CV berikut agar lebih profesional, jelas, dan menarik:\n\n" + text;
+
+  const url = "https://chat.openai.com/?q=" + encodeURIComponent(prompt);
+
+  window.open(url, "_blank");
+
+  document.getElementById("status").innerText =
+    "✔ CV diproses. Lihat hasil di tab baru.";
+}
+</script>
+
+</body>
+</html>
