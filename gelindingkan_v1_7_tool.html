@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perbaiki CV dengan AI — MLP Career Readiness</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3H0VDPS8H2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3H0VDPS8H2');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f7f4ef;
+    --accent: #d4522a;
+    --accent2: #1a3a5c;
+    --muted: #7a7570;
+    --card: #ffffff;
+    --success: #166534;
+    --success-bg: #dcfce7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 15%, rgba(212,82,42,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 85% 85%, rgba(26,58,92,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .wrap { max-width: 640px; margin: 0 auto; position: relative; }
+
+  .header { text-align: center; margin-bottom: 24px; animation: fadeUp 0.5s ease forwards; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent2);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.5; transform:scale(1.4); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(24px, 5vw, 30px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  h1 span { color: var(--accent); }
+  .sub { font-size: 14px; color: var(--muted); }
+
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(14px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 130px;
+    border: 1.5px solid #e0dbd3;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: #faf8f5;
+    resize: vertical;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  textarea:focus { border-color: var(--accent2); background: #fff; }
+  textarea::placeholder { color: #b0a89e; }
+
+  .btn-generate {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 16px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-generate:active { transform: translateY(0); }
+  .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .output-card { display: none; animation: fadeUp 0.4s ease forwards; }
+
+  .output-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+
+  .output-header h3 { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+
+  .btn-copy {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-copy:hover { background: #bbf7d0; }
+
+  .output-text {
+    background: #faf8f5;
+    border: 1.5px solid #e0dbd3;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--ink);
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  .ai-section { display: none; animation: fadeUp 0.4s ease 0.1s both; }
+
+  .ai-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+  }
+
+  .ai-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 10px;
+    background: #faf8f5;
+    border: 1.5px solid #e0dbd3;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .ai-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); transform: translateY(-2px); }
+  .ai-btn .emoji { font-size: 20px; }
+
+  .footer { text-align: center; font-size: 11px; color: var(--muted); margin-top: 20px; }
+  .footer a { color: var(--accent2); text-decoration: none; }
+
+  .copy-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .copy-toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="badge">MLP Career Readiness · v1.7</div>
+    <h1>Perbaiki CV Kamu<br>dengan <span>AI</span></h1>
+    <p class="sub">Masukkan pengalamanmu → dapat prompt siap pakai → paste ke AI pilihanmu</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card">
+    <p class="card-label">Step 1 — Ceritakan pengalamanmu</p>
+    <textarea id="inputText"
+      placeholder="Contoh: Saya bekerja di toko selama 2 tahun, melayani pelanggan dan mengatur stok barang..."></textarea>
+    <button class="btn-generate" id="generateBtn">✨ Generate Prompt AI</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card output-card" id="outputCard">
+    <div class="output-header">
+      <h3>Step 2 — Prompt siap digunakan</h3>
+      <button class="btn-copy" id="copyBtn">📋 Salin Prompt</button>
+    </div>
+    <div class="output-text" id="outputText"></div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card ai-section" id="aiSection">
+    <p class="ai-label">Step 3 — Pilih AI, paste prompt di sana</p>
+    <div class="ai-grid">
+      <button class="ai-btn" data-platform="chatgpt"><span class="emoji">🤖</span>ChatGPT</button>
+      <button class="ai-btn" data-platform="gemini"><span class="emoji">✨</span>Gemini</button>
+      <button class="ai-btn" data-platform="copilot"><span class="emoji">🪟</span>Copilot</button>
+      <button class="ai-btn" data-platform="claude"><span class="emoji">🧠</span>Claude</button>
+      <button class="ai-btn" data-platform="deepseek"><span class="emoji">🔍</span>DeepSeek</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://superherocafeinside.com" target="_blank">superherocafeinside.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://trakteer.id/gokiantik/post/gelindingkan-XewPC" target="_blank">Gelindingkan Series</a>
+    &nbsp;·&nbsp; v1.7
+  </div>
+
+</div>
+
+<div class="copy-toast" id="toast"></div>
+
+<script>
+(function() {
+
+  // ── TRACKING ─────────────────────────────────────────────────────
+  const params = new URLSearchParams(window.location.search);
+
+  const track = {
+    src: params.get("src") || "direct",
+    acc: params.get("acc") || "unknown",
+    exp: params.get("exp") || "none",
+    ver: params.get("ver") || "v1.7"
+  };
+
+  gtag('set', 'user_properties', {
+    traffic_source: track.src,
+    account:        track.acc,
+    experiment:     track.exp
+  });
+
+  // GA: halaman tool dibuka
+  gtag('event', 'tool_view', {
+    src: track.src,
+    acc: track.acc,
+    exp: track.exp,
+    ver: track.ver
+  });
+
+  console.log("GELINDINGKAN TOOL INIT:", track);
+
+  // ── GENERATE ──────────────────────────────────────────────────────
+  let generatedPrompt = "";
+
+  document.getElementById("generateBtn").addEventListener("click", function() {
+    const input = document.getElementById("inputText").value.trim();
+    if (!input) { alert("Isi dulu pengalamanmu ya!"); return; }
+
+    this.disabled = true;
+    this.textContent = "Memproses...";
+
+    // GA: user klik generate
+    gtag('event', 'prompt_generate', {
+      src:        track.src,
+      acc:        track.acc,
+      exp:        track.exp,
+      char_count: input.length
+    });
+
+    generatedPrompt =
+"Kamu adalah HR profesional berpengalaman.\n\n" +
+"Ubah pengalaman kerja berikut menjadi poin-poin CV yang kuat dan berbasis hasil nyata:\n\n" +
+"---\n" + input + "\n---\n\n" +
+"Panduan:\n" +
+"• Gunakan kata kerja aktif (mengelola, meningkatkan, mengoptimalkan)\n" +
+"• Tonjolkan dampak dan angka jika ada\n" +
+"• Relevan untuk rekrutmen modern\n" +
+"• Bahasa Indonesia profesional\n\n" +
+"Format output: poin-poin siap masuk CV.";
+
+    const btn = this;
+    setTimeout(function() {
+      document.getElementById("outputText").textContent = generatedPrompt;
+      document.getElementById("outputCard").style.display = "block";
+      document.getElementById("aiSection").style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "✨ Generate Ulang";
+      document.getElementById("outputCard").scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 400);
+  });
+
+  // ── COPY ──────────────────────────────────────────────────────────
+  document.getElementById("copyBtn").addEventListener("click", function() {
+    if (!generatedPrompt) return;
+
+    // GA: user salin prompt
+    gtag('event', 'prompt_copy', { src: track.src, acc: track.acc, exp: track.exp });
+
+    navigator.clipboard.writeText(generatedPrompt).then(function() {
+      showToast("✅ Prompt tersalin!");
+    }).catch(function() {
+      const el = document.createElement("textarea");
+      el.value = generatedPrompt;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      showToast("✅ Tersalin!");
+    });
+  });
+
+  // ── AI BUTTONS ────────────────────────────────────────────────────
+  const aiURLs = {
+    chatgpt:  "https://chat.openai.com/",
+    gemini:   "https://gemini.google.com/",
+    copilot:  "https://copilot.microsoft.com/",
+    claude:   "https://claude.ai/",
+    deepseek: "https://chat.deepseek.com/"
+  };
+
+  document.querySelectorAll(".ai-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      const platform = this.dataset.platform;
+      const url = aiURLs[platform];
+      if (!url) return;
+
+      // GA: AI mana yang dipilih — ini data riset A/B koko!
+      gtag('event', 'ai_platform_open', {
+        platform: platform,
+        src:      track.src,
+        acc:      track.acc,
+        exp:      track.exp
+      });
+
+      window.open(url, "_blank");
+      showToast("🚀 Paste prompt ke " + platform + "!");
+    });
+  });
+
+  // ── TOAST ─────────────────────────────────────────────────────────
+  function showToast(msg) {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(function() { toast.classList.remove("show"); }, 2500);
+  }
+
+})();
+</script>
+
+</body>
+</html>
