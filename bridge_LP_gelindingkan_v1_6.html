@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perbaiki CV dengan AI</title>
+
+<style>
+body {
+  font-family: Arial;
+  background:#f5f5f5;
+  text-align:center;
+  padding:30px;
+}
+
+.container {
+  max-width:700px;
+  margin:auto;
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+}
+
+textarea {
+  width:100%;
+  height:120px;
+  margin-top:10px;
+}
+
+button {
+  margin-top:10px;
+  padding:12px;
+  border:none;
+  background:#000;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.ai-buttons button {
+  background:#eaeaea;
+  color:#000;
+  margin:5px;
+}
+
+.output {
+  margin-top:20px;
+  text-align:left;
+  background:#fafafa;
+  padding:15px;
+  white-space:pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🚀 Perbaiki CV Anda dengan AI</h2>
+
+<textarea id="inputText" placeholder="Tuliskan pengalaman Anda..."></textarea>
+
+<br>
+
+<button onclick="generatePrompt()">Generate Prompt</button>
+
+<div id="output" class="output"></div>
+
+<div id="aiOptions" class="ai-buttons" style="display:none;">
+  <p>Pilih AI untuk digunakan:</p>
+
+  <button onclick="openAI('chatgpt')">ChatGPT</button>
+  <button onclick="openAI('gemini')">Gemini</button>
+  <button onclick="openAI('copilot')">Copilot</button>
+  <button onclick="openAI('claude')">Claude</button>
+  <button onclick="openAI('deepseek')">DeepSeek</button>
+</div>
+
+</div>
+
+<script>
+
+let generatedPrompt = "";
+
+function generatePrompt(){
+  let input = document.getElementById("inputText").value;
+
+  if(!input.trim()){
+    alert("Isi dulu ya");
+    return;
+  }
+
+  generatedPrompt =
+"Anda adalah HR.\n\n" +
+"Ubah ini jadi CV kuat berbasis hasil:\n\n" +
+input +
+"\n\nFokus pada dampak dan hasil nyata.";
+
+  document.getElementById("output").innerText = generatedPrompt;
+  document.getElementById("aiOptions").style.display = "block";
+}
+
+function openAI(platform){
+
+  let url = "";
+
+  if(platform === "chatgpt") url = "https://chat.openai.com/";
+  if(platform === "gemini") url = "https://gemini.google.com/";
+  if(platform === "copilot") url = "https://copilot.microsoft.com/";
+  if(platform === "claude") url = "https://claude.ai/";
+  if(platform === "deepseek") url = "https://chat.deepseek.com/";
+
+  window.open(url, "_blank");
+
+  alert("Prompt sudah disiapkan. Paste ke AI yang dipilih.");
+}
+
+</script>
+
+</body>
+</html>
