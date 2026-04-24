@@ -3,52 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perbaiki CV dengan AI</title>
+<title>Siap Kerja Pintar Pakai AI</title>
 
 <style>
 body {
-  font-family: Arial;
-  background:#f5f5f5;
-  text-align:center;
-  padding:30px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f5f5f5;
+  padding: 40px;
 }
-
 .container {
-  max-width:700px;
-  margin:auto;
-  background:#fff;
-  padding:30px;
-  border-radius:12px;
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
-
-textarea {
-  width:100%;
-  height:120px;
-  margin-top:10px;
+.button {
+  display: block;
+  margin: 15px 0;
+  padding: 14px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
 }
-
-button {
-  margin-top:10px;
-  padding:12px;
-  border:none;
-  background:#000;
-  color:#fff;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.ai-buttons button {
-  background:#eaeaea;
-  color:#000;
-  margin:5px;
-}
-
-.output {
-  margin-top:20px;
-  text-align:left;
-  background:#fafafa;
-  padding:15px;
-  white-space:pre-wrap;
+.small {
+  font-size: 13px;
+  color: #666;
+  margin-top: 15px;
 }
 </style>
 </head>
@@ -57,65 +42,74 @@ button {
 
 <div class="container">
 
-<h2>🚀 Perbaiki CV Anda dengan AI</h2>
+<h1>Siap Kerja Pintar Pakai AI</h1>
+<p>Bukan belajar lama. Langsung praktik.</p>
 
-<textarea id="inputText" placeholder="Tuliskan pengalaman Anda..."></textarea>
+<p class="small">
+Digunakan oleh kandidat untuk improve CV sebelum apply.
+</p>
 
+<p class="small">
+Cocok untuk:
+<br>• Fresh graduate
+<br>• Career switcher
+<br>• Yang sering gagal di screening awal
+</p>
+
+<a class="button" href="#" onclick="trackAndRedirect('shunda')">
+🚀 Mulai — Perbaiki CV dengan AI (±5 menit)
+</a>
+
+<p class="small">
+Gunakan ini sebelum melamar kerja.<br>
+Ulangi sesuai kebutuhan.
+</p>
+
+<p class="small">
+Dukung pengembangan & akses lanjutan:
 <br>
+<a href="https://trakteer.id/gokiantik/post/gelindingkan-XewPC" target="_blank">Gelindingkan Series</a>
+<br>
+<a href="https://trakteer.id/gokiantik/post/chapter-1-awakening-QZYw7" target="_blank">Street Smart Series</a>
+</p>
 
-<button onclick="generatePrompt()">Generate Prompt</button>
-
-<div id="output" class="output"></div>
-
-<div id="aiOptions" class="ai-buttons" style="display:none;">
-  <p>Pilih AI untuk digunakan:</p>
-
-  <button onclick="openAI('chatgpt')">ChatGPT</button>
-  <button onclick="openAI('gemini')">Gemini</button>
-  <button onclick="openAI('copilot')">Copilot</button>
-  <button onclick="openAI('claude')">Claude</button>
-  <button onclick="openAI('deepseek')">DeepSeek</button>
-</div>
+<p class="small">
+Bridge Version: v1.6 | Experiment Active
+</p>
 
 </div>
 
 <script>
+// Ambil parameter dari URL
+const params = new URLSearchParams(window.location.search);
 
-let generatedPrompt = "";
+// Logging dasar
+const data = {
+  src: params.get("src"),
+  acc: params.get("acc"),
+  exp: params.get("exp"),
+  ver: params.get("ver"),
+  time: new Date().toISOString()
+};
 
-function generatePrompt(){
-  let input = document.getElementById("inputText").value;
+console.log("TRACK:", data);
 
-  if(!input.trim()){
-    alert("Isi dulu ya");
-    return;
+// Redirect function
+function trackAndRedirect(target) {
+  let baseURL = "";
+
+  if (target === "shunda") {
+    baseURL = "https://shundadepok.com/cv redirect";
+  } else {
+    baseURL = "https://superherocafeinside.com/cv redirect";
   }
 
-  generatedPrompt =
-"Anda adalah HR.\n\n" +
-"Ubah ini jadi CV kuat berbasis hasil:\n\n" +
-input +
-"\n\nFokus pada dampak dan hasil nyata.";
+  const finalURL = baseURL + "?" + params.toString();
 
-  document.getElementById("output").innerText = generatedPrompt;
-  document.getElementById("aiOptions").style.display = "block";
+  console.log("REDIRECT TO:", finalURL);
+
+  window.location.href = finalURL;
 }
-
-function openAI(platform){
-
-  let url = "";
-
-  if(platform === "chatgpt") url = "https://chat.openai.com/";
-  if(platform === "gemini") url = "https://gemini.google.com/";
-  if(platform === "copilot") url = "https://copilot.microsoft.com/";
-  if(platform === "claude") url = "https://claude.ai/";
-  if(platform === "deepseek") url = "https://chat.deepseek.com/";
-
-  window.open(url, "_blank");
-
-  alert("Prompt sudah disiapkan. Paste ke AI yang dipilih.");
-}
-
 </script>
 
 </body>
