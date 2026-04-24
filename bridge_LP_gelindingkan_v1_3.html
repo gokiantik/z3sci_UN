@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siap Kerja Pintar Pakai AI</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 30px;
+  text-align: center;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #444;
+  line-height: 1.6;
+}
+
+.section {
+  margin-top: 30px;
+}
+
+.button {
+  display: block;
+  margin: 10px 0;
+  padding: 14px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.button.secondary {
+  background: #eaeaea;
+  color: #000;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.output {
+  margin-top: 20px;
+  text-align: left;
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 10px;
+  white-space: pre-wrap;
+}
+
+.loop {
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.small {
+  font-size: 13px;
+  color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<h1>Stop Belajar. Mulai Siap Kerja dengan AI.</h1>
+<p>Langsung praktik. Tanpa kursus panjang.</p>
+
+<!-- ENGINE -->
+<div class="section">
+<h3>🚀 Langsung Coba</h3>
+<p>Masukkan CV atau deskripsi pekerjaan Anda:</p>
+
+<textarea id="inputText" placeholder="Contoh: Saya melamar sebagai admin, pengalaman 2 tahun..."></textarea>
+
+<button class="button" onclick="generatePrompt()">Generate Prompt AI</button>
+
+<div id="output" class="output"></div>
+</div>
+
+<!-- ITERATION LOOP -->
+<div class="section loop">
+COBA → MELESET → PERBAIKI → ULANGI
+<br><br>
+<p class="small">
+Tidak harus langsung benar.<br>
+Semakin sering mencoba, semakin cepat Anda berkembang.
+</p>
+</div>
+
+<!-- ITERATION EXPLANATION -->
+<div class="section">
+<p class="small">
+Kalau hasil pertama belum bagus — itu normal.<br><br>
+
+Yang membedakan bukan siapa yang langsung benar,<br>
+tapi siapa yang mau mencoba lagi.<br><br>
+
+Di sini prosesnya:
+mencoba → meleset → perbaiki → ulangi.
+</p>
+</div>
+
+<!-- EXAMPLE OUTPUT -->
+<div class="section">
+<p class="small"><b>Contoh hasil yang lebih kuat:</b></p>
+
+<div class="output">
+Sebelum:
+"Admin selama 2 tahun, mengelola data."
+
+Sesudah:
+"Mengelola dan mengoptimalkan sistem data administrasi selama 2 tahun, meningkatkan efisiensi pencatatan sehingga lebih terstruktur dan mudah diakses."
+
+👉 Fokus pada dampak, bukan hanya tugas.
+</div>
+</div>
+
+<!-- ITERATION GUIDE -->
+<div class="section">
+<p class="small">
+Coba ulang dengan lebih spesifik:<br>
+• tambahkan angka<br>
+• tambahkan hasil kerja<br>
+• tambahkan konteks pekerjaan<br>
+</p>
+</div>
+
+<!-- BRIDGE TO V2 -->
+<div class="section">
+<p class="small">
+Sudah mulai paham?
+</p>
+
+<a class="button secondary" href="https://gokiantik.github.io/z3sci_UN/SKPPAI_V2_0_ChatGPT.html" target="_blank">
+Masuk ke Versi Lengkap (Eksplorasi Lanjutan)
+</a>
+</div>
+
+<!-- MLP -->
+<div class="section">
+<a class="button secondary" href="https://gokiantik.github.io/z3sci_UN/SiapKerjaPintarPakaiAI_V1_9.html" target="_blank">
+📘 Pahami Cara Kerja (MLP Career Readiness)
+</a>
+</div>
+
+<!-- LIGHTHOUSE -->
+<div class="section">
+<p class="small">
+Jika ini membantu, lanjutkan di:
+</p>
+
+<a class="button secondary" href="https://trakteer.id/gokiantik/post/gelindingkan-XewPC" target="_blank">
+Gelindingkan Series
+</a>
+
+<p class="small">
+Pengembangan berikutnya:
+Substack • Medium • Buy Me a Coffee
+</p>
+</div>
+
+<!-- FOOT -->
+<div class="section">
+<p class="small">
+Gunakan → ulangi → tingkatkan.<br>
+Bukan konsumsi. Tapi eksekusi.
+</p>
+</div>
+
+</div>
+
+<script>
+function generatePrompt() {
+  var input = document.getElementById("inputText").value;
+
+  if (!input.trim()) {
+    document.getElementById("output").innerText = "Silakan isi dulu input Anda.";
+    return;
+  }
+
+  var output =
+"Gunakan prompt ini di ChatGPT / AI lain:\n\n" +
+"Anda adalah HR yang menilai kandidat.\n\n" +
+"Tugas Anda:\n" +
+"Ubah deskripsi berikut menjadi CV yang lebih kuat, berbasis hasil, dan relevan dengan pekerjaan.\n\n" +
+"Input:\n" + input +
+"\n\nOutput harus:\n" +
+"- fokus pada dampak (bukan tugas)\n" +
+"- lebih spesifik dan jelas\n" +
+"- terasa profesional dan meyakinkan\n\n" +
+"Berikan versi final yang siap pakai.\n";
+
+  document.getElementById("output").innerText = output;
+}
+</script>
+
+</body>
+</html>
