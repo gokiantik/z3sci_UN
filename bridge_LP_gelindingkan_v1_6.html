@@ -22,13 +22,14 @@ body {
 }
 .button {
   display: block;
-  margin: 15px 0;
-  padding: 14px;
+  margin: 20px 0;
+  padding: 16px;
   background: black;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: bold;
+  font-size: 16px;
 }
 .small {
   font-size: 13px;
@@ -46,7 +47,7 @@ body {
 <p>Bukan belajar lama. Langsung praktik.</p>
 
 <p class="small">
-Sebagian kandidat gagal bukan karena skill—tapi cara menyampaikan CV.
+<strong>Sebagian kandidat gagal bukan karena skill—tapi cara menyampaikan CV.</strong>
 </p>
 
 <p class="small">
@@ -56,9 +57,13 @@ Cocok untuk:
 <br>• Yang sering gagal di screening awal
 </p>
 
-<a class="button" href="#" onclick="trackAndRedirect('shunda')">
+<a class="button" id="startBtn">
 🚀 Mulai — Upgrade CV Kamu (±5 menit dengan AI)
 </a>
+
+<p class="small">
+Tidak perlu daftar. Langsung coba.
+</p>
 
 <p class="small">
 Gunakan ini sebelum melamar kerja.<br>
@@ -74,42 +79,38 @@ Dukung pengembangan & akses lanjutan:
 </p>
 
 <p class="small">
-Bridge Version: v1.6 | Experiment Active
+Bridge Version: v1.6 | Stable Tracking Active
 </p>
 
 </div>
 
 <script>
-// Ambil parameter dari URL
+// Ambil parameter URL
 const params = new URLSearchParams(window.location.search);
 
-// Logging dasar
-const data = {
+// Logging awal
+console.log("TRACK INIT:", {
   src: params.get("src"),
   acc: params.get("acc"),
   exp: params.get("exp"),
   ver: params.get("ver"),
   time: new Date().toISOString()
-};
+});
 
-console.log("TRACK:", data);
+// Event listener tombol (SUPER STABLE)
+document.getElementById("startBtn").addEventListener("click", function() {
 
-// Redirect function
-function trackAndRedirect(target) {
-  let baseURL = "";
+  const baseURL = "https://shundadepok.com/cv";
 
-  if (target === "shunda") {
-    baseURL = "https://shundadepok.com/cv";
-  } else {
-    baseURL = "https://superherocafeinside.com/cv";
-  }
-
-  const finalURL = baseURL + "?" + params.toString();
+  const queryString = params.toString();
+  const finalURL = queryString ? baseURL + "?" + queryString : baseURL;
 
   console.log("REDIRECT TO:", finalURL);
 
-  window.location.href = finalURL;
-}
+  // Redirect langsung
+  window.location.assign(finalURL);
+
+});
 </script>
 
 </body>
