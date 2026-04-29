@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLP AIRT · Volunteer Peer Reviewer | FEU Side</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-navy: #0A1128;
+            --gold-primary: #C5A059;
+            --gold-light: #E8D5A3;
+            --gold-dim: rgba(197, 160, 89, 0.25);
+            --slate: #1E293B;
+            --slate-light: #334155;
+            --text-light: #E8EDF2;
+            --text-muted: #94A3B8;
+            --teal-accent: #2D9C7C;
+            --coral-warning: #D85A30;
+            --success-green: #2E7D64;
+            --border-glow: rgba(197, 160, 89, 0.25);
+            --card-bg: rgba(30, 41, 59, 0.6);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #0B132B 100%);
+            color: var(--text-light);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 17, 40, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glow);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--gold-primary);
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            background: var(--gold-dim);
+            border: 0.5px solid var(--gold-primary);
+            border-radius: 20px;
+            color: var(--gold-light);
+        }
+
+        .cho-link {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border: 0.5px solid var(--slate-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+
+        .cho-link:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        /* main container */
+        .container {
+            max-width: 880px;
+            margin: 2rem auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        /* hero section */
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-glow);
+            border-radius: 32px;
+            padding: 2rem 2rem 2rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 25px 40px -20px rgba(0,0,0,0.5);
+        }
+
+        .greeting {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 span {
+            color: var(--gold-primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .invite-text {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            border-left: 2px solid var(--gold-primary);
+            padding-left: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* DOI selection grid */
+        .doi-section {
+            margin: 2rem 0;
+        }
+
+        .section-caption {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-caption h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .random-badge {
+            font-size: 0.7rem;
+            background: rgba(45, 156, 124, 0.2);
+            border: 0.5px solid var(--teal-accent);
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            color: var(--teal-accent);
+        }
+
+        .doi-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .doi-option {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--slate-light);
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .doi-option:hover {
+            background: rgba(197, 160, 89, 0.08);
+            border-color: var(--gold-dim);
+            transform: translateX(6px);
+        }
+
+        .doi-radio {
+            accent-color: var(--gold-primary);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .doi-info {
+            flex: 1;
+        }
+
+        .doi-id {
+            font-family: 'Inter', monospace;
+            font-size: 0.7rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.3px;
+            margin-bottom: 0.2rem;
+        }
+
+        .doi-title {
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .doi-theme {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* form */
+        .review-form {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            padding: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        textarea, input {
+            width: 100%;
+            background: rgba(15, 25, 45, 0.8);
+            border: 1px solid var(--slate-light);
+            border-radius: 16px;
+            padding: 0.9rem 1.2rem;
+            color: var(--text-light);
+            font-family: 'Inter', monospace;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            resize: vertical;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 2px var(--gold-dim);
+        }
+
+        .row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.2rem 0;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            accent-color: var(--gold-primary);
+            transform: scale(1.1);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            text-transform: none;
+            letter-spacing: normal;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .btn-submit {
+            background: transparent;
+            border: 1.5px solid var(--gold-primary);
+            padding: 0.9rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: var(--gold-primary);
+            cursor: pointer;
+            transition: all 0.25s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold-primary);
+            color: var(--deep-navy);
+            box-shadow: 0 5px 18px rgba(197, 160, 89, 0.3);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border-top: 0.5px solid var(--slate-light);
+            padding-top: 2rem;
+        }
+
+        .cta-highlight {
+            background: rgba(197, 160, 89, 0.08);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: var(--gold-light);
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 0 1rem 2rem; }
+            .hero-card { padding: 1.5rem; }
+            .row-2col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo-area">
+        <div class="logo">MLP AIRT <span style="font-size:0.9rem;">⟡</span> Volunteer Peer Review</div>
+        <div class="badge">FEU Side · v4.5</div>
+    </div>
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/" class="cho-link" target="_blank">⎚ Chief Humanity Officer</a>
+</div>
+
+<div class="container">
+    <div class="hero-card">
+        <div class="greeting">⟡ Voluntary Red Teaming · Human-in-the-loop ⟡</div>
+        <h1>Menjembatani <span>Intensi Manusia (FEU)</span><br>menuju Solusi Nyata (BEU)</h1>
+        <div class="invite-text">
+            Saya <strong>Go Kian Tik (Mbah Hogi Bejo)</strong>, mengundang Anda menjadi <strong>Volunteer Peer Reviewer</strong> 
+            dalam kerangka <strong>MLP AIRT (Multi-Layer Perceptrons AI Red Teaming)</strong>. 
+            Bukan sekadar mengecek plagiarisme — ini adalah <strong>Red Teaming terhadap integritas ilmiah</strong>.
+            Anda memegang peran sentral sebagai validator akhir (Human‑in‑the‑loop).
+        </div>
+        <div class="signature">
+            “All systems (BEU) are downstream of human intention (FEU).”
+        </div>
+    </div>
+
+    <!-- Pilih DOI -->
+    <div class="doi-section">
+        <div class="section-caption">
+            <h2>📄 1. Pilih DOI yang beresonansi dengan riset Anda</h2>
+            <div class="random-badge">⚡ diambil acak dari repositori Zenodo</div>
+        </div>
+        <div class="doi-grid" id="doiGrid">
+            <!-- DOI list akan diisi dynamic via JS (simulasi acak dari Zenodo) -->
+        </div>
+    </div>
+
+    <!-- Form Review -->
+    <form id="volunteerReviewForm">
+        <div class="review-form">
+            <div class="form-group">
+                <label>✍️ Penilaian Manusia (Human validator)</label>
+                <textarea rows="4" id="humanComment" placeholder="Tulis komentar substantif Anda sebagai peer reviewer: apakah ada kejanggalan logika, potensi mosaik plagiarism, kejelasan deklarasi AIGC, orisinalitas ide? Perspektif Anda sangat penting karena Lingua (AI) hanyalah mediator probalistik, bukan hakim final." required></textarea>
+            </div>
+
+            <div class="row-2col">
+                <div class="form-group">
+                    <label>👤 Nama Lengkap</label>
+                    <input type="text" id="reviewerName" placeholder="Cantumkan nama profesional" required>
+                </div>
+                <div class="form-group">
+                    <label>📧 Email (untuk PDF hasil kolaborasi)</label>
+                    <input type="email" id="reviewerEmail" placeholder="email@institusi.anda" required>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="joinResearchInterest">
+                <label for="joinResearchInterest">✨ Saya tertarik untuk <strong>join research / kolaborasi</strong> pada tema yang resonan dengan DOI ini, atau mengajukan tema lain yang selaras dengan MLP AIRT framework.</label>
+            </div>
+
+            <div class="cta-highlight" style="margin-bottom: 1.5rem;">
+                💡 Setelah submit: <strong>AIRT Anti‑Plagiarism Prompt v4.5</strong> akan memproses DOI pilihan Anda, menggabungkan analisis AI dengan komentar Anda, lalu mengirimkan <strong>PDF analisis kolaborasi (AIRT + Human Review)</strong> ke email Anda. PDF ini mencantumkan nama Anda sebagai volunteer peer reviewer dan menjadi pintu menuju kolaborasi riset nyata.
+            </div>
+
+            <button type="submit" class="btn-submit">⟡ UJI DENGAN AIRT v4.5 & KIRIM PDF KOLABORASI ⟡</button>
+        </div>
+    </form>
+
+    <div class="footer-note">
+        <span>MLP AIRT · FEU ⇄ LINGUA (AI Mediator) ⇄ BEU</span><br>
+        Zì Zhǔ Zhě (自主者) · Superhero Café Inside · Integrity begins with transparency.<br>
+        © 2026 Go Kian Tik — CC BY-NC-ND 4.0
+    </div>
+</div>
+
+<script>
+    // Daftar 5 DOI (simulasi dari repositori Zenodo milik koko)
+    // nanti sistem bisa mengambil secara random dari Zenodo, untuk demo kita buat dataset fiksi tapi realistis
+    const DOI_REPOSITORY = [
+        {
+            id: "10.5281/zenodo.14653821",
+            title: "FEU-BEU Architecture: Human Intention as Downstream Governor for AGI Safety",
+            theme: "AI Ethics & Human Intention · Sovereignty Framework"
+        },
+        {
+            id: "10.5281/zenodo.14653822",
+            title: "Psychosocial Risk Mitigation in Digital Workspace: The Chief Humanity Officer Approach",
+            theme: "Psychosocial Risk, ILO Standards, Work Stress Reduction"
+        },
+        {
+            id: "10.5281/zenodo.14653823",
+            title: "AGI as a Bridge: From Meaning-Maker (FEU) to Real-World Solutions (BEU)",
+            theme: "AGI Bridge · FEU/BEU · Consciousness in AI Mediation"
+        },
+        {
+            id: "10.5281/zenodo.14653824",
+            title: "Algorithmic Safety Driving on Professional Networks: A Case Study of LinkedIn Sovereignty Metrics",
+            theme: "Algorithmic Safety · LinkedIn · Human-Centric Metrics"
+        },
+        {
+            id: "10.5281/zenodo.14653825",
+            title: "AIRT Anti-Plagiarism Prompt v4.5: Red Teaming for Academic Integrity and AIGC Transparency",
+            theme: "Anti-Plagiarism Prompt Engineering · Red Teaming · Zona Ruwet"
+        }
+    ];
+
+    // fungsi untuk render DOI ke grid
+    function renderDoiList() {
+        const container = document.getElementById('doiGrid');
+        if (!container) return;
+        container.innerHTML = '';
+        DOI_REPOSITORY.forEach((doi, idx) => {
+            const div = document.createElement('div');
+            div.className = 'doi-option';
+            div.setAttribute('data-doi-id', doi.id);
+            div.innerHTML = `
+                <input type="radio" name="selected_doi" value="${doi.id}" class="doi-radio" id="doi_${idx}" required>
+                <div class="doi-info">
+                    <div class="doi-id">DOI: ${doi.id}</div>
+                    <div class="doi-title">${doi.title}</div>
+                    <div class="doi-theme">🎯 ${doi.theme}</div>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+        // tambahkan required handling via js agar minimal satu radio dipilih
+        const radios = document.querySelectorAll('input[name="selected_doi"]');
+        radios.forEach(r => {
+            r.addEventListener('change', () => {
+                // optional: hapus required manual
+            });
+        });
+    }
+
+    // Fungsi submit: mengumpulkan data, validasi, lalu simulasi pengiriman ke engine AIRT + generate PDF (via alert & redirect ke tool AIRT v4.5)
+    function handleFormSubmit(event) {
+        event.preventDefault();
+
+        // ambil nilai
+        const selectedRadio = document.querySelector('input[name="selected_doi"]:checked');
+        if (!selectedRadio) {
+            alert('Silakan pilih satu DOI yang ingin Anda review.');
+            return;
+        }
+        const selectedDoiValue = selectedRadio.value;
+        const selectedDoiObj = DOI_REPOSITORY.find(d => d.id === selectedDoiValue);
+        const humanComment = document.getElementById('humanComment').value.trim();
+        if (!humanComment) {
+            alert('Harap tulis komentar / penilaian Anda sebagai volunteer reviewer.');
+            document.getElementById('humanComment').focus();
+            return;
+        }
+        const reviewerName = document.getElementById('reviewerName').value.trim();
+        const reviewerEmail = document.getElementById('reviewerEmail').value.trim();
+        if (!reviewerName || !reviewerEmail) {
+            alert('Nama dan email diperlukan untuk mengirim PDF hasil kolaborasi dan diskusi lebih lanjut.');
+            return;
+        }
+        const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+        if (!emailPattern.test(reviewerEmail)) {
+            alert('Mohon masukkan alamat email yang valid.');
+            return;
+        }
+        const joinInterest = document.getElementById('joinResearchInterest').checked;
+
+        // --- data yang akan dikirim ke backend / AIRT engine ---
+        const submissionData = {
+            selected_doi: selectedDoiValue,
+            doi_title: selectedDoiObj.title,
+            doi_theme: selectedDoiObj.theme,
+            human_comment: humanComment,
+            reviewer_name: reviewerName,
+            reviewer_email: reviewerEmail,
+            interest_to_collaborate: joinInterest,
+            timestamp: new Date().toISOString()
+        };
+
+        // Simpan ke localStorage sementara untuk bridging ke halaman AIRT v4.5 (sebagai session)
+        // Karena nanti volunteer akan diarahkan ke tool AIRT yang sudah ada (airt_anti_plagiarism_pro_v4_5_Full.html)
+        // Kita simpan data reviewer di sessionStorage supaya tool AIRT bisa membaca & menampilkan "Volunteer Mode"
+        sessionStorage.setItem('mlp_airt_volunteer_session', JSON.stringify(submissionData));
+        sessionStorage.setItem('airt_volunteer_active', 'true');
+
+        // Notifikasi ke user bahwa akan diarahkan ke halaman uji AIRT + setelah uji selesai PDF akan digenerate via email
+        const confirmationMsg = `Terima kasih, ${reviewerName}!\n\n` +
+            `✅ DOI terpilih: ${selectedDoiValue}\n` +
+            `📝 Komentar Anda akan dipadukan dengan analisis AIRT v4.5.\n` +
+            `🔗 Anda akan diarahkan ke alat uji Anti-Plagiarism AIRT v4.5 untuk menyelesaikan proses audit integritas.\n\n` +
+            `Setelah menjalankan audit di tool AIRT, PDF kolaborasi (AIRT + Komentar Manusia) akan dikirim ke ${reviewerEmail}.\n` +
+            `Kami juga akan menghubungi Anda via email untuk diskusi kolaborasi riset lebih lanjut jika Anda menyatakan minat.\n\n` +
+            `Apakah Anda siap diarahkan ke alat uji AIRT v4.5?`;
+
+        if (confirm(confirmationMsg)) {
+            // Redirect ke halaman AIRT Anti-Plagiarism Prompt v4.5 (file yang sudah koko buat)
+            // asumsikan file tersebut berada di path yang sama atau url absolut
+            const airtToolUrl = 'airt_anti_plagiarism_pro_v4_5_Full.html';
+            window.location.href = airtToolUrl;
+        }
+    }
+
+    // Inisialisasi ketika halaman siap
+    document.addEventListener('DOMContentLoaded', () => {
+        renderDoiList();
+
+        const form = document.getElementById('volunteerReviewForm');
+        if (form) {
+            form.addEventListener('submit', handleFormSubmit);
+        }
+
+        // tambahan nuansa FEU: sapaan random berdasarkan waktu
+        const heroCard = document.querySelector('.hero-card .invite-text');
+        if (heroCard) {
+            const hour = new Date().getHours();
+            let greeting = "";
+            if (hour < 12) greeting = "Selamat pagi,";
+            else if (hour < 18) greeting = "Selamat siang,";
+            else greeting = "Selamat malam,";
+            // sedikit sentuhan personal tanpa merusak teks existing
+            const originalHTML = heroCard.innerHTML;
+            if (!originalHTML.includes('Selamat')) {
+                heroCard.innerHTML = `<span style="color:var(--gold-light);">${greeting}</span> ${originalHTML}`;
+            }
+        }
+    });
+</script>
+</body>
+</html>
