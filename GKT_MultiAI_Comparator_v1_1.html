@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Multi-AI Response Comparator v1.1 — CHO Framework | GKT</title>
+<meta name="description" content="Bandingkan 5 respons AI (Claude, ChatGPT, Gemini, Copilot, DeepSeek) dalam satu tabulasi ringkasan. Bagian dari GKT Research Framework — CHO In Action.">
+<meta name="author" content="Go Kian Tik (Mbah Hogi Bejo™)">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1410;
+  --gold: #b8922a;
+  --gold-light: #e8c97a;
+  --gold-pale: #f7f0de;
+  --cream: #f7f3ec;
+  --parchment: #faf7f2;
+  --border: #d4c9b8;
+  --teal: #2d6b5e;
+  --teal-light: #e8f4f1;
+  --sage: #6b8c5c;
+  --navy: #1b3a5c;
+  --navy-light: #e8edf4;
+  --red: #a33a2a;
+  --red-light: #fdf0ee;
+
+  /* AI brand colors */
+  --claude: #d97a4a;
+  --chatgpt: #10a37f;
+  --gemini: #4285f4;
+  --copilot: #6264a7;
+  --deepseek: #e04040;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.6;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px -12px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+/* HEADER */
+header {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 1.75rem 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 3px solid var(--gold);
+  position: relative;
+}
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-bottom: 0.25rem;
+  color: var(--gold-light);
+}
+.header-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  color: rgba(232,201,122,0.75);
+  font-style: italic;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+header .subtitle {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* LANG TOGGLE */
+.lang-bar {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0;
+  background: rgba(255,255,255,0.06);
+  border-radius: 40px;
+  padding: 0.15rem;
+}
+.lang-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 0.3rem 1rem;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 40px;
+}
+.lang-btn.active { background: var(--gold); color: var(--ink); font-weight: 600; }
+.lang-btn:hover:not(.active) { color: var(--gold-light); }
+
+/* CROSSLINK */
+.crosslink-bar {
+  background: var(--navy-light);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 2rem;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.crosslink-bar a {
+  color: var(--navy);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  border: 1px solid var(--navy);
+  padding: 0.2rem 0.8rem;
+  border-radius: 30px;
+  transition: 0.2s;
+}
+.crosslink-bar a:hover { background: var(--navy); color: white; }
+.crosslink-label { color: #888; font-size: 0.78rem; font-style: italic; }
+
+.content { padding: 2rem; }
+
+/* SECTION TITLE */
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 1.75rem 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* INFO BOX */
+.info-box {
+  background: var(--teal-light);
+  border-left: 4px solid var(--teal);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-size: 0.88rem;
+}
+.info-box strong { color: var(--teal); }
+
+/* STEP INDICATOR */
+.steps-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+.step-item {
+  flex: 1;
+  min-width: 120px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  text-align: center;
+  transition: 0.2s;
+}
+.step-item .step-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.step-item.active-step {
+  background: var(--gold-pale);
+  border-color: var(--gold);
+}
+
+/* PROMPT DISPLAY */
+.prompt-display-card {
+  background: #fdfbf8;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.prompt-display-header {
+  background: var(--cream);
+  padding: 0.65rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.prompt-textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 1rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  background: #fefefc;
+  border: none;
+  outline: none;
+  resize: vertical;
+  color: var(--ink);
+}
+.prompt-textarea::placeholder { color: #c0b9af; }
+
+/* AI TABS */
+.ai-tab-bar {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  border-bottom: 2px solid var(--border);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ai-tab-bar::-webkit-scrollbar { display: none; }
+
+.ai-tab-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  padding: 0.65rem 1.25rem;
+  background: transparent;
+  border: 2px solid transparent;
+  border-bottom: none;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+  margin-bottom: -2px;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #888;
+}
+.ai-tab-btn .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  transition: 0.2s;
+}
+.ai-tab-btn.active .dot { opacity: 1; }
+.ai-tab-btn[data-ai="claude"] { --ai-color: var(--claude); }
+.ai-tab-btn[data-ai="chatgpt"] { --ai-color: var(--chatgpt); }
+.ai-tab-btn[data-ai="gemini"] { --ai-color: var(--gemini); }
+.ai-tab-btn[data-ai="copilot"] { --ai-color: var(--copilot); }
+.ai-tab-btn[data-ai="deepseek"] { --ai-color: var(--deepseek); }
+.ai-tab-btn.active {
+  background: white;
+  border-color: var(--border);
+  border-bottom-color: white;
+  color: var(--ai-color);
+  font-weight: 600;
+}
+.ai-tab-btn .fill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ai-color);
+  display: none;
+}
+.ai-tab-btn.filled .fill-dot { display: inline-block; }
+
+.ai-tab-panel { display: none; }
+.ai-tab-panel.active { display: block; }
+
+/* RESPONSE INPUT */
+.response-area {
+  background: #fdfdfc;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 1rem 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.ai-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.ai-name-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  border: 1.5px solid;
+  font-weight: 600;
+}
+.ai-name-badge.claude { color: var(--claude); border-color: var(--claude); background: #fdf4ef; }
+.ai-name-badge.chatgpt { color: var(--chatgpt); border-color: var(--chatgpt); background: #edfaf5; }
+.ai-name-badge.gemini { color: var(--gemini); border-color: var(--gemini); background: #eef4fd; }
+.ai-name-badge.copilot { color: var(--copilot); border-color: var(--copilot); background: #f2f2f9; }
+.ai-name-badge.deepseek { color: var(--deepseek); border-color: var(--deepseek); background: #fdf0f0; }
+
+.response-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  outline: none;
+  resize: vertical;
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+.response-textarea:focus { border-color: var(--gold); }
+.response-textarea::placeholder { color: #c8c2b8; font-style: italic; }
+.char-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #aaa;
+  text-align: right;
+  margin-top: 0.3rem;
+}
+
+/* DIMENSIONS */
+.dimensions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.dim-item {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.85rem;
+}
+.dim-item:hover { border-color: var(--gold); background: var(--gold-pale); }
+.dim-item input[type="checkbox"] { accent-color: var(--gold); width: 14px; height: 14px; cursor: pointer; }
+.dim-item label { cursor: pointer; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 1px; }
+
+.custom-dim-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.custom-dim-input {
+  flex: 1;
+  min-width: 180px;
+  padding: 0.5rem 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  outline: none;
+  background: white;
+  transition: border-color 0.2s;
+}
+.custom-dim-input:focus { border-color: var(--gold); }
+.btn-add-dim {
+  background: var(--ink);
+  color: var(--gold-light);
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.2s;
+}
+.btn-add-dim:hover { background: #2d2520; }
+
+.custom-dims-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.custom-dim-tag {
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  color: var(--ink);
+  padding: 0.25rem 0.75rem;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.custom-dim-tag button {
+  background: none;
+  border: none;
+  color: var(--red);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+}
+
+/* MAIN ACTION BUTTONS */
+.action-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--gold-light);
+  border: none;
+  padding: 0.75rem 2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 40px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-primary:hover { background: #2d2520; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  border-radius: 40px;
+  transition: 0.2s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.btn-export {
+  background: var(--teal);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  border-radius: 40px;
+  transition: 0.2s;
+}
+.btn-export:hover { background: #245548; }
+
+/* COMPARISON TABLE */
+#comparison-section { display: none; }
+#comparison-section.visible { display: block; }
+
+.comparison-header-bar {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.comparison-header-bar h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+}
+.comparison-header-bar .meta {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+  font-family: 'DM Mono', monospace;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 1rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.comparison-table th {
+  padding: 0.75rem 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+}
+.comparison-table th.dim-col { color: var(--gold); text-align: left; min-width: 140px; }
+.comparison-table th.ai-col {
+  text-align: center;
+  min-width: 140px;
+  border-left: 1px solid var(--border);
+}
+.comparison-table th.ai-col.claude { color: var(--claude); }
+.comparison-table th.ai-col.chatgpt { color: var(--chatgpt); }
+.comparison-table th.ai-col.gemini { color: var(--gemini); }
+.comparison-table th.ai-col.copilot { color: var(--copilot); }
+.comparison-table th.ai-col.deepseek { color: var(--deepseek); }
+
+.comparison-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #ede8e0;
+  vertical-align: top;
+}
+.comparison-table td.dim-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #888;
+  text-transform: uppercase;
+  background: #fafaf8;
+  white-space: nowrap;
+}
+.comparison-table td.cell-value {
+  text-align: center;
+  border-left: 1px solid #ede8e0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.comparison-table tr:hover td { background: #fdf9f4; }
+.comparison-table tr:last-child td { border-bottom: none; }
+
+/* RATING DISPLAY */
+.rating-stars { color: var(--gold); letter-spacing: 1px; font-size: 13px; }
+.rating-empty { color: #ddd; }
+.score-pill {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+.score-high { background: #e8f5e9; color: #2e7d32; }
+.score-mid { background: #fff8e1; color: #f57f17; }
+.score-low { background: #fce4e1; color: #b71c1c; }
+
+.word-count-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #666;
+}
+
+.tone-tag {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 20px;
+  font-size: 10px;
+  background: var(--navy-light);
+  color: var(--navy);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.5px;
+}
+
+/* WINNER BADGE */
+.winner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* NARRATIVE SUMMARY */
+.narrative-card {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.narrative-card::before {
+  content: '❝';
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-size: 5rem;
+  color: rgba(184,146,42,0.1);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+.narrative-card h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.narrative-card p {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: rgba(247,243,236,0.9);
+  position: relative;
+  z-index: 1;
+}
+
+/* SCORE SUMMARY ROW */
+.score-summary-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.score-card {
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: 0.2s;
+  cursor: default;
+}
+.score-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.score-card .ai-title {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+}
+.score-card .total-score {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.score-card .score-label {
+  font-size: 0.72rem;
+  color: #aaa;
+  margin-top: 0.25rem;
+}
+.score-card.rank-1 { background: var(--gold-pale); border-color: var(--gold); }
+.score-card.rank-1 .total-score { color: var(--gold); }
+.score-card.rank-2 { background: #f0f0f0; border-color: #bbb; }
+.score-card.rank-2 .total-score { color: #666; }
+.score-card.rank-other { background: var(--cream); border-color: var(--border); }
+.score-card.rank-other .total-score { color: #999; }
+
+.score-card.claude { background: #fdf4ef; }
+.score-card.chatgpt { background: #edfaf5; }
+.score-card.gemini { background: #eef4fd; }
+.score-card.copilot { background: #f2f2f9; }
+.score-card.deepseek { background: #fdf0f0; }
+
+/* RATING INPUT */
+.rating-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+.rating-input-row label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #888;
+  min-width: 100px;
+}
+.star-rate {
+  display: flex;
+  gap: 0.2rem;
+}
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+.star-btn.active, .star-btn:hover { color: var(--gold); }
+.star-btn:hover ~ .star-btn { color: #ddd !important; }
+
+/* TONE SELECTOR */
+.tone-select {
+  padding: 0.35rem 0.75rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  outline: none;
+  background: white;
+}
+
+/* EXPORT BUTTONS */
+.export-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* PROGRESS BAR */
+.progress-bar-wrap {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.progress-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.progress-track {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 100px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+.progress-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.ai-indicator-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.ai-dot-indicator {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: white;
+  transition: 0.2s;
+}
+.ai-dot-indicator.filled { border-color: transparent; }
+.ai-dot-indicator.filled.claude { background: var(--claude); }
+.ai-dot-indicator.filled.chatgpt { background: var(--chatgpt); }
+.ai-dot-indicator.filled.gemini { background: var(--gemini); }
+.ai-dot-indicator.filled.copilot { background: var(--copilot); }
+.ai-dot-indicator.filled.deepseek { background: var(--deepseek); }
+
+/* EMPTY STATE */
+.empty-cell { color: #ccc; font-style: italic; font-size: 0.8rem; }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.3);
+  padding: 1.25rem 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  letter-spacing: 0.5px;
+}
+footer a { color: var(--gold); text-decoration: none; }
+
+/* PRINT STYLES */
+@media print {
+  body { background: white; padding: 0; }
+  .container { box-shadow: none; border-radius: 0; }
+  header, .crosslink-bar, .content > *:not(#comparison-section), .action-row, .export-row { display: none !important; }
+  #comparison-section { display: block !important; }
+  .comparison-header-bar { background: #1a1410 !important; -webkit-print-color-adjust: exact; }
+}
+
+@media (max-width: 640px) {
+  .score-summary-row { grid-template-columns: repeat(2, 1fr); }
+  .steps-row .step-item { min-width: 80px; font-size: 0.72rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('id')">ID</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+  <h1>MULTI-AI RESPONSE COMPARATOR</h1>
+  <div class="header-tagline" id="h-tagline">Bandingkan 5 AI dalam satu tabulasi ringkasan · CHO Framework</div>
+  <div class="subtitle">v1.1 · Go Kian Tik (Mbah Hogi Bejo™) · Z3SCI · 自主者</div>
+</header>
+
+<!-- CROSSLINK -->
+<div class="crosslink-bar">
+  <span class="crosslink-label" id="xl-label">Terintegrasi dengan:</span>
+  <a href="GKT_Asisten_Riset_V2_3.html">↩ GKT Research Assistant</a>
+  <a href="DeepSeek_SLR_WAGHY_v2_2.html">↩ DeepSeek SLR Tool</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- INFO BOX -->
+  <div class="info-box" id="info-main">
+    <strong id="info-title">Cara Pakai:</strong>
+    <span id="info-body"> Isi prompt yang dipakai → masukkan respons masing-masing AI → pilih dimensi perbandingan → klik <em>Generate Comparison</em>.</span>
+  </div>
+
+  <!-- STEP INDICATOR -->
+  <div class="steps-row">
+    <div class="step-item active-step" id="step-1">
+      <span class="step-num">1</span>
+      <span id="s1-lbl">Tulis Prompt</span>
+    </div>
+    <div class="step-item" id="step-2">
+      <span class="step-num">2</span>
+      <span id="s2-lbl">Input 5 Respons</span>
+    </div>
+    <div class="step-item" id="step-3">
+      <span class="step-num">3</span>
+      <span id="s3-lbl">Pilih Dimensi</span>
+    </div>
+    <div class="step-item" id="step-4">
+      <span class="step-num">4</span>
+      <span id="s4-lbl">Generate & Export</span>
+    </div>
+  </div>
+
+  <!-- STEP 1: PROMPT -->
+  <div class="section-title" id="st-prompt">PROMPT YANG DIGUNAKAN</div>
+  <div class="prompt-display-card">
+    <div class="prompt-display-header">
+      <span id="ph-label">TEMPEL ATAU KETIK PROMPT YANG DIKIRIM KE SEMUA AI</span>
+    </div>
+    <textarea class="prompt-textarea" id="prompt-input" placeholder="Ketik atau tempel prompt di sini…" oninput="updatePromptCount()"></textarea>
+    <div style="padding:0.3rem 1.25rem 0.75rem; display:flex; justify-content:flex-end;">
+      <span class="char-count" id="prompt-count">0 kata</span>
+    </div>
+  </div>
+
+  <!-- STEP 2: AI RESPONSES -->
+  <div class="section-title" id="st-responses">RESPONS 5 AI</div>
+
+  <!-- Progress -->
+  <div class="progress-bar-wrap">
+    <span class="progress-label" id="prog-label">PROGRES INPUT</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="ai-indicator-row">
+      <div class="ai-dot-indicator claude" id="dot-claude" title="Claude"></div>
+      <div class="ai-dot-indicator chatgpt" id="dot-chatgpt" title="ChatGPT"></div>
+      <div class="ai-dot-indicator gemini" id="dot-gemini" title="Gemini"></div>
+      <div class="ai-dot-indicator copilot" id="dot-copilot" title="Copilot"></div>
+      <div class="ai-dot-indicator deepseek" id="dot-deepseek" title="DeepSeek"></div>
+    </div>
+    <span class="progress-count" id="progress-count">0/5</span>
+  </div>
+
+  <!-- AI TABS -->
+  <div class="ai-tab-bar">
+    <button class="ai-tab-btn active" data-ai="claude" onclick="switchAITab('claude', this)">
+      <div class="dot"></div> <span>CLAUDE</span> <div class="fill-dot"></div>
+    </button>
+    <button class="ai-tab-btn" data-ai="chatgpt" onclick="switchAITab('chatgpt', this)">
+      <div class="dot"></div> <span>CHATGPT</span> <div class="fill-dot"></div>
+    </button>
+    <button class="ai-tab-btn" data-ai="gemini" onclick="switchAITab('gemini', this)">
+      <div class="dot"></div> <span>GEMINI</span> <div class="fill-dot"></div>
+    </button>
+    <button class="ai-tab-btn" data-ai="copilot" onclick="switchAITab('copilot', this)">
+      <div class="dot"></div> <span>COPILOT</span> <div class="fill-dot"></div>
+    </button>
+    <button class="ai-tab-btn" data-ai="deepseek" onclick="switchAITab('deepseek', this)">
+      <div class="dot"></div> <span>DEEPSEEK</span> <div class="fill-dot"></div>
+    </button>
+  </div>
+
+  <!-- AI Panels -->
+  <div id="panel-claude" class="ai-tab-panel active">
+    <div class="response-area">
+      <div class="ai-label-row">
+        <span class="ai-name-badge claude">● CLAUDE</span>
+        <span class="char-count" id="count-claude">0 kata</span>
+      </div>
+      <textarea class="response-textarea" id="resp-claude" placeholder="Tempel respons Claude di sini…" oninput="updateCount('claude')"></textarea>
+      <div class="rating-input-row">
+        <label id="r-clarity">KEJELASAN</label>
+        <div class="star-rate" id="stars-claude-clarity" data-ai="claude" data-dim="clarity" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('claude','clarity',1)">★</button>
+          <button class="star-btn" onclick="setRating('claude','clarity',2)">★</button>
+          <button class="star-btn" onclick="setRating('claude','clarity',3)">★</button>
+          <button class="star-btn" onclick="setRating('claude','clarity',4)">★</button>
+          <button class="star-btn" onclick="setRating('claude','clarity',5)">★</button>
+        </div>
+        <label id="r-depth" style="margin-left:1rem">KEDALAMAN</label>
+        <div class="star-rate" id="stars-claude-depth" data-ai="claude" data-dim="depth" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('claude','depth',1)">★</button>
+          <button class="star-btn" onclick="setRating('claude','depth',2)">★</button>
+          <button class="star-btn" onclick="setRating('claude','depth',3)">★</button>
+          <button class="star-btn" onclick="setRating('claude','depth',4)">★</button>
+          <button class="star-btn" onclick="setRating('claude','depth',5)">★</button>
+        </div>
+      </div>
+      <div class="rating-input-row">
+        <label id="r-tone-label">TONE</label>
+        <select class="tone-select" id="tone-claude">
+          <option value="">— pilih —</option>
+          <option value="Akademik">Akademik</option>
+          <option value="Teknis">Teknis</option>
+          <option value="Naratif">Naratif</option>
+          <option value="Kritis">Kritis</option>
+          <option value="Asertif">Asertif</option>
+          <option value="Diplomatik">Diplomatik</option>
+          <option value="Kreatif">Kreatif</option>
+          <option value="Informatif">Informatif</option>
+        </select>
+      </div>
+      <div class="rating-input-row">
+        <label>KEUNIKAN</label>
+        <div class="star-rate" id="stars-claude-unique" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('claude','unique',1)">★</button>
+          <button class="star-btn" onclick="setRating('claude','unique',2)">★</button>
+          <button class="star-btn" onclick="setRating('claude','unique',3)">★</button>
+          <button class="star-btn" onclick="setRating('claude','unique',4)">★</button>
+          <button class="star-btn" onclick="setRating('claude','unique',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">ACTIONABLE</label>
+        <div class="star-rate" id="stars-claude-actionable" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('claude','actionable',1)">★</button>
+          <button class="star-btn" onclick="setRating('claude','actionable',2)">★</button>
+          <button class="star-btn" onclick="setRating('claude','actionable',3)">★</button>
+          <button class="star-btn" onclick="setRating('claude','actionable',4)">★</button>
+          <button class="star-btn" onclick="setRating('claude','actionable',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">RELEVANSI</label>
+        <div class="star-rate" id="stars-claude-relevance" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('claude','relevance',1)">★</button>
+          <button class="star-btn" onclick="setRating('claude','relevance',2)">★</button>
+          <button class="star-btn" onclick="setRating('claude','relevance',3)">★</button>
+          <button class="star-btn" onclick="setRating('claude','relevance',4)">★</button>
+          <button class="star-btn" onclick="setRating('claude','relevance',5)">★</button>
+        </div>
+      </div>
+  <div id="panel-chatgpt" class="ai-tab-panel">
+    <div class="response-area">
+      <div class="ai-label-row">
+        <span class="ai-name-badge chatgpt">● CHATGPT</span>
+        <span class="char-count" id="count-chatgpt">0 kata</span>
+      </div>
+      <textarea class="response-textarea" id="resp-chatgpt" placeholder="Tempel respons ChatGPT di sini…" oninput="updateCount('chatgpt')"></textarea>
+      <div class="rating-input-row">
+        <label>KEJELASAN</label>
+        <div class="star-rate" id="stars-chatgpt-clarity" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('chatgpt','clarity',1)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','clarity',2)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','clarity',3)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','clarity',4)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','clarity',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">KEDALAMAN</label>
+        <div class="star-rate" id="stars-chatgpt-depth" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('chatgpt','depth',1)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','depth',2)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','depth',3)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','depth',4)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','depth',5)">★</button>
+        </div>
+      </div>
+      <div class="rating-input-row">
+        <label>TONE</label>
+        <select class="tone-select" id="tone-chatgpt">
+          <option value="">— pilih —</option>
+          <option value="Akademik">Akademik</option>
+          <option value="Teknis">Teknis</option>
+          <option value="Naratif">Naratif</option>
+          <option value="Kritis">Kritis</option>
+          <option value="Asertif">Asertif</option>
+          <option value="Diplomatik">Diplomatik</option>
+          <option value="Kreatif">Kreatif</option>
+          <option value="Informatif">Informatif</option>
+        </select></div>
+      <div class="rating-input-row">
+        <label>KEUNIKAN</label>
+        <div class="star-rate" id="stars-chatgpt-unique" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('chatgpt','unique',1)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','unique',2)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','unique',3)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','unique',4)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','unique',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">ACTIONABLE</label>
+        <div class="star-rate" id="stars-chatgpt-actionable" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('chatgpt','actionable',1)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','actionable',2)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','actionable',3)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','actionable',4)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','actionable',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">RELEVANSI</label>
+        <div class="star-rate" id="stars-chatgpt-relevance" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('chatgpt','relevance',1)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','relevance',2)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','relevance',3)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','relevance',4)">★</button>
+          <button class="star-btn" onclick="setRating('chatgpt','relevance',5)">★</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gemini Panel -->
+  <div id="panel-gemini" class="ai-tab-panel">
+    <div class="response-area">
+      <div class="ai-label-row">
+        <span class="ai-name-badge gemini">● GEMINI</span>
+        <span class="char-count" id="count-gemini">0 kata</span>
+      </div>
+      <textarea class="response-textarea" id="resp-gemini" placeholder="Tempel respons Gemini di sini…" oninput="updateCount('gemini')"></textarea>
+      <div class="rating-input-row">
+        <label>KEJELASAN</label>
+        <div class="star-rate" id="stars-gemini-clarity" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('gemini','clarity',1)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','clarity',2)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','clarity',3)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','clarity',4)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','clarity',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">KEDALAMAN</label>
+        <div class="star-rate" id="stars-gemini-depth" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('gemini','depth',1)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','depth',2)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','depth',3)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','depth',4)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','depth',5)">★</button>
+        </div>
+      </div>
+      <div class="rating-input-row">
+        <label>TONE</label>
+        <select class="tone-select" id="tone-gemini">
+          <option value="">— pilih —</option>
+          <option value="Akademik">Akademik</option>
+          <option value="Teknis">Teknis</option>
+          <option value="Naratif">Naratif</option>
+          <option value="Kritis">Kritis</option>
+          <option value="Asertif">Asertif</option>
+          <option value="Diplomatik">Diplomatik</option>
+          <option value="Kreatif">Kreatif</option>
+          <option value="Informatif">Informatif</option>
+        </select></div>
+      <div class="rating-input-row">
+        <label>KEUNIKAN</label>
+        <div class="star-rate" id="stars-gemini-unique" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('gemini','unique',1)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','unique',2)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','unique',3)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','unique',4)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','unique',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">ACTIONABLE</label>
+        <div class="star-rate" id="stars-gemini-actionable" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('gemini','actionable',1)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','actionable',2)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','actionable',3)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','actionable',4)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','actionable',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">RELEVANSI</label>
+        <div class="star-rate" id="stars-gemini-relevance" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('gemini','relevance',1)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','relevance',2)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','relevance',3)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','relevance',4)">★</button>
+          <button class="star-btn" onclick="setRating('gemini','relevance',5)">★</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copilot Panel -->
+  <div id="panel-copilot" class="ai-tab-panel">
+    <div class="response-area">
+      <div class="ai-label-row">
+        <span class="ai-name-badge copilot">● COPILOT</span>
+        <span class="char-count" id="count-copilot">0 kata</span>
+      </div>
+      <textarea class="response-textarea" id="resp-copilot" placeholder="Tempel respons Copilot di sini…" oninput="updateCount('copilot')"></textarea>
+      <div class="rating-input-row">
+        <label>KEJELASAN</label>
+        <div class="star-rate" id="stars-copilot-clarity" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('copilot','clarity',1)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','clarity',2)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','clarity',3)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','clarity',4)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','clarity',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">KEDALAMAN</label>
+        <div class="star-rate" id="stars-copilot-depth" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('copilot','depth',1)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','depth',2)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','depth',3)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','depth',4)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','depth',5)">★</button>
+        </div>
+      </div>
+      <div class="rating-input-row">
+        <label>TONE</label>
+        <select class="tone-select" id="tone-copilot">
+          <option value="">— pilih —</option>
+          <option value="Akademik">Akademik</option>
+          <option value="Teknis">Teknis</option>
+          <option value="Naratif">Naratif</option>
+          <option value="Kritis">Kritis</option>
+          <option value="Asertif">Asertif</option>
+          <option value="Diplomatik">Diplomatik</option>
+          <option value="Kreatif">Kreatif</option>
+          <option value="Informatif">Informatif</option>
+        </select></div>
+      <div class="rating-input-row">
+        <label>KEUNIKAN</label>
+        <div class="star-rate" id="stars-copilot-unique" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('copilot','unique',1)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','unique',2)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','unique',3)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','unique',4)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','unique',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">ACTIONABLE</label>
+        <div class="star-rate" id="stars-copilot-actionable" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('copilot','actionable',1)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','actionable',2)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','actionable',3)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','actionable',4)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','actionable',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">RELEVANSI</label>
+        <div class="star-rate" id="stars-copilot-relevance" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('copilot','relevance',1)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','relevance',2)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','relevance',3)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','relevance',4)">★</button>
+          <button class="star-btn" onclick="setRating('copilot','relevance',5)">★</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DeepSeek Panel -->
+  <div id="panel-deepseek" class="ai-tab-panel">
+    <div class="response-area">
+      <div class="ai-label-row">
+        <span class="ai-name-badge deepseek">● DEEPSEEK</span>
+        <span class="char-count" id="count-deepseek">0 kata</span>
+      </div>
+      <textarea class="response-textarea" id="resp-deepseek" placeholder="Tempel respons DeepSeek di sini…" oninput="updateCount('deepseek')"></textarea>
+      <div class="rating-input-row">
+        <label>KEJELASAN</label>
+        <div class="star-rate" id="stars-deepseek-clarity" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('deepseek','clarity',1)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','clarity',2)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','clarity',3)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','clarity',4)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','clarity',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">KEDALAMAN</label>
+        <div class="star-rate" id="stars-deepseek-depth" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('deepseek','depth',1)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','depth',2)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','depth',3)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','depth',4)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','depth',5)">★</button>
+        </div>
+      </div>
+      <div class="rating-input-row">
+        <label>TONE</label>
+        <select class="tone-select" id="tone-deepseek">
+          <option value="">— pilih —</option>
+          <option value="Akademik">Akademik</option>
+          <option value="Teknis">Teknis</option>
+          <option value="Naratif">Naratif</option>
+          <option value="Kritis">Kritis</option>
+          <option value="Asertif">Asertif</option>
+          <option value="Diplomatik">Diplomatik</option>
+          <option value="Kreatif">Kreatif</option>
+          <option value="Informatif">Informatif</option>
+        </select></div>
+      <div class="rating-input-row">
+        <label>KEUNIKAN</label>
+        <div class="star-rate" id="stars-deepseek-unique" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('deepseek','unique',1)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','unique',2)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','unique',3)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','unique',4)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','unique',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">ACTIONABLE</label>
+        <div class="star-rate" id="stars-deepseek-actionable" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('deepseek','actionable',1)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','actionable',2)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','actionable',3)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','actionable',4)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','actionable',5)">★</button>
+        </div>
+        <label style="margin-left:1rem">RELEVANSI</label>
+        <div class="star-rate" id="stars-deepseek-relevance" onmouseleave="resetStarHover(this)">
+          <button class="star-btn" onclick="setRating('deepseek','relevance',1)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','relevance',2)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','relevance',3)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','relevance',4)">★</button>
+          <button class="star-btn" onclick="setRating('deepseek','relevance',5)">★</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: DIMENSIONS -->
+  <div class="section-title" id="st-dims">DIMENSI PERBANDINGAN</div>
+
+  <div class="dimensions-grid" id="dims-grid">
+    <div class="dim-item">
+      <input type="checkbox" id="dim-wordcount" checked>
+      <label for="dim-wordcount" id="dl-wordcount">JUMLAH KATA</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-structure" checked>
+      <label for="dim-structure" id="dl-structure">STRUKTUR JAWABAN</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-clarity" checked>
+      <label for="dim-clarity" id="dl-clarity">KEJELASAN</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-depth" checked>
+      <label for="dim-depth" id="dl-depth">KEDALAMAN</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-tone">
+      <label for="dim-tone" id="dl-tone">TONE / NADA</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-unique">
+      <label for="dim-unique" id="dl-unique">KEUNIKAN INSIGHT</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-actionable">
+      <label for="dim-actionable" id="dl-actionable">ACTIONABLE OUTPUT</label>
+    </div>
+    <div class="dim-item">
+      <input type="checkbox" id="dim-relevance">
+      <label for="dim-relevance" id="dl-relevance">RELEVANSI PROMPT</label>
+    </div>
+  </div>
+
+  <div class="section-title" id="st-custom">DIMENSI CUSTOM</div>
+  <div class="custom-dim-row">
+    <input type="text" class="custom-dim-input" id="custom-dim-input" placeholder="Tambah dimensi baru (mis: Kreativitas, Format Output…)" maxlength="40">
+    <button class="btn-add-dim" onclick="addCustomDim()" id="btn-add-dim-lbl">+ TAMBAH</button>
+  </div>
+  <div class="custom-dims-list" id="custom-dims-list"></div>
+
+  <!-- ACTION -->
+  <div class="action-row">
+    <button class="btn-primary" onclick="generateComparison()" id="btn-generate">
+      ⚡ <span id="btn-gen-lbl">GENERATE COMPARISON</span>
+    </button>
+    <button class="btn-secondary" onclick="clearAll()" id="btn-clear-lbl">RESET SEMUA</button>
+  </div>
+
+  <!-- COMPARISON RESULT -->
+  <div id="comparison-section">
+    <div class="comparison-header-bar">
+      <h2 id="comp-title">TABULASI PERBANDINGAN</h2>
+      <span class="meta" id="comp-meta"></span>
+    </div>
+
+    <!-- SCORE SUMMARY -->
+    <div style="padding: 1.25rem 0;">
+      <div class="section-title" id="st-scores">RINGKASAN SKOR</div>
+      <div class="score-summary-row" id="score-summary-row"></div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="table-wrapper">
+      <table class="comparison-table" id="comparison-table">
+        <thead id="table-head"></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- NARRATIVE -->
+    <div class="narrative-card" id="narrative-card">
+      <h3 id="narr-title">NARASI RINGKASAN</h3>
+      <p id="narrative-text"></p>
+    </div>
+
+    <!-- EXPORT ROW -->
+    <div class="export-row">
+      <button class="btn-primary" onclick="copyTableText()" id="btn-copy-lbl">
+        📋 <span>COPY TABEL (TEXT)</span>
+      </button>
+      <button class="btn-export" onclick="window.print()" id="btn-print-lbl">
+        🖨 PRINT / SAVE PDF
+      </button>
+      <button class="btn-secondary" onclick="copyJSON()" id="btn-json-lbl">
+        { } EXPORT JSON
+      </button>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<footer>
+  Multi-AI Response Comparator v1.1 · <a href="https://gokiantik.github.io/chiefhumanityofficer" target="_blank">CHO Framework</a> · Go Kian Tik (Mbah Hogi Bejo™) · Z3SCI · 자주자 自主者
+</footer>
+
+</div><!-- /container -->
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+const AI_LIST = ['claude','chatgpt','gemini','copilot','deepseek'];
+const AI_NAMES = { claude:'Claude', chatgpt:'ChatGPT', gemini:'Gemini', copilot:'Copilot', deepseek:'DeepSeek' };
+
+const ratings = {};
+AI_LIST.forEach(ai => { ratings[ai] = { clarity: 0, depth: 0, unique: 0, actionable: 0, relevance: 0 }; });
+
+const customDims = [];
+let lang = 'id';
+
+// ─── LANG ─────────────────────────────────────────────────────────────────────
+const T = {
+  id: {
+    'h-tagline': 'Bandingkan 5 AI dalam satu tabulasi ringkasan · CHO Framework',
+    'xl-label': 'Terintegrasi dengan:',
+    'info-title': 'Cara Pakai:',
+    'info-body': ' Isi prompt yang dipakai → masukkan respons masing-masing AI → pilih dimensi perbandingan → klik Generate Comparison.',
+    's1-lbl': 'Tulis Prompt', 's2-lbl': 'Input 5 Respons', 's3-lbl': 'Pilih Dimensi', 's4-lbl': 'Generate & Export',
+    'ph-label': 'TEMPEL ATAU KETIK PROMPT YANG DIKIRIM KE SEMUA AI',
+    'prog-label': 'PROGRES INPUT',
+    'st-prompt': 'PROMPT YANG DIGUNAKAN',
+    'st-responses': 'RESPONS 5 AI',
+    'st-dims': 'DIMENSI PERBANDINGAN',
+    'st-custom': 'DIMENSI CUSTOM',
+    'st-scores': 'RINGKASAN SKOR',
+    'r-clarity': 'KEJELASAN', 'r-depth': 'KEDALAMAN', 'r-tone-label': 'TONE',
+    'dl-wordcount': 'JUMLAH KATA', 'dl-structure': 'STRUKTUR JAWABAN',
+    'dl-clarity': 'KEJELASAN', 'dl-depth': 'KEDALAMAN', 'dl-tone': 'TONE / NADA',
+    'dl-unique': 'KEUNIKAN INSIGHT', 'dl-actionable': 'ACTIONABLE OUTPUT', 'dl-relevance': 'RELEVANSI PROMPT',
+    'btn-add-dim-lbl': '+ TAMBAH',
+    'btn-gen-lbl': 'GENERATE COMPARISON',
+    'btn-clear-lbl': 'RESET SEMUA',
+    'comp-title': 'TABULASI PERBANDINGAN',
+    'narr-title': 'NARASI RINGKASAN',
+    'btn-copy-lbl': 'COPY TABEL (TEXT)',
+    'btn-print-lbl': '🖨 PRINT / SAVE PDF',
+    'btn-json-lbl': '{ } EXPORT JSON',
+    'dim-wordcount-label': 'Jumlah Kata',
+    'dim-structure-label': 'Struktur Jawaban',
+    'dim-clarity-label': 'Kejelasan',
+    'dim-depth-label': 'Kedalaman',
+    'dim-tone-label': 'Tone / Nada',
+    'dim-unique-label': 'Keunikan Insight',
+    'dim-actionable-label': 'Actionable Output',
+    'dim-relevance-label': 'Relevansi Prompt',
+    'empty': '—',
+    'total': 'TOTAL SKOR',
+    'rank': 'PERINGKAT',
+    'words': 'kata',
+    'na': 'n/a',
+  },
+  en: {
+    'h-tagline': 'Compare 5 AI responses in one clean summary table · CHO Framework',
+    'xl-label': 'Integrated with:',
+    'info-title': 'How to Use:',
+    'info-body': ' Enter the prompt used → paste each AI response → select comparison dimensions → click Generate Comparison.',
+    's1-lbl': 'Write Prompt', 's2-lbl': 'Input 5 Responses', 's3-lbl': 'Pick Dimensions', 's4-lbl': 'Generate & Export',
+    'ph-label': 'PASTE OR TYPE THE PROMPT SENT TO ALL AIs',
+    'prog-label': 'INPUT PROGRESS',
+    'st-prompt': 'PROMPT USED',
+    'st-responses': '5 AI RESPONSES',
+    'st-dims': 'COMPARISON DIMENSIONS',
+    'st-custom': 'CUSTOM DIMENSIONS',
+    'st-scores': 'SCORE SUMMARY',
+    'r-clarity': 'CLARITY', 'r-depth': 'DEPTH', 'r-tone-label': 'TONE',
+    'dl-wordcount': 'WORD COUNT', 'dl-structure': 'ANSWER STRUCTURE',
+    'dl-clarity': 'CLARITY', 'dl-depth': 'DEPTH', 'dl-tone': 'TONE / REGISTER',
+    'dl-unique': 'UNIQUE INSIGHTS', 'dl-actionable': 'ACTIONABLE OUTPUT', 'dl-relevance': 'PROMPT RELEVANCE',
+    'btn-add-dim-lbl': '+ ADD',
+    'btn-gen-lbl': 'GENERATE COMPARISON',
+    'btn-clear-lbl': 'RESET ALL',
+    'comp-title': 'COMPARISON TABLE',
+    'narr-title': 'NARRATIVE SUMMARY',
+    'btn-copy-lbl': 'COPY TABLE (TEXT)',
+    'btn-print-lbl': '🖨 PRINT / SAVE PDF',
+    'btn-json-lbl': '{ } EXPORT JSON',
+    'dim-wordcount-label': 'Word Count',
+    'dim-structure-label': 'Answer Structure',
+    'dim-clarity-label': 'Clarity',
+    'dim-depth-label': 'Depth',
+    'dim-tone-label': 'Tone / Register',
+    'dim-unique-label': 'Unique Insights',
+    'dim-actionable-label': 'Actionable Output',
+    'dim-relevance-label': 'Prompt Relevance',
+    'empty': '—',
+    'total': 'TOTAL SCORE',
+    'rank': 'RANK',
+    'words': 'words',
+    'na': 'n/a',
+  }
+};
+
+function t(key) { return (T[lang]||T['id'])[key] || key; }
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent===l.toUpperCase()));
+  const keys = Object.keys(T.id);
+  keys.forEach(k => {
+    const el = document.getElementById(k);
+    if (el) {
+      if (el.tagName === 'TEXTAREA') el.placeholder = T[lang][k] || el.placeholder;
+      else el.textContent = T[lang][k] || el.textContent;
+    }
+  });
+  // update placeholder
+  const pi = document.getElementById('prompt-input');
+  if (pi) pi.placeholder = lang === 'en' ? 'Type or paste the prompt here…' : 'Ketik atau tempel prompt di sini…';
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchAITab(ai, btn) {
+  document.querySelectorAll('.ai-tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ai-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + ai).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── COUNTS ──────────────────────────────────────────────────────────────────
+function wordCount(text) { return text.trim() ? text.trim().split(/\s+/).length : 0; }
+
+function updateCount(ai) {
+  const val = document.getElementById('resp-' + ai).value;
+  const wc = wordCount(val);
+  document.getElementById('count-' + ai).textContent = wc + ' ' + t('words');
+  const tab = document.querySelector(`.ai-tab-btn[data-ai="${ai}"]`);
+  if (val.trim()) {
+    tab.classList.add('filled');
+    document.getElementById('dot-' + ai).classList.add('filled');
+  } else {
+    tab.classList.remove('filled');
+    document.getElementById('dot-' + ai).classList.remove('filled');
+  }
+  updateProgress();
+}
+
+function updatePromptCount() {
+  const val = document.getElementById('prompt-input').value;
+  document.getElementById('prompt-count').textContent = wordCount(val) + ' ' + t('words');
+}
+
+function updateProgress() {
+  const filled = AI_LIST.filter(ai => document.getElementById('resp-' + ai).value.trim()).length;
+  document.getElementById('progress-fill').style.width = (filled / 5 * 100) + '%';
+  document.getElementById('progress-count').textContent = filled + '/5';
+}
+
+// ─── RATINGS ─────────────────────────────────────────────────────────────────
+function setRating(ai, dim, val) {
+  ratings[ai][dim] = val;
+  const stars = document.getElementById('stars-' + ai + '-' + dim);
+  if (!stars) return;
+  stars.querySelectorAll('.star-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i < val);
+  });
+}
+
+function resetStarHover(container) {
+  // stars are controlled by click only
+}
+
+// ─── CUSTOM DIMENSIONS ────────────────────────────────────────────────────────
+function addCustomDim() {
+  const inp = document.getElementById('custom-dim-input');
+  const val = inp.value.trim();
+  if (!val || customDims.includes(val)) { inp.value = ''; return; }
+  customDims.push(val);
+  renderCustomDims();
+  inp.value = '';
+}
+
+function removeCustomDim(name) {
+  const idx = customDims.indexOf(name);
+  if (idx > -1) customDims.splice(idx, 1);
+  renderCustomDims();
+}
+
+function renderCustomDims() {
+  const list = document.getElementById('custom-dims-list');
+  list.innerHTML = customDims.map(d =>
+    `<div class="custom-dim-tag">${d}<button onclick="removeCustomDim('${d}')">✕</button></div>`
+  ).join('');
+}
+
+// Enter key for custom dim
+document.getElementById('custom-dim-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addCustomDim();
+});
+
+// ─── STRUCTURE DETECTION ─────────────────────────────────────────────────────
+function detectStructure(text) {
+  const hasHeaders = /^#{1,3}\s/m.test(text) || /^\*{2}.+\*{2}/m.test(text);
+  const hasBullets = /^[-•*]\s/m.test(text);
+  const hasNumbers = /^\d+[\.\)]\s/m.test(text);
+  const paras = text.split(/\n\n+/).filter(p => p.trim()).length;
+
+  if (hasHeaders && (hasBullets || hasNumbers)) return lang==='id' ? 'Terstruktur ✓' : 'Structured ✓';
+  if (hasBullets || hasNumbers) return lang==='id' ? 'Poin-poin' : 'Bulleted';
+  if (hasHeaders) return lang==='id' ? 'Berheading' : 'Headed';
+  if (paras > 2) return lang==='id' ? 'Prosa' : 'Prose';
+  return lang==='id' ? 'Padat' : 'Compact';
+}
+
+function starStr(n) {
+  if (!n) return '<span class="empty-cell">' + t('na') + '</span>';
+  return '<span class="rating-stars">' + '★'.repeat(n) + '<span class="rating-empty">' + '★'.repeat(5-n) + '</span></span>';
+}
+
+function scoreClass(n, max) {
+  const pct = n / max;
+  if (pct >= 0.7) return 'score-high';
+  if (pct >= 0.4) return 'score-mid';
+  return 'score-low';
+}
+
+// ─── GENERATE ─────────────────────────────────────────────────────────────────
+function generateComparison() {
+  const prompt = document.getElementById('prompt-input').value.trim();
+  const responses = {};
+  AI_LIST.forEach(ai => {
+    responses[ai] = document.getElementById('resp-' + ai).value.trim();
+  });
+
+  const filled = AI_LIST.filter(ai => responses[ai]).length;
+  if (filled < 2) {
+    alert(lang==='id'
+      ? 'Minimal 2 respons AI harus diisi untuk membandingkan.'
+      : 'At least 2 AI responses are required for comparison.');
+    return;
+  }
+
+  // Collect active dimensions
+  const fixedDims = [
+    { id: 'wordcount', label: t('dim-wordcount-label'), active: document.getElementById('dim-wordcount').checked },
+    { id: 'structure', label: t('dim-structure-label'), active: document.getElementById('dim-structure').checked },
+    { id: 'clarity',   label: t('dim-clarity-label'),   active: document.getElementById('dim-clarity').checked },
+    { id: 'depth',     label: t('dim-depth-label'),     active: document.getElementById('dim-depth').checked },
+    { id: 'tone',      label: t('dim-tone-label'),      active: document.getElementById('dim-tone').checked },
+    { id: 'unique',    label: t('dim-unique-label'),    active: document.getElementById('dim-unique').checked },
+    { id: 'actionable',label: t('dim-actionable-label'),active: document.getElementById('dim-actionable').checked },
+    { id: 'relevance', label: t('dim-relevance-label'), active: document.getElementById('dim-relevance').checked },
+  ].filter(d => d.active);
+
+  const allDims = [...fixedDims, ...customDims.map(d => ({ id: 'custom_' + d, label: d, active: true }))];
+
+  // Build data per AI
+  const aiData = {};
+  AI_LIST.forEach(ai => {
+    const resp = responses[ai];
+    aiData[ai] = {
+      text: resp,
+      wc: wordCount(resp),
+      structure: resp ? detectStructure(resp) : null,
+      clarity: ratings[ai].clarity,
+      depth: ratings[ai].depth,
+      unique: ratings[ai].unique,
+      actionable: ratings[ai].actionable,
+      relevance: ratings[ai].relevance,
+      tone: document.getElementById('tone-' + ai).value || null,
+    };
+  });
+
+  // Compute totals
+  const scores = {};
+  AI_LIST.forEach(ai => {
+    let total = 0;
+    if (aiData[ai].text) {
+      total += aiData[ai].clarity + aiData[ai].depth + aiData[ai].unique + aiData[ai].actionable + aiData[ai].relevance;
+    }
+    scores[ai] = total;
+  });
+
+  const sorted = [...AI_LIST].filter(ai => aiData[ai].text).sort((a,b) => scores[b]-scores[a]);
+  const maxScore = Math.max(...Object.values(scores));
+
+  // RENDER SCORE SUMMARY
+  const scoreRow = document.getElementById('score-summary-row');
+  scoreRow.innerHTML = sorted.map((ai, idx) => {
+    const rankClass = idx === 0 ? 'rank-1' : idx === 1 ? 'rank-2' : 'rank-other';
+    const s = scores[ai];
+    return `<div class="score-card ${ai} ${rankClass}">
+      ${idx===0 ? '<div class="winner-badge">🏆 #1</div>' : `<div style="font-size:0.7rem;color:#aaa;margin-bottom:0.3rem">#${idx+1}</div>`}
+      <div class="ai-title">${AI_NAMES[ai]}</div>
+      <div class="total-score">${s}</div>
+      <div class="score-label">${t('total')}</div>
+    </div>`;
+  }).join('') + AI_LIST.filter(ai => !aiData[ai].text).map(ai =>
+    `<div class="score-card ${ai} rank-other" style="opacity:0.35">
+      <div class="ai-title">${AI_NAMES[ai]}</div>
+      <div class="total-score" style="font-size:1rem">—</div>
+      <div class="score-label" style="font-size:0.7rem">${lang==='id'?'Tidak diisi':'Not filled'}</div>
+    </div>`
+  ).join('');
+
+  // RENDER TABLE HEAD
+  const thead = document.getElementById('table-head');
+  const activePresentAIs = AI_LIST.filter(ai => aiData[ai].text);
+  thead.innerHTML = `<tr>
+    <th class="dim-col">${lang==='id'?'DIMENSI':'DIMENSION'}</th>
+    ${activePresentAIs.map(ai => `<th class="ai-col ${ai}">${AI_NAMES[ai]}</th>`).join('')}
+  </tr>`;
+
+  // RENDER TABLE BODY
+  const tbody = document.getElementById('table-body');
+  const rows = [];
+
+  allDims.forEach(dim => {
+    let cells = activePresentAIs.map(ai => {
+      const d = aiData[ai];
+      if (!d.text) return `<td class="cell-value"><span class="empty-cell">—</span></td>`;
+      switch(dim.id) {
+        case 'wordcount':
+          return `<td class="cell-value"><span class="word-count-badge">${d.wc.toLocaleString()}</span> <small style="color:#aaa">${t('words')}</small></td>`;
+        case 'structure':
+          return `<td class="cell-value"><span class="tone-tag">${d.structure}</span></td>`;
+        case 'clarity':
+          return `<td class="cell-value">${starStr(d.clarity)}</td>`;
+        case 'depth':
+          return `<td class="cell-value">${starStr(d.depth)}</td>`;
+        case 'tone':
+          return `<td class="cell-value">${d.tone ? `<span class="tone-tag">${d.tone}</span>` : `<span class="empty-cell">${t('na')}</span>`}</td>`;
+        case 'unique':
+          return `<td class="cell-value">${starStr(d.unique)}</td>`;
+        case 'actionable':
+          return `<td class="cell-value">${starStr(d.actionable)}</td>`;
+        case 'relevance':
+          return `<td class="cell-value">${starStr(d.relevance)}</td>`;
+        default:
+          return `<td class="cell-value"><span class="empty-cell" contenteditable="true" style="outline:none;border-bottom:1px dashed #ccc;min-width:60px;display:inline-block">${t('na')}</span></td>`;
+      }
+    });
+    rows.push(`<tr><td class="dim-label">${dim.label}</td>${cells.join('')}</tr>`);
+  });
+
+  // Score row
+  rows.push(`<tr style="background:var(--cream);font-weight:600">
+    <td class="dim-label" style="color:var(--gold)">${t('total')}</td>
+    ${activePresentAIs.map(ai => {
+      const s = scores[ai];
+      const sc = s > 0 ? `<span class="score-pill ${scoreClass(s, Math.max(25, maxScore))}">${s}</span>` : '<span class="empty-cell">—</span>';
+      return `<td class="cell-value">${sc}</td>`;
+    }).join('')}
+  </tr>`);
+
+  rows.push(`<tr>
+    <td class="dim-label">${t('rank')}</td>
+    ${activePresentAIs.map(ai => {
+      const rank = sorted.indexOf(ai) + 1;
+      return `<td class="cell-value">
+        ${rank === 1 ? '<span class="winner-badge">🏆 #1</span>' : `<span style="font-family:'DM Mono',monospace;font-size:12px;color:#888">#${rank}</span>`}
+      </td>`;
+    }).join('')}
+  </tr>`);
+
+  tbody.innerHTML = rows.join('');
+
+  // NARRATIVE
+  const winner = sorted[0];
+  const promptSnip = prompt ? `"${prompt.slice(0,60)}${prompt.length>60?'…':''}"` : (lang==='id'?'prompt yang diberikan':'the given prompt');
+  const topStats = sorted.map((ai,i) => `${AI_NAMES[ai]} (#${i+1}: ${scores[ai]} poin)`).join(', ');
+
+  const narrative = lang === 'id'
+    ? `Dari ${filled} respons AI yang dibandingkan terhadap ${promptSnip}, ${AI_NAMES[winner]} tampil terdepan dengan total skor ${scores[winner]}. Urutan lengkap: ${topStats}. ${aiData[winner]?.wc ? `Respons ${AI_NAMES[winner]} memiliki ${aiData[winner].wc} kata` : ''} ${aiData[winner]?.structure ? `dengan struktur ${aiData[winner].structure}.` : '.'} Analisis dimensi menunjukkan variasi signifikan dalam kedalaman dan kejelasan antar model—data ini siap digunakan sebagai input untuk iterasi prompt berikutnya atau dokumentasi AIRT.`
+    : `Across ${filled} AI responses compared against ${promptSnip}, ${AI_NAMES[winner]} performed best with a total score of ${scores[winner]}. Full ranking: ${topStats}. ${aiData[winner]?.wc ? `${AI_NAMES[winner]}'s response contains ${aiData[winner].wc} words` : ''} ${aiData[winner]?.structure ? `with ${aiData[winner].structure} structure.` : '.'} Dimensional analysis reveals significant variation in depth and clarity across models—this data is ready for use in next-iteration prompt refinement or AIRT documentation.`;
+
+  document.getElementById('narrative-text').textContent = narrative;
+  document.getElementById('comp-meta').textContent = new Date().toLocaleString('id-ID', { dateStyle:'medium', timeStyle:'short' }) + ' · ' + filled + '/5 AI';
+
+  // SHOW SECTION
+  const sec = document.getElementById('comparison-section');
+  sec.classList.add('visible');
+  sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Update step
+  document.getElementById('step-4').classList.add('active-step');
+}
+
+// ─── CLEAR ────────────────────────────────────────────────────────────────────
+function clearAll() {
+  if (!confirm(lang==='id' ? 'Reset semua input?' : 'Reset all inputs?')) return;
+  document.getElementById('prompt-input').value = '';
+  AI_LIST.forEach(ai => {
+    document.getElementById('resp-' + ai).value = '';
+    document.getElementById('count-' + ai).textContent = '0 ' + t('words');
+    document.querySelector(`.ai-tab-btn[data-ai="${ai}"]`).classList.remove('filled');
+    document.getElementById('dot-' + ai).classList.remove('filled');
+    ratings[ai] = { clarity: 0, depth: 0, unique: 0, actionable: 0, relevance: 0 };
+    ['clarity','depth','unique','actionable','relevance'].forEach(dim => {
+      const stars = document.getElementById('stars-' + ai + '-' + dim);
+      if (stars) stars.querySelectorAll('.star-btn').forEach(b => b.classList.remove('active'));
+    });
+    const ts = document.getElementById('tone-' + ai);
+    if (ts) ts.value = '';
+  });
+  updateProgress();
+  document.getElementById('comparison-section').classList.remove('visible');
+  document.querySelectorAll('.step-item').forEach((s,i) => s.classList.toggle('active-step', i===0));
+}
+
+// ─── EXPORT ───────────────────────────────────────────────────────────────────
+function copyTableText() {
+  const table = document.getElementById('comparison-table');
+  if (!table) return;
+  let text = '';
+  table.querySelectorAll('tr').forEach(row => {
+    const cells = Array.from(row.querySelectorAll('th,td')).map(c => c.innerText.trim().replace(/\n/g,' '));
+    text += cells.join('\t') + '\n';
+  });
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('[onclick="copyTableText()"]');
+    if (btn) { btn.style.background = '#2d6b5e'; setTimeout(() => btn.style.background = '', 1500); }
+  });
+}
+
+function copyJSON() {
+  const data = {
+    generated: new Date().toISOString(),
+    prompt: document.getElementById('prompt-input').value.trim(),
+    responses: {},
+  };
+  AI_LIST.forEach(ai => {
+    const resp = document.getElementById('resp-' + ai).value.trim();
+    if (resp) data.responses[ai] = {
+      text: resp,
+      wordCount: wordCount(resp),
+      ratings: { ...ratings[ai] },
+      tone: document.getElementById('tone-' + ai).value || null,
+    };
+  });
+  navigator.clipboard.writeText(JSON.stringify(data, null, 2)).then(() => {
+    const btn = document.querySelector('[onclick="copyJSON()"]');
+    if (btn) { const orig = btn.textContent; btn.textContent = '✓ COPIED'; setTimeout(() => btn.textContent = orig, 1500); }
+  });
+}
+</script>
+</body>
+</html>
