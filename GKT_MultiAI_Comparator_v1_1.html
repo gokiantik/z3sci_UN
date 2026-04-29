@@ -837,6 +837,93 @@ footer a { color: var(--gold); text-decoration: none; }
   .score-summary-row { grid-template-columns: repeat(2, 1fr); }
   .steps-row .step-item { min-width: 80px; font-size: 0.72rem; }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=DM+Mono:wght@400;500&display=swap');
+
+.z3sci-footer {
+  border-top: 0.5px solid rgba(201,168,76,0.15);
+  padding: 2rem 2rem 1.8rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.z3sci-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 0.5px;
+  background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+}
+
+.z3sci-footer-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C9A84C 0%, #7A6030 100%);
+  font-size: 12px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 0 12px rgba(201,168,76,0.2);
+}
+
+.z3sci-footer-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ivory-dim, #A09880);
+  letter-spacing: 0.08em;
+  line-height: 2;
+  margin-bottom: 0.2rem;
+}
+
+.z3sci-footer-name strong {
+  color: var(--ivory, #F2EDD7);
+  font-weight: 500;
+}
+
+.z3sci-footer-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 0.95rem;
+  color: var(--gold-dim, #7A6030);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.z3sci-footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--text-muted, #7A7260);
+  letter-spacing: 0.07em;
+  line-height: 2;
+}
+
+.z3sci-footer-copy .year {
+  color: var(--gold, #C9A84C);
+}
+
+.z3sci-footer-copy a {
+  color: var(--gold-dim, #7A6030);
+  text-decoration: none;
+  border-bottom: 0.5px solid rgba(201,168,76,0.25);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.z3sci-footer-copy a:hover {
+  color: var(--gold, #C9A84C);
+  border-color: rgba(201,168,76,0.6);
+}
+
+.z3sci-footer-rights {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  color: var(--text-muted, #7A7260);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  opacity: 0.7;
+}
 </style>
 </head>
 <body>
@@ -1372,8 +1459,17 @@ footer a { color: var(--gold); text-decoration: none; }
 
 </div><!-- /content -->
 
-<footer>
-  Multi-AI Response Comparator v1.1 · <a href="https://gokiantik.github.io/chiefhumanityofficer" target="_blank">CHO Framework</a> · Go Kian Tik (Mbah Hogi Bejo™) · Z3SCI · 자주자 自主者
+<footer class="z3sci-footer">
+  <div class="z3sci-footer-avatar">👤</div>
+  <div class="z3sci-footer-name">
+    <strong>Go Kian Tik</strong> &nbsp;·&nbsp; Mbah Hogi Bejo™
+  </div>
+  <span class="z3sci-footer-cn">Zì Zhǔ Zhě 自主者</span>
+  <div class="z3sci-footer-copy">
+    <span class="year">© 2026</span> Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; Superhero Café Inside<br>
+    <a href="http://www.superherocafeinside.com" target="_blank">www.superherocafeinside.com</a>
+  </div>
+  <div class="z3sci-footer-rights">All rights reserved.</div>
 </footer>
 
 </div><!-- /container -->
