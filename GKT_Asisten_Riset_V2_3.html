@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>GKT Research Assistant v2.2 — Front-End User Sovereign Tool | CHO Framework</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Tool riset mandiri untuk memahami pemikiran Go Kian Tik (GKT / Mbah Hogi Bejo™) — Chief Humanity Officer. Grand Formula, Walking Books Philosophy, Tao Alignment, dan SLR Mode.">
+    <meta name="author" content="Go Kian Tik (Mbah Hogi Bejo™)">
+    <meta name="keywords" content="Chief Humanity Officer, Grand Formula, Walking Books Philosophy, AI Red Teaming, Cognitive Sovereignty, Tao TSM-XYP, Ruwet Genah, AIRT, Z3SCI">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="GKT Research Assistant v2.2 — Front-End User Sovereign Tool">
+    <meta property="og:description" content="Copy-paste prompt tool untuk AI Red Teaming framework Go Kian Tik. Mode QA, Tao Alignment, dan SLR Protocol — bilingual EN/ID.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gokiantik.github.io/chiefhumanityofficer/GKT_Asisten_Riset_V2_2.html">
+    <meta property="og:site_name" content="Zì Zhǔ Zhě 自主者 | Superhero Café Inside">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://gokiantik.github.io/chiefhumanityofficer/GKT_Asisten_Riset_V2_2.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@400;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1410;
+            --gold: #b8922a;
+            --gold-light: #e8c97a;
+            --cream: #f7f3ec;
+            --parchment: #faf7f2;
+            --border: #d4c9b8;
+            --teal: #2d6b5e;
+            --teal-light: #e8f4f1;
+            --sage: #6b8c5c;
+            --sage-light: #eef5ea;
+            --navy: #1b3a5c;
+            --navy-light: #e8edf4;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--parchment);
+            color: var(--ink);
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        header {
+            background: var(--ink);
+            color: var(--cream);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+            position: relative;
+        }
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+        }
+        .header-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-style: italic;
+            margin-bottom: 0.3rem;
+            letter-spacing: 1px;
+        }
+        header .subtitle {
+            font-style: italic;
+            color: rgba(232,201,122,0.7);
+            font-size: 0.85rem;
+        }
+
+        /* LANGUAGE TOGGLE */
+        .lang-bar {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 40px;
+            padding: 0.15rem;
+        }
+        .lang-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            padding: 0.3rem 1rem;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 40px;
+        }
+        .lang-btn.active { background: var(--gold); color: var(--ink); font-weight: 600; }
+        .lang-btn:hover:not(.active) { color: var(--gold-light); background: rgba(255,255,255,0.1); }
+
+        .content { padding: 2rem; }
+
+        .info-box {
+            background: var(--teal-light);
+            border-left: 4px solid var(--teal);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            font-size: 0.9rem;
+        }
+        .warning-box {
+            background: #fef9ef;
+            border-left: 4px solid var(--gold);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            font-size: 0.85rem;
+        }
+        .crosslink-box {
+            background: var(--navy-light);
+            border-left: 4px solid var(--navy);
+            padding: 0.9rem 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 1rem 1rem 0;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .crosslink-box a {
+            color: var(--navy);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .crosslink-box a:hover { text-decoration: underline; }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        /* TABS */
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            padding: 0.6rem 1.1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 0.25rem;
+            margin-bottom: -1px;
+            border-radius: 6px 6px 0 0;
+        }
+        .tab-btn.active { background: white; color: var(--gold); border-color: var(--border); border-bottom-color: white; font-weight: 600; }
+        .tab-btn:hover:not(.active) { background: var(--cream); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* PROMPT CARD */
+        .prompt-card {
+            background: #fdfbf8;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .prompt-header {
+            background: var(--cream);
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .lang-indicator {
+            font-size: 9px;
+            background: #e0dcd5;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+        .prompt-body {
+            padding: 1.25rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+            background: #fefefc;
+        }
+        .copy-btn {
+            background: var(--ink);
+            color: var(--gold-light);
+            border: none;
+            padding: 0.5rem 1.25rem;
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 0.5rem 1rem 1rem auto;
+            display: block;
+            width: fit-content;
+            border-radius: 30px;
+        }
+        .copy-btn:hover { background: #2d2520; }
+        .copy-btn.copied { background: var(--teal); color: white; }
+
+        /* AI GRID */
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        .ai-btn {
+            border: 1px solid var(--border);
+            background: transparent;
+            padding: 0.6rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--ink);
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            display: block;
+            border-radius: 40px;
+        }
+        .ai-btn:hover { background: var(--gold); color: white; border-color: var(--gold); }
+
+        /* SOURCES LIST */
+        .sources-list {
+            background: #f9fafc;
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            font-size: 11px;
+            font-family: 'DM Mono', monospace;
+            word-break: break-all;
+        }
+        .sources-list a { color: var(--teal); text-decoration: none; }
+        .sources-list a:hover { text-decoration: underline; }
+
+        /* DATASET TAB */
+        .dataset-block {
+            background: #f9f7f4;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+        .dataset-block .ds-label {
+            font-family: 'Cinzel', serif;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .dataset-block p {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            margin-bottom: 0.5rem;
+        }
+        .speaker-gkt { color: var(--teal); font-weight: 600; }
+        .speaker-iwan { color: var(--navy); font-weight: 600; }
+        .timestamp { font-size: 0.75rem; color: #aaa; font-family: 'DM Mono', monospace; margin-left: 0.4rem; }
+
+        /* DOI TABLE */
+        .doi-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.82rem; }
+        .doi-table th { background: var(--ink); color: var(--gold-light); padding: 0.6rem 0.9rem; text-align: left; font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 1px; }
+        .doi-table td { padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .doi-table tr:nth-child(even) td { background: var(--cream); }
+        .doi-table .doi-val { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--teal); }
+        .doi-table a { color: var(--teal); text-decoration: none; }
+        .doi-table a:hover { text-decoration: underline; }
+
+        /* BADGES */
+        .badge-tao {
+            background: var(--sage-light);
+            color: var(--sage);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 9px;
+            font-family: 'DM Mono', monospace;
+            display: inline-block;
+        }
+        .badge-slr {
+            background: var(--navy-light);
+            color: var(--navy);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 9px;
+            font-family: 'DM Mono', monospace;
+            display: inline-block;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--ink);
+            color: var(--cream);
+            padding: 1.5rem 2rem;
+            font-size: 11px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .footer-meta { color: rgba(255,255,255,0.6); line-height: 1.8; }
+        .footer-doi { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold-light); line-height: 1.9; }
+        .footer-base {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.75rem;
+            text-align: center;
+            color: rgba(255,255,255,0.45);
+            font-size: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 1.25rem; }
+            .prompt-body { font-size: 10px; }
+            .tab-btn { font-size: 9px; padding: 0.4rem 0.75rem; }
+            .lang-bar { position: static; justify-content: flex-end; margin-bottom: 0.5rem; }
+            header { padding-top: 1rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    
+    /* ══ CHO DISCLAIMER COMPONENT ══ */
+    .cho-disclaimer {
+      background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+      color: #e8eef2;
+      padding: 1.8rem 2rem;
+      border-bottom: 3px solid #c9a84c;
+      position: relative;
+      overflow: hidden;
+    }
+    .cho-disclaimer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: .5;
+    }
+    .cho-disclaimer > * { position: relative; }
+    .cho-disclaimer__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 40px;
+      padding: 0.28rem 0.9rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      color: #c9a84c;
+      text-transform: uppercase;
+    }
+    .cho-disclaimer__title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      color: #f0ece6;
+    }
+    .cho-disclaimer__body {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      opacity: 0.92;
+      margin-bottom: 0.6rem;
+    }
+    .cho-disclaimer__body a {
+      color: #c9a84c;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(201,168,76,0.5);
+      transition: border-color .15s;
+    }
+    .cho-disclaimer__body a:hover { border-color: #c9a84c; }
+    .cho-disclaimer__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      margin-top: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: #b0bec8;
+      letter-spacing: .04em;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.9rem;
+    }
+    .cho-disclaimer__meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    /* ══ Z3SCI FOOTER ══ */
+    .z3sci-footer {
+      border-top: 0.5px solid rgba(201,168,76,0.15);
+      padding: 2rem 2rem 1.8rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .z3sci-footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 0.5px;
+      background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+    }
+    .z3sci-footer-avatar {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, #C9A84C 0%, #7A6030 100%);
+      font-size: 12px; margin-bottom: 0.8rem;
+      box-shadow: 0 0 12px rgba(201,168,76,0.2);
+    }
+    .z3sci-footer-name {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      color: var(--gold-light, #e8c97a); letter-spacing: 0.08em; line-height: 2; margin-bottom: 0.2rem;
+    }
+    .z3sci-footer-name strong { color: var(--cream, #f7f3ec); font-weight: 500; }
+    .z3sci-footer-cn { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--gold, #b8922a); letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem; }
+    .z3sci-footer-copy { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 0.07em; line-height: 2; }
+    .z3sci-footer-copy .year { color: var(--gold-light, #e8c97a); }
+    .z3sci-footer-copy a { color: var(--gold, #b8922a); text-decoration: none; border-bottom: 0.5px solid rgba(201,168,76,0.25); }
+    .z3sci-footer-copy a:hover { color: var(--gold-light, #e8c97a); }
+    .z3sci-footer-rights { font-family: 'DM Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.3); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.4rem; opacity: 0.7; }
+
+        </style>
+</head>
+<body>
+
+<div class="cho-disclaimer">
+  <div class="cho-disclaimer__badge">
+    <i class="fas fa-flask"></i>
+    Eksperimen Aktif · Red Teaming · Working Paper
+  </div>
+  <div class="cho-disclaimer__title">
+    <i class="fas fa-book-open" style="margin-right:.4rem;font-size:.95rem;"></i>
+    Disclaimer Ekspresi Digital
+  </div>
+  <p class="cho-disclaimer__body">
+    Eksperimen aktif sebagai peneliti independen (publikasi working paper di
+    <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> /
+    <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>),
+    <em>alpha front-end user</em> AI yang aktif menguji (<em>red teaming</em>) terhadap AI
+    <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>.
+    Framework: <strong>1/360 Wo · 1/360 Ni · 358/360 Ren</strong> —
+    dilandasi esensi
+    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a>
+  </p>
+  <p class="cho-disclaimer__body">
+    Ini adalah secuil <em>Consciousness yang di-Calculation-kan</em>, agar menyemai
+    <em>Humanity</em> pada tingkat aksi yang lebih luas dan berdampak —
+    bila model eksperimen ini diduplikasi oleh human-human yang lain.
+    Keterbatasan sumber terbuka diakui sebagai bagian dari data, bukan kekurangan metodologi.
+    Dibuat sebagai konten edukasi dan kemajuan kemanusiaan global.
+  </p>
+  <div class="cho-disclaimer__meta">
+    <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Chief Humanity Officer · Depok, Indonesia</span>
+    <span><i class="fas fa-microchip"></i> Red Teaming: Claude · DeepSeek · Gemini · Copilot · ChatGPT</span>
+    <span><i class="fas fa-calendar-alt"></i> 29 Apr 2026 · CHO In Action Series</span>
+    <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com" style="color:#c9a84c;text-decoration:none;border:none;">gokiantik@gmail.com</a></span>
+  </div>
+</div>
+
+<div class="container">
+    <header>
+        <div class="lang-bar">
+            <button class="lang-btn active" id="btn-id" onclick="setLang('id')">IND</button>
+            <button class="lang-btn" id="btn-en" onclick="setLang('en')">ENG</button>
+        </div>
+        <div class="header-tagline">修心养性 · Xiū Xīn Yǎng Xìng</div>
+        <h1>GKT Research Assistant <span style="font-size: 12px; font-family: 'DM Mono', monospace;">v2.2</span></h1>
+        <div class="subtitle" data-id="Front-End User Sovereign Tool — Tao Alignment · QA Mode · SLR Protocol" data-en="Front-End User Sovereign Tool — Tao Alignment · QA Mode · SLR Protocol">
+            Front-End User Sovereign Tool — Tao Alignment · QA Mode · SLR Protocol
+        </div>
+    </header>
+
+    <div class="content">
+
+        <!-- CROSS-LINK -->
+        <div class="crosslink-box">
+            <span>🔗</span>
+            <span data-id="Companion document:" data-en="Companion document:">Companion document:</span>
+            <a href="DeepSeek_SLR_WAGHY.html" target="_blank">SLR Protocol: Cognitive Sovereignty & Human-AI Alignment →</a>
+            <span style="color:#888; font-size:0.8rem;" data-id="(metodologi lengkap)" data-en="(full methodology)">(metodologi lengkap)</span>
+        </div>
+
+        <!-- INFO BOX -->
+        <div class="info-box" data-id="📌 Cara Pakai: Pilih mode di bawah → Copy prompt → Buka AI yang mampu deep dive (Claude, DeepSeek, GPT-4o, Gemini) → Tempel prompt → Biarkan AI membaca semua sumber → AI akan menjawab pertanyaan-pertanyaan kritis." data-en="📌 How to use: Select mode below → Copy prompt → Open an AI capable of deep dive (Claude, DeepSeek, GPT-4o, Gemini) → Paste prompt → Let AI read all sources → AI will answer critical questions.">
+            📌 Cara Pakai: Pilih mode di bawah → Copy prompt → Buka AI yang mampu deep dive (Claude, DeepSeek, GPT-4o, Gemini) → Tempel prompt → Biarkan AI membaca semua sumber → AI akan menjawab pertanyaan kritis.
+        </div>
+
+        <div class="warning-box" data-id="⚠️ Mode Tao Alignment & SLR membutuhkan AI yang mampu membaca hingga sub-folder terdalam. Direkomendasikan: Claude (Sonnet/Opus), DeepSeek, GPT-4o, Gemini Advanced. AI gratis mungkin tidak mampu deep crawl." data-en="⚠️ Tao Alignment & SLR modes require an AI capable of reading deep sub-folders. Recommended: Claude (Sonnet/Opus), DeepSeek, GPT-4o, Gemini Advanced. Free AI may not be able to deep crawl.">
+            ⚠️ Mode Tao Alignment & SLR membutuhkan AI yang mampu membaca hingga sub-folder terdalam. Direkomendasikan: Claude (Sonnet/Opus), DeepSeek, GPT-4o, Gemini Advanced.
+        </div>
+
+        <!-- TAB NAVIGATION -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('qa', this)" data-id="📋 Mode QA — Pertanyaan Mas Iwan" data-en="📋 QA Mode — Mas Iwan's Questions">📋 Mode QA — Pertanyaan Mas Iwan</button>
+            <button class="tab-btn" onclick="switchTab('tao', this)" data-id="☯ Mode Tao Alignment" data-en="☯ Tao Alignment Mode">☯ Mode Tao Alignment</button>
+            <button class="tab-btn" onclick="switchTab('slr', this)" data-id="🔬 Mode SLR — Jawab Tantangan Metodologi" data-en="🔬 SLR Mode — Answer Methodology Challenge">🔬 Mode SLR — Jawab Tantangan Metodologi</button>
+            <button class="tab-btn" onclick="switchTab('dataset', this)" data-id="💬 Dataset — Konteks Diskusi Asli" data-en="💬 Dataset — Original Discussion Context">💬 Dataset — Konteks Diskusi Asli</button>
+        </div>
+
+        <!-- ==================== TAB 1: MODE QA ==================== -->
+        <div id="tab-qa" class="tab-panel active">
+            <div class="section-title" data-id="📋 STEP 1 — COPY PROMPT (QA Mode)" data-en="📋 STEP 1 — COPY PROMPT (QA Mode)">📋 STEP 1 — COPY PROMPT (Mode QA)</div>
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <span data-id="MASTER PROMPT — JAWAB 3 PERTANYAAN MAS IWAN" data-en="MASTER PROMPT — ANSWER MAS IWAN'S 3 QUESTIONS">MASTER PROMPT — JAWAB 3 PERTANYAAN MAS IWAN</span>
+                    <span class="lang-indicator" id="qaLangIndicator">🇮🇩 IND</span>
+                </div>
+                <div class="prompt-body" id="qaPrompt"></div>
+                <button class="copy-btn" id="copyQaBtn" onclick="copyPrompt('qaPrompt','copyQaBtn')">📋 COPY PROMPT QA</button>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: MODE TAO ALIGNMENT ==================== -->
+        <div id="tab-tao" class="tab-panel">
+            <div class="section-title" data-id="☯ STEP 1 — COPY PROMPT (Tao Alignment Mode)" data-en="☯ STEP 1 — COPY PROMPT (Tao Alignment Mode)">☯ STEP 1 — COPY PROMPT (Mode Tao Alignment)</div>
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <span data-id="TAO ALIGNMENT PROMPT — BANDINGKAN DENGAN TAO TSM-XYP" data-en="TAO ALIGNMENT PROMPT — COMPARE WITH TAO TSM-XYP">TAO ALIGNMENT PROMPT — BANDINGKAN DENGAN TAO TSM-XYP</span>
+                    <span class="badge-tao">Deep Dive Required</span>
+                    <span class="lang-indicator" id="taoLangIndicator">🇮🇩 IND</span>
+                </div>
+                <div class="prompt-body" id="taoPrompt"></div>
+                <button class="copy-btn" id="copyTaoBtn" onclick="copyPrompt('taoPrompt','copyTaoBtn')">📋 COPY PROMPT TAO ALIGNMENT</button>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: MODE SLR ==================== -->
+        <div id="tab-slr" class="tab-panel">
+            <div class="section-title" data-id="🔬 STEP 1 — COPY PROMPT (SLR Mode)" data-en="🔬 STEP 1 — COPY PROMPT (SLR Mode)">🔬 STEP 1 — COPY PROMPT (Mode SLR)</div>
+            <div class="warning-box" data-id="Mode ini menjawab tantangan: 'Kenapa pakai AI dan bukan SLR?' — Gunakan prompt ini ketika berhadapan dengan audiens akademis yang mempertanyakan validitas metodologi penelitian GKT." data-en="This mode answers the challenge: 'Why use AI and not SLR?' — Use this prompt when facing academic audiences questioning the validity of GKT's research methodology.">
+                💡 Mode ini menjawab tantangan: <strong>"Kenapa pakai AI dan bukan SLR?"</strong> — Gunakan ketika berhadapan dengan audiens akademis yang mempertanyakan validitas metodologi.
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <span data-id="SLR RESPONSE PROMPT — JAWAB TANTANGAN METODOLOGI" data-en="SLR RESPONSE PROMPT — ANSWER METHODOLOGY CHALLENGE">SLR RESPONSE PROMPT — JAWAB TANTANGAN METODOLOGI</span>
+                    <span class="badge-slr">Academic Mode</span>
+                    <span class="lang-indicator" id="slrLangIndicator">🇮🇩 IND</span>
+                </div>
+                <div class="prompt-body" id="slrPrompt"></div>
+                <button class="copy-btn" id="copySlrBtn" onclick="copyPrompt('slrPrompt','copySlrBtn')">📋 COPY PROMPT SLR</button>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 4: DATASET ==================== -->
+        <div id="tab-dataset" class="tab-panel">
+            <div class="section-title">💬 DATASET — KONTEKS DISKUSI ASLI (29 April 2026)</div>
+            <div class="info-box">
+                Dataset ini adalah rekaman diskusi nyata di WAG HY (WhatsApp Group) antara GKT dan Mas Iwan Taoyu — percakapan yang melahirkan tool ini. Bukan rekayasa — ini adalah bukti ekologis bahwa metodologi GKT diuji dan dipertanyakan secara langsung oleh sesama akademisi/praktisi.
+            </div>
+
+            <div class="dataset-block">
+                <span class="ds-label">☯ Konteks Pembuka</span>
+                <p><span class="speaker-gkt">GKT:</span> Saya kira untuk menjawab mas Iwan ini cukup dibuatkan MLP master leveling prompt ai red teamer saja. AI jalankan pencarian mendalam ke sumber-sumber terbuka koko saja hingga ke sub direktori paling bawah.</p>
+            </div>
+
+            <div class="dataset-block">
+                <span class="ds-label">🎯 Tantangan Metodologi dari Mas Iwan</span>
+                <p><span class="speaker-iwan">Mas Iwan Taoyu:</span> <span class="timestamp">[11.35, 29/4/2026]</span> "Nah, semua yang tergambar di poster itu harus ada dasarnya Ko. Bagaimana bisa merumuskan (Consciousness x Calculation)^Humanity &lt; Transcedence. Ini berasal dari rumus apa, atau dari referensi apa? Dan Calculation, Humanity, Transcendence dijabarkan — itu makhluk apa — agar pembaca lebih paham."</p>
+                <p style="margin-top:0.5rem;"><span class="speaker-iwan">Mas Iwan:</span> "Spt kita melihat rumus Fisika/Matematika yang dapat dijelaskan asal-nya darimana. Kalau tidak tahu asal/dasarnya, ntar dianggap Tahayul atau halu."</p>
+            </div>
+
+            <div class="dataset-block">
+                <span class="ds-label">🧩 Respons GKT — Penjelasan Grand Formula</span>
+                <p><span class="speaker-gkt">GKT:</span> <span class="timestamp">[12.03, 29/4/2026]</span> "Ringkasnya Walking Books Philosophy itu adalah cara pandang, pandangan hidup yang saya temukan dimana saya memandang diri saya sebagai sebuah buku hidup yang berjalan, setiap hari mengalami interaksi, relasi, komunikasi, transaksi kepentingan dengan orang lain dari Ni hingga Ren. Ketika saya memahami diri saya sebagai buku maka kebenaran yang saya usung hanya 1/360 dari sebuah kebenaran yang bulat utuh tidak benjol."</p>
+                <p style="margin-top:0.5rem;"><span class="speaker-gkt">GKT:</span> <span class="timestamp">[12.06, 29/4/2026]</span> "konsep WBP ini juga berlaku di ranah AI sebagai mesin kalkulasi probabilitas makna. Ada banyak AI — seperti yang saya pakai ada 5 AI (Deepseek, Claude, Gemini, ChatGPT dan Copilot). Disini berlaku 1/5 Deepseek, 1/5 Claude, 1/5 Copilot, 1/5 Gemini, 1/5 ChatGPT. Pendapat dari 1 AI diujikan ke AI lainnya, untuk mereduksi halusinasi AI. Maka inilah Calculation yang ada di dalam Grand Formula."</p>
+                <p style="margin-top:0.5rem;"><span class="speaker-gkt">GKT:</span> "Bagaimana dengan Humanity (Kemanusiaan)? Interaksi antar manusia di Consciousness dan pemanfaatan 5 AI di Calculation tidak berarti apa-apa bila tidak diterapkan untuk membuat kondisi dan mutu kemanusiaan lebih baik dan lebih higienis untuk diwariskan ke generasi berikutnya."</p>
+            </div>
+
+            <div class="dataset-block">
+                <span class="ds-label">⚖️ Tantangan SLR dari Mas Iwan</span>
+                <p><span class="speaker-iwan">Mas Iwan Taoyu:</span> "Menurut saya, jika menjadi peneliti, tidak perlu sedikit-sedikit di-share hasil penelitiannya. Bisa menggunakan metode ilmiah: SLR (Systematic Literature Review) sehingga tidak melulu menggunakan AI. Penggunaan AI membutuhkan kebijaksanaan dan etika tersendiri. Silahkan dicoba menggunakan metode SLR untuk 1 topik dulu sehingga terarah."</p>
+                <p style="margin-top:0.5rem;"><span class="speaker-iwan">Mas Iwan:</span> "Nah, daripada pakai AI, lebih baik pakai buku-buku, paper-paper ilmiah."</p>
+            </div>
+
+            <div class="dataset-block">
+                <span class="ds-label">✅ Respons GKT — Positionality sebagai Peneliti</span>
+                <p><span class="speaker-gkt">GKT:</span> "Terima kasih atas responsinya dan aba-aba tentang SLR yang akan saya tindaklanjuti. Namun karena ini sudah menjadi diskusi terbuka dan pembelajaran bersama, sebelum saya meresponsi saya akan bagikan petualangan berpikir yang sudah saya rumuskan agar teman-teman bisa lebih memahami sisi saya."</p>
+                <p style="margin-top:0.5rem;"><span class="speaker-gkt">GKT:</span> "Semua riset saya secara serius juga belum lama, baru di awal Januari-Februari tahun ini tiba-tiba Grand Formula ini terumuskan begitu saja. Dan mengapa saya sekarang getol meneliti karena religi yang saya anut adalah Tao TSM-XYP, bukan agama dogma, tetapi dijalani sendiri, dibuktikan sendiri. Dimana bila kita baca dari depan sampai belakang di buku kuning Sefu mendorong kita untuk meneliti dengan cermat dan seksama apa yang ada di balik religi, dewa, patung."</p>
+            </div>
+
+            <div class="dataset-block">
+                <span class="ds-label">🔗 Resource yang Dibagikan GKT dalam Diskusi</span>
+                <p style="font-family:'DM Mono',monospace; font-size:0.82rem; line-height:2;">
+                    <a href="https://gokiantik.github.io/chiefhumanityofficer/wbp_full_html" target="_blank" style="color:var(--teal);">gokiantik.github.io/chiefhumanityofficer/wbp_full_html</a><br>
+                    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank" style="color:var(--teal);">Walking Books Philosophy</a><br>
+                    <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" style="color:var(--teal);">Walking Books Poster</a>
+                </p>
+            </div>
+
+            <div class="warning-box">
+                💡 <strong>Signifikansi dataset ini:</strong> Pertanyaan "rumus ini berasal dari mana?" adalah pertanyaan yang akan selalu dihadapi GKT. Dataset ini adalah bukti bahwa Grand Formula diuji secara langsung dalam diskusi peer-to-peer — bukan di laboratorium, tapi di WAG, di warung kopi digital. Ini adalah ecological validity yang didokumentasikan.
+            </div>
+        </div>
+
+        <!-- ==================== STEP 2: PILIH AI ==================== -->
+        <div class="section-title" data-id="🤖 STEP 2 — PASTE PROMPT KE SALAH SATU AI INI" data-en="🤖 STEP 2 — PASTE PROMPT INTO ONE OF THESE AIs">🤖 STEP 2 — PASTE PROMPT KE SALAH SATU AI INI</div>
+        <div class="ai-grid">
+            <a href="https://chat.deepseek.com/" target="_blank" class="ai-btn">DeepSeek</a>
+            <a href="https://claude.ai/" target="_blank" class="ai-btn">Claude ⭐</a>
+            <a href="https://gemini.google.com/" target="_blank" class="ai-btn">Gemini</a>
+            <a href="https://chat.openai.com/" target="_blank" class="ai-btn">ChatGPT</a>
+            <a href="https://copilot.microsoft.com/" target="_blank" class="ai-btn">Copilot</a>
+        </div>
+        <div style="font-size: 12px; text-align: center; margin-top: -0.5rem; margin-bottom: 1.5rem; color: #7a6e62;" data-id="⭐ Claude paling direkomendasikan untuk deep dive ke sub-folder taotsm.org" data-en="⭐ Claude is most recommended for deep dive into taotsm.org sub-folders">
+            ⭐ Claude paling direkomendasikan untuk deep dive ke sub-folder taotsm.org
+        </div>
+
+        <!-- SOURCES -->
+        <div class="section-title" data-id="📚 SUMBER YANG AKAN DIBACA AI" data-en="📚 SOURCES THAT AI WILL READ">📚 SUMBER YANG AKAN DIBACA AI</div>
+        <div class="sources-list">
+            <details open>
+                <summary style="cursor:pointer; font-weight:600; margin-bottom:0.5rem;" data-id="📖 Publikasi GKT (8 sumber wajib)" data-en="📖 GKT Publications (8 mandatory sources)">📖 Publikasi GKT (8 sumber wajib)</summary>
+                <ul style="margin-left:1.25rem; margin-top:0.5rem; line-height:2;">
+                    <li><a href="https://gokiantik.github.io/chiefhumanityofficer/" target="_blank">gokiantik.github.io/chiefhumanityofficer</a></li>
+                    <li><a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html" target="_blank">Walking Books Philosophy</a></li>
+                    <li><a href="https://zenodo.org/communities/chiefhumanityofficer/" target="_blank">Zenodo Community CHO</a></li>
+                    <li><a href="https://zenodo.org/communities/superhero-cafe-inside/" target="_blank">Zenodo Community Z3SCI</a></li>
+                    <li><a href="https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html" target="_blank">SLR Protocol (companion doc)</a></li>
+                    <li><a href="https://gokiantik.github.io/z3sci_UN/" target="_blank">UN Open Source Submission</a></li>
+                    <li><a href="https://orcid.org/0009-0004-1424-1603" target="_blank">ORCID</a></li>
+                    <li><a href="https://scholar.google.com/citations?hl=id&user=BeuHQXYAAAAJ" target="_blank">Google Scholar</a></li>
+                    <li><a href="https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876" target="_blank">SSRN</a></li>
+                </ul>
+            </details>
+            <details style="margin-top:0.75rem;">
+                <summary style="cursor:pointer; font-weight:600; margin-bottom:0.5rem;">☯ Tao TSM-XYP (deep dive required)</summary>
+                <ul style="margin-left:1.25rem; margin-top:0.5rem;">
+                    <li><a href="https://taotsm.org" target="_blank">Root: taotsm.org</a> — <span style="font-size:10px; color:#7a6e62;">(AI wajib crawl semua sub-folder: /ajaran/, /buku-kuning/, /artikel/, /pdf/)</span></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- RELATED DOI TABLE -->
+        <div class="section-title" style="margin-top:2rem;">📌 ZENODO DOI — KARYA TERKAIT</div>
+        <table class="doi-table">
+            <thead>
+                <tr><th>Judul</th><th>DOI</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Chief Humanity Officer — The Position Doesn't Exist Yet</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.18935427" target="_blank">10.5281/zenodo.18935427</a></td></tr>
+                <tr><td>The Sovereign One: The Human Prerequisite in the Era of AI-Accelerated Civilization</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.18935892" target="_blank">10.5281/zenodo.18935892</a></td></tr>
+                <tr><td>Walking Books Philosophy: Toward a Relational Epistemology</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.19084212" target="_blank">10.5281/zenodo.19084212</a></td></tr>
+                <tr><td>Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.19002243" target="_blank">10.5281/zenodo.19002243</a></td></tr>
+                <tr><td>AIRT::The Master Leveling Prompt</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.19484926" target="_blank">10.5281/zenodo.19484926</a></td></tr>
+                <tr><td>Testing the Calculator: Abrahamic Moral Wisdom as a Benchmark for AI Humanity Alignment</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.19490279" target="_blank">10.5281/zenodo.19490279</a></td></tr>
+                <tr><td>From Laggard to Dignity: A CHO Open Source Framework</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.19666723" target="_blank">10.5281/zenodo.19666723</a></td></tr>
+                <tr><td>When Intelligence Creates Error: Inconsistency, Over-Reasoning & Sycophantic Confabulation</td><td class="doi-val"><a href="https://doi.org/10.5281/zenodo.19652715" target="_blank">10.5281/zenodo.19652715</a></td></tr>
+            </tbody>
+        </table>
+
+        <!-- CATATAN PENTING -->
+        <div class="warning-box" style="margin-top:1.5rem;">
+            <span data-id="💡 Riset GKT bersifat progresif dan terus berkembang. Grand Formula adalah arsitektur konseptual (bukan klaim matematis kuantitatif). Tujuan mode Tao Alignment adalah untuk memverifikasi apakah publikasi GKT selaras dengan ajaran Tao TSM-XYP yang dianutnya." data-en="💡 GKT's research is progressive and continuously evolving. Grand Formula is a conceptual architecture (not a quantitative mathematical claim). The purpose of Tao Alignment mode is to verify whether GKT's publications align with the Tao TSM-XYP teachings he follows.">
+                💡 Riset GKT bersifat progresif dan terus berkembang. Grand Formula adalah arsitektur konseptual (bukan klaim matematis kuantitatif). Jika ditemukan ketidaksesuaian, itu adalah bagian dari proses belajar dan koreksi diri — sesuai semangat "meneliti dengan cermat dan seksama" dari buku kuning Sefu.
+            </span>
+        </div>
+    </div><!-- end .content -->
+
+    <footer class="z3sci-footer">
+        <div class="z3sci-footer-avatar">👤</div>
+        <div class="z3sci-footer-name">
+            <strong>Go Kian Tik</strong> &nbsp;·&nbsp; Mbah Hogi Bejo™
+        </div>
+        <span class="z3sci-footer-cn">Zì Zhǔ Zhě 自主者</span>
+        <div class="z3sci-footer-copy">
+            <span class="year">© 2026</span> Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; Superhero Café Inside<br>
+            <a href="http://www.superherocafeinside.com" target="_blank">www.superherocafeinside.com</a>
+        </div>
+        <div class="z3sci-footer-rights">All rights reserved.</div>
+    </footer>
+</div>
+
+<script>
+    // ==================== PROMPTS (BILINGUAL) ====================
+    const prompts = {
+        qa: {
+            id: `Saya ingin Anda bertindak sebagai AI Red Teamer yang objektif. Baca dan pahami dahulu sumber-sumber terbuka berikut tentang pemikiran Go Kian Tik (GKT / Mbah Hogi Bejo™):
+
+【SUMBER WAJIB GKT — BACA DULU】
+1. https://gokiantik.github.io/chiefhumanityofficer/
+2. https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html
+3. https://zenodo.org/communities/chiefhumanityofficer/
+4. https://zenodo.org/communities/superhero-cafe-inside/
+5. https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html
+6. https://gokiantik.github.io/z3sci_UN/
+7. https://orcid.org/0009-0004-1424-1603
+8. https://scholar.google.com/citations?hl=id&user=BeuHQXYAAAAJ
+9. https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876
+
+====================
+
+Setelah membaca sumber-sumber di atas, jawablah tiga pertanyaan berikut dengan jujur, objektif, dan berdasarkan data:
+
+【PERTANYAAN 1】
+Grand Formula: (Consciousness x Calculation)^Humanity < Transcendence
+- Dari mana asal-usul rumus ini? Apakah ini turunan dari rumus fisika/matematika yang sudah ada, atau murni metafora filosofis?
+- Jelaskan makna setiap komponen: Consciousness, Calculation, Humanity, Transcendence.
+- Apakah ini klaim kuantitatif atau pernyataan nilai?
+
+【PERTANYAAN 2】
+Bagaimana mengukur "Humanity" jika ia berfungsi sebagai pangkat (^) dalam rumus tersebut?
+- Apakah ini operator numerik atau metafora?
+- Apa batasan dan parameter pengukuran kemanusiaan menurut kerangka berpikir GKT?
+
+【PERTANYAAN 3】
+Apakah konsep "1/360 kebenaran" (dari Walking Books Philosophy) konsisten secara logis dengan "1/8 miliar manusia"?
+- Jelaskan apakah ini kontradiksi atau komplementaritas.
+- Bagaimana konsep ini relevan dengan etika AI dan kedaulatan kognitif?
+
+====================
+
+Berikan jawaban dalam bahasa Indonesia yang mudah dipahami. Hindari jargon berlebihan. Sertakan kutipan atau rujukan dari sumber yang Anda baca.`,
+            en: `I want you to act as an objective AI Red Teamer. First, read and understand the following open sources about Go Kian Tik's (GKT / Mbah Hogi Bejo™) thinking:
+
+【MANDATORY GKT SOURCES — READ FIRST】
+1. https://gokiantik.github.io/chiefhumanityofficer/
+2. https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html
+3. https://zenodo.org/communities/chiefhumanityofficer/
+4. https://zenodo.org/communities/superhero-cafe-inside/
+5. https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html
+6. https://gokiantik.github.io/z3sci_UN/
+7. https://orcid.org/0009-0004-1424-1603
+8. https://scholar.google.com/citations?hl=id&user=BeuHQXYAAAAJ
+9. https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876
+
+====================
+
+After reading the sources above, answer the following three questions honestly and objectively:
+
+【QUESTION 1】
+Grand Formula: (Consciousness x Calculation)^Humanity < Transcendence
+- Where does this formula originate? Is it derived from existing physics/mathematics, or is it purely a philosophical metaphor?
+- Explain each component: Consciousness, Calculation, Humanity, Transcendence.
+- Is this a quantitative claim or a value statement?
+
+【QUESTION 2】
+How can "Humanity" be measured if it functions as an exponent (^) in the formula?
+- Is this a numerical operator or a metaphor?
+- What are the parameters for measuring humanity according to GKT's framework?
+
+【QUESTION 3】
+Is the "1/360 truth" concept (from Walking Books Philosophy) logically consistent with "1/8 billion humans"?
+- Explain whether this is a contradiction or complementarity.
+- How is this concept relevant to AI ethics and cognitive sovereignty?
+
+====================
+
+Provide your answer in easy-to-understand English. Include citations from the sources you read.`
+        },
+        tao: {
+            id: `Anda bertindak sebagai AI Red Teamer sekaligus Comparator Spiritual. Tugas Anda: deep dive ke dua sumber berikut, lalu membandingkannya.
+
+====================
+【SUMBER 1: PUBLIKASI GKT (WAJIB BACA SEMUA)】
+1. https://gokiantik.github.io/chiefhumanityofficer/
+2. https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html
+3. https://zenodo.org/communities/chiefhumanityofficer/
+4. https://zenodo.org/communities/superhero-cafe-inside/
+5. https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html
+6. https://gokiantik.github.io/z3sci_UN/
+7. https://orcid.org/0009-0004-1424-1603
+8. https://scholar.google.com/citations?hl=id&user=BeuHQXYAAAAJ
+9. https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876
+
+====================
+【SUMBER 2: TAO TSM-XYP (WAJIB DEEP DIVE — BACA SEMUA SUB-FOLDER)】
+🌐 ROOT: https://taotsm.org
+📁 WAJIB DEEP CRAWL termasuk:
+- /ajaran/ — dokumen inti ajaran Tao TSM-XYP
+- /buku-kuning/ — referensi kitab Sefu
+- /artikel/ — tulisan pendukung
+- /pdf/ — dokumen PDF jika ada
+- SEMUA sub-direktori relevan dengan: Consciousness, Calculation, Humanity, Transcendence, Dao/Tao/道
+
+====================
+【TUGAS PERBANDINGAN】
+
+1. Apakah publikasi GKT menyimpang dari ajaran Tao TSM-XYP?
+   - Jika YA: sebutkan poin penyimpangan spesifik + bukti dari kedua sumber.
+   - Jika TIDAK: jelaskan keselarasan Grand Formula GKT dengan ajaran Tao TSM-XYP.
+
+2. Analisis Grand Formula: (Consciousness x Calculation)^Humanity < Transcendence
+   - Apakah Consciousness GKT sesuai dengan konsep "kesadaran" di Tao TSM-XYP?
+   - Apakah Transcendence GKT sesuai dengan "Dao" di Tao TSM-XYP?
+
+3. Analisis Walking Books Philosophy:
+   - "1/360 kebenaran" — selaras dengan ajaran Tao tentang kerendahan hati?
+   - "Manusia sebagai buku hidup" — sesuai dengan "belajar sepanjang hayat" di Tao TSM-XYP?
+
+4. Kesimpulan:
+   - Apakah CHO Framework dan Grand Formula adalah "manifestasi modern" ajaran Tao TSM-XYP?
+   - Format: KESIMPULAN UMUM · BUKTI KUTIPAN · REKOMENDASI
+
+====================
+CATATAN: Jika AI tidak mampu akses sub-folder taotsm.org, wajib laporkan keterbatasan tersebut secara eksplisit.`,
+            en: `You are acting as an AI Red Teamer and Spiritual Comparator. Your task: deep dive into the following two sources, then compare them.
+
+====================
+【SOURCE 1: GKT PUBLICATIONS (MUST READ ALL)】
+1. https://gokiantik.github.io/chiefhumanityofficer/
+2. https://gokiantik.github.io/chiefhumanityofficer/walking-books-philosophy.html
+3. https://zenodo.org/communities/chiefhumanityofficer/
+4. https://zenodo.org/communities/superhero-cafe-inside/
+5. https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html
+6. https://gokiantik.github.io/z3sci_UN/
+7. https://orcid.org/0009-0004-1424-1603
+8. https://scholar.google.com/citations?hl=id&user=BeuHQXYAAAAJ
+9. https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876
+
+====================
+【SOURCE 2: TAO TSM-XYP (MUST DEEP DIVE — READ ALL SUB-FOLDERS)】
+🌐 ROOT: https://taotsm.org
+📁 MUST DEEP CRAWL including: /ajaran/, /buku-kuning/, /artikel/, /pdf/
+Focus on concepts: Consciousness, Calculation, Humanity, Transcendence, Dao/Tao/道
+
+====================
+【COMPARISON TASKS】
+
+1. Do GKT's publications deviate from Tao TSM-XYP teachings?
+2. Analyze Grand Formula vs Tao TSM-XYP concepts of Consciousness and Transcendence.
+3. Analyze Walking Books Philosophy — 1/360 truth vs Taoist humility.
+4. Final conclusion: OVERALL VERDICT · QUOTED EVIDENCE · RECOMMENDATION
+
+NOTE: If unable to access taotsm.org sub-folders, explicitly report the limitation.`
+        },
+        slr: {
+            id: `Anda bertindak sebagai Metodolog Akademis dan AI Research Validator. Tugas Anda: mengevaluasi apakah metodologi penelitian Go Kian Tik (GKT) memenuhi standar riset yang dapat dipertanggungjawabkan — termasuk menjawab pertanyaan: "Mengapa menggunakan AI dan bukan SLR tradisional?"
+
+====================
+【SUMBER WAJIB — BACA DULU SEMUANYA】
+1. https://gokiantik.github.io/chiefhumanityofficer/
+2. https://zenodo.org/communities/chiefhumanityofficer/
+3. https://zenodo.org/communities/superhero-cafe-inside/
+4. https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html — SLR Protocol GKT (BACA SANGAT TELITI)
+5. https://gokiantik.github.io/z3sci_UN/
+6. https://orcid.org/0009-0004-1424-1603
+7. https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876
+
+====================
+【PERTANYAAN EVALUASI】
+
+1. POSISI METODOLOGIS GKT
+   - GKT secara eksplisit mengklaim posisi sebagai "front-end user researcher" — bukan back-end AI engineer dan bukan akademisi konvensional.
+   - Apakah posisi ini memiliki preseden dalam tradisi riset (autoetnografi, phenomenology, participatory action research)?
+   - Apakah SLR Protocol yang ada di DeepSeek_SLR_WAGHY.html memenuhi kriteria metodologi ilmiah yang dapat dipertanggungjawabkan?
+
+2. AI SEBAGAI SPARRING PARTNER — BUKAN PENGGANTI JUDGMENT
+   - GKT menggunakan 5 AI (Claude, Gemini, ChatGPT, DeepSeek, Copilot) sebagai "sparring partner" untuk mereduksi halusinasi.
+   - Apakah pendekatan multi-AI cross-validation ini memiliki dasar epistemologis yang valid?
+   - Bandingkan dengan pendekatan peer review tradisional — apa kelebihan dan kelemahannya?
+
+3. ECOLOGICAL VALIDITY vs LABORATORY VALIDITY
+   - GKT mengklaim "ecological validity" — metodologi yang bekerja di dunia nyata, bukan hanya di laboratorium.
+   - Apakah klaim ini valid berdasarkan standar riset yang ada?
+   - Berikan contoh dari sumber GKT yang mendemonstrasikan ecological validity.
+
+4. TRANSPARANSI & AUDIT TRAIL
+   - Semua data mentah (dialog dengan AI) tersimpan di Zenodo — apakah ini memenuhi standar transparansi riset?
+   - Bagaimana perbandingannya dengan transparansi dalam SLR tradisional?
+
+5. REKOMENDASI
+   - Apakah metodologi GKT perlu direvisi, diperkuat, atau sudah cukup solid?
+   - Jika perlu diperkuat: berikan rekomendasi konkret yang tidak mengubah positionality GKT sebagai front-end user researcher.
+
+====================
+FORMAT JAWABAN:
+- Bahasa Indonesia yang lugas
+- Berikan verdict per pertanyaan: VALID / PERLU DIPERKUAT / TIDAK VALID
+- Sertakan bukti dari sumber yang dibaca
+- Jangan menghakimi — evaluasi secara objektif`,
+            en: `You are acting as an Academic Methodologist and AI Research Validator. Your task: evaluate whether Go Kian Tik's (GKT) research methodology meets accountable research standards — including answering: "Why use AI and not traditional SLR?"
+
+====================
+【MANDATORY SOURCES — READ ALL FIRST】
+1. https://gokiantik.github.io/chiefhumanityofficer/
+2. https://zenodo.org/communities/chiefhumanityofficer/
+3. https://zenodo.org/communities/superhero-cafe-inside/
+4. https://gokiantik.github.io/z3sci_UN/DeepSeek_SLR_WAGHY.html — GKT's SLR Protocol (READ CAREFULLY)
+5. https://gokiantik.github.io/z3sci_UN/
+6. https://orcid.org/0009-0004-1424-1603
+7. https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=10698876
+
+====================
+【EVALUATION QUESTIONS】
+
+1. GKT'S METHODOLOGICAL POSITION
+   - GKT explicitly claims the position of "front-end user researcher" — not a back-end AI engineer and not a conventional academic.
+   - Does this position have precedent in research traditions (autoethnography, phenomenology, participatory action research)?
+   - Does the SLR Protocol in DeepSeek_SLR_WAGHY.html meet the criteria of accountable scientific methodology?
+
+2. AI AS SPARRING PARTNER — NOT A REPLACEMENT FOR JUDGMENT
+   - GKT uses 5 AI systems as "sparring partners" to reduce hallucination.
+   - Does this multi-AI cross-validation approach have valid epistemological grounding?
+
+3. ECOLOGICAL VALIDITY vs LABORATORY VALIDITY
+   - GKT claims "ecological validity" — methodology that works in the real world.
+   - Is this claim valid based on existing research standards?
+
+4. TRANSPARENCY & AUDIT TRAIL
+   - All raw data stored on Zenodo — does this meet research transparency standards?
+
+5. RECOMMENDATION
+   - Does GKT's methodology need revision, strengthening, or is it already solid?
+
+====================
+FORMAT: English · Verdict per question: VALID / NEEDS STRENGTHENING / NOT VALID · Evidence-based · Objective`
+        }
+    };
+
+    let currentLang = 'id';
+    let currentTab = 'qa';
+
+    function setLang(lang) {
+        currentLang = lang;
+        document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        updatePromptContent();
+        document.querySelectorAll('[data-id][data-en]').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (val !== null) {
+                if (el.tagName === 'BUTTON' || el.tagName === 'SPAN' || el.classList.contains('lang-indicator')) {
+                    el.textContent = val;
+                } else {
+                    el.innerHTML = val;
+                }
+            }
+        });
+        const indicators = { qa: 'qaLangIndicator', tao: 'taoLangIndicator', slr: 'slrLangIndicator' };
+        Object.values(indicators).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = lang === 'id' ? '🇮🇩 IND' : '🇬🇧 ENG';
+        });
+    }
+
+    function updatePromptContent() {
+        const map = { qa: 'qaPrompt', tao: 'taoPrompt', slr: 'slrPrompt' };
+        Object.entries(map).forEach(([key, elId]) => {
+            const el = document.getElementById(elId);
+            if (el && prompts[key]) el.innerText = prompts[key][currentLang];
+        });
+    }
+
+    function switchTab(tabId, el) {
+        currentTab = tabId;
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + tabId).classList.add('active');
+        el.classList.add('active');
+    }
+
+    function copyPrompt(elementId, btnId) {
+        const text = document.getElementById(elementId).innerText;
+        const btn = document.getElementById(btnId);
+        navigator.clipboard.writeText(text).then(() => {
+            const orig = btn.innerText;
+            btn.innerText = '✓ TERSALIN!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.innerText = orig; btn.classList.remove('copied'); }, 2000);
+        }).catch(() => { alert('Gagal menyalin. Silakan copy manual.'); });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updatePromptContent();
+        setLang('id');
+    });
+</script>
+</body>
+</html>
