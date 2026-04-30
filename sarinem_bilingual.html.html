@@ -25,6 +25,28 @@
             margin: 0 auto;
         }
 
+        /* Toast notification (popup sementara, tidak masuk chat) */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d1b3a;
+            color: #f9eeb0;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-family: 'DM Mono', monospace;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .toast-notification.show {
+            opacity: 1;
+        }
+
         /* Disclaimer CHO */
         .cho-disclaimer {
             background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
@@ -426,6 +448,12 @@
             font-size: 7px;
             color: #7A7260;
         }
+
+        /* Loading overlay untuk efek transisi */
+        .loading-dots {
+            display: inline-flex;
+            gap: 2px;
+        }
     </style>
 </head>
 <body>
@@ -501,11 +529,24 @@
     </div>
 </div>
 
+<!-- Toast Notification (tidak masuk chat) -->
+<div id="toastMsg" class="toast-notification"></div>
+
 <script>
     // ==============================================================
-    // BILINGUAL UI STATE
+    // BILINGUAL UI STATE (tanpa notifikasi chat)
     // ==============================================================
     let currentLang = "id"; // id = Indonesia, en = English
+    
+    // Toast notification helper
+    function showToast(message, duration = 2000) {
+        const toast = document.getElementById("toastMsg");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, duration);
+    }
     
     // Daftar teks bilingual
     const texts = {
@@ -541,7 +582,7 @@
         feedback3Text: { id: "Lain-lain / masukan", en: "Other / feedback" },
         closeExitBtn: { id: "Tutup", en: "Close" },
         
-        // Quick replies options (dinamis)
+        // Quick replies options (untuk inisialisasi awal)
         qrBingung: { id: "Saya bingung dengan hubungan", en: "I'm confused about my relationship" },
         qrKekerasan: { id: "Apakah ini kekerasan?", en: "Is this abuse?" },
         qrCerita: { id: "Saya ingin cerita", en: "I want to share my story" },
@@ -584,21 +625,21 @@
         document.getElementById("feedback3Text").textContent = texts.feedback3Text[currentLang];
         document.getElementById("closeExitBtn").textContent = texts.closeExitBtn[currentLang];
         
-        // Tombol toggle (ubah label)
+        // Tombol toggle (ubah label) - TIDAK menambah notifikasi ke chat
         document.getElementById("langToggleBtn").innerHTML = currentLang === "id" ? "🌐 EN" : "🌐 ID";
     }
     
-    // Toggle language
+    // Toggle language dengan toast notification (BUKAN chat message)
     document.getElementById("langToggleBtn").addEventListener("click", () => {
         currentLang = currentLang === "id" ? "en" : "id";
         updateUILanguage();
-        // Tambahkan pesan notifikasi kecil di chat
-        const notification = currentLang === "id" ? "🌐 Bahasa UI diubah ke Indonesia" : "🌐 UI language changed to English";
-        addMessage(notification, false, null);
+        // Tampilkan toast notification yang akan hilang sendiri (tidak masuk chat)
+        const toastMsg = currentLang === "id" ? "🌐 Bahasa UI diubah ke Indonesia" : "🌐 UI language changed to English";
+        showToast(toastMsg, 1500);
     });
     
     // ==============================================================
-    // STATE MACHINE FULL IMPLEMENTATION (S0-S8) - SAMA SEPERTI SEBELUMNYA
+    // STATE MACHINE FULL IMPLEMENTATION (S0-S8)
     // ==============================================================
     
     let currentState = "S0";
@@ -609,7 +650,7 @@
     const userInput = document.getElementById("userInput");
     const stateIndicator = document.getElementById("stateIndicator");
     
-    // OPAL GEMINI LINK (sama seperti sebelumnya)
+    // OPAL GEMINI LINK KOKO
     const OPAL_GEMINI_URL = "https://gemini.google.com/gem-labs/1G-_1yn9mSXfzPuV_oYRwzefK0Oy5qsm0";
     document.getElementById("opalGeminiBtn").addEventListener("click", () => {
         window.open(OPAL_GEMINI_URL, "_blank");
@@ -799,14 +840,14 @@
             hideTyping();
             const reply = processMessage(message);
             let qrs = [];
-            const qrBingung = texts.qrBingung[currentLang];
-            const qrKekerasan = texts.qrKekerasan[currentLang];
-            const qrCerita = texts.qrCerita[currentLang];
-            const qrBantuan = texts.qrBantuan[currentLang];
+            const qrBingungText = texts.qrBingung[currentLang];
+            const qrKekerasanText = texts.qrKekerasan[currentLang];
+            const qrCeritaText = texts.qrCerita[currentLang];
+            const qrBantuanText = texts.qrBantuan[currentLang];
             
             if (currentState === "S5") qrs = ["Saya dalam bahaya sekarang", "Hubungi nomor darurat"];
             else if (currentState === "S3" || currentState === "S4") qrs = ["Saya ingin bantuan", "Saya ingin cerita lebih lanjut"];
-            else qrs = [qrBingung, qrKekerasan, qrCerita, qrBantuan];
+            else qrs = [qrBingungText, qrKekerasanText, qrCeritaText, qrBantuanText];
             addMessage(reply, false, qrs);
             isWaiting = false;
         }, 800);
@@ -864,7 +905,7 @@
     // Inisialisasi UI bahasa
     updateUILanguage();
     
-    // Inisialisasi state machine
+    // Inisialisasi state machine dan sapaan awal (dengan quick replies bilingual)
     setTimeout(() => {
         const s0Message = "Halo, saya Sarinem. 🌾\n\nSaya di sini untuk mendukung siapa pun yang mengalami masalah dalam hubungan.\n\nSemua yang Anda ceritakan bersifat rahasia. Jika Anda merasa tidak aman, gunakan tombol 'Keluar Aman' kapan saja.\n\nApa yang ingin Anda bicarakan hari ini?";
         const qrBingungText = texts.qrBingung[currentLang];
