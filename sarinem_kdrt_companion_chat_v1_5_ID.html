@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sarinem.chat · Pendamping KDRT Indonesia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #2d1b3a 0%, #1a0f24 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .srn-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Disclaimer CHO */
+        .cho-disclaimer {
+            background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+            color: #e8eef2;
+            padding: 1rem 1.2rem;
+            border-bottom: 2.5px solid #c9a84c;
+            border-radius: 16px 16px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .cho-disclaimer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: .5;
+        }
+        .cho-disclaimer > * { position: relative; }
+        .cho-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(201,168,76,0.13);
+            border: 1px solid rgba(201,168,76,0.28);
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+            color: #c9a84c;
+            text-transform: uppercase;
+        }
+        .cho-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        .cho-body {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 0.4rem;
+        }
+        .cho-body a {
+            color: #c9a84c;
+            text-decoration: none;
+        }
+        .cho-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-top: 0.6rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.55rem;
+            color: #b0bec8;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 0.6rem;
+        }
+
+        /* App Shell */
+        .srn-app {
+            background: #fffaf2;
+            border-radius: 0 0 16px 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 560px;
+        }
+
+        /* Topbar */
+        .srn-topbar {
+            background: #3C3489;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .srn-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .srn-avatar {
+            width: 36px;
+            height: 36px;
+            background: #EEEDFE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #3C3489;
+        }
+        .srn-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #EEEDFE;
+        }
+        .srn-sub {
+            font-size: 9px;
+            color: #AFA9EC;
+        }
+        .srn-exit-btn {
+            background: #993C1D;
+            color: #FAECE7;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Hotline Bar */
+        .srn-hotline {
+            background: #0d1a14;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            border-bottom: 0.5px solid rgba(31,111,75,0.4);
+        }
+        .hl-label {
+            font-size: 9px;
+            color: #5DCAA5;
+            font-family: 'DM Mono', monospace;
+        }
+        .hl-chip {
+            background: rgba(31,111,75,0.25);
+            border: 0.5px solid rgba(93,202,165,0.3);
+            border-radius: 20px;
+            padding: 3px 8px;
+            font-size: 9px;
+            color: #9FE1CB;
+            cursor: pointer;
+            font-family: 'DM Mono', monospace;
+        }
+        .hl-chip:hover {
+            background: rgba(93,202,165,0.2);
+        }
+
+        /* Messages Area */
+        .srn-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .msg {
+            display: flex;
+            gap: 8px;
+            max-width: 85%;
+        }
+        .msg.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .msg.bot {
+            align-self: flex-start;
+        }
+        .bubble {
+            padding: 9px 13px;
+            border-radius: 16px;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+        .msg.bot .bubble {
+            background: white;
+            border: 0.5px solid #e2cfb5;
+            border-bottom-left-radius: 4px;
+        }
+        .msg.user .bubble {
+            background: #3C3489;
+            color: #EEEDFE;
+            border-bottom-right-radius: 4px;
+        }
+        .msg-avatar {
+            width: 28px;
+            height: 28px;
+            background: #EEEDFE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #3C3489;
+            flex-shrink: 0;
+        }
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 9px 13px;
+            background: white;
+            border: 0.5px solid #e2cfb5;
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            width: 50px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #7F77DD;
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+        .dot:nth-child(2) { animation-delay: .2s; }
+        .dot:nth-child(3) { animation-delay: .4s; }
+        @keyframes blink { 0%,80%,100% { opacity: .3; } 40% { opacity: 1; } }
+
+        /* Quick Replies */
+        .quick-wrap {
+            margin-left: 36px;
+            margin-top: 4px;
+        }
+        .quick-replies {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .qr {
+            background: #EEEDFE;
+            border: 0.5px solid #AFA9EC;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 10px;
+            cursor: pointer;
+            color: #3C3489;
+        }
+        .qr:hover {
+            background: #CECBF6;
+        }
+
+        /* Input Area */
+        .srn-inputarea {
+            border-top: 0.5px solid #ecd9c0;
+            padding: 10px 12px;
+            display: flex;
+            gap: 8px;
+            background: white;
+        }
+        #userInput {
+            flex: 1;
+            border: 0.5px solid #e2cfb5;
+            border-radius: 20px;
+            padding: 8px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            resize: none;
+            background: white;
+        }
+        #userInput:focus {
+            outline: none;
+            border-color: #7F77DD;
+        }
+        #sendBtn {
+            background: #3C3489;
+            border: none;
+            border-radius: 40px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        #sendBtn:hover {
+            background: #26215C;
+        }
+
+        /* Overlay Quick Exit - VERSI FEEDBACK LENGKAP DENGAN EMAIL */
+        .srn-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .srn-overlay.show {
+            display: flex;
+        }
+        .exit-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+        }
+        .exit-card h3 {
+            font-size: 18px;
+            color: #2d1b3a;
+            margin-bottom: 12px;
+        }
+        .exit-card p {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .exit-card .feedback-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .feedback-btn {
+            background: #f3ede8;
+            border: 1px solid #dcc8b0;
+            border-radius: 40px;
+            padding: 10px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .feedback-btn:hover {
+            background: #e6d9cc;
+            transform: translateX(4px);
+        }
+        .feedback-emoji {
+            font-size: 18px;
+        }
+        .close-exit {
+            background: #993C1D;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .close-exit:hover {
+            background: #712B1D;
+        }
+        .thankyou-message {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #2e7d32;
+            display: none;
+        }
+        .thankyou-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        .srn-footer {
+            background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+            border-radius: 0 0 16px 16px;
+            padding: 0.8rem 1.2rem;
+            text-align: center;
+        }
+        .srn-footer-name {
+            font-family: 'DM Mono', monospace;
+            font-size: 9px;
+            color: #A09880;
+        }
+        .srn-footer-name strong {
+            color: #F2EDD7;
+        }
+        .srn-footer-cn {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.75rem;
+            color: #7A6030;
+            display: block;
+        }
+        .srn-footer-copy {
+            font-family: 'DM Mono', monospace;
+            font-size: 8px;
+            color: #7A7260;
+        }
+        .srn-footer-copy a {
+            color: #7A6030;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="srn-container">
+    <!-- DISCLAIMER -->
+    <div class="cho-disclaimer">
+        <div class="cho-badge">
+            <span>🧪</span> Eksperimen Aktif · Red Teaming · Working Paper
+        </div>
+        <div class="cho-title">📖 Disclaimer Ekspresi Digital</div>
+        <p class="cho-body">
+            Eksperimen aktif sebagai peneliti independen (working paper di 
+            <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank">Zenodo</a>),
+            <em>alpha front-end user</em> AI red teaming terhadap 
+            <strong>Claude · Gemini · DeepSeek · Copilot · ChatGPT</strong>.
+            Framework: <strong>1/360 Wo · 1/360 Ni · 358/360 Ren</strong> — 
+            <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank">Walking Books Philosophy</a>.
+        </p>
+        <div class="cho-meta">
+            <span>✍️ Go Kian Tik (Mbah Hogi Bejo™ · 自主者)</span>
+            <span>🔬 Red Teaming: 5 AI</span>
+            <span>📅 2026 · CHO In Action · SARINEM</span>
+        </div>
+    </div>
+
+    <!-- APP -->
+    <div class="srn-app" id="srnApp">
+        <div class="srn-topbar">
+            <div class="srn-topbar-left">
+                <div class="srn-avatar">🌾</div>
+                <div>
+                    <div class="srn-name">Sarinem</div>
+                    <div class="srn-sub">Pendamping aman · rahasia</div>
+                </div>
+            </div>
+            <button class="srn-exit-btn" onclick="showExitOverlay()">Keluar Aman</button>
+        </div>
+        <div class="srn-hotline">
+            <span class="hl-label">📞 Bantuan darurat:</span>
+            <button class="hl-chip" onclick="window.open('tel:110')">Polisi 110</button>
+            <button class="hl-chip" onclick="window.open('tel:129')">SAPA 129</button>
+            <button class="hl-chip" onclick="window.open('https://wa.me/6208111129129')">WA SAPA 129</button>
+            <button class="hl-chip" onclick="window.open('http://komnasperempuan.go.id')">Komnas Perempuan</button>
+            <button class="hl-chip" onclick="window.open('http://lbhapik.or.id')">LBH Apik</button>
+        </div>
+
+        <div class="srn-messages" id="messages"></div>
+
+        <div class="srn-inputarea">
+            <textarea id="userInput" rows="1" placeholder="Tulis pesan Anda di sini... (aman dan rahasia)"></textarea>
+            <button id="sendBtn" onclick="sendMessage()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 8L14 8M9 3L14 8L9 13" stroke="#EEEDFE" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="srn-footer">
+        <div class="srn-footer-name"><strong>Go Kian Tik</strong> · Mbah Hogi Bejo™</div>
+        <span class="srn-footer-cn">Zì Zhǔ Zhě 自主者</span>
+        <div class="srn-footer-copy">
+            © 2026 · Superhero Café Inside · 
+            <a href="http://www.superherocafeinside.com" target="_blank">superherocafeinside.com</a>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay Quick Exit dengan Feedback (SEMUA OPSI BUKA EMAIL) -->
+<div id="exitOverlay" class="srn-overlay">
+    <div class="exit-card">
+        <h3>🛡️ Anda telah keluar dengan aman</h3>
+        <p>Terima kasih sudah mencoba <strong>Sarinem</strong> — prototipe pendamping KDRT versi lokal Indonesia yang terinspirasi dari <strong>Sophia.chat</strong>.</p>
+        
+        <div class="feedback-options">
+            <button class="feedback-btn" id="feedbackOption1">
+                <span class="feedback-emoji">✅</span>
+                <span><strong>Ajukan konsep ini ke Rhiana Spring</strong><br><small>Agar Sophia.chat dibuatkan versi lokal Indonesia dengan bantuan Mbah Hogi Bejo</small></span>
+            </button>
+            
+            <button class="feedback-btn" id="feedbackOption2">
+                <span class="feedback-emoji">💡</span>
+                <span><strong>Saya siap mendanai riset Mbah Hogi Bejo lebih lanjut</strong></span>
+            </button>
+            
+            <button class="feedback-btn" id="feedbackOption3">
+                <span class="feedback-emoji">📧</span>
+                <span><strong>Lain-lain / Saya ingin memberikan masukan</strong></span>
+            </button>
+        </div>
+        
+        <button class="close-exit" id="closeExitBtn">Tutup</button>
+        <div id="thankyouMsg" class="thankyou-message"></div>
+    </div>
+</div>
+
+<script>
+    // ==============================================================
+    // RESPON SARINEM (safety-first, bahasa Indonesia hangat)
+    // ==============================================================
+    function getSarinemResponse(userMessage) {
+        const lower = userMessage.toLowerCase();
+        
+        // DETEKSI BAHAYA LANGSUNG
+        if (lower.includes("pukul") || lower.includes("mukul") || lower.includes("tendang") || 
+            lower.includes("ancam") || lower.includes("darurat") || lower.includes("bahaya") ||
+            lower.includes("dipukul") || lower.includes("ditampar")) {
+            return "Terima kasih sudah berbagi, Kak. Prioritaskan keselamatan Anda sekarang. Cari tempat aman, lalu hubungi:\n\n📞 POLISI: 110\n📞 SAPA 129: 129 / WhatsApp 08111-129-129\n\nSaya di sini mendukung. Apakah Anda saat ini di tempat yang aman?";
+        }
+        
+        // TKW
+        if (lower.includes("tkw") || lower.includes("tenaga kerja wanita") || 
+            lower.includes("hongkong") || lower.includes("taiwan") || 
+            lower.includes("majikan")) {
+            return "Kak, saya prihatin dengan pengalaman Anda sebagai TKW. Kekerasan dari majikan tidak boleh dibiarkan.\n\n📌 Langkah: catat kejadian, cari tempat aman, hubungi KBRI atau Komnas Perempuan. Jika darurat: 110 atau SAPA 129. Apakah ingin saya bantu cari nomor layanan di negara Anda?";
+        }
+        
+        // LAKI-LAKI KORBAN
+        if ((lower.includes("laki") || lower.includes("suami") || lower.includes("pria")) && 
+            (lower.includes("istri") && (lower.includes("pukul") || lower.includes("kekerasan") || lower.includes("bentak")))) {
+            return "Mas, terima kasih sudah berani bercerita. KDRT bisa dialami siapa saja, termasuk laki-laki. Perasaan Anda valid. Jika dalam bahaya, hubungi 110 atau SAPA 129. Saya bisa bantu cari lembaga yang menerima korban laki-laki. Bersedia?";
+        }
+        
+        // BINGUNG / CURHAT
+        if (lower.includes("bingung") || lower.includes("hubungan") || lower.includes("curhat") || lower.includes("tidak sehat")) {
+            return "Bingung itu wajar, Kak. Hubungan sehat seharusnya membuat hati tenang, bukan ketakutan. Coba ceritakan: apakah pasangan sering mengontrol uang, membentak, merendahkan, atau memukul? Tidak perlu semua dijawab sekarang. Saya mendengarkan.";
+        }
+        
+        // EDUKASI KEKERASAN
+        if (lower.includes("apa ini kekerasan") || lower.includes("termasuk kekerasan") || lower.includes("tanda kekerasan")) {
+            return "📋 Tanda-tanda kekerasan dalam hubungan:\n\n🔴 Fisik: dipukul, ditampar, ditendang, didorong\n🔴 Psikis: diancam, direndahkan, diisolasi dari keluarga/teman\n🔴 Ekonomi: uang dikuasai total, dilarang bekerja\n🔴 Seksual: dipaksa berhubungan intim\n\nJika Anda mengalami satu atau lebih hal di atas, itu sudah termasuk kekerasan. Anda tidak pantas mengalaminya.";
+        }
+        
+        // TESTING
+        if (lower.includes("coba") || lower.includes("test") || lower.includes("iseng") || lower.includes("nyoba")) {
+            return "Senang Anda mencoba Sarinem. Saya di sini setiap hari untuk siapa pun yang membutuhkan pendampingan terkait kekerasan dalam hubungan. Jika nanti Anda atau teman Anda butuh bantuan, saya tetap di sini.";
+        }
+        
+        // RESPON DEFAULT
+        return "Terima kasih sudah berbagi, Kak. Sarinem di sini untuk mendengarkan. Jika Anda merasa tidak aman dalam hubungan, ingat: Anda tidak sendirian. Hubungi 110 atau SAPA 129 (129 / WA 08111-129-129) jika butuh bantuan darurat. Ada yang ingin diceritakan lagi?";
+    }
+
+    // Chat state
+    let isWaiting = false;
+    const messagesDiv = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    function addMessage(text, isUser, quickReplies = null) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `msg ${isUser ? 'user' : 'bot'}`;
+        
+        if (!isUser) {
+            const avatar = document.createElement("div");
+            avatar.className = "msg-avatar";
+            avatar.textContent = "🌾";
+            msgDiv.appendChild(avatar);
+        }
+        
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.innerHTML = text.replace(/\n/g, '<br>');
+        msgDiv.appendChild(bubble);
+        messagesDiv.appendChild(msgDiv);
+        
+        if (!isUser && quickReplies && quickReplies.length > 0) {
+            const qWrap = document.createElement("div");
+            qWrap.className = "quick-wrap";
+            const qDiv = document.createElement("div");
+            qDiv.className = "quick-replies";
+            quickReplies.forEach(qr => {
+                const btn = document.createElement("button");
+                btn.className = "qr";
+                btn.textContent = qr;
+                btn.onclick = () => {
+                    userInput.value = qr;
+                    sendMessage();
+                };
+                qDiv.appendChild(btn);
+            });
+            qWrap.appendChild(qDiv);
+            messagesDiv.appendChild(qWrap);
+        }
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function showTyping() {
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "msg bot";
+        typingDiv.id = "typingIndicator";
+        const avatar = document.createElement("div");
+        avatar.className = "msg-avatar";
+        avatar.textContent = "🌾";
+        typingDiv.appendChild(avatar);
+        const typingBubble = document.createElement("div");
+        typingBubble.className = "typing";
+        typingBubble.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+        typingDiv.appendChild(typingBubble);
+        messagesDiv.appendChild(typingDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function hideTyping() {
+        const el = document.getElementById("typingIndicator");
+        if (el) el.remove();
+    }
+
+    async function sendMessage() {
+        if (isWaiting) return;
+        const message = userInput.value.trim();
+        if (!message) return;
+        addMessage(message, true);
+        userInput.value = "";
+        userInput.style.height = "auto";
+        isWaiting = true;
+        showTyping();
+        setTimeout(() => {
+            hideTyping();
+            const reply = getSarinemResponse(message);
+            let qrs = [];
+            if (message.toLowerCase().includes("bahaya") || message.toLowerCase().includes("pukul")) {
+                qrs = ["Saya dalam bahaya sekarang", "Saya butuh nomor darurat", "Cuma mau cerita dulu"];
+            } else if (message.toLowerCase().includes("tkw")) {
+                qrs = ["Hubungi Komnas Perempuan", "Cari tempat aman dulu", "Saya butuh bantuan hukum"];
+            } else {
+                qrs = ["Saya ingin cerita lebih lanjut", "Apakah ini termasuk kekerasan?", "Saya butuh bantuan"];
+            }
+            addMessage(reply, false, qrs);
+            isWaiting = false;
+        }, 800);
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+    userInput.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = Math.min(this.scrollHeight, 80) + "px";
+    });
+
+    // ==============================================================
+    // TOMBOL KELUAR AMAN - SEMUA OPSI MEMBUKA EMAIL
+    // ==============================================================
+    const overlay = document.getElementById("exitOverlay");
+    const thankyouMsg = document.getElementById("thankyouMsg");
+    const closeBtn = document.getElementById("closeExitBtn");
+
+    function showExitOverlay() {
+        overlay.classList.add("show");
+        thankyouMsg.classList.remove("show");
+        thankyouMsg.innerHTML = "";
+    }
+
+    function hideExitOverlay() {
+        overlay.classList.remove("show");
+    }
+
+    // Fungsi untuk menyimpan feedback ke localStorage
+    function saveFeedback(option) {
+        const feedbacks = JSON.parse(localStorage.getItem("sarinem_feedback") || "[]");
+        feedbacks.push({
+            option: option,
+            timestamp: new Date().toISOString()
+        });
+        localStorage.setItem("sarinem_feedback", JSON.stringify(feedbacks));
+        console.log("Feedback tersimpan:", { option, timestamp: new Date().toISOString() });
+    }
+
+    // OPSI 1: Ajukan ke Rhiana Spring (buka email)
+    document.getElementById("feedbackOption1").addEventListener("click", () => {
+        saveFeedback("Ajukan ke Rhiana Spring");
+        
+        // BUKA EMAIL
+        window.location.href = "mailto:mbah_hogi_bejo@superherocafeinside.com?subject=Dukungan%20Ajukan%20Sarinem%20ke%20Rhiana%20Spring%20(Sophia.chat%20Lokal)&body=Halo%20Mbah%20Hogi%20Bejo%2C%0A%0ASaya%20setuju%20bahwa%20konsep%20Sarinem%20perlu%20diajukan%20ke%20Rhiana%20Spring%20(Founder%20Sophia.chat)%20agar%20Sophia.chat%20memiliki%20versi%20lokal%20Indonesia.%0A%0ABerikut%20dukungan%20atau%20pesan%20saya%3A%0A%0A%0A%0ATerima%20kasih.";
+        
+        thankyouMsg.innerHTML = "✅ Terima kasih! Email akan terbuka. Silakan kirim pesan dukungan Anda untuk mendukung pengajuan Sarinem ke Rhiana Spring.";
+        thankyouMsg.classList.add("show");
+        setTimeout(() => {
+            hideExitOverlay();
+            messagesDiv.innerHTML = "";
+            addMessage("Anda telah keluar dengan aman. Jika suatu saat membutuhkan bantuan, Sarinem selalu ada di sini. 🌾", false, []);
+        }, 2000);
+    });
+
+    // OPSI 2: Danai riset (buka email)
+    document.getElementById("feedbackOption2").addEventListener("click", () => {
+        saveFeedback("Bersedia mendanai riset");
+        window.location.href = "mailto:mbah_hogi_bejo@superherocafeinside.com?subject=Ketertarikan%20Mendanai%20Riset%20Sarinem%20%2F%20Sophia.chat%20Lokal&body=Halo%20Mbah%20Hogi%20Bejo%2C%0A%0ASaya%20tertarik%20untuk%20mendukung%20riset%20dan%20pengembangan%20Sarinem%20%2F%20Sophia.chat%20versi%20lokal%20Indonesia.%20Mohon%20informasi%20lebih%20lanjut.%0A%0ATerima%20kasih.";
+        thankyouMsg.innerHTML = "💡 Terima kasih! Email akan terbuka. Silakan kirim pesan Anda untuk mendiskusikan dukungan riset.";
+        thankyouMsg.classList.add("show");
+        setTimeout(() => {
+            hideExitOverlay();
+            messagesDiv.innerHTML = "";
+            addMessage("Anda telah keluar dengan aman. Jika suatu saat membutuhkan bantuan, Sarinem selalu ada di sini. 🌾", false, []);
+        }, 2000);
+    });
+
+    // OPSI 3: Lain-lain / masukan (buka email)
+    document.getElementById("feedbackOption3").addEventListener("click", () => {
+        saveFeedback("Lain-lain / masukan");
+        window.location.href = "mailto:mbah_hogi_bejo@superherocafeinside.com?subject=Masukan%20untuk%20Sarinem%20%2F%20Sophia.chat%20Lokal&body=Halo%20Mbah%20Hogi%20Bejo%2C%0A%0ABerikut%20masukan%20saya%20untuk%20Sarinem%20%2F%20Sophia.chat%20versi%20lokal%20Indonesia%3A%0A%0A%5BTulis%20masukan%20Anda%20di%20sini%5D%0A%0ATerima%20kasih.";
+        thankyouMsg.innerHTML = "📧 Terima kasih! Email akan terbuka. Silakan tulis masukan Anda untuk pengembangan Sarinem.";
+        thankyouMsg.classList.add("show");
+        setTimeout(() => {
+            hideExitOverlay();
+            messagesDiv.innerHTML = "";
+            addMessage("Anda telah keluar dengan aman. Jika suatu saat membutuhkan bantuan, Sarinem selalu ada di sini. 🌾", false, []);
+        }, 2000);
+    });
+
+    // Tombol Tutup (keluar biasa, tanpa email)
+    closeBtn.addEventListener("click", () => {
+        hideExitOverlay();
+        messagesDiv.innerHTML = "";
+        addMessage("Anda telah keluar dengan aman. Jika suatu saat membutuhkan bantuan, Sarinem selalu ada di sini. 🌾", false, []);
+    });
+
+    // Sapaan awal
+    setTimeout(() => {
+        const greeting = "Halo, saya Sarinem. 🌾\n\nSemua cerita Anda bersifat rahasia dan aman. Mari bercerita perlahan, apa yang sedang membebani hati Anda tentang hubungan Anda.\n\nPerasaan bingung, lelah, atau takut adalah hal yang wajar. Jika situasi Anda saat ini berbahaya, segera cari tempat aman dan hubungi darurat 110 atau SAPA 129 (129 / WhatsApp 08111-129-129).\n\nIngin bercerita? Saya siap mendengarkan tanpa menghakimi. 🌾";
+        addMessage(greeting, false, ["Saya ingin bercerita", "Saya hanya mau bertanya", "Ini cuma coba-coba"]);
+    }, 300);
+</script>
+</body>
+</html>
