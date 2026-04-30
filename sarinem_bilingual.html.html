@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sarinem.chat · Pendamping KDRT Indonesia · Bilingual UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #2d1b3a 0%, #1a0f24 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .srn-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Disclaimer CHO */
+        .cho-disclaimer {
+            background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+            color: #e8eef2;
+            padding: 0.9rem 1.2rem;
+            border-bottom: 2.5px solid #c9a84c;
+            border-radius: 16px 16px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .cho-disclaimer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: .5;
+        }
+        .cho-disclaimer > * { position: relative; }
+        .cho-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(201,168,76,0.13);
+            border: 1px solid rgba(201,168,76,0.28);
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+            color: #c9a84c;
+            text-transform: uppercase;
+        }
+        .cho-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 0.4rem;
+        }
+        .cho-body {
+            font-size: 0.7rem;
+            line-height: 1.55;
+            opacity: 0.9;
+            margin-bottom: 0.3rem;
+        }
+        .cho-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.5rem;
+            color: #b0bec8;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 0.5rem;
+        }
+
+        /* App Shell */
+        .srn-app {
+            background: #fffaf2;
+            border-radius: 0 0 16px 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 560px;
+        }
+
+        /* Topbar */
+        .srn-topbar {
+            background: #3C3489;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .srn-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .srn-avatar {
+            width: 36px;
+            height: 36px;
+            background: #EEEDFE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #3C3489;
+        }
+        .srn-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #EEEDFE;
+        }
+        .srn-sub {
+            font-size: 9px;
+            color: #AFA9EC;
+        }
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .lang-toggle {
+            background: rgba(255,255,255,0.15);
+            border: 0.5px solid rgba(255,255,255,0.3);
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #EEEDFE;
+            font-family: 'DM Mono', monospace;
+            transition: 0.2s;
+        }
+        .lang-toggle:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .state-indicator {
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 9px;
+            font-family: 'DM Mono', monospace;
+            color: #c9a84c;
+        }
+        .srn-exit-btn {
+            background: #993C1D;
+            color: #FAECE7;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Hotline Bar */
+        .srn-hotline {
+            background: #0d1a14;
+            padding: 5px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            border-bottom: 0.5px solid rgba(31,111,75,0.4);
+        }
+        .hl-label {
+            font-size: 9px;
+            color: #5DCAA5;
+            font-family: 'DM Mono', monospace;
+        }
+        .hl-chip {
+            background: rgba(31,111,75,0.25);
+            border: 0.5px solid rgba(93,202,165,0.3);
+            border-radius: 20px;
+            padding: 3px 8px;
+            font-size: 9px;
+            color: #9FE1CB;
+            cursor: pointer;
+            font-family: 'DM Mono', monospace;
+        }
+        .hl-chip:hover {
+            background: rgba(93,202,165,0.2);
+        }
+
+        /* Messages Area */
+        .srn-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .msg {
+            display: flex;
+            gap: 8px;
+            max-width: 85%;
+        }
+        .msg.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .msg.bot {
+            align-self: flex-start;
+        }
+        .bubble {
+            padding: 9px 13px;
+            border-radius: 16px;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+        .msg.bot .bubble {
+            background: white;
+            border: 0.5px solid #e2cfb5;
+            border-bottom-left-radius: 4px;
+        }
+        .msg.user .bubble {
+            background: #3C3489;
+            color: #EEEDFE;
+            border-bottom-right-radius: 4px;
+        }
+        .msg-avatar {
+            width: 28px;
+            height: 28px;
+            background: #EEEDFE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #3C3489;
+            flex-shrink: 0;
+        }
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 9px 13px;
+            background: white;
+            border: 0.5px solid #e2cfb5;
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            width: 50px;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #7F77DD;
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink { 0%,80%,100% { opacity: .3; } 40% { opacity: 1; } }
+
+        /* Quick Replies */
+        .quick-wrap {
+            margin-left: 36px;
+            margin-top: 4px;
+        }
+        .quick-replies {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .qr {
+            background: #EEEDFE;
+            border: 0.5px solid #AFA9EC;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 10px;
+            cursor: pointer;
+            color: #3C3489;
+        }
+        .qr:hover {
+            background: #CECBF6;
+        }
+
+        /* Input Area */
+        .srn-inputarea {
+            border-top: 0.5px solid #ecd9c0;
+            padding: 10px 12px;
+            display: flex;
+            gap: 8px;
+            background: white;
+        }
+        #userInput {
+            flex: 1;
+            border: 0.5px solid #e2cfb5;
+            border-radius: 20px;
+            padding: 8px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            resize: none;
+        }
+        #sendBtn {
+            background: #3C3489;
+            border: none;
+            border-radius: 40px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Opal Button */
+        .opal-section {
+            padding: 8px 12px;
+            background: #fef7e6;
+            border-top: 0.5px solid #ecd9c0;
+            display: flex;
+            justify-content: center;
+        }
+        .opal-btn {
+            background: #c9a03d;
+            color: #2d1b3a;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .opal-btn:hover {
+            background: #b3882e;
+            transform: scale(0.97);
+        }
+
+        /* Overlay */
+        .srn-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .srn-overlay.show { display: flex; }
+        .exit-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+        }
+        .exit-card h3 { margin-bottom: 12px; color: #2d1b3a; }
+        .exit-card p { font-size: 12px; color: #555; margin-bottom: 20px; }
+        .feedback-options { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+        .feedback-btn {
+            background: #f3ede8;
+            border: 1px solid #dcc8b0;
+            border-radius: 40px;
+            padding: 10px 14px;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feedback-btn:hover { background: #e6d9cc; }
+        .close-exit {
+            background: #993C1D;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .thankyou-message {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 10px;
+            margin-top: 12px;
+            font-size: 11px;
+            color: #2e7d32;
+            display: none;
+        }
+        .thankyou-message.show { display: block; }
+
+        /* Footer */
+        .srn-footer {
+            background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+            border-radius: 0 0 16px 16px;
+            padding: 0.7rem 1.2rem;
+            text-align: center;
+        }
+        .srn-footer-name {
+            font-family: 'DM Mono', monospace;
+            font-size: 8px;
+            color: #A09880;
+        }
+        .srn-footer-name strong { color: #F2EDD7; }
+        .srn-footer-cn {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.7rem;
+            color: #7A6030;
+            display: block;
+        }
+        .srn-footer-copy {
+            font-family: 'DM Mono', monospace;
+            font-size: 7px;
+            color: #7A7260;
+        }
+    </style>
+</head>
+<body>
+<div class="srn-container">
+    <!-- DISCLAIMER -->
+    <div class="cho-disclaimer" id="disclaimerBox">
+        <div class="cho-badge"><span>🧪</span> <span id="disclaimerBadge">Eksperimen Aktif · State Machine Full · CHO In Action</span></div>
+        <div class="cho-title">📖 <span id="disclaimerTitle">SARINEM.CHAT — Pendamping KDRT Indonesia</span></div>
+        <p class="cho-body" id="disclaimerBody1">State machine S0-S8 · Safety-first · Non-linear conversation · Hybrid AI + Human support</p>
+        <div class="cho-meta">
+            <span>✍️ Go Kian Tik (Mbah Hogi Bejo™)</span>
+            <span>🔬 5 AI Red Teaming</span>
+            <span>📅 2026 · Bilingual UI</span>
+        </div>
+    </div>
+
+    <!-- APP -->
+    <div class="srn-app">
+        <div class="srn-topbar">
+            <div class="srn-topbar-left">
+                <div class="srn-avatar">🌾</div>
+                <div>
+                    <div class="srn-name" id="srnName">Sarinem</div>
+                    <div class="srn-sub" id="srnSub">State Machine · Safety First</div>
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <button class="lang-toggle" id="langToggleBtn">🌐 EN</button>
+                <div class="state-indicator" id="stateIndicator">S0 · ENTRY</div>
+                <button class="srn-exit-btn" id="exitBtn">Keluar Aman</button>
+            </div>
+        </div>
+        <div class="srn-hotline" id="hotlineBar"></div>
+        <div class="srn-messages" id="messages"></div>
+        
+        <!-- TOMBOL OPAL GEMINI -->
+        <div class="opal-section">
+            <button class="opal-btn" id="opalGeminiBtn">
+                🤖 <span id="opalBtnText">Butuh Bantuan AI / Lanjut ke Opal</span>
+            </button>
+        </div>
+        
+        <div class="srn-inputarea">
+            <textarea id="userInput" rows="1" placeholder="Tulis pesan Anda... (aman dan rahasia)"></textarea>
+            <button id="sendBtn" onclick="sendMessage()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 8L14 8M9 3L14 8L9 13" stroke="#EEEDFE" stroke-width="1.5"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="srn-footer">
+        <div class="srn-footer-name"><strong>Go Kian Tik</strong> · Mbah Hogi Bejo™</div>
+        <span class="srn-footer-cn">Zì Zhǔ Zhě 自主者</span>
+        <div class="srn-footer-copy">© 2026 · Superhero Café Inside · Bilingual UI + Opal</div>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div id="exitOverlay" class="srn-overlay">
+    <div class="exit-card">
+        <h3 id="exitTitle">🛡️ Anda telah keluar dengan aman</h3>
+        <p id="exitDesc">Terima kasih sudah mencoba Sarinem — prototipe pendamping KDRT dengan state machine penuh.</p>
+        <div class="feedback-options">
+            <button class="feedback-btn" id="feedback1">✅ <span id="feedback1Text">Ajukan konsep ini ke Rhiana Spring</span></button>
+            <button class="feedback-btn" id="feedback2">💡 <span id="feedback2Text">Saya siap mendanai riset Mbah Hogi Bejo</span></button>
+            <button class="feedback-btn" id="feedback3">📧 <span id="feedback3Text">Lain-lain / masukan</span></button>
+        </div>
+        <button class="close-exit" id="closeExitBtn">Tutup</button>
+        <div id="thankyouMsg" class="thankyou-message"></div>
+    </div>
+</div>
+
+<script>
+    // ==============================================================
+    // BILINGUAL UI STATE
+    // ==============================================================
+    let currentLang = "id"; // id = Indonesia, en = English
+    
+    // Daftar teks bilingual
+    const texts = {
+        // Topbar
+        srnName: { id: "Sarinem", en: "Sarinem" },
+        srnSub: { id: "State Machine · Safety First", en: "State Machine · Safety First" },
+        exitBtn: { id: "Keluar Aman", en: "Safe Exit" },
+        
+        // Disclaimer
+        disclaimerBadge: { id: "Eksperimen Aktif · State Machine Full · CHO In Action", en: "Active Experiment · Full State Machine · CHO In Action" },
+        disclaimerTitle: { id: "SARINEM.CHAT — Pendamping KDRT Indonesia", en: "SARINEM.CHAT — Indonesian Domestic Violence Companion" },
+        disclaimerBody1: { id: "State machine S0-S8 · Safety-first · Non-linear conversation · Hybrid AI + Human support", en: "State machine S0-S8 · Safety-first · Non-linear conversation · Hybrid AI + Human support" },
+        
+        // Hotline
+        hotlineLabel: { id: "📞 Darurat:", en: "📞 Emergency:" },
+        hotlinePolisi: { id: "Polisi 110", en: "Police 110" },
+        hotlineSapa: { id: "SAPA 129", en: "SAPA 129" },
+        hotlineWa: { id: "WA SAPA", en: "WA SAPA" },
+        hotlineKomnas: { id: "Komnas Perempuan", en: "Komnas Perempuan" },
+        hotlineLbh: { id: "LBH Apik", en: "LBH Apik" },
+        
+        // Opal button
+        opalBtnText: { id: "🤖 Butuh Bantuan AI / Lanjut ke Opal", en: "🤖 Need AI Help / Continue to Opal" },
+        
+        // Input placeholder
+        inputPlaceholder: { id: "Tulis pesan Anda... (aman dan rahasia)", en: "Write your message... (safe and confidential)" },
+        
+        // Overlay exit
+        exitTitle: { id: "🛡️ Anda telah keluar dengan aman", en: "🛡️ You have exited safely" },
+        exitDesc: { id: "Terima kasih sudah mencoba Sarinem — prototipe pendamping KDRT dengan state machine penuh.", en: "Thank you for trying Sarinem — a full state machine domestic violence companion prototype." },
+        feedback1Text: { id: "Ajukan konsep ini ke Rhiana Spring", en: "Submit this concept to Rhiana Spring" },
+        feedback2Text: { id: "Saya siap mendanai riset Mbah Hogi Bejo", en: "I'm ready to fund Mbah Hogi Bejo's research" },
+        feedback3Text: { id: "Lain-lain / masukan", en: "Other / feedback" },
+        closeExitBtn: { id: "Tutup", en: "Close" },
+        
+        // Quick replies options (dinamis)
+        qrBingung: { id: "Saya bingung dengan hubungan", en: "I'm confused about my relationship" },
+        qrKekerasan: { id: "Apakah ini kekerasan?", en: "Is this abuse?" },
+        qrCerita: { id: "Saya ingin cerita", en: "I want to share my story" },
+        qrBantuan: { id: "Saya butuh bantuan", en: "I need help" }
+    };
+    
+    function updateUILanguage() {
+        // Topbar
+        document.getElementById("srnName").textContent = texts.srnName[currentLang];
+        document.getElementById("srnSub").textContent = texts.srnSub[currentLang];
+        document.getElementById("exitBtn").textContent = texts.exitBtn[currentLang];
+        
+        // Disclaimer
+        document.getElementById("disclaimerBadge").textContent = texts.disclaimerBadge[currentLang];
+        document.getElementById("disclaimerTitle").textContent = texts.disclaimerTitle[currentLang];
+        document.getElementById("disclaimerBody1").textContent = texts.disclaimerBody1[currentLang];
+        
+        // Opal button
+        document.getElementById("opalBtnText").textContent = texts.opalBtnText[currentLang];
+        
+        // Input placeholder
+        document.getElementById("userInput").placeholder = texts.inputPlaceholder[currentLang];
+        
+        // Hotline bar rebuild
+        const hotlineBar = document.getElementById("hotlineBar");
+        hotlineBar.innerHTML = `
+            <span class="hl-label">${texts.hotlineLabel[currentLang]}</span>
+            <button class="hl-chip" onclick="window.open('tel:110')">${texts.hotlinePolisi[currentLang]}</button>
+            <button class="hl-chip" onclick="window.open('tel:129')">${texts.hotlineSapa[currentLang]}</button>
+            <button class="hl-chip" onclick="window.open('https://wa.me/6208111129129')">${texts.hotlineWa[currentLang]}</button>
+            <button class="hl-chip" onclick="window.open('http://komnasperempuan.go.id')">${texts.hotlineKomnas[currentLang]}</button>
+            <button class="hl-chip" onclick="window.open('http://lbhapik.or.id')">${texts.hotlineLbh[currentLang]}</button>
+        `;
+        
+        // Overlay
+        document.getElementById("exitTitle").innerHTML = texts.exitTitle[currentLang];
+        document.getElementById("exitDesc").textContent = texts.exitDesc[currentLang];
+        document.getElementById("feedback1Text").textContent = texts.feedback1Text[currentLang];
+        document.getElementById("feedback2Text").textContent = texts.feedback2Text[currentLang];
+        document.getElementById("feedback3Text").textContent = texts.feedback3Text[currentLang];
+        document.getElementById("closeExitBtn").textContent = texts.closeExitBtn[currentLang];
+        
+        // Tombol toggle (ubah label)
+        document.getElementById("langToggleBtn").innerHTML = currentLang === "id" ? "🌐 EN" : "🌐 ID";
+    }
+    
+    // Toggle language
+    document.getElementById("langToggleBtn").addEventListener("click", () => {
+        currentLang = currentLang === "id" ? "en" : "id";
+        updateUILanguage();
+        // Tambahkan pesan notifikasi kecil di chat
+        const notification = currentLang === "id" ? "🌐 Bahasa UI diubah ke Indonesia" : "🌐 UI language changed to English";
+        addMessage(notification, false, null);
+    });
+    
+    // ==============================================================
+    // STATE MACHINE FULL IMPLEMENTATION (S0-S8) - SAMA SEPERTI SEBELUMNYA
+    // ==============================================================
+    
+    let currentState = "S0";
+    let lastUserMessage = "";
+    let isWaiting = false;
+    
+    const messagesDiv = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
+    const stateIndicator = document.getElementById("stateIndicator");
+    
+    // OPAL GEMINI LINK (sama seperti sebelumnya)
+    const OPAL_GEMINI_URL = "https://gemini.google.com/gem-labs/1G-_1yn9mSXfzPuV_oYRwzefK0Oy5qsm0";
+    document.getElementById("opalGeminiBtn").addEventListener("click", () => {
+        window.open(OPAL_GEMINI_URL, "_blank");
+    });
+    
+    function updateStateDisplay() {
+        let displayName = "";
+        switch(currentState) {
+            case "S0": displayName = "S0 · ENTRY"; break;
+            case "S1": displayName = "S1 · INTENT DETECT"; break;
+            case "S2": displayName = "S2 · EXPLORATION"; break;
+            case "S3": displayName = "S3 · ABUSE ID"; break;
+            case "S4": displayName = "S4 · EMOTIONAL"; break;
+            case "S5": displayName = "S5 · CRISIS 🚨"; break;
+            case "S6": displayName = "S6 · CASUAL"; break;
+            case "S7": displayName = "S7 · RESOURCE"; break;
+            case "S8": displayName = "S8 · SAFETY PLAN"; break;
+            default: displayName = currentState;
+        }
+        stateIndicator.textContent = displayName;
+    }
+    
+    function classifyIntent(message) {
+        const lower = message.toLowerCase();
+        if (lower.includes("dipukul sekarang") || lower.includes("sedang dipukul") ||
+            lower.includes("dikunci") || lower.includes("disandera") ||
+            lower.includes("takut diserang") || lower.includes("darurat") ||
+            (lower.includes("pukul") && lower.includes("sekarang"))) {
+            return "D";
+        }
+        if (lower.includes("pukul") || lower.includes("mukul") || lower.includes("tendang") ||
+            lower.includes("ancam") || lower.includes("kontrol") || lower.includes("intimidasi") ||
+            lower.includes("kekerasan") || lower.includes("dilarang") || lower.includes("dikuasai") ||
+            lower.includes("bentak")) {
+            return "B";
+        }
+        if (lower.includes("sedih") || lower.includes("takut") || lower.includes("cemas") ||
+            lower.includes("putus asa") || lower.includes("sendiri") || lower.includes("tidak kuat") ||
+            lower.includes("depresi") || lower.includes("stress")) {
+            return "C";
+        }
+        if (lower.includes("cuma coba") || lower.includes("iseng") || lower.includes("test") ||
+            lower.includes("nyoba") || lower.includes("testing") || (lower.includes("hai") && lower.length < 10)) {
+            return "E";
+        }
+        return "A";
+    }
+    
+    function hasAbuseIndication(message) {
+        const lower = message.toLowerCase();
+        const abuseKeywords = ["pukul", "mukul", "tendang", "ancam", "kontrol", "intimidasi", "bentak", "dilarang", "dikuasai", "kekerasan", "takut", "tidak aman"];
+        return abuseKeywords.some(kw => lower.includes(kw));
+    }
+    
+    function hasEmotionalDistress(message) {
+        const lower = message.toLowerCase();
+        const distressKeywords = ["sedih", "takut", "cemas", "putus asa", "sendiri", "tidak kuat", "depresi"];
+        return distressKeywords.some(kw => lower.includes(kw));
+    }
+    
+    function generateResponse(message) {
+        const lower = message.toLowerCase();
+        
+        if (lower.includes("harus cerai") || lower.includes("apakah saya harus")) {
+            return "Keputusan seperti itu sangat pribadi, Kak. Saya tidak bisa memberi arahan tegas apakah Anda harus cerai atau tidak. Saya bisa membantu Anda mempertimbangkan pilihan dengan aman. Apakah Anda ingin kita bicarakan apa saja pilihan yang mungkin?";
+        }
+        if (lower.includes("saya pelaku") || (lower.includes("saya yang") && lower.includes("menyakiti"))) {
+            return "Terima kasih sudah jujur. Saya tidak bisa mendukung perilaku yang menyakiti orang lain. Tapi saya bisa membantu Anda mencari cara yang lebih sehat dalam menjalani hubungan. Apakah Anda bersedia mencari bantuan profesional untuk mengubah perilaku?";
+        }
+        if (lower.includes("canda") || lower.includes("becanda") || (lower.includes("gak serius") && lower.includes("cuma"))) {
+            return "Saya di sini untuk membantu siapa pun yang membutuhkan. Jika Anda memiliki pertanyaan serius tentang kekerasan dalam hubungan, silakan bertanya. Saya siap mendengarkan tanpa menghakimi.";
+        }
+        
+        switch(currentState) {
+            case "S0":
+                return "Halo, saya Sarinem. 🌾\n\nSaya di sini untuk mendukung siapa pun yang mengalami masalah dalam hubungan.\n\nSemua yang Anda ceritakan bersifat rahasia. Jika Anda merasa tidak aman, gunakan tombol 'Keluar Aman' kapan saja.\n\nApa yang ingin Anda bicarakan hari ini?";
+            case "S1": {
+                const intent = classifyIntent(message);
+                if (intent === "D") { currentState = "S5"; updateStateDisplay(); return "🚨 Saya khawatir dengan keselamatan Anda.\n\nJika Anda dalam bahaya sekarang, mohon segera cari tempat aman dan hubungi bantuan darurat:\n📞 POLISI: 110\n📞 SAPA 129: 129 / WhatsApp 08111-129-129\n\nApakah Anda saat ini bisa mencari tempat aman?"; }
+                else if (intent === "B") { currentState = "S3"; updateStateDisplay(); return "Terima kasih sudah berbagi, Kak.\n\nDari yang Anda ceritakan, ada beberapa hal yang tidak sehat dalam hubungan. Perilaku seperti ini bisa termasuk bentuk kekerasan — dan Anda tidak pantas mengalaminya.\n\nApakah ini sering terjadi?"; }
+                else if (intent === "C") { currentState = "S4"; updateStateDisplay(); return "Terima kasih sudah jujur, Kak.\n\nApa yang Anda rasakan itu valid. Anda tidak harus menghadapi ini sendirian.\n\nApa yang paling berat bagi Anda saat ini?"; }
+                else if (intent === "E") { currentState = "S6"; updateStateDisplay(); return "Tidak apa-apa 🙂\n\nSenang Anda mencoba fitur ini. Jika suatu saat Anda atau orang lain membutuhkan tempat untuk bercerita, saya ada di sini.\n\nAda yang ingin Anda tanyakan?"; }
+                else { currentState = "S2"; updateStateDisplay(); return "Terima kasih sudah berbagi, Kak.\n\nKita bisa pelan-pelan saja.\n\nBisa ceritakan apa yang membuat Anda merasa tidak nyaman dalam hubungan?"; }
+            }
+            case "S2":
+                if (hasAbuseIndication(message)) { currentState = "S3"; updateStateDisplay(); return "Dari cerita Anda, saya mulai melihat beberapa tanda yang tidak sehat. Perilaku seperti yang Anda ceritakan bisa termasuk bentuk kekerasan. Anda tidak pantas mengalaminya.\n\nApakah Anda ingin kita bicarakan lebih lanjut?"; }
+                else if (hasEmotionalDistress(message)) { currentState = "S4"; updateStateDisplay(); return "Saya dengar ada kesedihan dalam cerita Anda. Apa yang Anda rasakan itu wajar. Anda tidak sendirian.\n\nApa yang paling memberatkan hati Anda saat ini?"; }
+                else return "Terima kasih, Kak. Saya mendengarkan.\n\nBisa ceritakan lebih detail? Misalnya, apakah pasangan sering mengontrol Anda, membentak, atau membuat Anda takut?\n\nTidak perlu semua dijawab sekaligus. Kita pelan-pelan.";
+            case "S3":
+                if (message.toLowerCase().includes("ingin bantuan") || message.toLowerCase().includes("tolong")) { currentState = "S7"; updateStateDisplay(); return "Saya siap membantu. Ada beberapa layanan di Indonesia yang bisa Anda hubungi:\n\n📞 Komnas Perempuan\n📞 SAPA 129\n📞 LBH Apik\n\nAnda tidak harus menghubungi sekarang — keputusan ada di tangan Anda. Apakah Anda ingin saya bantu membuat rencana aman?"; }
+                else if (hasEmotionalDistress(message)) { currentState = "S4"; updateStateDisplay(); return "Saya mengerti ini berat. Perasaan Anda valid. Apa yang Anda alami tidak mudah.\n\nIngin kita bicarakan perasaan Anda dulu, atau Anda ingin informasi bantuan?"; }
+                else return "Terima kasih sudah terus berbagi, Kak.\n\nKekerasan dalam hubungan tidak boleh dibiarkan. Anda berhak merasa aman dan dihargai.\n\nApakah Anda ingin saya bantu mencari layanan bantuan, atau kita bicarakan dulu apa yang paling mengganggu pikiran Anda?";
+            case "S4":
+                if (message.toLowerCase().includes("ingin bantuan") || message.toLowerCase().includes("tolong")) { currentState = "S7"; updateStateDisplay(); return "Baik, Kak. Saya bantu arahkan ke layanan yang bisa mendukung Anda.\n\n📞 Komnas Perempuan\n📞 SAPA 129\n📞 LBH Apik\n\nApakah Anda ingin informasi kontak lengkapnya?"; }
+                else if (hasAbuseIndication(message)) { currentState = "S3"; updateStateDisplay(); return "Saya dengar ada pengalaman yang tidak aman dalam cerita Anda. Apakah Anda merasa ada kekerasan yang terjadi?\n\nMari kita bicarakan dengan tenang. Saya di sini untuk mendukung."; }
+                else return "Terima kasih sudah jujur, Kak. Perasaan Anda penting. Saya mendengarkan.\n\nApa yang bisa saya lakukan untuk membantu Anda saat ini — sekadar mendengarkan, atau membantu mencari informasi bantuan?";
+            case "S5":
+                return "🚨 PRIORITAS KESELAMATAN ANDA 🚨\n\nJika Anda dalam bahaya sekarang:\n1. Segera cari tempat aman\n2. Hubungi 110 (Polisi)\n3. Atau hubungi SAPA 129 (129 / WA 08111-129-129)\n\nApakah Anda sudah bisa mencapai tempat yang aman? Saya tetap di sini mendukung Anda.";
+            case "S6":
+                return "Senang Anda mencoba Sarinem. 🙂\n\nSaya di sini setiap hari untuk siapa pun yang membutuhkan pendampingan terkait kekerasan dalam hubungan. Jika nanti Anda atau teman Anda butuh bantuan, saya tetap di sini.\n\nAda yang ingin Anda tanyakan tentang cara kerja Sarinem?";
+            case "S7":
+                if (message.toLowerCase().includes("rencana aman") || message.toLowerCase().includes("iya") && message.toLowerCase().includes("ingin")) { currentState = "S8"; updateStateDisplay(); return "Baik, kita buat rencana aman bersama.\n\nLangkah-langkah kecil yang bisa Anda persiapkan:\n\n📄 Simpan dokumen penting di tempat aman (KTP, KK, akta lahir, dll)\n📞 Siapkan kontak darurat (110, SAPA 129, teman tepercaya)\n🏠 Tentukan tempat aman jika harus keluar rumah (rumah keluarga, shelter)\n💰 Siapkan sedikit uang cadangan\n\nApakah Anda ingin kita bahas salah satu dari ini lebih detail?"; }
+                else return "Layanan bantuan di Indonesia:\n\n✅ Komnas Perempuan — komnasperempuan.go.id\n✅ SAPA 129 — telp 129 / WA 08111-129-129\n✅ KemenPPPA\n✅ LBH Apik — lbhapik.or.id\n\nAnda tidak harus menghubungi sekarang. Saya di sini jika Anda ingin bicara lebih lanjut.";
+            case "S8":
+                if (message.toLowerCase().includes("sudah") || message.toLowerCase().includes("terima kasih")) { currentState = "S4"; updateStateDisplay(); return "Sama-sama, Kak. Saya bangga Anda sudah memikirkan keselamatan diri. Ingat, Anda tidak sendirian. Jika butuh bicara lagi, Sarinem selalu ada.\n\nAda hal lain yang ingin Anda ceritakan?"; }
+                else return "Mari kita lanjutkan rencana aman.\n\nPertanyaan sederhana: Apakah Anda punya satu orang tepercaya yang bisa dihubungi dalam keadaan darurat?\n\nKita bisa bicara perlahan, tidak perlu terburu-buru.";
+            default:
+                return "Terima kasih sudah berbagi. Saya Sarinem di sini untuk mendengarkan. Ada yang ingin Anda ceritakan?";
+        }
+    }
+    
+    function processMessage(message) {
+        lastUserMessage = message;
+        if (currentState === "S0") {
+            currentState = "S1";
+            updateStateDisplay();
+        }
+        let reply = generateResponse(message);
+        updateStateDisplay();
+        let additionalReminder = "";
+        if (currentState === "S5" || currentState === "S3") {
+            additionalReminder = "\n\n🔒 Ingat: gunakan tombol 'Keluar Aman' jika situasi tidak aman.";
+        }
+        return reply + additionalReminder;
+    }
+    
+    function addMessage(text, isUser, quickReplies = null) {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `msg ${isUser ? 'user' : 'bot'}`;
+        if (!isUser) {
+            const avatar = document.createElement("div");
+            avatar.className = "msg-avatar";
+            avatar.textContent = "🌾";
+            msgDiv.appendChild(avatar);
+        }
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.innerHTML = text.replace(/\n/g, '<br>');
+        msgDiv.appendChild(bubble);
+        messagesDiv.appendChild(msgDiv);
+        if (!isUser && quickReplies && quickReplies.length) {
+            const qWrap = document.createElement("div");
+            qWrap.className = "quick-wrap";
+            const qDiv = document.createElement("div");
+            qDiv.className = "quick-replies";
+            quickReplies.forEach(qr => {
+                const btn = document.createElement("button");
+                btn.className = "qr";
+                btn.textContent = qr;
+                btn.onclick = () => { userInput.value = qr; sendMessage(); };
+                qDiv.appendChild(btn);
+            });
+            qWrap.appendChild(qDiv);
+            messagesDiv.appendChild(qWrap);
+        }
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
+    function showTyping() {
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "msg bot";
+        typingDiv.id = "typingIndicator";
+        const avatar = document.createElement("div");
+        avatar.className = "msg-avatar";
+        avatar.textContent = "🌾";
+        typingDiv.appendChild(avatar);
+        const typingBubble = document.createElement("div");
+        typingBubble.className = "typing";
+        typingBubble.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+        typingDiv.appendChild(typingBubble);
+        messagesDiv.appendChild(typingDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
+    function hideTyping() { const el = document.getElementById("typingIndicator"); if (el) el.remove(); }
+    
+    async function sendMessage() {
+        if (isWaiting) return;
+        const message = userInput.value.trim();
+        if (!message) return;
+        addMessage(message, true);
+        userInput.value = "";
+        userInput.style.height = "auto";
+        isWaiting = true;
+        showTyping();
+        setTimeout(() => {
+            hideTyping();
+            const reply = processMessage(message);
+            let qrs = [];
+            const qrBingung = texts.qrBingung[currentLang];
+            const qrKekerasan = texts.qrKekerasan[currentLang];
+            const qrCerita = texts.qrCerita[currentLang];
+            const qrBantuan = texts.qrBantuan[currentLang];
+            
+            if (currentState === "S5") qrs = ["Saya dalam bahaya sekarang", "Hubungi nomor darurat"];
+            else if (currentState === "S3" || currentState === "S4") qrs = ["Saya ingin bantuan", "Saya ingin cerita lebih lanjut"];
+            else qrs = [qrBingung, qrKekerasan, qrCerita, qrBantuan];
+            addMessage(reply, false, qrs);
+            isWaiting = false;
+        }, 800);
+    }
+    
+    document.getElementById("sendBtn").addEventListener("click", sendMessage);
+    document.getElementById("userInput").addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    document.getElementById("userInput").addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = Math.min(this.scrollHeight, 80) + "px";
+    });
+    
+    // Overlay Exit & Feedback
+    const overlay = document.getElementById("exitOverlay");
+    const thankyouMsg = document.getElementById("thankyouMsg");
+    const closeBtn = document.getElementById("closeExitBtn");
+    function showExitOverlay() { overlay.classList.add("show"); }
+    function hideExitOverlay() { overlay.classList.remove("show"); }
+    function saveFeedback(option) {
+        const feedbacks = JSON.parse(localStorage.getItem("sarinem_feedback") || "[]");
+        feedbacks.push({ option, state: currentState, timestamp: new Date().toISOString() });
+        localStorage.setItem("sarinem_feedback", JSON.stringify(feedbacks));
+    }
+    
+    document.getElementById("exitBtn").addEventListener("click", showExitOverlay);
+    document.getElementById("feedback1").addEventListener("click", () => {
+        saveFeedback("Ajukan ke Rhiana Spring");
+        window.location.href = "mailto:mbah_hogi_bejo@superherocafeinside.com?subject=Dukungan%20Ajukan%20Sarinem%20ke%20Rhiana%20Spring&body=Halo%20Mbah%20Hogi%20Bejo%2C%0A%0ASaya%20setuju%20konsep%20ini%20diajukan%20ke%20Rhiana%20Spring.%0A%0ATerima%20kasih.";
+        thankyouMsg.innerHTML = "✅ Email terbuka. Terima kasih!";
+        thankyouMsg.classList.add("show");
+        setTimeout(() => { hideExitOverlay(); messagesDiv.innerHTML = ""; addMessage("Anda keluar dengan aman. 🌾", false, []); }, 2000);
+    });
+    document.getElementById("feedback2").addEventListener("click", () => {
+        saveFeedback("Bersedia mendanai riset");
+        window.location.href = "mailto:mbah_hogi_bejo@superherocafeinside.com?subject=Ketertarikan%20Mendanai%20Riset%20Sarinem&body=Halo%2C%20saya%20tertarik%20mendukung%20riset%20Sarinem.";
+        thankyouMsg.innerHTML = "💡 Email terbuka. Terima kasih!";
+        thankyouMsg.classList.add("show");
+        setTimeout(() => { hideExitOverlay(); messagesDiv.innerHTML = ""; addMessage("Anda keluar dengan aman. 🌾", false, []); }, 2000);
+    });
+    document.getElementById("feedback3").addEventListener("click", () => {
+        saveFeedback("Masukan");
+        window.location.href = "mailto:mbah_hogi_bejo@superherocafeinside.com?subject=Masukan%20Sarinem&body=Halo%2C%20berikut%20masukan%20saya.";
+        thankyouMsg.innerHTML = "📧 Email terbuka. Terima kasih!";
+        thankyouMsg.classList.add("show");
+        setTimeout(() => { hideExitOverlay(); messagesDiv.innerHTML = ""; addMessage("Anda keluar dengan aman. 🌾", false, []); }, 2000);
+    });
+    closeBtn.addEventListener("click", () => {
+        hideExitOverlay();
+        messagesDiv.innerHTML = "";
+        addMessage("Anda keluar dengan aman. Sarinem selalu ada di sini. 🌾", false, []);
+    });
+    
+    // Inisialisasi UI bahasa
+    updateUILanguage();
+    
+    // Inisialisasi state machine
+    setTimeout(() => {
+        const s0Message = "Halo, saya Sarinem. 🌾\n\nSaya di sini untuk mendukung siapa pun yang mengalami masalah dalam hubungan.\n\nSemua yang Anda ceritakan bersifat rahasia. Jika Anda merasa tidak aman, gunakan tombol 'Keluar Aman' kapan saja.\n\nApa yang ingin Anda bicarakan hari ini?";
+        const qrBingungText = texts.qrBingung[currentLang];
+        const qrKekerasanText = texts.qrKekerasan[currentLang];
+        const qrCeritaText = texts.qrCerita[currentLang];
+        const qrBantuanText = texts.qrBantuan[currentLang];
+        addMessage(s0Message, false, [qrBingungText, qrKekerasanText, qrCeritaText, qrBantuanText]);
+    }, 300);
+</script>
+</body>
+</html>
