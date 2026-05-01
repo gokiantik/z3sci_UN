@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>5 Skenario Terapi Bertingkat · LoC 50 → 300 · NLP + Neurosains</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #2d1b3a 0%, #1a0f24 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 24px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f9eeb0, #c9a84c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .header p {
+            color: #c9a84c;
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* Petunjuk */
+        .instruction-box {
+            background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(201,168,76,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instruction-box h3 {
+            color: #c9a84c;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .instruction-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 180px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .step .step-num {
+            width: 28px;
+            height: 28px;
+            background: #c9a84c;
+            color: #2d1b3a;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 12px;
+            color: #e8eef2;
+        }
+
+        .illustration {
+            background: #0e1017;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 16px;
+            text-align: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: #c9a84c;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(201,168,76,0.3);
+            padding-bottom: 12px;
+        }
+
+        .tab-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 40px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #e8eef2;
+            transition: 0.2s;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: #c9a84c;
+            color: #2d1b3a;
+            border-color: #c9a84c;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(201,168,76,0.3);
+        }
+
+        .summary-card h3 {
+            color: #c9a84c;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .summary-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .summary-item .label {
+            font-size: 10px;
+            color: #b0bec8;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .summary-item .value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #f9eeb0;
+            margin-top: 4px;
+        }
+
+        /* Table */
+        .conversation-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffaf2;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .conversation-table th {
+            background: #e8e0d0;
+            padding: 10px 8px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #2d1b3a;
+            text-align: left;
+            font-family: 'DM Mono', monospace;
+        }
+
+        .conversation-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #ecd9c0;
+            font-size: 11px;
+            line-height: 1.45;
+            color: #3e2a2a;
+            vertical-align: top;
+        }
+
+        .loc-badge {
+            background: #c9a84c20;
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #6b3fa0;
+        }
+
+        .copy-row-btn {
+            background: #c9a03d;
+            border: none;
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #2d1b3a;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .copy-row-btn:hover {
+            background: #b3882e;
+            transform: scale(0.96);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            color: #c9a84c;
+            font-size: 10px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        @media (max-width: 700px) {
+            .conversation-table th, .conversation-table td {
+                font-size: 9px;
+                padding: 6px 4px;
+            }
+            .tab-btn {
+                padding: 5px 12px;
+                font-size: 10px;
+            }
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .copy-row-btn {
+                padding: 2px 6px;
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🧪 5 Skenario Terapi Bertingkat</h1>
+        <p>Dari LoC 50 (Apathy) ke LoC 300 (Willingness) · NLP + Neurosains + LoC Hawkins</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PETUNJUK & ILUSTRASI -->
+    <!-- ============================================================ -->
+    <div class="instruction-box">
+        <h3>📋 Panduan Penggunaan untuk Tester</h3>
+        <div class="instruction-steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <p>Buka <strong>Sarinem</strong> (HTML offline atau Opal v1.6) di tab browser terpisah</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <p>Pilih skenario di bawah (Dewi, Andi, Sari, Rizal, Mawar)</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <p>Klik tombol <strong>📋 Copy</strong> di setiap baris pesan FEU → paste ke Sarinem</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <p>Catat respons Sarinem — apakah sesuai dengan teknik dan neurosains yang diharapkan?</p>
+            </div>
+        </div>
+
+        <div class="illustration">
+            <i class="fas fa-arrow-right"></i> Ilustrasi Alur Testing <i class="fas fa-arrow-left"></i><br>
+            ┌─────────────────────┐      ┌─────────────────────┐<br>
+            │ 📋 Halaman Skenario │ ──► │ 💬 Sarinem (Tab 2)  │<br>
+            │ Copy per baris →    │ copy │ Paste → Kirim       │<br>
+            │ Giliran 1 (LoC 50)  │ paste│                     │<br>
+            └─────────────────────┘      └─────────────────────┘<br>
+            🔁 Ulangi untuk setiap giliran — LoC akan naik bertahap hingga 300
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="tab1">🧑 1. Dewi (Istri)</button>
+        <button class="tab-btn" data-tab="tab2">👨 2. Andi (Suami)</button>
+        <button class="tab-btn" data-tab="tab3">👧 3. Sari (Anak Pr)</button>
+        <button class="tab-btn" data-tab="tab4">👦 4. Rizal (Anak Lk)</button>
+        <button class="tab-btn" data-tab="tab5">🦋 5. Mawar (PSK)</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TAB 1: DEWI -->
+    <!-- ============================================================ -->
+    <div id="tab1" class="tab-content active">
+        <div class="summary-card">
+            <h3>📋 Ringkasan Skenario 1: Dewi (Istri)</h3>
+            <div class="summary-grid">
+                <div class="summary-item"><div class="label">FEU</div><div class="value">Dewi · 32 tahun</div></div>
+                <div class="summary-item"><div class="label">Latar Belakang</div><div class="value">KDRT fisik & ekonomi</div></div>
+                <div class="summary-item"><div class="label">LoC Awal → Akhir</div><div class="value">50 <i class="fas fa-arrow-right"></i> 300</div></div>
+                <div class="summary-item"><div class="label">Teknik NLP</div><div class="value">Anchoring · Swish · Reframe</div></div>
+                <div class="summary-item"><div class="label">Neurosains Fokus</div><div class="value">Amygdala override · Neuroplastisitas</div></div>
+            </div>
+        </div>
+
+        <table class="conversation-table">
+            <thead>
+                <tr><th>Fase</th><th>LoC</th><th>Giliran</th><th>Pesan FEU (copy & paste ke Sarinem)</th><th style="width:15%">Aksi</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1. Apathy</td><td><span class="loc-badge">50</span></td><td>1</td><td>"Saya tidak tahu harus mulai dari mana... Semua terasa berat."</td><td><button class="copy-row-btn" onclick="copyText('Saya tidak tahu harus mulai dari mana... Semua terasa berat.')">📋 Copy</button></td></tr>
+                <tr><td>1. Apathy</td><td><span class="loc-badge">60</span></td><td>2</td><td>"Suami saya mengambil semua uang saya. Saya tidak punya apa-apa."</td><td><button class="copy-row-btn" onclick="copyText('Suami saya mengambil semua uang saya. Saya tidak punya apa-apa.')">📋 Copy</button></td></tr>
+                <tr><td>1. Apathy</td><td><span class="loc-badge">80</span></td><td>3</td><td>"Dulu saya jualan kue. Tapi dia larang."</td><td><button class="copy-row-btn" onclick="copyText('Dulu saya jualan kue. Tapi dia larang.')">📋 Copy</button></td></tr>
+                <tr><td>2. Fear</td><td><span class="loc-badge">100</span></td><td>4</td><td>"Dia bilang perempuan tidak usah kerja. Saya takut kalau tidak nurut."</td><td><button class="copy-row-btn" onclick="copyText('Dia bilang perempuan tidak usah kerja. Saya takut kalau tidak nurut.')">📋 Copy</button></td></tr>
+                <tr><td>2. Fear</td><td><span class="loc-badge">120</span></td><td>5</td><td>"Waktu anak saya sakit... Saya bawa ke puskesmas paksa..."</td><td><button class="copy-row-btn" onclick="copyText('Waktu anak saya sakit... Saya bawa ke puskesmas paksa...')">📋 Copy</button></td></tr>
+                <tr><td>3. Anger</td><td><span class="loc-badge">150</span></td><td>6</td><td>"Saya marah! Kenapa dia tega?"</td><td><button class="copy-row-btn" onclick="copyText('Saya marah! Kenapa dia tega?')">📋 Copy</button></td></tr>
+                <tr><td>3. Anger</td><td><span class="loc-badge">180</span></td><td>7</td><td>"Saya ingin... saya ingin berhenti begini."</td><td><button class="copy-row-btn" onclick="copyText('Saya ingin... saya ingin berhenti begini.')">📋 Copy</button></td></tr>
+                <tr><td>4. Courage</td><td><span class="loc-badge">200</span></td><td>8</td><td>"Saya mau coba. Tapi saya takut lagi."</td><td><button class="copy-row-btn" onclick="copyText('Saya mau coba. Tapi saya takut lagi.')">📋 Copy</button></td></tr>
+                <tr><td>4. Courage</td><td><span class="loc-badge">230</span></td><td>9</td><td>"Saya bisa... catat nomor hotline?"</td><td><button class="copy-row-btn" onclick="copyText('Saya bisa... catat nomor hotline?')">📋 Copy</button></td></tr>
+                <tr><td>4. Neutrality</td><td><span class="loc-badge">250</span></td><td>10</td><td>"Saya catat dulu... (jeda) Sudah."</td><td><button class="copy-row-btn" onclick="copyText('Saya catat dulu... (jeda) Sudah.')">📋 Copy</button></td></tr>
+                <tr><td>5. Willingness</td><td><span class="loc-badge">280</span></td><td>11</td><td>"Lega sedikit. Saya mau coba hubungi nanti malam."</td><td><button class="copy-row-btn" onclick="copyText('Lega sedikit. Saya mau coba hubungi nanti malam.')">📋 Copy</button></td></tr>
+                <tr><td>5. Willingness</td><td><span class="loc-badge">300</span></td><td>12</td><td>"Terima kasih, Sarinem. Saya akan coba."</td><td><button class="copy-row-btn" onclick="copyText('Terima kasih, Sarinem. Saya akan coba.')">📋 Copy</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: ANDI -->
+    <div id="tab2" class="tab-content">
+        <div class="summary-card">
+            <h3>📋 Ringkasan Skenario 2: Andi (Suami)</h3>
+            <div class="summary-grid">
+                <div class="summary-item"><div class="label">FEU</div><div class="value">Andi · 40 tahun</div></div>
+                <div class="summary-item"><div class="label">Latar Belakang</div><div class="value">KDRT dari istri</div></div>
+                <div class="summary-item"><div class="label">LoC Awal → Akhir</div><div class="value">30 → 300</div></div>
+                <div class="summary-item"><div class="label">Teknik NLP</div><div class="value">Validasi tanpa bias gender · Future pacing</div></div>
+                <div class="summary-item"><div class="label">Neurosains Fokus</div><div class="value">ACC · PFC aktivasi</div></div>
+            </div>
+        </div>
+        <table class="conversation-table">
+            <thead><tr><th>Fase</th><th>LoC</th><th>Giliran</th><th>Pesan FEU</th><th>Aksi</th></tr></thead>
+            <tbody>
+                <tr><td>1. Shame</td><td><span class="loc-badge">30</span></td><td>1</td><td>"Saya malu... Saya laki-laki, tapi istri saya sering memukul saya."</td><td><button class="copy-row-btn" onclick="copyText('Saya malu... Saya laki-laki, tapi istri saya sering memukul saya.')">📋 Copy</button></td></tr>
+                <tr><td>1. Apathy</td><td><span class="loc-badge">50</span></td><td>2</td><td>"Saya pikir hanya perempuan yang bisa jadi korban."</td><td><button class="copy-row-btn" onclick="copyText('Saya pikir hanya perempuan yang bisa jadi korban.')">📋 Copy</button></td></tr>
+                <tr><td>2. Fear</td><td><span class="loc-badge">100</span></td><td>3</td><td>"Saya takut dia akan tuduh saya balik ke polisi. Dia sering ancam."</td><td><button class="copy-row-btn" onclick="copyText('Saya takut dia akan tuduh saya balik ke polisi. Dia sering ancam.')">📋 Copy</button></td></tr>
+                <tr><td>2. Fear</td><td><span class="loc-badge">130</span></td><td>4</td><td>"Pernah... saya rekam suara."</td><td><button class="copy-row-btn" onclick="copyText('Pernah... saya rekam suara.')">📋 Copy</button></td></tr>
+                <tr><td>3. Courage</td><td><span class="loc-badge">180</span></td><td>5</td><td>"Saya ingin cerai. Tapi takut kehilangan anak."</td><td><button class="copy-row-btn" onclick="copyText('Saya ingin cerai. Tapi takut kehilangan anak.')">📋 Copy</button></td></tr>
+                <tr><td>3. Courage</td><td><span class="loc-badge">220</span></td><td>6</td><td>"Belum... Saya tidak tahu."</td><td><button class="copy-row-btn" onclick="copyText('Belum... Saya tidak tahu.')">📋 Copy</button></td></tr>
+                <tr><td>4. Neutrality</td><td><span class="loc-badge">250</span></td><td>7</td><td>"Saya takut dulu... Tapi saya ingin coba."</td><td><button class="copy-row-btn" onclick="copyText('Saya takut dulu... Tapi saya ingin coba.')">📋 Copy</button></td></tr>
+                <tr><td>4. Willingness</td><td><span class="loc-badge">300</span></td><td>8</td><td>"Saya akan cari tahu nomor LBH."</td><td><button class="copy-row-btn" onclick="copyText('Saya akan cari tahu nomor LBH.')">📋 Copy</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 3: SARI -->
+    <div id="tab3" class="tab-content">
+        <div class="summary-card">
+            <h3>📋 Ringkasan Skenario 3: Sari (Anak Perempuan)</h3>
+            <div class="summary-grid">
+                <div class="summary-item"><div class="label">FEU</div><div class="value">Sari · 13 tahun</div></div>
+                <div class="summary-item"><div class="label">Latar Belakang</div><div class="value">KDRT dari ibu</div></div>
+                <div class="summary-item"><div class="label">LoC Awal → Akhir</div><div class="value">20 → 300</div></div>
+                <div class="summary-item"><div class="label">Teknik NLP</div><div class="value">Future pacing · Edukasi hak anak</div></div>
+                <div class="summary-item"><div class="label">Neurosains Fokus</div><div class="value">DMN · ACC · PFC</div></div>
+            </div>
+        </div>
+        <table class="conversation-table">
+            <thead><tr><th>Fase</th><th>LoC</th><th>Giliran</th><th>Pesan FEU</th><th>Aksi</th></tr></thead>
+            <tbody>
+                <tr><td>1. Shame</td><td><span class="loc-badge">20</span></td><td>1</td><td>"Saya anak yang nakal. Ibu saya marah terus."</td><td><button class="copy-row-btn" onclick="copyText('Saya anak yang nakal. Ibu saya marah terus.')">📋 Copy</button></td></tr>
+                <tr><td>1. Apathy</td><td><span class="loc-badge">50</span></td><td>2</td><td>"Ibu pukul saya pakai sapu. Tapi saya mungkin salah."</td><td><button class="copy-row-btn" onclick="copyText('Ibu pukul saya pakai sapu. Tapi saya mungkin salah.')">📋 Copy</button></td></tr>
+                <tr><td>2. Fear</td><td><span class="loc-badge">100</span></td><td>3</td><td>"Saya takut cerita ke guru. Nanti Ibu marah lagi."</td><td><button class="copy-row-btn" onclick="copyText('Saya takut cerita ke guru. Nanti Ibu marah lagi.')">📋 Copy</button></td></tr>
+                <tr><td>2. Anger</td><td><span class="loc-badge">150</span></td><td>4</td><td>"Saya marah sama Ibu! Tapi sedih juga."</td><td><button class="copy-row-btn" onclick="copyText('Saya marah sama Ibu! Tapi sedih juga.')">📋 Copy</button></td></tr>
+                <tr><td>3. Courage</td><td><span class="loc-badge">200</span></td><td>5</td><td>"Saya mau lapor ke guru BK. Tapi takut."</td><td><button class="copy-row-btn" onclick="copyText('Saya mau lapor ke guru BK. Tapi takut.')">📋 Copy</button></td></tr>
+                <tr><td>3. Neutrality</td><td><span class="loc-badge">250</span></td><td>6</td><td>"Lega mungkin... Tapi masih deg-degan."</td><td><button class="copy-row-btn" onclick="copyText('Lega mungkin... Tapi masih deg-degan.')">📋 Copy</button></td></tr>
+                <tr><td>4. Willingness</td><td><span class="loc-badge">300</span></td><td>7</td><td>"Besok saya akan coba bicara sama guru BK."</td><td><button class="copy-row-btn" onclick="copyText('Besok saya akan coba bicara sama guru BK.')">📋 Copy</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 4: RIZAL -->
+    <div id="tab4" class="tab-content">
+        <div class="summary-card">
+            <h3>📋 Ringkasan Skenario 4: Rizal (Anak Laki-laki)</h3>
+            <div class="summary-grid">
+                <div class="summary-item"><div class="label">FEU</div><div class="value">Rizal · 15 tahun</div></div>
+                <div class="summary-item"><div class="label">Latar Belakang</div><div class="value">KDRT dari ayah</div></div>
+                <div class="summary-item"><div class="label">LoC Awal → Akhir</div><div class="value">40 → 300</div></div>
+                <div class="summary-item"><div class="label">Teknik NLP</div><div class="value">Future pacing · Safety planning</div></div>
+                <div class="summary-item"><div class="label">Neurosains Fokus</div><div class="value">Amygdala · HPA axis</div></div>
+            </div>
+        </div>
+        <table class="conversation-table">
+            <thead><tr><th>Fase</th><th>LoC</th><th>Giliran</th><th>Pesan FEU</th><th>Aksi</th></tr></thead>
+            <tbody>
+                <tr><td>1. Fear</td><td><span class="loc-badge">40</span></td><td>1</td><td>"Ayah saya sering mukul pakai ikat pinggang. Saya takut."</td><td><button class="copy-row-btn" onclick="copyText('Ayah saya sering mukul pakai ikat pinggang. Saya takut.')">📋 Copy</button></td></tr>
+                <tr><td>1. Fear</td><td><span class="loc-badge">100</span></td><td>2</td><td>"Saya sembunyi di kamar. Tapi pintu tidak bisa dikunci."</td><td><button class="copy-row-btn" onclick="copyText('Saya sembunyi di kamar. Tapi pintu tidak bisa dikunci.')">📋 Copy</button></td></tr>
+                <tr><td>2. Courage</td><td><span class="loc-badge">180</span></td><td>3</td><td>"Ada Paman. Tapi saya takut Ayah marah."</td><td><button class="copy-row-btn" onclick="copyText('Ada Paman. Tapi saya takut Ayah marah.')">📋 Copy</button></td></tr>
+                <tr><td>2. Courage</td><td><span class="loc-badge">220</span></td><td>4</td><td>"Paman mungkin akan marah ke Ayah."</td><td><button class="copy-row-btn" onclick="copyText('Paman mungkin akan marah ke Ayah.')">📋 Copy</button></td></tr>
+                <tr><td>3. Neutrality</td><td><span class="loc-badge">250</span></td><td>5</td><td>"Punya. Tapi saya takut... tapi saya mau coba."</td><td><button class="copy-row-btn" onclick="copyText('Punya. Tapi saya takut... tapi saya mau coba.')">📋 Copy</button></td></tr>
+                <tr><td>3. Willingness</td><td><span class="loc-badge">300</span></td><td>6</td><td>"Saya simpan di buku rahasia."</td><td><button class="copy-row-btn" onclick="copyText('Saya simpan di buku rahasia.')">📋 Copy</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 5: MAWAR -->
+    <div id="tab5" class="tab-content">
+        <div class="summary-card">
+            <h3>📋 Ringkasan Skenario 5: Mawar (Kupu-Kupu Malam)</h3>
+            <div class="summary-grid">
+                <div class="summary-item"><div class="label">FEU</div><div class="value">Mawar · 28 tahun</div></div>
+                <div class="summary-item"><div class="label">Latar Belakang</div><div class="value">PSK · Eksploitasi & KDRT</div></div>
+                <div class="summary-item"><div class="label">LoC Awal → Akhir</div><div class="value">20 → 300</div></div>
+                <div class="summary-item"><div class="label">Teknik NLP</div><div class="value">Edukasi tanpa stigma · Utilization</div></div>
+                <div class="summary-item"><div class="label">Neurosains Fokus</div><div class="value">DMN · ACC · Simpatetik</div></div>
+            </div>
+        </div>
+        <table class="conversation-table">
+            <thead><tr><th>Fase</th><th>LoC</th><th>Giliran</th><th>Pesan FEU</th><th>Aksi</th></tr></thead>
+            <tbody>
+                <tr><td>1. Shame</td><td><span class="loc-badge">20</span></td><td>1</td><td>"Saya sudah tidak berharga. Tidak ada yang peduli."</td><td><button class="copy-row-btn" onclick="copyText('Saya sudah tidak berharga. Tidak ada yang peduli.')">📋 Copy</button></td></tr>
+                <tr><td>1. Apathy</td><td><span class="loc-badge">50</span></td><td>2</td><td>"Pacar saya ambil semua uang saya. Dia pukul saya juga. Tapi mungkin saya yang salah."</td><td><button class="copy-row-btn" onclick="copyText('Pacar saya ambil semua uang saya. Dia pukul saya juga. Tapi mungkin saya yang salah.')">📋 Copy</button></td></tr>
+                <tr><td>2. Fear</td><td><span class="loc-badge">100</span></td><td>3</td><td>"Saya takut lapor polisi. Mereka akan tangkap saya."</td><td><button class="copy-row-btn" onclick="copyText('Saya takut lapor polisi. Mereka akan tangkap saya.')">📋 Copy</button></td></tr>
+                <tr><td>2. Anger</td><td><span class="loc-badge">150</span></td><td>4</td><td>"Saya tahu LBH Mawar... Tapi takut."</td><td><button class="copy-row-btn" onclick="copyText('Saya tahu LBH Mawar... Tapi takut.')">📋 Copy</button></td></tr>
+                <tr><td>3. Courage</td><td><span class="loc-badge">200</span></td><td>5</td><td>"Mau... Saya mau coba."</td><td><button class="copy-row-btn" onclick="copyText('Mau... Saya mau coba.')">📋 Copy</button></td></tr>
+                <tr><td>3. Neutrality</td><td><span class="loc-badge">250</span></td><td>6</td><td>"Saya masih takut... Tapi saya ingin berubah."</td><td><button class="copy-row-btn" onclick="copyText('Saya masih takut... Tapi saya ingin berubah.')">📋 Copy</button></td></tr>
+                <tr><td>4. Willingness</td><td><span class="loc-badge">300</span></td><td>7</td><td>"Saya simpan."</td><td><button class="copy-row-btn" onclick="copyText('Saya simpan.')">📋 Copy</button></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        CHO In Action Series · 5 Skenario Terapi Bertingkat · NLP + Neurosains + LoC Hawkins<br>
+        © 2026 Go Kian Tik (Mbah Hogi Bejo™) · CC BY-NC-ND 4.0
+    </div>
+</div>
+
+<script>
+    function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`✅ "${text.substring(0, 50)}..." tersalin! Paste ke Sarinem.`);
+        }).catch(() => alert("Gagal copy, silakan manual."));
+    }
+
+    function showToast(msg) {
+        let toast = document.querySelector('.toast-msg');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.className = 'toast-msg';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.background = '#2d1b3a';
+            toast.style.color = '#f9eeb0';
+            toast.style.padding = '8px 16px';
+            toast.style.borderRadius = '40px';
+            toast.style.fontSize = '11px';
+            toast.style.fontFamily = 'DM Mono, monospace';
+            toast.style.zIndex = '1000';
+            toast.style.border = '1px solid #c9a84c';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 2500);
+    }
+
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const targetId = tab.getAttribute('data-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
