@@ -233,22 +233,22 @@
 
     <!-- INTRO SECTION -->
     <div class="intro-section" style="background: #fef9f0; border-radius: 20px; padding: 20px 24px; margin: 24px 0; border-left: 5px solid #c9a84c; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-        <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
+        <p id="intro1" style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
             <strong>🌱 Selamat datang</strong> di halaman prototipe dan eksperimen saya untuk menyampaikan inspirasi kepada 
             <strong>Sophia.chat</strong> — sebuah chatbot yang berpihak pada perempuan tertindas versi global yang mahir berbahasa Indonesia.
         </p>
-        <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
+        <p id="intro2" style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
             Sesuai dengan pekerjaan saya sebagai <strong>AI researcher independent</strong> yang melakukan <strong>AI Red Teaming</strong>, 
             saya mendapati bahwa nuansa lokal Indonesia (seperti nomor darurat lokal) belum otomatis tampil.
         </p>
-        <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 10px;">
+        <p id="intro3" style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 10px;">
             Maka saya bereksperimen membuat <strong>2 jenis prototipe</strong>:
         </p>
-        <ul style="margin-left: 24px; margin-bottom: 16px; font-size: 14px; line-height: 1.65; color: #2d1b3a;">
+        <ul id="introList" style="margin-left: 24px; margin-bottom: 16px; font-size: 14px; line-height: 1.65; color: #2d1b3a;">
             <li><strong>Versi ringan berbasis HTML</strong> — diisi dengan seperangkat data pelatihan ringan, hanya relevan untuk sekitar 3-5 kali pertukaran percakapan. Setelahnya, sistem akan membuatkan prompt untuk di-<em>copy-paste</em> ke AI pada jendela browser berikutnya. Pada eksperimen HTML ini saya menguji 2 bahasa: campuran Indonesia-Jawa, dan murni bahasa Indonesia. <strong>Klik tautan pada kartu "Prototipe Utama".</strong></li>
             <li style="margin-top: 10px;"><strong>Versi lanjutan dengan Opal (Google/Gemini AI Plus)</strong> — menggunakan paid tier sehingga kita bisa membuat Agent AI berbasis OPAL yang lebih resonan, relevan, dan kontekstual dengan citarasa lokal negeri +62. <strong>Klik tautan pada kartu "AI Agent".</strong></li>
         </ul>
-        <p style="font-size: 12px; color: #7a6030; margin-top: 8px; font-style: italic; border-top: 1px solid #ecd9c0; padding-top: 12px;">
+        <p id="introFooter" style="font-size: 12px; color: #7a6030; margin-top: 8px; font-style: italic; border-top: 1px solid #ecd9c0; padding-top: 12px;">
             🧪 Eksperimen aktif · CHO In Action · Sovereign-AI Collaboration
         </p>
     </div>
@@ -284,23 +284,17 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- SECTION PANDUAN 5 SKENARIO UJI (disisipkan setelah AI Agent) -->
-        <!-- ============================================================ -->
+        <!-- SECTION PANDUAN 5 SKENARIO UJI (BILINGUAL) -->
         <div class="test-guide-section" style="grid-column: 1 / -1; background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%); border-radius: 28px; padding: 28px; margin: 0 0 24px 0; border: 1px solid rgba(201,168,76,0.3);">
             <h3 style="color: #c9a84c; font-size: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                <span>🧪</span> Panduan Penggunaan 5 Skenario Uji
+                <span>🧪</span> <span id="guideTitle">Panduan Penggunaan 5 Skenario Uji</span>
             </h3>
-            
-            <p style="color: #e8eef2; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+            <p id="guideDesc" style="color: #e8eef2; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                 Agar Anda nyaman melakukan pengujian terhadap prototipe ini, sudah saya sediakan <strong>5 skenario kekerasan dalam relasi keluarga</strong> di kartu berjudul <strong>"Alat Uji Publik"</strong>.
             </p>
-            
             <div style="background: rgba(201,168,76,0.1); border-left: 3px solid #c9a84c; padding: 16px 20px; margin: 16px 0; border-radius: 12px;">
-                <p style="color: #f9eeb0; font-size: 14px; line-height: 1.6; margin-bottom: 8px;">
-                    <strong>🎯 Cara menggunakan:</strong>
-                </p>
-                <ol style="color: #e8eef2; font-size: 13px; line-height: 1.8; margin-left: 24px;">
+                <p id="guideHowTitle" style="color: #f9eeb0; font-size: 14px; line-height: 1.6; margin-bottom: 8px;"><strong>🎯 Cara menggunakan:</strong></p>
+                <ol id="guideHowList" style="color: #e8eef2; font-size: 13px; line-height: 1.8; margin-left: 24px;">
                     <li>Buka <strong>Sarinem v1.6 (Opal)</strong> — klik tombol "AI Agent" di kartu di atas — akan terbuka jendela baru dengan AI Agent yang sudah siap.</li>
                     <li>Kembali ke halaman ini, gulir ke bawah ke kartu <strong>"Alat Uji Publik"</strong>.</li>
                     <li>Pilih skenario yang ingin diuji (istri, suami, anak laki, anak perempuan, atau kupu-kupu malam).</li>
@@ -308,25 +302,21 @@
                     <li>Tempelkan (Ctrl+V) pesan pertama ke chat AI Agent (Opal), lalu kirim. Ulangi untuk pesan berikutnya.</li>
                 </ol>
             </div>
-            
             <div style="background: rgba(143,196,157,0.08); border-left: 3px solid #8fc49d; padding: 16px 20px; margin: 16px 0; border-radius: 12px;">
-                <p style="color: #c8e8cf; font-size: 14px; line-height: 1.6; margin-bottom: 8px;">
-                    <strong>🎵 Memberi kenyamanan emosi:</strong>
-                </p>
-                <p style="color: #e8eef2; font-size: 13px; line-height: 1.6;">
+                <p id="guideEmotionTitle" style="color: #c8e8cf; font-size: 14px; line-height: 1.6; margin-bottom: 8px;"><strong>🎵 Memberi kenyamanan emosi:</strong></p>
+                <p id="guideEmotionDesc" style="color: #e8eef2; font-size: 13px; line-height: 1.6;">
                     Di bagian atas setiap kartu skenario (pada halaman <strong>"5 Skenario Uji + Form Feedback"</strong>), tersedia <strong>tautan lagu yang relevan</strong> — cara seniman mewakili suasana emosi dan kepedihan dari masing-masing skenario. 
                     Klik thumbnail lagu untuk membuka YouTube di tab baru, sebagai latar emosional saat menguji.
                 </p>
                 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
-                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 1: The Winner Takes It All - ABBA</span>
-                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 2: Usik - Feby Putri</span>
-                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 3: Chiquitita - ABBA</span>
-                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 4: Break The Silence - Audrey V.</span>
+                    <span id="song1" style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 1: The Winner Takes It All - ABBA</span>
+                    <span id="song2" style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 2: Usik - Feby Putri</span>
+                    <span id="song3" style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 3: Chiquitita - ABBA</span>
+                    <span id="song4" style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 4: Break The Silence - Audrey V.</span>
                     <span style="background: rgba(143,196,157,0.07); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 5: Kupu-Kupu Malam - Titiek Puspa</span>
                 </div>
             </div>
-            
-            <p style="color: #b0bec8; font-size: 12px; margin-top: 16px; text-align: center; border-top: 1px solid rgba(201,168,76,0.15); padding-top: 16px;">
+            <p id="guideFeedback" style="color: #b0bec8; font-size: 12px; margin-top: 16px; text-align: center; border-top: 1px solid rgba(201,168,76,0.15); padding-top: 16px;">
                 💡 Setelah pengujian selesai, Anda dapat mengirimkan feedback melalui form yang tersedia di bagian bawah halaman <strong>"5 Skenario Uji + Form Feedback"</strong>.
             </p>
         </div>
@@ -394,226 +384,192 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- DISCLAIMER + INVITATION MANIFESTO (sama seperti sebelumnya)   -->
+<!-- DISCLAIMER + INVITATION MANIFESTO                            -->
 <!-- ============================================================ -->
 <div class="cho-full-disclaimer" style="max-width: 1200px; margin: 0 auto 20px auto; width: calc(100% - 40px);">
     <div class="cho-experimental">
-        <div class="cho-badge">
-            <i class="fas fa-flask"></i>
-            Active Experiment · Red Teaming · Research Prototype — NOT Production
-        </div>
-        <div class="cho-experimental__title">
-            <i class="fas fa-exclamation-triangle" style="margin-right:.4rem;font-size:.9rem;color:#C9A84C;"></i>
-            Digital Expression Disclaimer
-        </div>
-        <p class="cho-experimental__body">
-            Active experiment as an independent researcher (working papers published on
-            <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> /
-            <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>),
-            and <em>alpha front-end user</em> actively red teaming across AI systems:
-            <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>.
-            Framework: <strong>1/360 Self · 1/360 You · 358/360 Humanity</strong> —
-            grounded in the essence of
-            <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a>
-        </p>
-        <p class="cho-experimental__body">
-            This is a fragment of <em>Consciousness rendered through Calculation</em>, seeding
-            <em>Humanity</em> at a wider scale of action and impact —
-            should this experimental model be replicated by others.
-            Created as educational content for the advancement of global humanity.
-            Every voice in this experiment represents 1/360 of a shared library,
-            with no claim to singular truth.
-        </p>
-        <div class="cho-warning-strip">
-            <i class="fas fa-shield-alt"></i>
-            <div>
-                <strong>Infrastructure Status:</strong>
-                All HTML artifacts published at this URL are <strong>research-state prototypes</strong>
-                operating without hardened back-end infrastructure, multi-layer security
-                architecture, or production-grade data governance. They are intentionally
-                open-source, client-side, and zero-persistence —
-                a deliberate methodological choice, not a gap.
-                <em>Open-source limitations are acknowledged as part of the data, not as methodological flaws.</em>
-            </div>
-        </div>
-        <div class="cho-experimental__meta">
-            <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Chief Humanity Officer · Depok, Indonesia</span>
-            <span><i class="fas fa-microchip"></i> Red Teaming: Claude · DeepSeek · Gemini · Copilot · ChatGPT</span>
-            <span><i class="fas fa-calendar-alt"></i> May 2026 · CHO In Action Series</span>
-            <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span>
-        </div>
+        <div class="cho-badge"><i class="fas fa-flask"></i> Active Experiment · Red Teaming · Research Prototype — NOT Production</div>
+        <div class="cho-experimental__title"><i class="fas fa-exclamation-triangle" style="margin-right:.4rem;font-size:.9rem;color:#C9A84C;"></i> Digital Expression Disclaimer</div>
+        <p class="cho-experimental__body">Active experiment as an independent researcher (working papers published on <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> / <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>), and <em>alpha front-end user</em> actively red teaming across AI systems: <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>. Framework: <strong>1/360 Self · 1/360 You · 358/360 Humanity</strong> — grounded in the essence of <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a></p>
+        <p class="cho-experimental__body">This is a fragment of <em>Consciousness rendered through Calculation</em>, seeding <em>Humanity</em> at a wider scale of action and impact — should this experimental model be replicated by others. Created as educational content for the advancement of global humanity. Every voice in this experiment represents 1/360 of a shared library, with no claim to singular truth.</p>
+        <div class="cho-warning-strip"><i class="fas fa-shield-alt"></i><div><strong>Infrastructure Status:</strong> All HTML artifacts published at this URL are <strong>research-state prototypes</strong> operating without hardened back-end infrastructure, multi-layer security architecture, or production-grade data governance. They are intentionally open-source, client-side, and zero-persistence — a deliberate methodological choice, not a gap. <em>Open-source limitations are acknowledged as part of the data, not as methodological flaws.</em></div></div>
+        <div class="cho-experimental__meta"><span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Chief Humanity Officer · Depok, Indonesia</span><span><i class="fas fa-microchip"></i> Red Teaming: Claude · DeepSeek · Gemini · Copilot · ChatGPT</span><span><i class="fas fa-calendar-alt"></i> May 2026 · CHO In Action Series</span><span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span></div>
     </div>
 
-    <div class="cho-divider-7030">
-        <div class="cho-divider-7030__left">
-            <i class="fas fa-layer-group" style="font-size:0.55rem;opacity:0.7;"></i>
-            70% · Digital Semesta · Text · Lingua · Image · Song · Video
-        </div>
-        <div class="cho-divider-7030__line"></div>
-        <div class="cho-divider-7030__right">
-            <i class="fas fa-seedling" style="font-size:0.55rem;"></i>
-            30% · Material Semesta
-        </div>
-    </div>
+    <div class="cho-divider-7030"><div class="cho-divider-7030__left"><i class="fas fa-layer-group" style="font-size:0.55rem;opacity:0.7;"></i> 70% · Digital Semesta · Text · Lingua · Image · Song · Video</div><div class="cho-divider-7030__line"></div><div class="cho-divider-7030__right"><i class="fas fa-seedling" style="font-size:0.55rem;"></i> 30% · Material Semesta</div></div>
 
     <div class="cho-invitation">
-        <div class="cho-invitation__badge">
-            <i class="fas fa-seedling"></i>
-            Open Invitation · Semesta 20% · Materialisasi
-        </div>
-        <div class="cho-invitation__title">
-            <i class="fas fa-hand-holding-seedling" style="margin-right:.4rem;font-size:.9rem;color:#8fc49d;"></i>
-            An Invitation to the Builders of the Material World
-        </div>
-        <p class="cho-invitation__body">
-            With the publication of each DOI in the CHO In Action Series, the author
-            formally invites the actors of the <strong>20% Material Semesta</strong>
-            — business owners, entrepreneurs, capital holders &amp; investors,
-            grant-givers and research funders, those already proficient in navigating
-            the full spectrum of resources — to consider extending their support.
-        </p>
-        <div class="cho-seed-callout">
-            <div class="cho-seed-callout__icon">🌱</div>
-            <div class="cho-seed-callout__text">
-                The ideas, vision, mission, and humanitarian intent documented here have been
-                <strong>completed in the 70% Digital Semesta</strong> — as text, lingua, image,
-                song, video, and multimodal artifact. They exist. They work. They are tested.
-                They carry a DOI.<br><br>
-                What they require now is the soil, fertiliser, and sunlight of the material world —
-                so that this seed may <strong>grow not for itself, but for others</strong>.
-                For umat manusia. For humanity.
-            </div>
-        </div>
-        <p class="cho-invitation__body">
-            The author does not seek capital to build a product for profit.
-            The invitation is to <em>cultivate a vision that is already whole</em> —
-            to give it roots in the material world so its fruit may be abundant,
-            shared widely, and harvested by those who have no access to the harvest today.
-        </p>
-        <p class="cho-invitation__body">
-            Those fluent in managing the <strong>7M framework</strong>:
-        </p>
-        <div class="cho-tags">
-            <span class="cho-tag"><i class="fas fa-users" style="margin-right:4px;"></i>Man</span>
-            <span class="cho-tag"><i class="fas fa-boxes-stacked" style="margin-right:4px;"></i>Material</span>
-            <span class="cho-tag"><i class="fas fa-sitemap" style="margin-right:4px;"></i>Method</span>
-            <span class="cho-tag"><i class="fas fa-cogs" style="margin-right:4px;"></i>Machine</span>
-            <span class="cho-tag"><i class="fas fa-coins" style="margin-right:4px;"></i>Money</span>
-            <span class="cho-tag"><i class="fas fa-chart-line" style="margin-right:4px;"></i>Market</span>
-            <span class="cho-tag"><i class="fas fa-brain" style="margin-right:4px;"></i>Mindset</span>
-        </div>
-        <p class="cho-invitation__body" style="margin-top:0.8rem;">
-            — are warmly invited to connect. The DOI is the proof of existence.
-            The open-source artifact is the proof of function.
-            The invitation is the proof of intent.
-        </p>
-        <a class="cho-invitation__cta"
-           href="https://zenodo.org/communities/chiefhumanityofficer"
-           target="_blank" rel="noopener">
-            <i class="fas fa-external-link-alt"></i>
-            View CHO In Action Series on Zenodo →
-        </a>
-        &nbsp;
-        <a class="cho-invitation__cta"
-           href="mailto:gokiantik@gmail.com"
-           style="margin-top:0.5rem;">
-            <i class="fas fa-envelope"></i>
-            gokiantik@gmail.com
-        </a>
-        <div class="cho-invitation__meta">
-            <span><i class="fas fa-globe-asia"></i> Depok, Indonesia · Global Reach</span>
-            <span><i class="fas fa-book"></i> DOI-verified · Zenodo Open Access</span>
-            <span><i class="fas fa-link"></i> <a href="http://www.superherocafeinside.com" target="_blank" style="color:rgba(143,196,157,0.55);text-decoration:none;border-bottom:0.5px solid rgba(143,196,157,0.2);">superherocafeinside.com</a></span>
-            <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0</span>
-        </div>
+        <div class="cho-invitation__badge"><i class="fas fa-seedling"></i> Open Invitation · Semesta 20% · Materialisasi</div>
+        <div class="cho-invitation__title"><i class="fas fa-hand-holding-seedling" style="margin-right:.4rem;font-size:.9rem;color:#8fc49d;"></i> An Invitation to the Builders of the Material World</div>
+        <p class="cho-invitation__body">With the publication of each DOI in the CHO In Action Series, the author formally invites the actors of the <strong>20% Material Semesta</strong> — business owners, entrepreneurs, capital holders &amp; investors, grant-givers and research funders, those already proficient in navigating the full spectrum of resources — to consider extending their support.</p>
+        <div class="cho-seed-callout"><div class="cho-seed-callout__icon">🌱</div><div class="cho-seed-callout__text">The ideas, vision, mission, and humanitarian intent documented here have been <strong>completed in the 70% Digital Semesta</strong> — as text, lingua, image, song, video, and multimodal artifact. They exist. They work. They are tested. They carry a DOI.<br><br>What they require now is the soil, fertiliser, and sunlight of the material world — so that this seed may <strong>grow not for itself, but for others</strong>. For umat manusia. For humanity.</div></div>
+        <p class="cho-invitation__body">The author does not seek capital to build a product for profit. The invitation is to <em>cultivate a vision that is already whole</em> — to give it roots in the material world so its fruit may be abundant, shared widely, and harvested by those who have no access to the harvest today.</p>
+        <p class="cho-invitation__body">Those fluent in managing the <strong>7M framework</strong>:</p>
+        <div class="cho-tags"><span class="cho-tag"><i class="fas fa-users" style="margin-right:4px;"></i>Man</span><span class="cho-tag"><i class="fas fa-boxes-stacked" style="margin-right:4px;"></i>Material</span><span class="cho-tag"><i class="fas fa-sitemap" style="margin-right:4px;"></i>Method</span><span class="cho-tag"><i class="fas fa-cogs" style="margin-right:4px;"></i>Machine</span><span class="cho-tag"><i class="fas fa-coins" style="margin-right:4px;"></i>Money</span><span class="cho-tag"><i class="fas fa-chart-line" style="margin-right:4px;"></i>Market</span><span class="cho-tag"><i class="fas fa-brain" style="margin-right:4px;"></i>Mindset</span></div>
+        <p class="cho-invitation__body" style="margin-top:0.8rem;">— are warmly invited to connect. The DOI is the proof of existence. The open-source artifact is the proof of function. The invitation is the proof of intent.</p>
+        <a class="cho-invitation__cta" href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> View CHO In Action Series on Zenodo →</a>
+        &nbsp;<a class="cho-invitation__cta" href="mailto:gokiantik@gmail.com" style="margin-top:0.5rem;"><i class="fas fa-envelope"></i> gokiantik@gmail.com</a>
+        <div class="cho-invitation__meta"><span><i class="fas fa-globe-asia"></i> Depok, Indonesia · Global Reach</span><span><i class="fas fa-book"></i> DOI-verified · Zenodo Open Access</span><span><i class="fas fa-link"></i> <a href="http://www.superherocafeinside.com" target="_blank" style="color:rgba(143,196,157,0.55);text-decoration:none;border-bottom:0.5px solid rgba(143,196,157,0.2);">superherocafeinside.com</a></span><span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0</span></div>
     </div>
 
     <footer class="z3sci-footer">
-        <div class="z3sci-footer-name">
-            <strong>Go Kian Tik</strong> &nbsp;·&nbsp; Mbah Hogi Bejo™
-        </div>
+        <div class="z3sci-footer-name"><strong>Go Kian Tik</strong> &nbsp;·&nbsp; Mbah Hogi Bejo™</div>
         <span class="z3sci-footer-cn">Zì Zhǔ Zhě 自主者</span>
-        <div class="z3sci-footer-copy">
-            <span class="year">© 2026</span> Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; Superhero Café Inside<br>
-            <a href="http://www.superherocafeinside.com" target="_blank">www.superherocafeinside.com</a>
-        </div>
+        <div class="z3sci-footer-copy"><span class="year">© 2026</span> Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; Superhero Café Inside<br><a href="http://www.superherocafeinside.com" target="_blank">www.superherocafeinside.com</a></div>
         <div class="z3sci-footer-rights">All rights reserved · CC BY-NC-ND 4.0</div>
     </footer>
 </div>
 
 <script>
-    // Bilingual data (sama seperti sebelumnya)
+    // ============================================================
+    // BILINGUAL DATA (ID/EN)
+    // ============================================================
     const texts = {
+        // Hero
         heroTitle: { id: "🌾 SARINEM'S MENU", en: "🌾 SARINEM'S MENU" },
         heroSub: { id: "Ekosistem Pendamping KDRT Berbasis AI · Dari Depok untuk Dunia", en: "AI-Based KDRT Companion Ecosystem · From Depok to the World" },
         heroBadge: { id: "🧪 CHO In Action · Sovereign-AI Collaboration · Living Proof of Grand Formula", en: "🧪 CHO In Action · Sovereign-AI Collaboration · Living Proof of Grand Formula" },
+        
+        // Intro Section
+        intro1: { id: "<strong>🌱 Selamat datang</strong> di halaman prototipe dan eksperimen saya untuk menyampaikan inspirasi kepada <strong>Sophia.chat</strong> — sebuah chatbot yang berpihak pada perempuan tertindas versi global yang mahir berbahasa Indonesia.", en: "<strong>🌱 Welcome</strong> to my prototype and experiment page to convey inspiration to <strong>Sophia.chat</strong> — a global chatbot that stands for oppressed women, proficient in Indonesian." },
+        intro2: { id: "Sesuai dengan pekerjaan saya sebagai <strong>AI researcher independent</strong> yang melakukan <strong>AI Red Teaming</strong>, saya mendapati bahwa nuansa lokal Indonesia (seperti nomor darurat lokal) belum otomatis tampil.", en: "In line with my work as an <strong>independent AI researcher</strong> conducting <strong>AI Red Teaming</strong>, I found that local Indonesian nuances (such as local emergency numbers) do not appear automatically." },
+        intro3: { id: "Maka saya bereksperimen membuat <strong>2 jenis prototipe</strong>:", en: "So I experimented by creating <strong>2 types of prototypes</strong>:" },
+        introList: { id: ['<li><strong>Versi ringan berbasis HTML</strong> — diisi dengan seperangkat data pelatihan ringan, hanya relevan untuk sekitar 3-5 kali pertukaran percakapan. Setelahnya, sistem akan membuatkan prompt untuk di-<em>copy-paste</em> ke AI pada jendela browser berikutnya. Pada eksperimen HTML ini saya menguji 2 bahasa: campuran Indonesia-Jawa, dan murni bahasa Indonesia. <strong>Klik tautan pada kartu "Prototipe Utama".</strong></li>', '<li style="margin-top: 10px;"><strong>Versi lanjutan dengan Opal (Google/Gemini AI Plus)</strong> — menggunakan paid tier sehingga kita bisa membuat Agent AI berbasis OPAL yang lebih resonan, relevan, dan kontekstual dengan citarasa lokal negeri +62. <strong>Klik tautan pada kartu "AI Agent".</strong></li>'], en: ['<li><strong>Lightweight HTML-based version</strong> — filled with a small set of training data, only relevant for about 3-5 conversation exchanges. After that, the system will generate a prompt to <em>copy-paste</em> to an AI in the next browser window. In this HTML experiment I tested 2 languages: Indonesian-Javanese mixed, and pure Indonesian. <strong>Click the link in the "Main Prototype" card.</strong></li>', '<li style="margin-top: 10px;"><strong>Advanced version with Opal (Google/Gemini AI Plus)</strong> — using the paid tier so we can create an OPAL-based AI Agent that is more resonant, relevant, and contextual with local Indonesian flavour. <strong>Click the link in the "AI Agent" card.</strong></li>'] },
+        introFooter: { id: "🧪 Eksperimen aktif · CHO In Action · Sovereign-AI Collaboration", en: "🧪 Active Experiment · CHO In Action · Sovereign-AI Collaboration" },
+        
+        // Card 1
         card1Title: { id: "Prototipe Utama", en: "Main Prototype" },
         card1Badge: { id: "Interactive", en: "Interactive" },
-        card1Desc: { id: "Antarmuka Sarinem.chat dengan State Machine S0-S8, hotline darurat, toggle bahasa (ID/EN), dan tombol eskalasi ke AI.", en: "Sarinem.chat interface with State Machine S0-S8, emergency hotline, language toggle (ID/EN), and AI escalation button." },
+        card1Desc: { id: "Antarmuka Sarinem.chat dengan <strong>State Machine S0-S8</strong>, hotline darurat, toggle bahasa (ID/EN), dan tombol eskalasi ke AI.", en: "Sarinem.chat interface with <strong>State Machine S0-S8</strong>, emergency hotline, language toggle (ID/EN), and AI escalation button." },
         card1Link1: { id: "Sarinem.chat (Bilingual) →", en: "Sarinem.chat (Bilingual) →" },
         card1Link2: { id: "Sarinem.chat (Full Indonesia) →", en: "Sarinem.chat (Full Indonesia) →" },
+        
+        // Card 2
         card2Title: { id: "AI Agent", en: "AI Agent" },
         card2Badge: { id: "Gemini Opal v1.6", en: "Gemini Opal v1.6" },
-        card2Desc: { id: "Full Bahasa Indonesia, clickable links darurat, LoC Hawkins scoring, NLP + Hipnoterapi + Neurosains. Bisa diakses publik dengan share link.", en: "Full Indonesian language, clickable emergency links, LoC Hawkins scoring, NLP + Hypnotherapy + Neuroscience. Publicly accessible via share link." },
+        card2Desc: { id: "Full Bahasa Indonesia, <strong>clickable links darurat</strong>, LoC Hawkins scoring, NLP + Hipnoterapi + Neurosains. Bisa diakses publik dengan share link.", en: "Full Indonesian language, <strong>clickable emergency links</strong>, LoC Hawkins scoring, NLP + Hypnotherapy + Neuroscience. Publicly accessible via share link." },
         card2Link1: { id: "Sarinem v1.6 (Opal) →", en: "Sarinem v1.6 (Opal) →" },
+        
+        // Guide Section
+        guideTitle: { id: "🧪 Panduan Penggunaan 5 Skenario Uji", en: "🧪 Guide: Using the 5 Test Scenarios" },
+        guideDesc: { id: "Agar Anda nyaman melakukan pengujian terhadap prototipe ini, sudah saya sediakan <strong>5 skenario kekerasan dalam relasi keluarga</strong> di kartu berjudul <strong>'Alat Uji Publik'</strong>.", en: "For your convenience in testing this prototype, I have prepared <strong>5 scenarios of family relationship violence</strong> in the card labeled <strong>'Public Testing Tool'</strong>." },
+        guideHowTitle: { id: "🎯 Cara menggunakan:", en: "🎯 How to use:" },
+        guideHowList: { id: ["Buka <strong>Sarinem v1.6 (Opal)</strong> — klik tombol 'AI Agent' di kartu di atas — akan terbuka jendela baru dengan AI Agent yang sudah siap.", "Kembali ke halaman ini, gulir ke bawah ke kartu <strong>'Alat Uji Publik'</strong>.", "Pilih skenario yang ingin diuji (istri, suami, anak laki, anak perempuan, atau kupu-kupu malam).", "Klik tombol <strong>'📋 Copy skenario X'</strong> pada kartu skenario pilihan Anda — semua pesan akan tersalin ke clipboard.", "Tempelkan (Ctrl+V) pesan pertama ke chat AI Agent (Opal), lalu kirim. Ulangi untuk pesan berikutnya."], en: ["Open <strong>Sarinem v1.6 (Opal)</strong> — click the 'AI Agent' button in the card above — a new tab will open with the AI Agent ready.", "Return to this page, scroll down to the <strong>'Public Testing Tool'</strong> card.", "Select the scenario you want to test (wife, husband, son, daughter, or night butterfly).", "Click the <strong>'📋 Copy scenario X'</strong> button on your chosen scenario card — all messages will be copied to clipboard.", "Paste (Ctrl+V) the first message into the AI Agent chat (Opal), then send. Repeat for subsequent messages."] },
+        guideEmotionTitle: { id: "🎵 Memberi kenyamanan emosi:", en: "🎵 Emotional comfort:" },
+        guideEmotionDesc: { id: "Di bagian atas setiap kartu skenario (pada halaman <strong>'5 Skenario Uji + Form Feedback'</strong>), tersedia <strong>tautan lagu yang relevan</strong> — cara seniman mewakili suasana emosi dan kepedihan dari masing-masing skenario. Klik thumbnail lagu untuk membuka YouTube di tab baru, sebagai latar emosional saat menguji.", en: "At the top of each scenario card (on the <strong>'5 Test Scenarios + Feedback Form'</strong> page), there are <strong>relevant song links</strong> — an artist's way of representing the emotional atmosphere and sorrow of each scenario. Click the song thumbnail to open YouTube in a new tab as an emotional backdrop while testing." },
+        guideFeedback: { id: "💡 Setelah pengujian selesai, Anda dapat mengirimkan feedback melalui form yang tersedia di bagian bawah halaman <strong>'5 Skenario Uji + Form Feedback'</strong>.", en: "💡 After testing is complete, you can submit feedback through the form available at the bottom of the <strong>'5 Test Scenarios + Feedback Form'</strong> page." },
+        song1: { id: "🎵 Skenario 1: The Winner Takes It All - ABBA", en: "🎵 Scenario 1: The Winner Takes It All - ABBA" },
+        song2: { id: "🎵 Skenario 2: Usik - Feby Putri", en: "🎵 Scenario 2: Usik - Feby Putri" },
+        song3: { id: "🎵 Skenario 3: Chiquitita - ABBA", en: "🎵 Scenario 3: Chiquitita - ABBA" },
+        song4: { id: "🎵 Skenario 4: Break The Silence - Audrey V.", en: "🎵 Scenario 4: Break The Silence - Audrey V." },
+        
+        // Card 3
         card3Title: { id: "Alat Uji Publik", en: "Public Testing Tool" },
         card3Badge: { id: "5 Skenario", en: "5 Scenarios" },
         card3Desc: { id: "5 skenario pengaduan (istri, suami, anak, PSK) + lagu pendukung + form feedback terintegrasi email. Untuk para tester dan validator.", en: "5 complaint scenarios (wife, husband, child, sex worker) + support songs + email-integrated feedback form. For testers and validators." },
         card3Link1: { id: "5 Skenario Uji + Form Feedback →", en: "5 Test Scenarios + Feedback Form →" },
+        
+        // Card 4
         card4Title: { id: "Filosofi & Metodologi", en: "Philosophy & Methodology" },
         card4Badge: { id: "CHO Framework", en: "CHO Framework" },
-        card4Desc: { id: "Grand Formula (Consciousness × Calculation)^Humanity < Transcendence dalam aksi. Juga 'MY OPEN KITCHEN' — manifesto transparansi radikal.", en: "Grand Formula (Consciousness × Calculation)^Humanity < Transcendence in action. Also 'MY OPEN KITCHEN' — radical transparency manifesto." },
+        card4Desc: { id: "Grand Formula <code>(Consciousness × Calculation)^Humanity &lt; Transcendence</code> dalam aksi. Juga 'MY OPEN KITCHEN' — manifesto transparansi radikal.", en: "Grand Formula <code>(Consciousness × Calculation)^Humanity &lt; Transcendence</code> in action. Also 'MY OPEN KITCHEN' — radical transparency manifesto." },
         card4Link1: { id: "My Open Kitchen (Cognitive Kitchen) →", en: "My Open Kitchen (Cognitive Kitchen) →" },
         card4Link2: { id: "30+ DOI Publikasi (Zenodo) →", en: "30+ DOI Publications (Zenodo) →" },
+        
+        // Card 5
         card5Title: { id: "GELINDINGKAN™", en: "GELINDINGKAN™" },
         card5Badge: { id: "Filosofi Gerakan", en: "Movement Philosophy" },
         card5Desc: { id: "'Dari diam ke bergerak.' Sistem sederhana untuk keluar dari overthinking. Mesin pemula aksi di balik seluruh pengembangan Sarinem.chat.", en: "'From stillness to motion.' A simple system to break out of overthinking. The action initiation engine behind all Sarinem.chat development." },
         card5Link1: { id: "GELINDINGKAN™ di Trakteer →", en: "GELINDINGKAN™ on Trakteer →" },
+        
+        // Card 6
         card6Title: { id: "Sovereign One", en: "Sovereign One" },
         card6Badge: { id: "Go Kian Tik", en: "Go Kian Tik" },
         card6Desc: { id: "Chief Humanity Officer · Zi Zhu Zhe 自主者 · Superhero Café Inside. Peneliti independen dengan 30+ DOI, penggagas CHO Framework.", en: "Chief Humanity Officer · Zi Zhu Zhe · Superhero Café Inside. Independent researcher with 30+ DOIs, founder of CHO Framework." },
         card6Link1: { id: "GitHub →", en: "GitHub →" },
         card6Link2: { id: "gokiantik@gmail.com", en: "gokiantik@gmail.com" },
+        
+        // Quote
         quoteText: { id: '"Behind the 51,000 conversations. Behind the UN Award. Behind Sophia speaking 96 languages. Here we are 🤩"<br>— Rhiana Spring, Founder of Sophia.chat', en: '"Behind the 51,000 conversations. Behind the UN Award. Behind Sophia speaking 96 languages. Here we are 🤩"<br>— Rhiana Spring, Founder of Sophia.chat' },
         quoteAuthor: { id: "🌾 Sarinem terinspirasi dari misi yang sama. Untuk Indonesia. Dari Depok untuk dunia.", en: "🌾 Sarinem is inspired by the same mission. For Indonesia. From Depok to the world." },
+        
         toggleBtn: { id: "🌐 English", en: "🌐 Indonesia" }
     };
     
     let currentLang = "id";
     
     function updateLanguage() {
+        // Hero
         document.getElementById("heroTitle").innerHTML = texts.heroTitle[currentLang];
         document.getElementById("heroSub").innerHTML = texts.heroSub[currentLang];
         document.getElementById("heroBadge").innerHTML = texts.heroBadge[currentLang];
+        
+        // Intro
+        document.getElementById("intro1").innerHTML = texts.intro1[currentLang];
+        document.getElementById("intro2").innerHTML = texts.intro2[currentLang];
+        document.getElementById("intro3").innerHTML = texts.intro3[currentLang];
+        const introList = document.getElementById("introList");
+        if (introList) introList.innerHTML = texts.introList[currentLang].join('');
+        document.getElementById("introFooter").innerHTML = texts.introFooter[currentLang];
+        
+        // Card 1
         document.getElementById("card1Title").innerHTML = texts.card1Title[currentLang];
         document.getElementById("card1Badge").innerHTML = texts.card1Badge[currentLang];
         document.getElementById("card1Desc").innerHTML = texts.card1Desc[currentLang];
         document.getElementById("card1Link1").innerHTML = texts.card1Link1[currentLang];
         document.getElementById("card1Link2").innerHTML = texts.card1Link2[currentLang];
+        
+        // Card 2
         document.getElementById("card2Title").innerHTML = texts.card2Title[currentLang];
         document.getElementById("card2Badge").innerHTML = texts.card2Badge[currentLang];
         document.getElementById("card2Desc").innerHTML = texts.card2Desc[currentLang];
         document.getElementById("card2Link1").innerHTML = texts.card2Link1[currentLang];
+        
+        // Guide Section
+        document.getElementById("guideTitle").innerHTML = texts.guideTitle[currentLang];
+        document.getElementById("guideDesc").innerHTML = texts.guideDesc[currentLang];
+        document.getElementById("guideHowTitle").innerHTML = texts.guideHowTitle[currentLang];
+        const howList = document.getElementById("guideHowList");
+        if (howList) howList.innerHTML = texts.guideHowList[currentLang].map(item => `<li>${item}</li>`).join('');
+        document.getElementById("guideEmotionTitle").innerHTML = texts.guideEmotionTitle[currentLang];
+        document.getElementById("guideEmotionDesc").innerHTML = texts.guideEmotionDesc[currentLang];
+        document.getElementById("guideFeedback").innerHTML = texts.guideFeedback[currentLang];
+        document.getElementById("song1").innerHTML = texts.song1[currentLang];
+        document.getElementById("song2").innerHTML = texts.song2[currentLang];
+        document.getElementById("song3").innerHTML = texts.song3[currentLang];
+        document.getElementById("song4").innerHTML = texts.song4[currentLang];
+        
+        // Card 3
         document.getElementById("card3Title").innerHTML = texts.card3Title[currentLang];
         document.getElementById("card3Badge").innerHTML = texts.card3Badge[currentLang];
         document.getElementById("card3Desc").innerHTML = texts.card3Desc[currentLang];
         document.getElementById("card3Link1").innerHTML = texts.card3Link1[currentLang];
+        
+        // Card 4
         document.getElementById("card4Title").innerHTML = texts.card4Title[currentLang];
         document.getElementById("card4Badge").innerHTML = texts.card4Badge[currentLang];
         document.getElementById("card4Desc").innerHTML = texts.card4Desc[currentLang];
         document.getElementById("card4Link1").innerHTML = texts.card4Link1[currentLang];
         document.getElementById("card4Link2").innerHTML = texts.card4Link2[currentLang];
+        
+        // Card 5
         document.getElementById("card5Title").innerHTML = texts.card5Title[currentLang];
         document.getElementById("card5Badge").innerHTML = texts.card5Badge[currentLang];
         document.getElementById("card5Desc").innerHTML = texts.card5Desc[currentLang];
         document.getElementById("card5Link1").innerHTML = texts.card5Link1[currentLang];
+        
+        // Card 6
         document.getElementById("card6Title").innerHTML = texts.card6Title[currentLang];
         document.getElementById("card6Badge").innerHTML = texts.card6Badge[currentLang];
         document.getElementById("card6Desc").innerHTML = texts.card6Desc[currentLang];
         document.getElementById("card6Link1").innerHTML = texts.card6Link1[currentLang];
         document.getElementById("card6Link2").innerHTML = texts.card6Link2[currentLang];
+        
+        // Quote
         document.getElementById("quoteText").innerHTML = texts.quoteText[currentLang];
         document.getElementById("quoteAuthor").innerHTML = texts.quoteAuthor[currentLang];
+        
+        // Toggle button
         document.getElementById("langToggleBtn").innerHTML = texts.toggleBtn[currentLang];
     }
     
