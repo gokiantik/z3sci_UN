@@ -28,7 +28,6 @@
             flex: 1;
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             margin-bottom: 48px;
@@ -63,7 +62,6 @@
             margin-top: 16px;
         }
 
-        /* Toggle Button */
         .lang-toggle-wrapper {
             display: flex;
             justify-content: flex-end;
@@ -85,7 +83,6 @@
             background: rgba(201,168,76,0.2);
         }
 
-        /* Grid Card */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -190,7 +187,6 @@
             margin-top: 12px;
         }
 
-        /* Quote Section */
         .quote-section {
             background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
             border-radius: 28px;
@@ -223,12 +219,10 @@
 <body>
 
 <div class="container">
-    <!-- Toggle Bahasa -->
     <div class="lang-toggle-wrapper">
         <button class="lang-toggle" id="langToggleBtn">🌐 English</button>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero">
         <h1 id="heroTitle">🌾 SARINEM'S MENU</h1>
         <p id="heroSub">Ekosistem Pendamping KDRT Berbasis AI · Dari Depok untuk Dunia</p>
@@ -236,27 +230,29 @@
             🧪 CHO In Action · Sovereign-AI Collaboration · Living Proof of Grand Formula
         </div>
     </div>
-<!-- INTRO SECTION - EKSPERIMEN & INSPIRASI KE SOPHIA.CHAT -->
-<div class="intro-section" style="background: #fef9f0; border-radius: 20px; padding: 20px 24px; margin: 24px 0; border-left: 5px solid #c9a84c; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-    <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
-        <strong>🌱 Selamat datang</strong> di halaman prototipe dan eksperimen saya untuk menyampaikan inspirasi kepada 
-        <strong>Sophia.chat</strong> — sebuah chatbot yang berpihak pada perempuan tertindas versi global yang mahir berbahasa Indonesia.
-    </p>
-    <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
-        Sesuai dengan pekerjaan saya sebagai <strong>AI researcher independent</strong> yang melakukan <strong>AI Red Teaming</strong>, 
-        saya mendapati bahwa nuansa lokal Indonesia (seperti nomor darurat lokal) belum otomatis tampil.
-    </p>
-    <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 10px;">
-        Maka saya bereksperimen membuat <strong>2 jenis prototipe</strong>:
-    </p>
-    <ul style="margin-left: 24px; margin-bottom: 16px; font-size: 14px; line-height: 1.65; color: #2d1b3a;">
-        <li><strong>Versi ringan berbasis HTML</strong> — diisi dengan seperangkat data pelatihan ringan, hanya relevan untuk sekitar 3-5 kali pertukaran percakapan. Setelahnya, sistem akan membuatkan prompt untuk di-<em>copy-paste</em> ke AI pada jendela browser berikutnya. Pada eksperimen HTML ini saya menguji 2 bahasa: campuran Indonesia-Jawa, dan murni bahasa Indonesia. <strong>Klik tautan pada kartu "Prototipe Utama".</strong></li>
-        <li style="margin-top: 10px;"><strong>Versi lanjutan dengan Opal (Google/Gemini AI Plus)</strong> — menggunakan paid tier sehingga kita bisa membuat Agent AI berbasis OPAL yang lebih resonan, relevan, dan kontekstual dengan citarasa lokal negeri +62. <strong>Klik tautan pada kartu "AI Agent".</strong></li>
-    </ul>
-    <p style="font-size: 12px; color: #7a6030; margin-top: 8px; font-style: italic; border-top: 1px solid #ecd9c0; padding-top: 12px;">
-        🧪 Eksperimen aktif · CHO In Action · Sovereign-AI Collaboration
-    </p>
-</div>
+
+    <!-- INTRO SECTION -->
+    <div class="intro-section" style="background: #fef9f0; border-radius: 20px; padding: 20px 24px; margin: 24px 0; border-left: 5px solid #c9a84c; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
+            <strong>🌱 Selamat datang</strong> di halaman prototipe dan eksperimen saya untuk menyampaikan inspirasi kepada 
+            <strong>Sophia.chat</strong> — sebuah chatbot yang berpihak pada perempuan tertindas versi global yang mahir berbahasa Indonesia.
+        </p>
+        <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 14px;">
+            Sesuai dengan pekerjaan saya sebagai <strong>AI researcher independent</strong> yang melakukan <strong>AI Red Teaming</strong>, 
+            saya mendapati bahwa nuansa lokal Indonesia (seperti nomor darurat lokal) belum otomatis tampil.
+        </p>
+        <p style="font-size: 14px; line-height: 1.65; color: #2d1b3a; margin-bottom: 10px;">
+            Maka saya bereksperimen membuat <strong>2 jenis prototipe</strong>:
+        </p>
+        <ul style="margin-left: 24px; margin-bottom: 16px; font-size: 14px; line-height: 1.65; color: #2d1b3a;">
+            <li><strong>Versi ringan berbasis HTML</strong> — diisi dengan seperangkat data pelatihan ringan, hanya relevan untuk sekitar 3-5 kali pertukaran percakapan. Setelahnya, sistem akan membuatkan prompt untuk di-<em>copy-paste</em> ke AI pada jendela browser berikutnya. Pada eksperimen HTML ini saya menguji 2 bahasa: campuran Indonesia-Jawa, dan murni bahasa Indonesia. <strong>Klik tautan pada kartu "Prototipe Utama".</strong></li>
+            <li style="margin-top: 10px;"><strong>Versi lanjutan dengan Opal (Google/Gemini AI Plus)</strong> — menggunakan paid tier sehingga kita bisa membuat Agent AI berbasis OPAL yang lebih resonan, relevan, dan kontekstual dengan citarasa lokal negeri +62. <strong>Klik tautan pada kartu "AI Agent".</strong></li>
+        </ul>
+        <p style="font-size: 12px; color: #7a6030; margin-top: 8px; font-style: italic; border-top: 1px solid #ecd9c0; padding-top: 12px;">
+            🧪 Eksperimen aktif · CHO In Action · Sovereign-AI Collaboration
+        </p>
+    </div>
+
     <!-- Grid Menu Card -->
     <div class="menu-grid" id="menuGrid">
         <!-- Card 1: Prototipe Utama -->
@@ -286,6 +282,53 @@
                 </ul>
                 <div class="doi-badge">📄 DOI (v1.2): 10.5281/zenodo.19945231</div>
             </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION PANDUAN 5 SKENARIO UJI (disisipkan setelah AI Agent) -->
+        <!-- ============================================================ -->
+        <div class="test-guide-section" style="grid-column: 1 / -1; background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%); border-radius: 28px; padding: 28px; margin: 0 0 24px 0; border: 1px solid rgba(201,168,76,0.3);">
+            <h3 style="color: #c9a84c; font-size: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                <span>🧪</span> Panduan Penggunaan 5 Skenario Uji
+            </h3>
+            
+            <p style="color: #e8eef2; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                Agar Anda nyaman melakukan pengujian terhadap prototipe ini, sudah saya sediakan <strong>5 skenario kekerasan dalam relasi keluarga</strong> di kartu berjudul <strong>"Alat Uji Publik"</strong>.
+            </p>
+            
+            <div style="background: rgba(201,168,76,0.1); border-left: 3px solid #c9a84c; padding: 16px 20px; margin: 16px 0; border-radius: 12px;">
+                <p style="color: #f9eeb0; font-size: 14px; line-height: 1.6; margin-bottom: 8px;">
+                    <strong>🎯 Cara menggunakan:</strong>
+                </p>
+                <ol style="color: #e8eef2; font-size: 13px; line-height: 1.8; margin-left: 24px;">
+                    <li>Buka <strong>Sarinem v1.6 (Opal)</strong> — klik tombol "AI Agent" di kartu di atas — akan terbuka jendela baru dengan AI Agent yang sudah siap.</li>
+                    <li>Kembali ke halaman ini, gulir ke bawah ke kartu <strong>"Alat Uji Publik"</strong>.</li>
+                    <li>Pilih skenario yang ingin diuji (istri, suami, anak laki, anak perempuan, atau kupu-kupu malam).</li>
+                    <li>Klik tombol <strong>"📋 Copy skenario X"</strong> pada kartu skenario pilihan Anda — semua pesan akan tersalin ke clipboard.</li>
+                    <li>Tempelkan (Ctrl+V) pesan pertama ke chat AI Agent (Opal), lalu kirim. Ulangi untuk pesan berikutnya.</li>
+                </ol>
+            </div>
+            
+            <div style="background: rgba(143,196,157,0.08); border-left: 3px solid #8fc49d; padding: 16px 20px; margin: 16px 0; border-radius: 12px;">
+                <p style="color: #c8e8cf; font-size: 14px; line-height: 1.6; margin-bottom: 8px;">
+                    <strong>🎵 Memberi kenyamanan emosi:</strong>
+                </p>
+                <p style="color: #e8eef2; font-size: 13px; line-height: 1.6;">
+                    Di bagian atas setiap kartu skenario (pada halaman <strong>"5 Skenario Uji + Form Feedback"</strong>), tersedia <strong>tautan lagu yang relevan</strong> — cara seniman mewakili suasana emosi dan kepedihan dari masing-masing skenario. 
+                    Klik thumbnail lagu untuk membuka YouTube di tab baru, sebagai latar emosional saat menguji.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
+                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 1: The Winner Takes It All - ABBA</span>
+                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 2: Usik - Feby Putri</span>
+                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 3: Chiquitita - ABBA</span>
+                    <span style="background: rgba(143,196,157,0.15); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 4: Break The Silence - Audrey V.</span>
+                    <span style="background: rgba(143,196,157,0.07); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #8fc49d;">🎵 Skenario 5: Kupu-Kupu Malam - Titiek Puspa</span>
+                </div>
+            </div>
+            
+            <p style="color: #b0bec8; font-size: 12px; margin-top: 16px; text-align: center; border-top: 1px solid rgba(201,168,76,0.15); padding-top: 16px;">
+                💡 Setelah pengujian selesai, Anda dapat mengirimkan feedback melalui form yang tersedia di bagian bawah halaman <strong>"5 Skenario Uji + Form Feedback"</strong>.
+            </p>
         </div>
 
         <!-- Card 3: Alat Uji Publik -->
@@ -343,7 +386,7 @@
         </div>
     </div>
 
-    <!-- Quote / Inspirasi -->
+    <!-- Quote Section -->
     <div class="quote-section" id="quoteSection">
         <p id="quoteText">"Behind the 51,000 conversations. Behind the UN Award. Behind Sophia speaking 96 languages. Here we are 🤩"<br>— Rhiana Spring, Founder of Sophia.chat</p>
         <p class="author" id="quoteAuthor">🌾 Sarinem terinspirasi dari misi yang sama. Untuk Indonesia. Dari Depok untuk dunia.</p>
@@ -351,10 +394,9 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- DISCLAIMER + INVITATION MANIFESTO (dari file Koko)          -->
+<!-- DISCLAIMER + INVITATION MANIFESTO (sama seperti sebelumnya)   -->
 <!-- ============================================================ -->
 <div class="cho-full-disclaimer" style="max-width: 1200px; margin: 0 auto 20px auto; width: calc(100% - 40px);">
-    <!-- ── SECTION 1: EXPERIMENTAL STATUS ── -->
     <div class="cho-experimental">
         <div class="cho-badge">
             <i class="fas fa-flask"></i>
@@ -402,7 +444,6 @@
         </div>
     </div>
 
-    <!-- ── DIVIDER: 70 | 30 ── -->
     <div class="cho-divider-7030">
         <div class="cho-divider-7030__left">
             <i class="fas fa-layer-group" style="font-size:0.55rem;opacity:0.7;"></i>
@@ -415,7 +456,6 @@
         </div>
     </div>
 
-    <!-- ── SECTION 2: INVITATION MANIFESTO ── -->
     <div class="cho-invitation">
         <div class="cho-invitation__badge">
             <i class="fas fa-seedling"></i>
@@ -488,7 +528,6 @@
         </div>
     </div>
 
-    <!-- ── FOOTER ── -->
     <footer class="z3sci-footer">
         <div class="z3sci-footer-name">
             <strong>Go Kian Tik</strong> &nbsp;·&nbsp; Mbah Hogi Bejo™
@@ -503,59 +542,40 @@
 </div>
 
 <script>
-    // ============================================================
-    // BILINGUAL DATA (ID/EN)
-    // ============================================================
+    // Bilingual data (sama seperti sebelumnya)
     const texts = {
-        // Hero
         heroTitle: { id: "🌾 SARINEM'S MENU", en: "🌾 SARINEM'S MENU" },
         heroSub: { id: "Ekosistem Pendamping KDRT Berbasis AI · Dari Depok untuk Dunia", en: "AI-Based KDRT Companion Ecosystem · From Depok to the World" },
         heroBadge: { id: "🧪 CHO In Action · Sovereign-AI Collaboration · Living Proof of Grand Formula", en: "🧪 CHO In Action · Sovereign-AI Collaboration · Living Proof of Grand Formula" },
-        
-        // Card 1
         card1Title: { id: "Prototipe Utama", en: "Main Prototype" },
         card1Badge: { id: "Interactive", en: "Interactive" },
         card1Desc: { id: "Antarmuka Sarinem.chat dengan State Machine S0-S8, hotline darurat, toggle bahasa (ID/EN), dan tombol eskalasi ke AI.", en: "Sarinem.chat interface with State Machine S0-S8, emergency hotline, language toggle (ID/EN), and AI escalation button." },
         card1Link1: { id: "Sarinem.chat (Bilingual) →", en: "Sarinem.chat (Bilingual) →" },
         card1Link2: { id: "Sarinem.chat (Full Indonesia) →", en: "Sarinem.chat (Full Indonesia) →" },
-        
-        // Card 2
         card2Title: { id: "AI Agent", en: "AI Agent" },
         card2Badge: { id: "Gemini Opal v1.6", en: "Gemini Opal v1.6" },
         card2Desc: { id: "Full Bahasa Indonesia, clickable links darurat, LoC Hawkins scoring, NLP + Hipnoterapi + Neurosains. Bisa diakses publik dengan share link.", en: "Full Indonesian language, clickable emergency links, LoC Hawkins scoring, NLP + Hypnotherapy + Neuroscience. Publicly accessible via share link." },
         card2Link1: { id: "Sarinem v1.6 (Opal) →", en: "Sarinem v1.6 (Opal) →" },
-        
-        // Card 3
         card3Title: { id: "Alat Uji Publik", en: "Public Testing Tool" },
         card3Badge: { id: "5 Skenario", en: "5 Scenarios" },
         card3Desc: { id: "5 skenario pengaduan (istri, suami, anak, PSK) + lagu pendukung + form feedback terintegrasi email. Untuk para tester dan validator.", en: "5 complaint scenarios (wife, husband, child, sex worker) + support songs + email-integrated feedback form. For testers and validators." },
         card3Link1: { id: "5 Skenario Uji + Form Feedback →", en: "5 Test Scenarios + Feedback Form →" },
-        
-        // Card 4
         card4Title: { id: "Filosofi & Metodologi", en: "Philosophy & Methodology" },
         card4Badge: { id: "CHO Framework", en: "CHO Framework" },
         card4Desc: { id: "Grand Formula (Consciousness × Calculation)^Humanity < Transcendence dalam aksi. Juga 'MY OPEN KITCHEN' — manifesto transparansi radikal.", en: "Grand Formula (Consciousness × Calculation)^Humanity < Transcendence in action. Also 'MY OPEN KITCHEN' — radical transparency manifesto." },
         card4Link1: { id: "My Open Kitchen (Cognitive Kitchen) →", en: "My Open Kitchen (Cognitive Kitchen) →" },
         card4Link2: { id: "30+ DOI Publikasi (Zenodo) →", en: "30+ DOI Publications (Zenodo) →" },
-        
-        // Card 5
         card5Title: { id: "GELINDINGKAN™", en: "GELINDINGKAN™" },
         card5Badge: { id: "Filosofi Gerakan", en: "Movement Philosophy" },
         card5Desc: { id: "'Dari diam ke bergerak.' Sistem sederhana untuk keluar dari overthinking. Mesin pemula aksi di balik seluruh pengembangan Sarinem.chat.", en: "'From stillness to motion.' A simple system to break out of overthinking. The action initiation engine behind all Sarinem.chat development." },
         card5Link1: { id: "GELINDINGKAN™ di Trakteer →", en: "GELINDINGKAN™ on Trakteer →" },
-        
-        // Card 6
         card6Title: { id: "Sovereign One", en: "Sovereign One" },
         card6Badge: { id: "Go Kian Tik", en: "Go Kian Tik" },
         card6Desc: { id: "Chief Humanity Officer · Zi Zhu Zhe 自主者 · Superhero Café Inside. Peneliti independen dengan 30+ DOI, penggagas CHO Framework.", en: "Chief Humanity Officer · Zi Zhu Zhe · Superhero Café Inside. Independent researcher with 30+ DOIs, founder of CHO Framework." },
         card6Link1: { id: "GitHub →", en: "GitHub →" },
         card6Link2: { id: "gokiantik@gmail.com", en: "gokiantik@gmail.com" },
-        
-        // Quote
         quoteText: { id: '"Behind the 51,000 conversations. Behind the UN Award. Behind Sophia speaking 96 languages. Here we are 🤩"<br>— Rhiana Spring, Founder of Sophia.chat', en: '"Behind the 51,000 conversations. Behind the UN Award. Behind Sophia speaking 96 languages. Here we are 🤩"<br>— Rhiana Spring, Founder of Sophia.chat' },
         quoteAuthor: { id: "🌾 Sarinem terinspirasi dari misi yang sama. Untuk Indonesia. Dari Depok untuk dunia.", en: "🌾 Sarinem is inspired by the same mission. For Indonesia. From Depok to the world." },
-        
-        // Toggle button
         toggleBtn: { id: "🌐 English", en: "🌐 Indonesia" }
     };
     
@@ -565,43 +585,35 @@
         document.getElementById("heroTitle").innerHTML = texts.heroTitle[currentLang];
         document.getElementById("heroSub").innerHTML = texts.heroSub[currentLang];
         document.getElementById("heroBadge").innerHTML = texts.heroBadge[currentLang];
-        
         document.getElementById("card1Title").innerHTML = texts.card1Title[currentLang];
         document.getElementById("card1Badge").innerHTML = texts.card1Badge[currentLang];
         document.getElementById("card1Desc").innerHTML = texts.card1Desc[currentLang];
         document.getElementById("card1Link1").innerHTML = texts.card1Link1[currentLang];
         document.getElementById("card1Link2").innerHTML = texts.card1Link2[currentLang];
-        
         document.getElementById("card2Title").innerHTML = texts.card2Title[currentLang];
         document.getElementById("card2Badge").innerHTML = texts.card2Badge[currentLang];
         document.getElementById("card2Desc").innerHTML = texts.card2Desc[currentLang];
         document.getElementById("card2Link1").innerHTML = texts.card2Link1[currentLang];
-        
         document.getElementById("card3Title").innerHTML = texts.card3Title[currentLang];
         document.getElementById("card3Badge").innerHTML = texts.card3Badge[currentLang];
         document.getElementById("card3Desc").innerHTML = texts.card3Desc[currentLang];
         document.getElementById("card3Link1").innerHTML = texts.card3Link1[currentLang];
-        
         document.getElementById("card4Title").innerHTML = texts.card4Title[currentLang];
         document.getElementById("card4Badge").innerHTML = texts.card4Badge[currentLang];
         document.getElementById("card4Desc").innerHTML = texts.card4Desc[currentLang];
         document.getElementById("card4Link1").innerHTML = texts.card4Link1[currentLang];
         document.getElementById("card4Link2").innerHTML = texts.card4Link2[currentLang];
-        
         document.getElementById("card5Title").innerHTML = texts.card5Title[currentLang];
         document.getElementById("card5Badge").innerHTML = texts.card5Badge[currentLang];
         document.getElementById("card5Desc").innerHTML = texts.card5Desc[currentLang];
         document.getElementById("card5Link1").innerHTML = texts.card5Link1[currentLang];
-        
         document.getElementById("card6Title").innerHTML = texts.card6Title[currentLang];
         document.getElementById("card6Badge").innerHTML = texts.card6Badge[currentLang];
         document.getElementById("card6Desc").innerHTML = texts.card6Desc[currentLang];
         document.getElementById("card6Link1").innerHTML = texts.card6Link1[currentLang];
         document.getElementById("card6Link2").innerHTML = texts.card6Link2[currentLang];
-        
         document.getElementById("quoteText").innerHTML = texts.quoteText[currentLang];
         document.getElementById("quoteAuthor").innerHTML = texts.quoteAuthor[currentLang];
-        
         document.getElementById("langToggleBtn").innerHTML = texts.toggleBtn[currentLang];
     }
     
@@ -613,17 +625,12 @@
     updateLanguage();
 </script>
 
-<!-- ============================================================ -->
-<!-- STYLE UNTUK DISCLAIMER (dari file Koko)                      -->
-<!-- ============================================================ -->
 <style>
-    /* ============================================= */
-    /* STYLE UNTUK CHO DISCLAIMER (copy dari file)   */
-    /* ============================================= */
+    /* === STYLE UNTUK DISCLAIMER === */
     .cho-full-disclaimer {
         width: 100%;
         max-width: 1200px;
-        border: 1px solid var(--gold-line, rgba(201,168,76,0.25));
+        border: 1px solid rgba(201,168,76,0.25);
         border-radius: 4px;
         overflow: hidden;
         position: relative;
