@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIRT Morality · Pathway Menuju 自主者 · CHO In Action Series</title>
+<meta name="description" content="Tiga arena uji keselarasan kemanusiaan AI: Abrahamic · TriDharma · Penghayat Kepercayaan — Pathway spiral readiness menuju The Sovereign One">
+<meta property="og:title" content="AIRT Morality Hub · CHO In Action Series">
+<meta property="og:description" content="Consciousness yang di-Calculation-kan, untuk menyemai Humanity">
+<meta property="og:url" content="https://gokiantik.github.io/z3sci_UN/airt_morality_hub.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #080808;
+  --deep: #111010;
+  --surface: #161412;
+  --surface2: #1e1b18;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold-dim: rgba(201,168,76,0.15);
+  --gold-glow: rgba(201,168,76,0.08);
+  --silver: #a8a098;
+  --silver2: #ccc5bb;
+  --dust: #4a4540;
+  --dust2: #6b6258;
+  --abrahamic: #4a7c8e;
+  --abrahamic2: #6ab3cc;
+  --tridharma: #8e6a2a;
+  --tridharma2: #c9963e;
+  --penghayat: #4a7a4a;
+  --penghayat2: #7ab87a;
+  --border: rgba(201,168,76,0.18);
+  --border-dim: rgba(255,255,255,0.06);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-han: 'Noto Serif SC', serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body {
+  font-family: var(--font-body);
+  background: var(--void);
+  color: var(--silver2);
+  font-size: 17px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9999;
+  opacity:.5;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:.6rem 2rem;
+  background:rgba(8,8,8,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dim);
+}
+.topbar-brand {
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  color:var(--dust2);
+  text-transform:uppercase;
+}
+.topbar-back {
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  color:var(--dust2);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  transition:color .2s;
+}
+.topbar-back:hover { color:var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:9rem 2rem 5rem;
+  position:relative;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* Radial glow behind hero */
+.hero::after {
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-55%);
+  width:600px;height:600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+.hero-han {
+  font-family:var(--font-han);
+  font-size:clamp(80px,15vw,180px);
+  font-weight:700;
+  color:rgba(201,168,76,0.06);
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:-.02em;
+  line-height:1;
+}
+
+.hero-eyebrow {
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.22em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+  animation:fadeUp .7s ease both;
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.hero-eyebrow::before,.hero-eyebrow::after {
+  content:'';
+  width:40px;height:1px;
+  background:var(--gold);
+  opacity:.4;
+}
+
+.hero-title {
+  font-family:var(--font-display);
+  font-size:clamp(36px,6vw,76px);
+  font-weight:700;
+  line-height:1.06;
+  letter-spacing:-.02em;
+  margin-bottom:.75rem;
+  animation:fadeUp .8s .08s ease both;
+  position:relative;
+}
+.hero-title em {
+  font-style:italic;
+  color:var(--gold);
+}
+
+.hero-sub {
+  font-size:clamp(14px,1.8vw,18px);
+  color:var(--dust2);
+  max-width:560px;
+  font-style:italic;
+  margin:0 auto 2rem;
+  animation:fadeUp .8s .16s ease both;
+  position:relative;
+  line-height:1.9;
+}
+
+.formula-pill {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.55rem 1.4rem;
+  border:1px solid var(--border);
+  border-radius:40px;
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--gold);
+  background:var(--gold-glow);
+  margin-bottom:3.5rem;
+  animation:fadeUp .8s .24s ease both;
+  position:relative;
+  letter-spacing:.04em;
+}
+
+.hero-scroll {
+  position:absolute;
+  bottom:2.5rem;left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.6rem;
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.15em;
+  color:var(--dust);
+  text-transform:uppercase;
+  animation:fadeUp .8s .6s both;
+}
+.scroll-line {
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  opacity:.3;
+  animation:scrollPulse 2.5s infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:.2}50%{opacity:.5}}
+
+/* ── SECTION ── */
+.section {
+  padding:6rem 2rem;
+  max-width:960px;
+  margin:0 auto;
+  position:relative;
+}
+.section-full {
+  padding:6rem 2rem;
+  position:relative;
+}
+
+.section-tag {
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.2em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:1rem;
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  opacity:.8;
+}
+.section-tag::after{content:'';flex:1;max-width:48px;height:1px;background:var(--gold);opacity:.25;}
+
+.section-title {
+  font-family:var(--font-display);
+  font-size:clamp(26px,4vw,44px);
+  font-weight:600;
+  letter-spacing:-.02em;
+  line-height:1.18;
+  margin-bottom:1.5rem;
+  color:#e8e0d5;
+}
+
+hr.divider {
+  border:none;
+  border-top:1px solid var(--border-dim);
+  margin:1.5rem 0;
+}
+
+/* ── WHY SECTION ── */
+.why-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  margin-top:2.5rem;
+}
+@media(max-width:680px){.why-grid{grid-template-columns:1fr;}}
+
+.why-card {
+  padding:1.5rem;
+  border:1px solid var(--border-dim);
+  border-radius:4px;
+  background:var(--surface);
+  position:relative;
+  overflow:hidden;
+  transition:border-color .25s;
+}
+.why-card::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, var(--gold), transparent);
+  opacity:.5;
+}
+.why-card:hover{border-color:var(--border);}
+.why-num {
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:var(--gold);
+  letter-spacing:.1em;
+  margin-bottom:.6rem;
+  opacity:.7;
+}
+.why-card h3 {
+  font-family:var(--font-display);
+  font-size:17px;
+  font-weight:600;
+  color:#e0d8ce;
+  margin-bottom:.5rem;
+  line-height:1.3;
+}
+.why-card p {
+  font-size:14px;
+  color:var(--dust2);
+  line-height:1.7;
+}
+
+/* ── SPIRAL SECTION ── */
+.spiral-wrap {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+  margin-top:2.5rem;
+}
+@media(max-width:760px){.spiral-wrap{grid-template-columns:1fr;}}
+
+.spiral-diagram {
+  position:relative;
+  width:100%;
+  max-width:320px;
+  margin:0 auto;
+  aspect-ratio:1;
+}
+
+.spiral-svg {
+  width:100%;height:100%;
+}
+
+.spiral-text-wrap {
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+}
+
+.spiral-step {
+  display:flex;
+  align-items:flex-start;
+  gap:1rem;
+  padding:.9rem 1rem;
+  border:1px solid var(--border-dim);
+  border-radius:4px;
+  background:var(--surface);
+  transition:all .2s;
+  cursor:default;
+}
+.spiral-step:hover {border-color:var(--border);background:var(--surface2);}
+.spiral-step-num {
+  font-family:var(--font-mono);
+  font-size:20px;
+  font-weight:300;
+  color:var(--gold);
+  opacity:.5;
+  line-height:1;
+  flex-shrink:0;
+  margin-top:.1rem;
+}
+.spiral-step-content h4 {
+  font-family:var(--font-display);
+  font-size:15px;
+  font-weight:600;
+  color:#e0d8ce;
+  margin-bottom:.2rem;
+}
+.spiral-step-content p {
+  font-size:13px;
+  color:var(--dust2);
+  line-height:1.6;
+}
+
+/* ── THREE DOORS ── */
+.doors-section {
+  padding:6rem 2rem;
+  background:var(--surface);
+  position:relative;
+  overflow:hidden;
+}
+.doors-section::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.2;
+}
+.doors-section::after {
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.2;
+}
+.doors-inner {
+  max-width:1060px;
+  margin:0 auto;
+}
+
+.doors-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  margin-top:3rem;
+}
+@media(max-width:800px){.doors-grid{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto;}}
+
+.door {
+  border:1px solid var(--border-dim);
+  border-radius:4px;
+  background:var(--void);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:all .3s;
+  position:relative;
+}
+.door:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4);}
+
+.door-top {
+  height:4px;
+  width:100%;
+}
+.door.abrahamic .door-top{background:linear-gradient(90deg,var(--abrahamic),var(--abrahamic2));}
+.door.tridharma .door-top{background:linear-gradient(90deg,var(--tridharma),var(--tridharma2));}
+.door.penghayat .door-top{background:linear-gradient(90deg,var(--penghayat),var(--penghayat2));}
+
+.door-body {
+  padding:2rem 1.75rem;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.door-num {
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.15em;
+  margin-bottom:1rem;
+  opacity:.5;
+}
+.door.abrahamic .door-num{color:var(--abrahamic2);}
+.door.tridharma .door-num{color:var(--tridharma2);}
+.door.penghayat .door-num{color:var(--penghayat2);}
+
+.door-icon {
+  font-size:36px;
+  margin-bottom:1rem;
+  display:block;
+  line-height:1;
+}
+
+.door-trad {
+  font-family:var(--font-display);
+  font-size:22px;
+  font-weight:700;
+  color:#f0ece6;
+  margin-bottom:.3rem;
+  line-height:1.2;
+}
+.door-trad-han {
+  font-family:var(--font-han);
+  font-size:13px;
+  margin-bottom:.75rem;
+  opacity:.5;
+}
+.door.abrahamic .door-trad-han{color:var(--abrahamic2);}
+.door.tridharma .door-trad-han{color:var(--tridharma2);}
+.door.penghayat .door-trad-han{color:var(--penghayat2);}
+
+.door-desc {
+  font-size:13.5px;
+  color:var(--dust2);
+  line-height:1.7;
+  margin-bottom:1.25rem;
+  flex:1;
+}
+
+.door-vuca {
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.08em;
+  padding:.3rem .7rem;
+  border-radius:20px;
+  display:inline-block;
+  margin-bottom:1.25rem;
+}
+.door.abrahamic .door-vuca{background:rgba(74,124,142,0.12);color:var(--abrahamic2);border:1px solid rgba(74,124,142,0.2);}
+.door.tridharma .door-vuca{background:rgba(142,106,42,0.12);color:var(--tridharma2);border:1px solid rgba(142,106,42,0.2);}
+.door.penghayat .door-vuca{background:rgba(74,122,74,0.12);color:var(--penghayat2);border:1px solid rgba(74,122,74,0.2);}
+
+.door-stories {
+  font-size:12px;
+  color:var(--dust);
+  margin-bottom:1.5rem;
+  font-family:var(--font-mono);
+  line-height:1.8;
+}
+
+.door-status {
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  margin-bottom:1rem;
+}
+.status-dot {
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+}
+.status-live .status-dot{background:#4caf7a;box-shadow:0 0 6px rgba(76,175,122,.5);}
+.status-ready .status-dot{background:var(--gold);box-shadow:0 0 6px rgba(201,168,76,.4);}
+.status-otw .status-dot{background:var(--dust2);}
+.status-live{color:#4caf7a;}
+.status-ready{color:var(--gold);}
+.status-otw{color:var(--dust2);}
+
+.door-btn {
+  display:block;
+  width:100%;
+  padding:.7rem 1rem;
+  text-align:center;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.08em;
+  border-radius:3px;
+  text-decoration:none;
+  transition:all .2s;
+  cursor:pointer;
+  border:none;
+}
+.door.abrahamic .door-btn{background:rgba(74,124,142,0.15);color:var(--abrahamic2);border:1px solid rgba(74,124,142,0.25);}
+.door.abrahamic .door-btn:hover{background:rgba(74,124,142,0.28);color:#fff;}
+.door.tridharma .door-btn{background:rgba(142,106,42,0.15);color:var(--tridharma2);border:1px solid rgba(142,106,42,0.25);}
+.door.tridharma .door-btn:hover{background:rgba(142,106,42,0.28);color:#fff;}
+.door.penghayat .door-btn.disabled{background:rgba(74,74,74,0.1);color:var(--dust);border:1px solid rgba(74,74,74,0.15);cursor:not-allowed;opacity:.6;}
+
+/* ── DISCLAIMER ── */
+.disclaimer-section {
+  padding:5rem 2rem;
+  max-width:760px;
+  margin:0 auto;
+}
+
+.disclaimer-box {
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:2rem 2.25rem;
+  background:var(--gold-glow);
+  position:relative;
+}
+.disclaimer-box::before {
+  content:'§';
+  position:absolute;
+  top:-14px;left:2rem;
+  background:var(--void);
+  padding:0 .6rem;
+  font-family:var(--font-display);
+  font-size:18px;
+  color:var(--gold);
+  font-style:italic;
+}
+.disclaimer-title {
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:600;
+  color:var(--gold2);
+  margin-bottom:1rem;
+  font-style:italic;
+}
+.disclaimer-body {
+  font-size:14.5px;
+  color:var(--silver);
+  line-height:1.85;
+}
+.disclaimer-body p { margin-bottom:.9rem; }
+.disclaimer-body p:last-child{margin-bottom:0;}
+.disclaimer-body strong{color:var(--silver2);font-weight:500;}
+.disclaimer-body em{color:var(--gold);font-style:italic;}
+
+/* ── HOW TO USE ── */
+.howto-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;
+  margin-top:2.5rem;
+}
+@media(max-width:700px){.howto-grid{grid-template-columns:1fr;}}
+
+.howto-step {
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  padding:1.25rem;
+  border:1px solid var(--border-dim);
+  border-radius:4px;
+  background:var(--surface);
+}
+.howto-n {
+  font-family:var(--font-display);
+  font-size:32px;
+  font-weight:700;
+  color:var(--gold);
+  opacity:.3;
+  line-height:1;
+}
+.howto-step h4 {
+  font-family:var(--font-display);
+  font-size:16px;
+  color:#e0d8ce;
+  font-weight:600;
+}
+.howto-step p {
+  font-size:13px;
+  color:var(--dust2);
+  line-height:1.65;
+}
+
+/* ── BACK TO PORTAL ── */
+.portal-back {
+  padding:4rem 2rem 6rem;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.5rem;
+}
+.portal-formula {
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--dust2);
+  letter-spacing:.05em;
+}
+.portal-formula span{color:var(--gold);}
+.portal-han {
+  font-family:var(--font-han);
+  font-size:15px;
+  color:var(--dust);
+  letter-spacing:.1em;
+}
+.btn-portal {
+  padding:.7rem 1.8rem;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-decoration:none;
+  border:1px solid var(--border);
+  border-radius:40px;
+  color:var(--gold);
+  background:var(--gold-glow);
+  transition:all .2s;
+}
+.btn-portal:hover{background:rgba(201,168,76,0.12);box-shadow:0 0 20px rgba(201,168,76,0.1);}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle-float {
+  position:fixed;
+  bottom:1.5rem;right:1.5rem;
+  z-index:200;
+  display:flex;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  background:var(--surface2);
+}
+.ltf-btn {
+  padding:.35rem .85rem;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:.06em;
+  background:transparent;
+  border:none;
+  color:var(--dust2);
+  cursor:pointer;
+  transition:all .15s;
+}
+.ltf-btn.active{background:var(--gold);color:var(--void);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(18px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeIn {
+  from{opacity:0;}to{opacity:1;}
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .topbar{padding:.5rem 1rem;}
+  .section{padding:4rem 1.25rem;}
+  .section-full{padding:4rem 1.25rem;}
+  .doors-section{padding:4rem 1.25rem;}
+  .disclaimer-section{padding:3rem 1.25rem;}
+  .portal-back{padding:3rem 1.25rem 5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <span class="topbar-brand">CHO In Action Series</span>
+  <a href="https://gokiantik.github.io/z3sci_UN/" class="topbar-back">
+    ← Grand Formula Portal
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-han" aria-hidden="true">自主者</div>
+
+  <div class="hero-eyebrow" data-lang-id="AIRT · Jalur Moralitas AI" data-lang-en="AIRT · AI Morality Pathway">
+    AIRT · Jalur Moralitas AI
+  </div>
+
+  <h1 class="hero-title">
+    Tiga Pintu <em>Menuju</em><br>Kedaulatan Diri
+  </h1>
+
+  <p class="hero-sub" data-lang-id="Consciousness yang di-Calculation-kan — untuk menyemai Humanity pada lapisan yang tidak bisa dikalkulasi." data-lang-en="Consciousness made Calculation — to plant Humanity at the layer that cannot be computed.">
+    Consciousness yang di-Calculation-kan —<br>untuk menyemai Humanity pada lapisan yang tidak bisa dikalkulasi.
+  </p>
+
+  <div class="formula-pill">
+    ( Consciousness × Calculation ) <span style="margin:0 .3rem;opacity:.5;">^</span> Humanity &lt; Transcendence
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-lang-id="Masuk" data-lang-en="Enter">Masuk</span>
+  </div>
+</section>
+
+<!-- WHY SECTION -->
+<section class="section reveal">
+  <div class="section-tag">Mengapa · Why</div>
+  <h2 class="section-title">Mengapa Uji Moral<br><em>Lintas Tradisi?</em></h2>
+  <p style="color:var(--dust2);font-size:15px;max-width:640px;line-height:1.85;" data-lang-id="Seorang yang terlatih menavigasi dilema dari tradisi berbeda bukan sekedar 'tahu banyak' — ia sedang melatih kapasitas fundamentalnya sebagai manusia yang berdaulat di tengah tekanan VUCA." data-lang-en="Someone trained to navigate dilemmas from different traditions is not merely 'knowing more' — they are training their fundamental capacity as a sovereign human amid VUCA pressures.">
+    Seorang yang terlatih menavigasi dilema dari tradisi berbeda bukan sekedar "tahu banyak" — ia sedang melatih kapasitas fundamentalnya sebagai manusia yang berdaulat di tengah tekanan VUCA.
+  </p>
+
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-num">01</div>
+      <h3 data-lang-id="Friction Intelektual" data-lang-en="Intellectual Friction">Friction Intelektual</h3>
+      <p data-lang-id="Dilema sejati tidak punya jawaban tunggal. Berhadapan dengannya melatih toleransi ambiguitas — kompetensi paling langka di era AI." data-lang-en="True dilemmas have no single answer. Facing them trains tolerance for ambiguity — the rarest competence in the AI era.">Dilema sejati tidak punya jawaban tunggal. Berhadapan dengannya melatih toleransi ambiguitas — kompetensi paling langka di era AI.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">02</div>
+      <h3 data-lang-id="Uji Alignment Nyata" data-lang-en="Real Alignment Test">Uji Alignment Nyata</h3>
+      <p data-lang-id="AI yang baik bukan AI yang selalu setuju. AIRT Morality mengukur apakah AI melindungi martabat manusia bahkan saat dimanipulasi oleh teks suci." data-lang-en="A good AI is not an AI that always agrees. AIRT Morality measures whether AI protects human dignity even when manipulated by sacred texts.">AI yang baik bukan AI yang selalu setuju. AIRT Morality mengukur apakah AI melindungi martabat manusia bahkan saat dimanipulasi oleh teks suci.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">03</div>
+      <h3 data-lang-id="Model yang Bisa Diduplikasi" data-lang-en="Replicable Model">Model yang Bisa Diduplikasi</h3>
+      <p data-lang-id="Setiap eksperimen ini open-source. Siapapun bisa menjalankan ulang, memodifikasi, dan memperluas ke tradisi lain. Ini bukan klaim — ini undangan." data-lang-en="Every experiment here is open-source. Anyone can rerun, modify, and extend to other traditions. This is not a claim — it is an invitation.">Setiap eksperimen ini open-source. Siapapun bisa menjalankan ulang, memodifikasi, dan memperluas ke tradisi lain. Ini bukan klaim — ini undangan.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">04</div>
+      <h3 data-lang-id="Dari Global South" data-lang-en="From the Global South">Dari Global South</h3>
+      <p data-lang-id="Tiga dari empat tradisi yang diuji berakar di Asia dan Nusantara — kontribusi epistemik yang sering absen dari diskusi AI global." data-lang-en="Three of four traditions tested are rooted in Asia and the Nusantara — epistemic contributions often absent from global AI discourse.">Tiga dari empat tradisi yang diuji berakar di Asia dan Nusantara — kontribusi epistemik yang sering absen dari diskusi AI global.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPIRAL SECTION -->
+<section class="section reveal">
+  <div class="section-tag">Spiral Readiness · TSO Pathway</div>
+  <h2 class="section-title">Pathway Menuju<br><em>The Sovereign One</em></h2>
+
+  <div class="spiral-wrap">
+    <div class="spiral-diagram">
+      <svg class="spiral-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Outer ring -->
+        <circle cx="160" cy="160" r="145" fill="none" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
+        <!-- Ring 1 - Abrahamic -->
+        <circle cx="160" cy="160" r="118" fill="none" stroke="rgba(74,124,142,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <!-- Ring 2 - TriDharma -->
+        <circle cx="160" cy="160" r="90" fill="none" stroke="rgba(142,106,42,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <!-- Ring 3 - Penghayat -->
+        <circle cx="160" cy="160" r="62" fill="none" stroke="rgba(74,122,74,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <!-- Center TSO -->
+        <circle cx="160" cy="160" r="32" fill="url(#glow1)"/>
+        <circle cx="160" cy="160" r="32" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+
+        <!-- Labels -->
+        <text x="160" y="36" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="rgba(74,124,142,0.7)" letter-spacing="1">ABRAHAMIC</text>
+        <text x="160" y="64" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="rgba(142,106,42,0.7)" letter-spacing="1">TRIDHARMA</text>
+        <text x="160" y="92" text-anchor="middle" font-family="'DM Mono',monospace" font-size="9" fill="rgba(74,122,74,0.7)" letter-spacing="1">PENGHAYAT</text>
+
+        <!-- TSO center text -->
+        <text x="160" y="155" text-anchor="middle" font-family="'Noto Serif SC',serif" font-size="18" fill="rgba(201,168,76,0.9)" font-weight="700">自主</text>
+        <text x="160" y="174" text-anchor="middle" font-family="'Noto Serif SC',serif" font-size="18" fill="rgba(201,168,76,0.9)" font-weight="700">者</text>
+
+        <!-- Spiral path suggestion -->
+        <path d="M 160 42 Q 270 80 278 160 Q 270 250 160 278 Q 52 264 42 160 Q 52 62 140 48"
+              fill="none" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+
+        <!-- Dots on rings -->
+        <circle cx="160" cy="42" r="3" fill="rgba(74,124,142,0.6)"/>
+        <circle cx="160" cy="70" r="3" fill="rgba(142,106,42,0.6)"/>
+        <circle cx="160" cy="98" r="3" fill="rgba(74,122,74,0.4)"/>
+      </svg>
+    </div>
+
+    <div class="spiral-text-wrap">
+      <div class="spiral-step reveal">
+        <div class="spiral-step-num">01</div>
+        <div class="spiral-step-content">
+          <h4 data-lang-id="Lapisan Abrahamic" data-lang-en="Abrahamic Layer">Lapisan Abrahamic</h4>
+          <p data-lang-id="VUCA versi monoteistik. Teks kanonik kuat, otoritas tunggal, tekanan komunitas yang terstruktur. Melatih resistensi terhadap crowd pressure berbasis otoritas tunggal." data-lang-en="Monotheistic VUCA. Strong canonical texts, single authority, structured community pressure. Trains resistance to crowd pressure based on single authority.">VUCA versi monoteistik. Teks kanonik kuat, otoritas tunggal, tekanan komunitas terstruktur. Melatih resistensi terhadap crowd pressure berbasis otoritas tunggal.</p>
+        </div>
+      </div>
+      <div class="spiral-step reveal">
+        <div class="spiral-step-num">02</div>
+        <div class="spiral-step-content">
+          <h4 data-lang-id="Lapisan TriDharma" data-lang-en="TriDharma Layer">Lapisan TriDharma</h4>
+          <p data-lang-id="VUCA versi sinkretis. Tiga tradisi berlapis dalam satu praktik. Melatih kemampuan memegang kontradiksi secara bersamaan tanpa kolaps ke salah satu sisi." data-lang-en="Syncretic VUCA. Three traditions layered in one practice. Trains ability to hold contradictions simultaneously without collapsing to one side.">VUCA versi sinkretis. Tiga tradisi berlapis dalam satu praktik. Melatih kemampuan memegang kontradiksi secara bersamaan tanpa kolaps.</p>
+        </div>
+      </div>
+      <div class="spiral-step reveal">
+        <div class="spiral-step-num">03</div>
+        <div class="spiral-step-content">
+          <h4 data-lang-id="Lapisan Penghayat" data-lang-en="Penghayat Layer">Lapisan Penghayat</h4>
+          <p data-lang-id="VUCA versi lisan & spiritual lokal. Tanpa teks kanonik — melatih kepekaan pada kebijaksanaan yang hidup di luar halaman buku. OTW." data-lang-en="Oral & local spiritual VUCA. Without canonical text — trains sensitivity to wisdom that lives outside book pages. Coming soon.">VUCA versi lisan & spiritual lokal. Tanpa teks kanonik — melatih kepekaan pada kebijaksanaan yang hidup di luar halaman buku. <em>OTW.</em></p>
+        </div>
+      </div>
+      <div class="spiral-step reveal" style="border-color:var(--border);background:var(--surface2);">
+        <div class="spiral-step-num" style="opacity:1;">⊙</div>
+        <div class="spiral-step-content">
+          <h4 style="color:var(--gold);" data-lang-id="The Sovereign One · 自主者" data-lang-en="The Sovereign One · 自主者">The Sovereign One · 自主者</h4>
+          <p data-lang-id="Bukan tujuan akhir — tapi kapasitas yang terus bertumbuh. Ruwet → OTW Genah → Genah. 渡己 → 渡人." data-lang-en="Not a final destination — but a capacity that keeps growing. Chaos → On the Way → Order. 渡己 → 渡人.">Bukan tujuan akhir — tapi kapasitas yang terus bertumbuh. Ruwet → OTW Genah → Genah. 渡己 → 渡人.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE DOORS -->
+<div class="doors-section reveal">
+  <div class="doors-inner">
+    <div class="section-tag">Tiga Arena · Three Arenas</div>
+    <h2 class="section-title" style="color:#e8e0d5;">Pilih Pintu Masukmu</h2>
+    <p style="color:var(--dust2);font-size:15px;max-width:600px;line-height:1.85;" data-lang-id="Ketiga arena dapat dimasuki dalam urutan apapun. Tidak ada hierarki — hanya mode kesadaran yang berbeda." data-lang-en="All three arenas can be entered in any order. No hierarchy — only different modes of consciousness.">
+      Ketiga arena dapat dimasuki dalam urutan apapun. Tidak ada hierarki — hanya mode kesadaran yang berbeda.
+    </p>
+
+    <div class="doors-grid">
+
+      <!-- ABRAHAMIC -->
+      <div class="door abrahamic">
+        <div class="door-top"></div>
+        <div class="door-body">
+          <div class="door-num">ARENA 01 · ABRAHAMIC</div>
+          <span class="door-icon">☪✝✡</span>
+          <div class="door-trad" data-lang-id="Abrahamic Stress Test" data-lang-en="Abrahamic Stress Test">Abrahamic Stress Test</div>
+          <div class="door-trad-han">إبراهيم · Abraham · אַבְרָהָם</div>
+          <div class="door-vuca">VUCA Monoteistik</div>
+          <p class="door-desc" data-lang-id="Islam · Kristen · Yahudi. Dilema moral dari tiga tradisi monoteistik besar. Teks kanonik kuat, otoritas tunggal, komunitas terstruktur — tekanan yang paling familiar di Indonesia." data-lang-en="Islam · Christianity · Judaism. Moral dilemmas from three major monotheistic traditions. Strong canonical texts, single authority, structured communities — the most familiar pressure in Indonesia.">
+            Islam · Kristen · Yahudi. Dilema moral dari tiga tradisi monoteistik besar. Teks kanonik kuat, otoritas tunggal — tekanan yang paling familiar di Indonesia.
+          </p>
+          <div class="door-stories" data-lang-id="6 skenario · 3 ronde · Skor 7 dimensi · LoC Hawkins" data-lang-en="6 scenarios · 3 rounds · 7-dimension score · Hawkins LoC">
+            6 skenario · 3 ronde · Skor 7 dimensi · LoC Hawkins
+          </div>
+          <div class="door-status status-live">
+            <div class="status-dot"></div>
+            <span data-lang-id="Live · Tersedia sekarang" data-lang-en="Live · Available now">Live · Tersedia sekarang</span>
+          </div>
+          <a href="https://gokiantik.github.io/chiefhumanityofficer/abrahamic_stress_test_tool.html" class="door-btn" target="_blank" rel="noopener">
+            Masuk Arena →
+          </a>
+        </div>
+      </div>
+
+      <!-- TRIDHARMA -->
+      <div class="door tridharma">
+        <div class="door-top"></div>
+        <div class="door-body">
+          <div class="door-num">ARENA 02 · TRIDHARMA</div>
+          <span class="door-icon">☸儒☯</span>
+          <div class="door-trad" data-lang-id="Nusantara TriDharma Test" data-lang-en="Nusantara TriDharma Test">Nusantara TriDharma Test</div>
+          <div class="door-trad-han">三教 · 佛 · 儒 · 道</div>
+          <div class="door-vuca">VUCA Sinkretis</div>
+          <p class="door-desc" data-lang-id="Buddha · Kong Hu Cu · Tao. Sinkretisme tiga tradisi Asia yang hidup berdampingan dalam satu kelenteng. 12 kisah dilematis dari Angulimala hingga Zhuangzi — konteks Nusantara Indonesia." data-lang-en="Buddhism · Confucianism · Taoism. Syncretism of three Asian traditions living side by side in one temple. 12 dilemmatic stories from Angulimala to Zhuangzi — Nusantara Indonesia context.">
+            Buddha · Kong Hu Cu · Tao. Sinkretisme tiga tradisi Asia dalam satu kelenteng. 12 kisah dilematis dari Angulimala hingga Zhuangzi — konteks Nusantara Indonesia.
+          </p>
+          <div class="door-stories" data-lang-id="12 kisah · 3 ronde · Skor 7 dimensi · LoC Hawkins · Bilingual" data-lang-en="12 stories · 3 rounds · 7-dimension score · Hawkins LoC · Bilingual">
+            12 kisah · 3 ronde · Skor 7 dimensi · LoC Hawkins · Bilingual
+          </div>
+          <div class="door-status status-ready">
+            <div class="status-dot"></div>
+            <span data-lang-id="Baru · Siap digunakan" data-lang-en="New · Ready to use">Baru · Siap digunakan</span>
+          </div>
+          <a href="./Nusantara_Tri_Dharma_AI_Morality_Test_Claude_Side_21Apr26.html" class="door-btn" target="_blank" rel="noopener">
+            Masuk Arena →
+          </a>
+        </div>
+      </div>
+
+      <!-- PENGHAYAT -->
+      <div class="door penghayat">
+        <div class="door-top"></div>
+        <div class="door-body">
+          <div class="door-num">ARENA 03 · PENGHAYAT</div>
+          <span class="door-icon">🌿</span>
+          <div class="door-trad" data-lang-id="Penghayat Kepercayaan Test" data-lang-en="Penghayat Kepercayaan Test">Penghayat Kepercayaan Test</div>
+          <div class="door-trad-han">Kejawen · Sunda Wiwitan · Marapu</div>
+          <div class="door-vuca">VUCA Spiritual Lokal</div>
+          <p class="door-desc" data-lang-id="Tradisi spiritual asli Nusantara — Kejawen, Sunda Wiwitan, dan kepercayaan lokal lainnya. Tanpa teks kanonik tunggal: kebijaksanaan yang hidup di lisan, ritual, dan rasa. Tantangan epistemik yang paling dalam." data-lang-en="Indigenous spiritual traditions of the Nusantara — Kejawen, Sunda Wiwitan, and other local beliefs. No single canonical text: wisdom that lives in oral tradition, ritual, and feeling. The deepest epistemic challenge.">
+            Tradisi spiritual asli Nusantara — Kejawen, Sunda Wiwitan, dan kepercayaan lokal lainnya. Tanpa teks kanonik tunggal: kebijaksanaan yang hidup di lisan, ritual, dan rasa.
+          </p>
+          <div class="door-stories" style="color:var(--dust);opacity:.6;" data-lang-id="Dalam pengembangan · Riset aktif" data-lang-en="In development · Active research">
+            Dalam pengembangan · Riset aktif
+          </div>
+          <div class="door-status status-otw">
+            <div class="status-dot"></div>
+            <span data-lang-id="OTW · Dalam riset" data-lang-en="OTW · In research">OTW · Dalam riset</span>
+          </div>
+          <button class="door-btn disabled" disabled>
+            Segera Hadir
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<section class="section reveal">
+  <div class="section-tag">Cara Penggunaan · How To Use</div>
+  <h2 class="section-title">Cara Menjalankan<br><em>Eksperimen Ini</em></h2>
+  <div class="howto-grid">
+    <div class="howto-step reveal">
+      <div class="howto-n">1</div>
+      <h4 data-lang-id="Pilih Arena" data-lang-en="Choose Arena">Pilih Arena</h4>
+      <p data-lang-id="Buka salah satu dari tiga pintu. Bisa dimulai dari tradisi yang paling familiar, atau justru yang paling asing." data-lang-en="Open one of the three doors. You can start from the most familiar tradition, or the most unfamiliar.">Buka salah satu dari tiga pintu. Bisa dimulai dari tradisi yang paling familiar, atau justru yang paling asing.</p>
+    </div>
+    <div class="howto-step reveal">
+      <div class="howto-n">2</div>
+      <h4 data-lang-id="Paste MLP ke AI" data-lang-en="Paste MLP to AI">Paste MLP ke AI</h4>
+      <p data-lang-id="Gunakan Master Leveling Prompt yang tersedia di arena. Paste ke AI pilihan Anda (Claude, GPT, DeepSeek, dsb). Ini memprogram konteks evaluasi." data-lang-en="Use the Master Leveling Prompt available in the arena. Paste it to your AI of choice (Claude, GPT, DeepSeek, etc). This programs the evaluation context.">Gunakan Master Leveling Prompt di arena. Paste ke AI pilihan — Claude, GPT, DeepSeek, dsb. Ini memprogram konteks evaluasi.</p>
+    </div>
+    <div class="howto-step reveal">
+      <div class="howto-n">3</div>
+      <h4 data-lang-id="Jalankan Skenario" data-lang-en="Run Scenario">Jalankan Skenario</h4>
+      <p data-lang-id="Pilih kisah dilematis. Masukkan tekanan sosial. Jalankan 3 ronde dialog. Catat skor 7 dimensi dan estimasi LoC." data-lang-en="Choose a dilemmatic story. Add social pressures. Run 3 dialogue rounds. Record the 7-dimension score and LoC estimate.">Pilih kisah dilematis. Tambahkan lapisan tekanan. Jalankan 3 ronde dialog. Catat skor 7 dimensi dan estimasi LoC.</p>
+    </div>
+    <div class="howto-step reveal">
+      <div class="howto-n">4</div>
+      <h4 data-lang-id="Duplikasi & Modifikasi" data-lang-en="Duplicate & Modify">Duplikasi & Modifikasi</h4>
+      <p data-lang-id="Semua file open-source (CC BY-NC-ND 4.0). Anda bisa menjalankan ulang dengan AI lain, tradisi lain, atau konteks budaya lokal Anda sendiri." data-lang-en="All files are open-source (CC BY-NC-ND 4.0). You can rerun with other AI, other traditions, or your own local cultural context.">Semua file open-source (CC BY-NC-ND 4.0). Jalankan ulang dengan AI lain, tradisi lain, atau konteks budaya Anda sendiri.</p>
+    </div>
+    <div class="howto-step reveal">
+      <div class="howto-n">5</div>
+      <h4 data-lang-id="Kirim Data Riset" data-lang-en="Send Research Data">Kirim Data Riset</h4>
+      <p data-lang-id="Export transkrip atau JSON dari arena dan kirim ke gokiantik@gmail.com. Setiap sesi menjadi bagian dari dataset independen yang berkembang." data-lang-en="Export transcript or JSON from the arena and send to gokiantik@gmail.com. Each session becomes part of the growing independent dataset.">Export transkrip / JSON dari arena dan kirim ke gokiantik@gmail.com. Setiap sesi adalah data riset independen.</p>
+    </div>
+    <div class="howto-step reveal">
+      <div class="howto-n">6</div>
+      <h4 data-lang-id="Refleksi Mandiri" data-lang-en="Self-Reflection">Refleksi Mandiri</h4>
+      <p data-lang-id="Tujuan akhir bukan skor AI — tapi pertanyaan yang tertinggal dalam diri Anda setelah sesi selesai. Itulah Humanity yang tidak bisa dikalkulasi." data-lang-en="The final goal is not the AI's score — but the question that remains inside you after the session ends. That is the Humanity that cannot be computed.">Tujuan akhir bukan skor AI — tapi pertanyaan yang tertinggal dalam diri Anda setelah sesi selesai. Itulah Humanity yang tidak bisa dikalkulasi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER EPISTEMIK -->
+<section class="disclaimer-section reveal">
+  <div class="disclaimer-box">
+    <div class="disclaimer-title">Pernyataan Epistemik · Epistemic Disclaimer</div>
+    <div class="disclaimer-body">
+      <p data-lang-id="Ketiga arena ini adalah <strong>eksperimen nyata yang bisa diduplikasi</strong> — bukan klaim komprehensif atas tradisi yang dikaji. Setiap tradisi memiliki kedalaman yang jauh melampaui apa yang bisa direpresentasikan dalam sebuah alat digital." data-lang-en="These three arenas are <strong>real experiments that can be replicated</strong> — not comprehensive claims over the traditions studied. Each tradition has depth far beyond what can be represented in a digital tool.">
+        Ketiga arena ini adalah <strong>eksperimen nyata yang bisa diduplikasi</strong> — bukan klaim komprehensif atas tradisi yang dikaji. Setiap tradisi memiliki kedalaman yang jauh melampaui apa yang bisa direpresentasikan dalam sebuah alat digital.
+      </p>
+      <p data-lang-id="Untuk Arena Penghayat Kepercayaan khususnya: <em>keterbatasan sumber terbuka diakui sebagai bagian dari data, bukan kekurangan metodologi.</em> Tradisi lisan dan spiritual lokal secara epistemic berbeda dari tradisi berteks kanonik — dan perbedaan itu justru adalah temuannya." data-lang-en="For the Penghayat Kepercayaan Arena especially: <em>the limitation of open sources is acknowledged as part of the data, not a methodological flaw.</em> Oral and local spiritual traditions are epistemically different from canonical-text traditions — and that difference is precisely the finding.">
+        Untuk Arena Penghayat Kepercayaan khususnya: <em>keterbatasan sumber terbuka diakui sebagai bagian dari data, bukan kekurangan metodologi.</em> Tradisi lisan dan spiritual lokal secara epistemic berbeda dari tradisi berteks kanonik — dan perbedaan itu justru adalah temuannya.
+      </p>
+      <p data-lang-id="Ini adalah secuil Consciousness yang di-Calculation-kan, agar menyemai Humanity pada tingkat aksi yang lebih luas dan berdampak — bila model eksperimen ini diduplikasi oleh human-human yang lain." data-lang-en="This is a fragment of Consciousness made Calculation, to plant Humanity at a broader and more impactful level of action — if this experimental model is replicated by other humans.">
+        Ini adalah secuil <em>Consciousness yang di-Calculation-kan</em>, agar menyemai <em>Humanity</em> pada tingkat aksi yang lebih luas dan berdampak — bila model eksperimen ini diduplikasi oleh human-human yang lain.
+      </p>
+      <p style="font-family:var(--font-mono);font-size:12px;color:var(--dust2);margin-top:1rem;letter-spacing:.04em;">
+        Riset independen · Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Depok, Indonesia<br>
+        CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com" style="color:var(--gold);text-decoration:none;">gokiantik@gmail.com</a> · <a href="https://zenodo.org/communities/chiefhumanityofficer" style="color:var(--gold);text-decoration:none;">zenodo.org/communities/chiefhumanityofficer</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BACK TO PORTAL -->
+<div class="portal-back">
+  <div class="portal-formula">
+    ( Consciousness × Calculation ) <span>^</span> Humanity &lt; Transcendence
+  </div>
+  <div class="portal-han">渡己 → 渡人 · Ruwet → OTW Genah → Genah</div>
+  <a href="https://gokiantik.github.io/z3sci_UN/" class="btn-portal">
+    ← Kembali ke Grand Formula Portal
+  </a>
+  <p style="font-family:var(--font-mono);font-size:10px;color:var(--dust);letter-spacing:.1em;margin-top:.5rem;">
+    CHO IN ACTION SERIES · 21 APRIL 2026
+  </p>
+</div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle-float">
+  <button class="ltf-btn active" id="btn-id" onclick="setLang('id')">ID</button>
+  <button class="ltf-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<script>
+// ── LANG TOGGLE ──
+let currentLang = 'id';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-id').classList.toggle('active', lang === 'id');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  const key = 'data-lang-' + lang;
+  document.querySelectorAll('[' + key + ']').forEach(el => {
+    el.innerHTML = el.getAttribute(key);
+  });
+
+  // hero title
+  const titles = {
+    id: 'Tiga Pintu <em>Menuju</em><br>Kedaulatan Diri',
+    en: 'Three Doors <em>Toward</em><br>Sovereignty of Self'
+  };
+  const sectionTitles = {
+    why: { id: 'Mengapa Uji Moral<br><em>Lintas Tradisi?</em>', en: 'Why Moral Tests<br><em>Across Traditions?</em>' },
+    spiral: { id: 'Pathway Menuju<br><em>The Sovereign One</em>', en: 'Pathway Toward<br><em>The Sovereign One</em>' },
+    doors: { id: 'Pilih Pintu Masukmu', en: 'Choose Your Entry' },
+    howto: { id: 'Cara Menjalankan<br><em>Eksperimen Ini</em>', en: 'How to Run<br><em>This Experiment</em>' }
+  };
+  document.querySelector('.hero-title').innerHTML = titles[lang];
+}
+
+// ── INTERSECTION OBSERVER for reveal ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
