@@ -84,6 +84,14 @@
   .nav-dropdown.open .nav-dropdown-btn .chevron{transform:rotate(180deg);}
   .nav-dropdown-menu{position:absolute;top:calc(100% + 7px);right:0;min-width:220px;background:var(--bg);border:1px solid var(--border-med);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.12);overflow:hidden;z-index:300;visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s,visibility .15s;}
   .nav-dropdown.open .nav-dropdown-menu{visibility:visible !important;opacity:1 !important;pointer-events:auto !important;transform:translateY(0) !important;}
+  .nav-dropdown-menu.scrollable{max-height:72vh;overflow-y:auto;}
+  .ddm-section-header{display:flex;align-items:center;justify-content:space-between;padding:7px 16px;font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-sec);border-top:1px solid var(--border);cursor:pointer;user-select:none;transition:background .12s;}
+  .ddm-section-header:first-child{border-top:none;}
+  .ddm-section-header:hover{background:var(--bg2);color:var(--purple-600);}
+  .ddm-section-header .ddm-chev{font-size:9px;transition:transform .2s;opacity:0.5;}
+  .ddm-section-header.open .ddm-chev{transform:rotate(180deg);}
+  .ddm-section-body{overflow:hidden;max-height:0;transition:max-height .25s ease;}
+  .ddm-section-body.open{max-height:600px;}
   .nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:12px;font-weight:500;font-family:'Georgia',serif;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:background .12s;}
   .nav-dropdown-menu a:last-child{border-bottom:none;}
   .nav-dropdown-menu a:hover{background:var(--purple-50);color:var(--purple-600);}
@@ -150,6 +158,92 @@
         <span class="item-icon">🪑</span>
         <span class="item-label">Lenggah O Le</span>
       </a>
+    </div>
+  </div>
+  <div class="nav-dropdown" id="dd-sarinem">
+    <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-sarinem')">
+      🌸 Sarinem Chat
+      <span class="chevron">▾</span>
+    </button>
+    <div class="nav-dropdown-menu scrollable" style="min-width:280px;">
+
+      <!-- APPS -->
+      <div class="ddm-section-header open" onclick="toggleSection(this)">
+        Apps <span class="ddm-chev">▾</span>
+      </div>
+      <div class="ddm-section-body open">
+        <a href="https://gokiantik.github.io/z3sci_UN/kedai_sarinem.html" target="_blank" rel="noopener">
+          <span class="item-icon">☕</span><span class="item-label">Kedai Sarinem</span>
+        </a>
+        <a href="https://gokiantik.github.io/z3sci_UN/sarinem_kdrt_companion_chat_v1_7_ID_OPAL.html" target="_blank" rel="noopener">
+          <span class="item-icon">💬</span><span class="item-label">Sarinem Chat (HTML eksperimen)</span><span class="item-badge">v1.7</span>
+        </a>
+        <a href="https://gemini.google.com/gem-labs/1gISx168vddJMDzyXCS_eTudfGIpS8nmF" target="_blank" rel="noopener">
+          <span class="item-icon">💎</span><span class="item-label">Sarinem v1.6 (Opal GEM)</span>
+        </a>
+        <a href="https://superherocafeinside.com/sarinem.chat" target="_blank" rel="noopener">
+          <span class="item-icon">🦸</span><span class="item-label">Superhero Café Inside</span>
+        </a>
+        <a href="https://superherocafeinside.com/sarinem.chat/funding" target="_blank" rel="noopener">
+          <span class="item-icon">🤝</span><span class="item-label">Support &amp; Funding</span>
+        </a>
+      </div>
+
+      <!-- DOI -->
+      <div class="ddm-section-header" onclick="toggleSection(this)">
+        DOI · Zenodo <span class="ddm-chev">▾</span>
+      </div>
+      <div class="ddm-section-body">
+        <a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" rel="noopener">
+          <span class="item-icon">📄</span><span class="item-label">Sarinem.chat: Living Proof of CHO Grand Formula</span>
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.19978064" target="_blank" rel="noopener">
+          <span class="item-icon">📄</span><span class="item-label">Sovereignty Gap: Indonesian Women &amp; Decision Power</span>
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.19945231" target="_blank" rel="noopener">
+          <span class="item-icon">📄</span><span class="item-label">Sarinem.chat v1.2: Two Technologies, One Mission</span>
+        </a>
+      </div>
+
+      <!-- SPRINGER -->
+      <div class="ddm-section-header" onclick="toggleSection(this)">
+        Springer <span class="ddm-chev">▾</span>
+      </div>
+      <div class="ddm-section-body">
+        <a href="https://submission.springernature.com/submission-details/c25dfdf7-7309-4786-b2bc-a2f25e08e9ac" target="_blank" rel="noopener">
+          <span class="item-icon">📰</span><span class="item-label">SpringerNature Submission</span><span class="item-badge">LIVE</span>
+        </a>
+      </div>
+
+      <!-- LINKEDIN -->
+      <div class="ddm-section-header" onclick="toggleSection(this)">
+        LinkedIn Posts <span class="ddm-chev">▾</span>
+      </div>
+      <div class="ddm-section-body">
+        <a href="https://www.linkedin.com/pulse/sarinemchat-when-ai-doesnt-fully-understand-ai-safety-strategist-f7moc" target="_blank" rel="noopener">
+          <span class="item-icon">🔗</span><span class="item-label">When AI Doesn't Fully Understand</span>
+        </a>
+        <a href="https://www.linkedin.com/pulse/sarinemchat-sovereignty-gap-mbah-hogi-bejo-ai-safety-strategist-t8opc" target="_blank" rel="noopener">
+          <span class="item-icon">🔗</span><span class="item-label">The Sovereignty Gap</span>
+        </a>
+        <a href="https://www.linkedin.com/pulse/sarinemchat-small-initiative-needs-support-ai-safety-strategist-ns7zc" target="_blank" rel="noopener">
+          <span class="item-icon">🔗</span><span class="item-label">A Small Initiative That Needs Support</span>
+        </a>
+        <a href="https://www.linkedin.com/pulse/apa-itu-ai-cognitive-architect-mbah-hogi-bejo-ai-safety-strategist-2n1ic" target="_blank" rel="noopener">
+          <span class="item-icon">🔗</span><span class="item-label">AI Cognitive Architect</span>
+        </a>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="ddm-section-header" onclick="toggleSection(this)">
+        Dukung Proyek <span class="ddm-chev">▾</span>
+      </div>
+      <div class="ddm-section-body">
+        <a href="https://trakteer.id/gokiantik/post/sarinemchat-building-a-safe-place-to-begin-Kt8IZ" target="_blank" rel="noopener">
+          <span class="item-icon">☕</span><span class="item-label">Trakteer · Dukung Sarinem.chat</span><span class="item-badge">DONATE</span>
+        </a>
+      </div>
+
     </div>
   </div>
   <div class="lang-toggle">
@@ -312,6 +406,12 @@
 </div>
 
 <script>
+function toggleSection(header){
+  var body=header.nextElementSibling;
+  var isOpen=header.classList.contains('open');
+  header.classList.toggle('open',!isOpen);
+  body.classList.toggle('open',!isOpen);
+}
 function toggleDropdown(id){
   var dd=document.getElementById(id);
   var isOpen=dd.classList.contains('open');
