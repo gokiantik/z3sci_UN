@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sovereign Space · MIT FII 2026 · Complete Proposal v7.6 · Trilingual</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a100e;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #eef3e6;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Language Toggle */
+    .toggle-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .lang-btn {
+      background: #1a2c24;
+      border: 1px solid #3a5e4c;
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #b7dbbe;
+    }
+    .lang-btn.active {
+      background: #2d6a4f;
+      border-color: #7caf8b;
+      color: white;
+    }
+    .lang-content {
+      display: none;
+    }
+    .lang-content.active-lang {
+      display: block;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #2a4236;
+      padding-bottom: 1rem;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #e1f3dd, #7caf8b, #b8dfbe);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .header p {
+      color: #92b09f;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #1a2c24;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      font-family: 'DM Mono', monospace;
+      color: #b7dbbe;
+      margin-top: 0.5rem;
+    }
+
+    .exec-summary {
+      background: #1a2f27;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #5e9b74;
+    }
+    .exec-summary h3 {
+      color: #cae5d2;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .exec-summary p {
+      font-size: 0.85rem;
+      color: #caddd2;
+      line-height: 1.5;
+    }
+    .exec-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .exec-item {
+      flex: 1;
+      background: #0f1a15;
+      border-radius: 0.8rem;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .exec-label {
+      font-size: 0.6rem;
+      color: #7caf8b;
+      font-family: 'DM Mono', monospace;
+    }
+    .exec-value {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #cae5d2;
+    }
+
+    .card {
+      background: rgba(18, 26, 22, 0.94);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #2a4236;
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #cae5d2;
+      border-left: 4px solid #5e9b74;
+      padding-left: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #d0ecd9;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .grid-2 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .info-card {
+      flex: 1;
+      background: #0f1a15;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+    .info-card h4 {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: #cae5d2;
+      border-bottom: 1px solid #2a4236;
+      padding-bottom: 0.3rem;
+    }
+    .info-card ul, .info-card p {
+      font-size: 0.75rem;
+      color: #caddd2;
+      margin-left: 1rem;
+    }
+    .info-card li {
+      margin: 0.3rem 0;
+    }
+
+    .prediction-box {
+      background: #1a2f27;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 4px solid #f4a261;
+    }
+    .prediction-title {
+      font-weight: 700;
+      color: #f4a261;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .timeline-visual {
+      background: #0f1a15;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      margin: 0.8rem 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .timeline-visual strong {
+      color: #f4a261;
+    }
+
+    .safety-box {
+      background: #1a2f27;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 4px solid #f4a261;
+    }
+    .safety-title {
+      font-weight: 700;
+      color: #f4a261;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .bridge-note {
+      background: #1a2f27;
+      border-radius: 1rem;
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-left: 4px solid #5e9b74;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+    }
+
+    .disclaimer {
+      font-size: 0.6rem;
+      color: #7fa38b;
+      text-align: center;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .doi-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .doi-item {
+      background: #0f1a15;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      color: #7caf8b;
+    }
+
+    .rate-reference {
+      background: #0f1a15;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      margin-top: 0.8rem;
+      font-size: 0.65rem;
+      color: #92b09f;
+    }
+
+    .philosophy-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .philosophy-card {
+      flex: 1;
+      min-width: 160px;
+      background: #0f1a15;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      text-align: center;
+      border-left: 3px solid #5e9b74;
+    }
+    .philosophy-card strong {
+      font-size: 0.85rem;
+      color: #cae5d2;
+    }
+    .philosophy-card p {
+      font-size: 0.65rem;
+      color: #92b09f;
+      margin-top: 0.3rem;
+    }
+
+    .cycle-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .cycle-item {
+      flex: 1;
+      min-width: 90px;
+      background: #0f1a15;
+      border-radius: 1rem;
+      padding: 0.8rem;
+      text-align: center;
+      border-left: 3px solid #5e9b74;
+    }
+    .cycle-item strong {
+      font-size: 0.85rem;
+      color: #cae5d2;
+    }
+    .cycle-item p {
+      font-size: 0.65rem;
+      color: #92b09f;
+      margin-top: 0.3rem;
+    }
+
+    .stat-number {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #7caf8b;
+    }
+
+    .budget-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.7rem;
+    }
+    .budget-table th {
+      background: #1a2c24;
+      color: #cae5d2;
+      padding: 0.6rem;
+      text-align: left;
+      border: 1px solid #2a4236;
+    }
+    .budget-table td {
+      background: #0f1a15;
+      padding: 0.6rem;
+      border: 1px solid #2a4236;
+      color: #caddd2;
+    }
+    .budget-total td {
+      font-weight: 700;
+      color: #7caf8b;
+      background: #1a2c24;
+    }
+
+    .cho-disclaimer {
+      background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%);
+      color: #e8eef2;
+      padding: 1.5rem;
+      border-bottom: 3px solid #c9a84c;
+      border-radius: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cho-disclaimer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: .5;
+    }
+    .cho-disclaimer > * { position: relative; }
+    .cho-disclaimer__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 40px;
+      padding: 0.28rem 0.9rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+      color: #c9a84c;
+      text-transform: uppercase;
+    }
+    .cho-disclaimer__title {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+      color: #f0ece6;
+    }
+    .cho-disclaimer__body {
+      font-size: 0.75rem;
+      line-height: 1.65;
+      opacity: 0.92;
+      margin-bottom: 0.5rem;
+    }
+    .cho-disclaimer__body a {
+      color: #c9a84c;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(201,168,76,0.5);
+    }
+    .cho-disclaimer__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-top: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: #b0bec8;
+      letter-spacing: .04em;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.7rem;
+    }
+    .cho-disclaimer__meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.6rem;
+      color: #7fa38b;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #2e4a3b;
+    }
+
+    @media (max-width: 680px) {
+      .grid-2 { flex-direction: column; }
+      .header h1 { font-size: 1.3rem; }
+      .exec-grid { flex-direction: column; }
+      .timeline-visual { font-size: 0.5rem; }
+      .philosophy-card { min-width: 120px; }
+      .cycle-item { min-width: 70px; }
+      .budget-table { font-size: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Language Toggle -->
+  <div class="toggle-bar">
+    <button class="lang-btn active" data-lang="jv">ꦧꦱꦗꦮ (Jawa)</button>
+    <button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
+    <button class="lang-btn" data-lang="en">English</button>
+  </div>
+
+  <!-- ==================== JAWA ==================== -->
+  <div id="lang-jv" class="lang-content active-lang">
+    <div class="header">
+      <h1>🌍 Sovereign Space</h1>
+      <p>Kolaborasi Manusia-AI kanggo Kesehatan Mental Masa Depan</p>
+      <div class="badge">MIT FII Innovators Pitch 2026 · Healthcare Transformation Track · TRL 6 · Pilot Stage</div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="exec-summary">
+      <h3>📋 Ringkesan Eksekutif (30 Detik)</h3>
+      <p><strong>Masalah:</strong> 840.000 pati / tahun akibat stres psikososial (ILO). Case 13: 5 taun kekerasan keluarga, bullying, tanpa papan aman — pungkasane depresi psikotik, ora gelek mangan, suicidal ideation.</p>
+      <div class="exec-grid">
+        <div class="exec-item"><span class="exec-label">Solusi</span><div class="exec-value">Sovereign Space Bot</div></div>
+        <div class="exec-item"><span class="exec-label">Inovasi</span><div class="exec-value">Zero Persistence + 5 Siklus Kasih Sayang</div></div>
+        <div class="exec-item"><span class="exec-label">TRL</span><div class="exec-value">6 (50-100 tester)</div></div>
+        <div class="exec-item"><span class="exec-label">Request</span><div class="exec-value">$100.000</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: PROBLEM -->
+    <div class="card">
+      <h2>📌 1. Masalah: Kesenjangan Kedaulatan</h2>
+      <p><strong>Sistem kesehatan mental global nganggep institusi paling cedhak (keluarga, sekolah, kantor) minangka papan aman. Kanggo mayuta-yuta trauma survivors, ora.</strong></p>
+      <div class="grid-2">
+        <div class="info-card"><h4>📊 Skala</h4><ul><li>840.000 pati / tahun (ILO)</li><li>86% sing paling rentan yaiku wanita</li><li>32,9M wong Indonesia kelainan mental (11,8% prevalensi)</li><li>80,4M kasus ASEAN (11,9% prevalensi)</li><li>Mung 4,9 kunjungan/orang/tahun (BPJS)</li></ul></div>
+        <div class="info-card"><h4>📋 Case 13 (Peer-Reviewed, 2023)</h4><ul><li>Remaja wadon 17 taun, depresi psikotik</li><li>5 taun kekerasan keluarga + bullying</li><li>10 dina ora gelek mangan, suicidal, halusinasi</li><li>Kulawarga sumber trauma, dudu papan aman</li></ul></div>
+      </div>
+      <div class="prediction-box">
+        <div class="prediction-title">📊 Timeline Prediktif — 5 Taun Sangsara vs 3 Wulan menyang Intervensi</div>
+        <div class="timeline-visual">
+          <strong>Tanpa Sovereign Space (Case 13 aktual):</strong><br>
+          Usia 12 ──→ 13 ──→ 14 ──→ 15 ──→ 16 ──→ 17 ──→ KRISIS (RS jiwa)<br>
+          [████████████████████████████████████████████████] 5 taun sangsara<br><br>
+          <strong>Kanthi Sovereign Space (prediktif):</strong><br>
+          Usia 12 ──→ [Bot detection] ──→ [Pendampingan] ──→ [Rujukan] ──→ SLAMET<br>
+          [███] 3 wulan saka gejala pisanan menyang intervensi
+        </div>
+        <div class="disclaimer">※ Adhedhasar Case 13 (peer-reviewed) lan data prototipe TRL 6. Proyeksi desain, dudu klaim klinis.</div>
+      </div>
+      <div class="bridge-note"><strong>Case 13 Indonesia · Case 14 India · Case 15 China (N=670)</strong><br>Telung negara, telung metode, siji kesimpulan: trauma cilik → psikosis remaja. Ora ana solusi zero-persistence, family-independent.</div>
+    </div>
+
+    <!-- SECTION 2: SOLUTION -->
+    <div class="card">
+      <h2>🛠️ 2. Solusi: Sovereign Space OS</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🔹 Layer 0 — Akses</h4><p>Bot Telegram <a href="https://t.me/SovereignSpaceBot" style="color:#7caf8b;">@SovereignSpaceBot</a> + HTML state machine (&lt;50KB). Ora perlu login, nomor HP, email.</p><h4>🔹 Layer 1 — AI Core</h4><p>5-AI control cross (DeepSeek, Claude, Gemini, ChatGPT, Copilot). <strong>AI Higienis</strong> LoC 200-400.</p></div>
+        <div class="info-card"><h4>🔹 Layer 2 — Keamanan & Privasi</h4><p><strong>Zero persistence:</strong> Ora ana data sing disimpen. Bukti ilang nalika sesi ditutup.</p><h4>🔹 Layer 3 — State Machine S0-S8</h4><p>Protokol non-linear nyegah retraumatisasi. Ora tau meksa crita trauma.</p></div>
+      </div>
+      <div class="safety-box"><div class="safety-title">🛡️ Protokol Keamanan AI</div><ul><li>Zero Persistence</li><li>Bukan saran medis</li><li>Rujukan menyang human sawise 3-5 sesi</li><li>State Machine S0-S8</li><li>Bot ora menehi label diagnosis klinis</li></ul></div>
+      <div class="bridge-note"><strong>Dudu pengganti terapi — jembatan pertama kanggo sing ora duwe.</strong></div>
+    </div>
+
+    <!-- SECTION 3: TECHNOLOGY -->
+    <div class="card">
+      <h2>⚙️ 3. Teknologi Inti</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🧠 Teknologi AI</h4><ul><li>Generative AI</li><li>Natural Language Processing</li><li>5-AI Control Cross</li></ul></div>
+        <div class="info-card"><h4>🏗️ Infrastruktur (Gratis)</h4><ul><li>Colab: 9 VM Gemini + 11 Groq Key</li><li>Oracle Free Tier</li><li>12-36 akun Gmail (railover)</li><li>GitHub Pages, Telegram Free</li></ul></div>
+      </div>
+      <div class="bridge-note"><strong>TRL 6</strong> — prototipe ing environment operasional, 50-100 tester, on-going wiwit 20 Mei 2026.</div>
+    </div>
+
+    <!-- SECTION 4: HEALTH FRAMEWORKS -->
+    <div class="card">
+      <h2>📚 4. Kerangka Kesehatan & DOI</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🧭 Kerangka</h4><ul><li>BAHASA DIRI (DOI: 10.5281/zenodo.19219823)</li><li>Sovereignty Gap (DOI: 10.5281/zenodo.19978064)</li><li>CHO Grand Formula (DOI: 10.5281/zenodo.19938363)</li><li>Ruwet-OTW Genah-Genah (DOI: 10.5281/zenodo.19002243)</li></ul></div>
+        <div class="info-card"><h4>📄 DOI Kunci (38+ total)</h4><div class="doi-list"><span class="doi-item">10.5281/zenodo.19938363</span><span class="doi-item">10.5281/zenodo.19978064</span><span class="doi-item">10.5281/zenodo.19945231</span><span class="doi-item">10.5281/zenodo.19219823</span><span class="doi-item">10.5281/zenodo.19002243</span></div><p style="margin-top:0.5rem;">Full list: zenodo.org/communities/chiefhumanityofficer</p></div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: TEAM -->
+    <div class="card">
+      <h2>👥 5. Tim & Validasi Eksternal</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>Principal Investigator</h4><p><strong>Go Kian Tik (Titus Permadi Setiawan)</strong><br>Chief Humanity Officer · 1,5 taun red-teaming · 38+ DOI · HAKI: 自主者 JID2026019533</p><h4>💪 Sweat Equity</h4><p>1.000+ jam intensif · 4.376 jam daily practice<br>Konservatif: <strong>$75.000</strong> · Full: <strong>$328.200</strong></p><div class="rate-reference">📌 Rate reference from AI Trainer ($40-120/hr), Chatbot Tester, Safety Analyst</div><div class="bridge-note" style="margin-top:0.5rem;">"Kula mboten nyuwun pendanaan kanggo mbangun saking nol. Kula sampun ngrampungake 70% Digital Semesta minangka peneliti independen. Kula nyuwun dana riset $100.000 kanggo materialisasi 20% lan mbeta dampak dhateng 10% Humanity."</div></div>
+        <div class="info-card"><h4>🔗 Validasi Eksternal</h4><ul><li>Spring ACT (Swiss) — korespondensi awal</li><li>GBD 2021 (The Lancet)</li><li>ILO: 840.000 deaths/year</li><li>BPJS: 18,9M claims</li><li>Natsu Sasaki, MD, PhD (Univ Tokyo) — keselarasan riset</li></ul></div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: BUDGET (tabel sudah diperbaiki) -->
+    <div class="card">
+      <h2>💰 6. Model Bisnis & Pendanaan Riset</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>Phase 1 (Saiki — seeking $100k saka MIT FII)</h4><p>$0 revenue. Dana riset kanggo safety audit, 100→1.000 users ing 3T, validasi klinis.</p><h4>Phase 2 (Year 2-3)</h4><p>B2G licensing: $10.000/taun/provinsi · B2B: White-label NGO $5k-$15k/taun.</p></div>
+        <div class="info-card"><h4>Phase 3 (Year 4-5)</h4><p>Ekspansi ASEAN (80,4M kasus) · Enterprise licensing.</p><h4>Unit Economics</h4><p>Marginal cost → zero. Break-even ing 10 lisensi provinsi ($100k/taun). Margin 80-90%.</p></div>
+      </div>
+      <h3>📊 Alokasi Anggaran (12 wulan)</h3>
+      <table class="budget-table">
+        <thead><tr><th>Pos Anggaran</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td style="width:70%;">Research Stipend: Founder Time Allocation (1.000+ jam sweat equity, parsial pasca-hibah)</td><td>$24.000</td></tr>
+          <tr><td>Local Language Validation & Dialect Calibration (Javanese/Sundanese)</td><td>$6.000</td></tr>
+          <tr><td>Backend Developer (part-time)</td><td>$7.200</td></tr>
+          <tr><td>Security Audit & Legal Consultant</td><td>$4.500</td></tr>
+          <tr><td>Cloud Infrastructure & API</td><td>$3.000</td></tr>
+          <tr><td>Community Liaison, NGO, Publication</td><td>$5.400</td></tr>
+          <tr><td>Contingency Buffer (10%)</td><td>$5.000</td></tr>
+          <tr><td><strong>Total Operational Core</strong></td><td><strong>$55.100</strong></td></tr>
+          <tr><td><strong>+ Scaling to 1,000+ users (3T regions)</strong></td><td><strong>$44.900</strong></td></tr>
+          <tr class="budget-total"><td><strong>TOTAL REQUEST TO MIT FII</strong></td><td><strong>$100.000</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 7: MARKET SIZE -->
+    <div class="card">
+      <h2>📊 7. Market Size & Digital Life Style</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>📈 Market Size (Mental Health)</h4><p><strong>TAM Indonesia:</strong> 32,9 yuta (GBD 2021)<br><strong>SAM ASEAN:</strong> 80,4 yuta kasus<br><strong>SOM 3T:</strong> 9,9 yuta wong<br><strong>Global:</strong> USD 6,77B (2026) → USD 18,38B (2035)</p></div>
+        <div class="info-card"><h4>📱 Digital Life Style (Indonesia)</h4><ul><li>Populasi: 287,1 yuta</li><li>Internet: 210 yuta (73%)</li><li>SIM: 347 yuta</li><li>WhatsApp: 112 yuta</li><li>Telegram: 15-20 yuta</li><li>Gen Z screen time: 5,4 - 9 jam/dina</li></ul></div>
+      </div>
+      <div class="bridge-note"><strong>Key insight:</strong> 210 yuta wong Indonesia online. 112 yuta ing WhatsApp. 15-20 yuta ing Telegram. Gen Z nglampahi 5-9 jam saben dina ing layar — nanging ora ana zero-persistence, family-independent safe space kanggo kesehatan mental.</div>
+    </div>
+
+    <!-- SECTION 8: PHILOSOPHY & CYCLES -->
+    <div class="card">
+      <h2>🧘 8. Filosofi & 5 Siklus Kasih Sayang</h2>
+      <h3>💚 5 Siklus Kasih Sayang (Love+Care+Humanity)</h3>
+      <div class="cycle-grid">
+        <div class="cycle-item"><strong>Ngeman</strong><p>Protect</p><p>Melindungi</p></div>
+        <div class="cycle-item"><strong>Ngemong</strong><p>Guide</p><p>Membimbing</p></div>
+        <div class="cycle-item"><strong>Ngrawat</strong><p>Sustain</p><p>Merawat</p></div>
+        <div class="cycle-item"><strong>Ngrumat</strong><p>Repair</p><p>Memulihkan</p></div>
+        <div class="cycle-item"><strong>Ngruwat</strong><p>Release / Apoptosis</p><p>Melepas kanthi hormat</p></div>
+      </div>
+      <div class="bridge-note">"Love+Care+Humanity dudu tembung kosong. Iki 5 tindakan sing dioperasionalake dadi state machine S0-S8."</div>
+      <h3 style="margin-top:1rem;">🧘 Filosofi — Saka Ren nganti CHO Grand Formula</h3>
+      <div class="philosophy-grid">
+        <div class="philosophy-card"><strong>Ren (仁)</strong><p>Kemanusiaan — nilai paling dhuwur.</p></div>
+        <div class="philosophy-card"><strong>Wu (无)</strong><p>Kesadaran tanpa ego = 1/ego.</p></div>
+        <div class="philosophy-card"><strong>Neng Zhi Ren (能知人)</strong><p>Kemampuan ngerteni karakter wong — Tao Zhu Gong.</p></div>
+        <div class="philosophy-card"><strong>CHO Grand Formula</strong><p>(Consciousness × Calculation)^Humanity &lt; Transcendence</p></div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: LINK & CONTACT -->
+    <div class="card" style="background:#0e241c;">
+      <h2>🔗 9. Prototipe Live & Kontak</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>📱 Telegram Bot</h4><p><a href="https://t.me/SovereignSpaceBot" style="color:#7caf8b;">@SovereignSpaceBot</a><br>Aktif, 50-100 tester, TRL 6</p><h4>🌐 Web</h4><p><a href="https://superherocafeinside.com/MIT_FII_2026/index.html" style="color:#7caf8b;">superherocafeinside.com/MIT_FII_2026/</a></p><h4>🎥 Video Pitch</h4><p><a href="https://superherocafeinside.com/Pitch_MIT_FII_2026.mp4" style="color:#7caf8b;">Pitch Video (MP4)</a></p></div>
+        <div class="info-card"><h4>📧 Kontak</h4><p>gokiantik@superherocafeinside.com</p><h4>🏛️ Legal Entity</h4><p>Yayasan DALATAS (Akta No.26, 2000)<br>Trademark: 自主者 JID2026019533</p></div>
+      </div>
+      <div class="bridge-note"><strong>Submitted to MIT Solve 10th Anniversary — May 27, 2026</strong><br>Seeking $100,000 research capital from MIT FII Innovators Pitch.</div>
+    </div>
+
+    <!-- CHO DISCLAIMER -->
+    <div class="cho-disclaimer">
+      <div class="cho-disclaimer__badge"><i class="fas fa-flask"></i> Eksperimen Aktif · Red Teaming · Working Paper</div>
+      <div class="cho-disclaimer__title"><i class="fas fa-book-open"></i> Disclaimer Ekspresi Digital</div>
+      <p class="cho-disclaimer__body">Eksperimen aktif minangka peneliti independen (working paper ing <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank">Zenodo</a> / <a href="https://ssrn.com" target="_blank">SSRN</a>), alpha front-end user red teaming ing AI: <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>. Framework: <strong>1/360 Self · 1/360 You · 358/360 Humanity</strong> — adhedhasar <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank">Walking Books Philosophy →</a></p>
+      <div class="cho-disclaimer__meta">
+        <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Depok, Indonesia</span>
+        <span><i class="fas fa-microchip"></i> Red Teaming: Claude · Gemini · DeepSeek · Copilot · ChatGPT</span>
+        <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <strong>Zì Zhǔ Zhě (自主者)</strong> · Superhero Cafe Inside · Yayasan DALATAS (Akta No.26, 2000)<br>
+      HAKI: JID2026019533 · CHO Grand Formula (symbolic): (Consciousness × Calculation)^Humanity &lt; Transcendence<br>
+      © 2026 Sovereign Space — Human-AI Collaborations for Mental Health for the Future · Solo Researcher · Bootstrapped
+    </div>
+  </div>
+
+  <!-- ==================== INDONESIA ==================== -->
+  <div id="lang-id" class="lang-content">
+    <div class="header">
+      <h1>🌍 Sovereign Space</h1>
+      <p>Kolaborasi Manusia-AI untuk Kesehatan Mental Masa Depan</p>
+      <div class="badge">MIT FII Innovators Pitch 2026 · Healthcare Transformation Track · TRL 6 · Pilot Stage</div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="exec-summary">
+      <h3>📋 Ringkasan Eksekutif (30 Detik)</h3>
+      <p><strong>Masalah:</strong> 840.000 kematian/tahun akibat stres psikososial (ILO). Case 13: 5 tahun kekerasan keluarga, bullying, tanpa ruang aman — berakhir pada depresi psikotik, mogok makan, suicidal ideation.</p>
+      <div class="exec-grid">
+        <div class="exec-item"><span class="exec-label">Solusi</span><div class="exec-value">Sovereign Space Bot</div></div>
+        <div class="exec-item"><span class="exec-label">Inovasi</span><div class="exec-value">Zero Persistence + 5 Siklus Kasih Sayang</div></div>
+        <div class="exec-item"><span class="exec-label">TRL</span><div class="exec-value">6 (50-100 tester)</div></div>
+        <div class="exec-item"><span class="exec-label">Request</span><div class="exec-value">$100.000</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: PROBLEM -->
+    <div class="card">
+      <h2>📌 1. Masalah: Kesenjangan Kedaulatan</h2>
+      <p><strong>Sistem kesehatan mental global mengasumsikan institusi terdekat (keluarga, sekolah, tempat kerja) adalah ruang aman. Bagi jutaan trauma survivors, tidak.</strong></p>
+      <div class="grid-2">
+        <div class="info-card"><h4>📊 Skala</h4><ul><li>840.000 kematian/tahun (ILO)</li><li>86% yang paling rentan adalah perempuan</li><li>32,9M orang Indonesia dengan gangguan jiwa (11,8% prevalensi)</li><li>80,4M kasus ASEAN (11,9% prevalensi)</li><li>Hanya 4,9 kunjungan/orang/tahun (BPJS)</li></ul></div>
+        <div class="info-card"><h4>📋 Case 13 (Peer-Reviewed, 2023)</h4><ul><li>Remaja perempuan 17 tahun, depresi psikotik</li><li>5 tahun kekerasan keluarga + bullying</li><li>10 hari tidak makan, suicidal, halusinasi</li><li>Keluarga sumber trauma, bukan ruang aman</li></ul></div>
+      </div>
+      <div class="prediction-box">
+        <div class="prediction-title">📊 Timeline Prediktif — 5 Tahun Penderitaan vs 3 Bulan ke Intervensi</div>
+        <div class="timeline-visual">
+          <strong>Tanpa Sovereign Space (Case 13 aktual):</strong><br>
+          Usia 12 ──→ 13 ──→ 14 ──→ 15 ──→ 16 ──→ 17 ──→ KRISIS (RS jiwa)<br>
+          [████████████████████████████████████████████████] 5 tahun penderitaan<br><br>
+          <strong>Dengan Sovereign Space (prediktif):</strong><br>
+          Usia 12 ──→ [Bot detection] ──→ [Pendampingan] ──→ [Rujukan] ──→ SELAMAT<br>
+          [███] 3 bulan dari gejala pertama ke intervensi
+        </div>
+        <div class="disclaimer">※ Berdasarkan Case 13 (peer-reviewed) dan data prototipe TRL 6. Proyeksi desain, bukan klaim klinis.</div>
+      </div>
+      <div class="bridge-note"><strong>Case 13 Indonesia · Case 14 India · Case 15 China (N=670)</strong><br>Tiga negara, tiga metode, satu kesimpulan: trauma masa kecil → psikosis remaja. Tidak ada solusi zero-persistence, family-independent.</div>
+    </div>
+
+    <!-- SECTION 2: SOLUTION -->
+    <div class="card">
+      <h2>🛠️ 2. Solusi: Sovereign Space OS</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🔹 Layer 0 — Akses</h4><p>Bot Telegram <a href="https://t.me/SovereignSpaceBot" style="color:#7caf8b;">@SovereignSpaceBot</a> + HTML state machine (&lt;50KB). Tidak perlu login, nomor HP, email.</p><h4>🔹 Layer 1 — AI Core</h4><p>5-AI control cross (DeepSeek, Claude, Gemini, ChatGPT, Copilot). <strong>AI Higienis</strong> LoC 200-400.</p></div>
+        <div class="info-card"><h4>🔹 Layer 2 — Keamanan & Privasi</h4><p><strong>Zero persistence:</strong> Tidak ada data yang disimpan. Bukti hilang saat sesi ditutup.</p><h4>🔹 Layer 3 — State Machine S0-S8</h4><p>Protokol non-linear mencegah retraumatisasi. Tidak pernah memaksa cerita trauma.</p></div>
+      </div>
+      <div class="safety-box"><div class="safety-title">🛡️ Protokol Keamanan AI</div><ul><li>Zero Persistence</li><li>Bukan saran medis</li><li>Rujukan ke human setelah 3-5 sesi</li><li>State Machine S0-S8</li><li>Bot tidak memberi label diagnosis klinis</li></ul></div>
+      <div class="bridge-note"><strong>Bukan pengganti terapi — jembatan pertama bagi mereka yang tidak punya.</strong></div>
+    </div>
+
+    <!-- SECTION 3: TECHNOLOGY -->
+    <div class="card">
+      <h2>⚙️ 3. Teknologi Inti</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🧠 Teknologi AI</h4><ul><li>Generative AI</li><li>Natural Language Processing</li><li>5-AI Control Cross</li></ul></div>
+        <div class="info-card"><h4>🏗️ Infrastruktur (Gratis)</h4><ul><li>Colab: 9 VM Gemini + 11 Groq Key</li><li>Oracle Free Tier</li><li>12-36 akun Gmail (railover)</li><li>GitHub Pages, Telegram Free</li></ul></div>
+      </div>
+      <div class="bridge-note"><strong>TRL 6</strong> — prototipe di environment operasional, 50-100 tester, on-going sejak 20 Mei 2026.</div>
+    </div>
+
+    <!-- SECTION 4: HEALTH FRAMEWORKS -->
+    <div class="card">
+      <h2>📚 4. Kerangka Kesehatan & DOI</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🧭 Kerangka</h4><ul><li>BAHASA DIRI (DOI: 10.5281/zenodo.19219823)</li><li>Sovereignty Gap (DOI: 10.5281/zenodo.19978064)</li><li>CHO Grand Formula (DOI: 10.5281/zenodo.19938363)</li><li>Ruwet-OTW Genah-Genah (DOI: 10.5281/zenodo.19002243)</li></ul></div>
+        <div class="info-card"><h4>📄 DOI Kunci (38+ total)</h4><div class="doi-list"><span class="doi-item">10.5281/zenodo.19938363</span><span class="doi-item">10.5281/zenodo.19978064</span><span class="doi-item">10.5281/zenodo.19945231</span><span class="doi-item">10.5281/zenodo.19219823</span><span class="doi-item">10.5281/zenodo.19002243</span></div><p style="margin-top:0.5rem;">Daftar lengkap: zenodo.org/communities/chiefhumanityofficer</p></div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: TEAM -->
+    <div class="card">
+      <h2>👥 5. Tim & Validasi Eksternal</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>Principal Investigator</h4><p><strong>Go Kian Tik (Titus Permadi Setiawan)</strong><br>Chief Humanity Officer · 1,5 tahun red-teaming · 38+ DOI · HAKI: 自主者 JID2026019533</p><h4>💪 Sweat Equity</h4><p>1.000+ jam intensif · 4.376 jam daily practice<br>Konservatif: <strong>$75.000</strong> · Full: <strong>$328.200</strong></p><div class="rate-reference">📌 Rate reference dari lowongan AI Trainer ($40-120/jam), Chatbot Tester, Safety Analyst</div><div class="bridge-note" style="margin-top:0.5rem;">"Saya tidak meminta pendanaan untuk membangun dari nol. Saya telah menyelesaikan 70% Digital Semesta sebagai peneliti independen. Saya meminta dana riset $100.000 untuk materialisasi 20% dan dampak ke 10% Humanity."</div></div>
+        <div class="info-card"><h4>🔗 Validasi Eksternal</h4><ul><li>Spring ACT (Swiss) — korespondensi awal</li><li>GBD 2021 (The Lancet)</li><li>ILO: 840.000 kematian/tahun</li><li>BPJS: 18,9M klaim</li><li>Natsu Sasaki, MD, PhD (Univ Tokyo) — keselarasan riset</li></ul></div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: BUDGET (tabel sudah diperbaiki) -->
+    <div class="card">
+      <h2>💰 6. Model Bisnis & Pendanaan Riset</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>Phase 1 (Sekarang — mencari $100k dari MIT FII)</h4><p>$0 pendapatan. Dana riset untuk safety audit, 100→1.000 user di 3T, validasi klinis.</p><h4>Phase 2 (Year 2-3)</h4><p>B2G licensing: $10.000/tahun/provinsi · B2B: White-label NGO $5k-$15k/tahun.</p></div>
+        <div class="info-card"><h4>Phase 3 (Year 4-5)</h4><p>Ekspansi ASEAN (80,4M kasus) · Enterprise licensing.</p><h4>Unit Economics</h4><p>Marginal cost → zero. Break-even di 10 lisensi provinsi ($100k/tahun). Margin 80-90%.</p></div>
+      </div>
+      <h3>📊 Alokasi Anggaran (12 bulan)</h3>
+      <table class="budget-table">
+        <thead><tr><th>Pos Anggaran</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td style="width:70%;">Research Stipend: Founder Time Allocation (1.000+ jam sweat equity, parsial pasca-hibah)</td><td>$24.000</td</tr>
+          <tr><td>Local Language Validation & Dialect Calibration (Javanese/Sundanese)</td<td>$6.000</td</tr>
+          <tr><td>Backend Developer (part-time)</td<td>$7.200</td</tr>
+          <tr><td>Security Audit & Legal Consultant</td<td>$4.500</td</tr>
+          <tr><td>Cloud Infrastructure & API</td<td>$3.000</td</tr>
+          <tr><td>Community Liaison, NGO, Publication</td<td>$5.400</td</tr>
+          <tr><td>Contingency Buffer (10%)</td<td>$5.000</td</tr>
+          <tr><td><strong>Total Operational Core</strong></td<td><strong>$55.100</strong></td</tr>
+          <tr><td><strong>+ Scaling to 1,000+ users (3T regions)</strong></td<td><strong>$44.900</strong></td</tr>
+          <tr class="budget-total"><td><strong>TOTAL REQUEST TO MIT FII</strong></td<td><strong>$100.000</strong></td</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 7: MARKET SIZE -->
+    <div class="card">
+      <h2>📊 7. Market Size & Digital Life Style</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>📈 Market Size (Mental Health)</h4><p><strong>TAM Indonesia:</strong> 32,9 juta (GBD 2021)<br><strong>SAM ASEAN:</strong> 80,4 juta kasus<br><strong>SOM 3T:</strong> 9,9 juta orang<br><strong>Global:</strong> USD 6,77B (2026) → USD 18,38B (2035)</p></div>
+        <div class="info-card"><h4>📱 Digital Life Style (Indonesia)</h4><ul><li>Populasi: 287,1 juta</li><li>Internet: 210 juta (73%)</li><li>SIM: 347 juta</li><li>WhatsApp: 112 juta</li><li>Telegram: 15-20 juta</li><li>Gen Z screen time: 5,4 - 9 jam/hari</li></ul></div>
+      </div>
+      <div class="bridge-note"><strong>Key insight:</strong> 210 juta orang Indonesia online. 112 juta di WhatsApp. 15-20 juta di Telegram. Gen Z menghabiskan 5-9 jam setiap hari di layar — namun tidak ada zero-persistence, family-independent safe space untuk kesehatan mental.</div>
+    </div>
+
+    <!-- SECTION 8: PHILOSOPHY & CYCLES -->
+    <div class="card">
+      <h2>🧘 8. Filosofi & 5 Siklus Kasih Sayang</h2>
+      <h3>💚 5 Siklus Kasih Sayang (Love+Care+Humanity)</h3>
+      <div class="cycle-grid">
+        <div class="cycle-item"><strong>Ngeman</strong><p>Menjaga</p></div>
+        <div class="cycle-item"><strong>Ngemong</strong><p>Membimbing</p></div>
+        <div class="cycle-item"><strong>Ngrawat</strong><p>Merawat</p></div>
+        <div class="cycle-item"><strong>Ngrumat</strong><p>Memulihkan</p></div>
+        <div class="cycle-item"><strong>Ngruwat</strong><p>Melepas dengan hormat</p></div>
+      </div>
+      <div class="bridge-note">"Love+Care+Humanity bukan sekadar kata. Ini 5 tindakan yang dioperasionalkan menjadi state machine S0-S8."</div>
+      <h3 style="margin-top:1rem;">🧘 Filosofi — Dari Ren hingga CHO Grand Formula</h3>
+      <div class="philosophy-grid">
+        <div class="philosophy-card"><strong>Ren (仁)</strong><p>Kemanusiaan — nilai tertinggi.</p></div>
+        <div class="philosophy-card"><strong>Wu (无)</strong><p>Kesadaran tanpa ego = 1/ego.</p></div>
+        <div class="philosophy-card"><strong>Neng Zhi Ren (能知人)</strong><p>Kemampuan mengenal karakter orang — Tao Zhu Gong.</p></div>
+        <div class="philosophy-card"><strong>CHO Grand Formula</strong><p>(Consciousness × Calculation)^Humanity &lt; Transcendence</p></div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: LINK & CONTACT -->
+    <div class="card" style="background:#0e241c;">
+      <h2>🔗 9. Prototipe Live & Kontak</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>📱 Telegram Bot</h4><p><a href="https://t.me/SovereignSpaceBot" style="color:#7caf8b;">@SovereignSpaceBot</a><br>Aktif, 50-100 tester, TRL 6</p><h4>🌐 Web</h4><p><a href="https://superherocafeinside.com/MIT_FII_2026/index.html" style="color:#7caf8b;">superherocafeinside.com/MIT_FII_2026/</a></p><h4>🎥 Video Pitch</h4><p><a href="https://superherocafeinside.com/Pitch_MIT_FII_2026.mp4" style="color:#7caf8b;">Pitch Video (MP4)</a></p></div>
+        <div class="info-card"><h4>📧 Kontak</h4><p>gokiantik@superherocafeinside.com</p><h4>🏛️ Legal Entity</h4><p>Yayasan DALATAS (Akta No.26, 2000)<br>Trademark: 自主者 JID2026019533</p></div>
+      </div>
+      <div class="bridge-note"><strong>Submitted to MIT Solve 10th Anniversary — May 27, 2026</strong><br>Seeking $100,000 research capital from MIT FII Innovators Pitch.</div>
+    </div>
+
+    <!-- CHO DISCLAIMER -->
+    <div class="cho-disclaimer">
+      <div class="cho-disclaimer__badge"><i class="fas fa-flask"></i> Eksperimen Aktif · Red Teaming · Working Paper</div>
+      <div class="cho-disclaimer__title"><i class="fas fa-book-open"></i> Disclaimer Ekspresi Digital</div>
+      <p class="cho-disclaimer__body">Eksperimen aktif sebagai peneliti independen (working paper di <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank">Zenodo</a> / <a href="https://ssrn.com" target="_blank">SSRN</a>), alpha front-end user red teaming di AI: <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>. Framework: <strong>1/360 Diri · 1/360 Kamu · 358/360 Kemanusiaan</strong> — dilandasi <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank">Walking Books Philosophy →</a></p>
+      <div class="cho-disclaimer__meta">
+        <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Depok, Indonesia</span>
+        <span><i class="fas fa-microchip"></i> Red Teaming: Claude · Gemini · DeepSeek · Copilot · ChatGPT</span>
+        <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <strong>Zì Zhǔ Zhě (自主者)</strong> · Superhero Cafe Inside · Yayasan DALATAS (Akta No.26, 2000)<br>
+      HAKI: JID2026019533 · CHO Grand Formula (symbolic): (Consciousness × Calculation)^Humanity &lt; Transcendence<br>
+      © 2026 Sovereign Space — Human-AI Collaborations for Mental Health for the Future · Solo Researcher · Bootstrapped
+    </div>
+  </div>
+
+  <!-- ==================== ENGLISH ==================== -->
+  <div id="lang-en" class="lang-content">
+    <div class="header">
+      <h1>🌍 Sovereign Space</h1>
+      <p>Human-AI Collaborations for Mental Health for the Future</p>
+      <div class="badge">MIT FII Innovators Pitch 2026 · Healthcare Transformation Track · TRL 6 · Pilot Stage</div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="exec-summary">
+      <h3>📋 Executive Summary (30 seconds)</h3>
+      <p><strong>Problem:</strong> 840,000 deaths/year from psychosocial stress (ILO). Case 13: 5 years of family violence, bullying, no safe space — ended in psychotic depression, food refusal, suicidal ideation.</p>
+      <div class="exec-grid">
+        <div class="exec-item"><span class="exec-label">Solution</span><div class="exec-value">Sovereign Space Bot</div></div>
+        <div class="exec-item"><span class="exec-label">Innovation</span><div class="exec-value">Zero Persistence + 5 Compassion Cycles</div></div>
+        <div class="exec-item"><span class="exec-label">TRL</span><div class="exec-value">6 (50-100 testers)</div></div>
+        <div class="exec-item"><span class="exec-label">Request</span><div class="exec-value">$100,000</div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: PROBLEM -->
+    <div class="card">
+      <h2>📌 1. The Problem: Sovereignty Gap</h2>
+      <p><strong>Global mental health systems assume the closest institution (family, school, workplace) is a safe space. For millions of trauma survivors, it is not.</strong></p>
+      <div class="grid-2">
+        <div class="info-card"><h4>📊 Scale</h4><ul><li>840,000 annual deaths from psychosocial risks (ILO)</li><li>86% of those most at risk from AI are women</li><li>32.9M Indonesians with mental disorders (11.8% prevalence, +73.8% since 1990)</li><li>80.4M cases across ASEAN (11.9% prevalence)</li><li>Only 4.9 visits/person/year (BPJS data)</li></ul></div>
+        <div class="info-card"><h4>📋 Case 13 (Peer-Reviewed, 2023)</h4><ul><li>17-year-old female, psychotic depression</li><li>5 years of family violence + bullying</li><li>Food refusal (10 days), suicidal ideation, hallucinations</li><li>No safe access — family was the trauma source</li><li><em>"She bore consequences of choices she never made"</em> — Sovereignty Gap</li></ul></div>
+      </div>
+      <div class="prediction-box">
+        <div class="prediction-title">📊 Predictive Timeline — 5 Years of Suffering vs 3 Months to Intervention</div>
+        <div class="timeline-visual">
+          <strong>Without Sovereign Space (Case 13 actual):</strong><br>
+          Age 12 ──→ 13 ──→ 14 ──→ 15 ──→ 16 ──→ 17 ──→ CRISIS (psychiatric ward)<br>
+          [████████████████████████████████████████████████] 5 years of suffering<br><br>
+          <strong>With Sovereign Space (predictive):</strong><br>
+          Age 12 ──→ [Bot detection] ──→ [Companionship] ──→ [Referral] ──→ STABLE<br>
+          [███] 3 months from first symptom to intervention
+        </div>
+        <div class="disclaimer">※ Based on Case 13 (peer-reviewed) and TRL 6 prototype data. Design projection, not clinical claim.</div>
+      </div>
+      <div class="bridge-note"><strong>Indonesian Case 13 · Indian Case 14 (PTSD+psychosis) · Chinese Case 15 (N=670, emotional abuse → prodromal symptoms)</strong><br>Three countries, three methods, one conclusion: childhood trauma → adolescent psychosis. No existing solution provides zero-persistence, family-independent safe space.</div>
+    </div>
+
+    <!-- SECTION 2: SOLUTION -->
+    <div class="card">
+      <h2>🛠️ 2. Solution: Sovereign Space OS</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🔹 Layer 0 — Access</h4><p>Telegram bot (<a href="https://t.me/SovereignSpaceBot" style="color:#7caf8b;">@SovereignSpaceBot</a>) + HTML state machine (&lt;50KB). No login, no phone number, no email. Works on any phone, any browser.</p><h4>🔹 Layer 1 — AI Core</h4><p>5-AI control cross (DeepSeek, Claude, Gemini, ChatGPT, Copilot). <strong>AI Higienis</strong> with LoC 200-400 resonance (Courage → Reason).</p></div>
+        <div class="info-card"><h4>🔹 Layer 2 — Safety & Privacy</h4><p><strong>Zero persistence:</strong> No backend, no chat logs, no data stored. Evidence disappears when session closes — critical for survivors living with abusers.</p><h4>🔹 Layer 3 — State Machine S0-S8</h4><p>Non-linear protocol preventing retraumatization. Never forces users to retell traumatic details. Users control the pace.</p></div>
+      </div>
+      <div class="safety-box"><div class="safety-title">🛡️ AI Safety & Governance Protocol</div><ul><li>Zero Persistence</li><li>Not medical advice</li><li>Human referral after 3-5 sessions</li><li>State Machine S0-S8</li><li>Bot never gives clinical diagnostic labels</li></ul></div>
+      <div class="bridge-note"><strong>Not a therapy replacement — a first bridge for those who have none.</strong></div>
+    </div>
+
+    <!-- SECTION 3: TECHNOLOGY -->
+    <div class="card">
+      <h2>⚙️ 3. Core Technology</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🧠 AI Technologies</h4><ul><li>Generative AI (Gemini, Claude, ChatGPT, Copilot, DeepSeek)</li><li>Natural Language Processing</li><li>5-AI Control Cross (eliminates hallucination via cross-validation)</li></ul></div>
+        <div class="info-card"><h4>🏗️ Infrastructure (Zero Cost)</h4><ul><li>Colab: 9 VM Gemini + 11 Groq Key</li><li>Oracle Free Tier: 4 core, 24 GB RAM</li><li>12-36 Gmail accounts (railover rotation)</li><li>GitHub Pages, Telegram Free</li></ul></div>
+      </div>
+      <div class="bridge-note"><strong>TRL 6 achieved</strong> — prototype demonstrated in operational environment (Telegram bot, 50-100 testers, on-going since May 20, 2026). Submitted to MIT Solve 10th Anniversary.</div>
+    </div>
+
+    <!-- SECTION 4: HEALTH FRAMEWORKS -->
+    <div class="card">
+      <h2>📚 4. Health Frameworks & Published DOIs</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>🧭 Guiding Frameworks</h4><ul><li><strong>BAHASA DIRI</strong> (DOI: 10.5281/zenodo.19219823) — Genah·Waras·Cerdas</li><li><strong>Sovereignty Gap</strong> (DOI: 10.5281/zenodo.19978064)</li><li><strong>CHO Grand Formula</strong> (DOI: 10.5281/zenodo.19938363)</li><li><strong>Ruwet-OTW Genah-Genah</strong> (DOI: 10.5281/zenodo.19002243)</li></ul></div>
+        <div class="info-card"><h4>📄 Key DOIs (38+ total)</h4><div class="doi-list"><span class="doi-item">10.5281/zenodo.19938363</span><span class="doi-item">10.5281/zenodo.19978064</span><span class="doi-item">10.5281/zenodo.19945231</span><span class="doi-item">10.5281/zenodo.19219823</span><span class="doi-item">10.5281/zenodo.19002243</span></div><p style="margin-top:0.5rem;">Full list: zenodo.org/communities/chiefhumanityofficer</p></div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: TEAM -->
+    <div class="card">
+      <h2>👥 5. Team & External Validation</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>Principal Investigator</h4><p><strong>Go Kian Tik (Titus Permadi Setiawan)</strong><br>Chief Humanity Officer · 1.5 years red-teaming · 38+ DOIs · Trademark: 自主者 JID2026019533</p><h4>💪 Sweat Equity</h4><p>1,000+ hours intensive · 4,376 hours daily practice<br>Conservative: <strong>$75,000</strong> · Full: <strong>$328,200</strong></p><div class="rate-reference">📌 Rate reference from AI Trainer ($40-120/hr), Chatbot Tester, Safety Analyst job postings (2026).</div><div class="bridge-note" style="margin-top:0.5rem;">"I am not asking for funding to build from zero. I have completed 70% of the Digital Universe as an independent researcher. I am asking for $100,000 research capital to materialize 20% and deliver impact to 10% of Humanity."</div></div>
+        <div class="info-card"><h4>🔗 External Validation</h4><ul><li>Spring ACT (Switzerland) — Early correspondence</li><li>GBD 2021 (The Lancet Public Health, June 2025)</li><li>ILO: 840,000 deaths/year</li><li>BPJS: 18.9M claims, 4.9 visits/person/year</li><li>Natsu Sasaki, MD, PhD (University of Tokyo) — research alignment</li></ul></div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: BUDGET (tabel sudah diperbaiki) -->
+    <div class="card">
+      <h2>💰 6. Business Model & Research Funding</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>Phase 1 (Now — seeking $100k from MIT FII)</h4><p>$0 revenue. Research capital for: safety audit, 100→1,000 users in 3T regions, clinical validation.</p><h4>Phase 2 (Year 2-3)</h4><p>B2G licensing: $10,000/year per province · B2B: White-label for NGOs ($5k-$15k/year).</p></div>
+        <div class="info-card"><h4>Phase 3 (Year 4-5)</h4><p>ASEAN expansion (80.4M cases) · Enterprise licensing.</p><h4>Unit Economics</h4><p>Marginal cost per additional user → zero. Break-even at 10 provincial licenses ($100k/year). 80-90% margin thereafter.</p></div>
+      </div>
+      <h3>📊 Budget Allocation (12 months)</h3>
+      <table class="budget-table">
+        <thead><tr><th>Budget Line</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td style="width:70%;">Research Stipend: Founder Time Allocation (1,000+ hours sweat equity, partial post-grant)</td><td>$24,000</td</tr>
+          <tr><td>Local Language Validation & Dialect Calibration (Javanese/Sundanese)</td<td>$6,000</td</tr>
+          <tr><td>Backend Developer (part-time)</td<td>$7,200</td</tr>
+          <tr><td>Security Audit & Legal Consultant</td<td>$4,500</td</tr>
+          <tr><td>Cloud Infrastructure & API</td<td>$3,000</td</tr>
+          <tr><td>Community Liaison, NGO, Publication</td<td>$5,400</td</tr>
+          <tr><td>Contingency Buffer (10%)</td<td>$5,000</td</tr>
+          <tr><td><strong>Total Operational Core</strong></td<td><strong>$55,100</strong></td</tr>
+          <tr><td><strong>+ Scaling to 1,000+ users (3T regions)</strong></td<td><strong>$44,900</strong></td</tr>
+          <tr class="budget-total"><td><strong>TOTAL REQUEST TO MIT FII</strong></td<td><strong>$100,000</strong></td</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 7: MARKET SIZE -->
+    <div class="card">
+      <h2>📊 7. Market Size & Digital Life Style</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>📈 Market Size (Mental Health)</h4><p><strong>TAM — Indonesia:</strong> 32.9 million (GBD 2021, The Lancet Public Health June 2025)<br><strong>SAM — ASEAN:</strong> 80.4 million cases<br><strong>SOM — 3T Regions:</strong> 9.9 million people<br><strong>Global Market Context:</strong> USD 6.77B (2026) → USD 18.38B (2035)</p></div>
+        <div class="info-card"><h4>📱 Digital Life Style & Time Consumption (Indonesia)</h4><ul><li>Total population: 287.1 million</li><li>Internet penetration: 210 million (73%)</li><li>Mobile SIM cards: 347 million</li><li>WhatsApp users: 112 million</li><li>Telegram: Estimated 15-20 million</li><li>Gen Z screen time: 5.4 - 9 hours/day</li></ul></div>
+      </div>
+      <div class="bridge-note"><strong>Key insight:</strong> 210 million Indonesians are online. 112 million on WhatsApp. 15-20 million on Telegram. Gen Z spends 5-9 hours daily on screens — yet no zero-persistence, family-independent safe space exists for mental health. This is the gap Sovereign Space fills.</div>
+    </div>
+
+    <!-- SECTION 8: PHILOSOPHY & CYCLES -->
+    <div class="card">
+      <h2>🧘 8. Philosophy & 5 Compassion Cycles</h2>
+      <h3>💚 5 Compassion Cycles (Love+Care+Humanity)</h3>
+      <div class="cycle-grid">
+        <div class="cycle-item"><strong>Ngeman</strong><p>Protect</p></div>
+        <div class="cycle-item"><strong>Ngemong</strong><p>Guide</p></div>
+        <div class="cycle-item"><strong>Ngrawat</strong><p>Sustain</p></div>
+        <div class="cycle-item"><strong>Ngrumat</strong><p>Repair</p></div>
+        <div class="cycle-item"><strong>Ngruwat</strong><p>Release / Apoptosis</p></div>
+      </div>
+      <div class="bridge-note">"Love+Care+Humanity are not just words. These are 5 actions operationalized as the S0-S8 state machine in Sovereign Space Bot."</div>
+      <h3 style="margin-top:1rem;">🧘 Philosophy — From Ren to the CHO Grand Formula</h3>
+      <div class="philosophy-grid">
+        <div class="philosophy-card"><strong>Ren (仁)</strong><p>Humanity — the highest value. Mission: save 840,000 lives.</p></div>
+        <div class="philosophy-card"><strong>Wu (无)</strong><p>Ego-less consciousness = 1/ego. The creator is no more important than those served.</p></div>
+        <div class="philosophy-card"><strong>Neng Zhi Ren (能知人)</strong><p>Ability to know a person's character — first principle of Tao Zhu Gong (Fan Li, ~500 BCE).</p></div>
+        <div class="philosophy-card"><strong>CHO Grand Formula</strong><p>(Consciousness × Calculation)^Humanity &lt; Transcendence — symbolic framework.</p></div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: LINK & CONTACT -->
+    <div class="card" style="background:#0e241c;">
+      <h2>🔗 9. Live Prototype & Contact</h2>
+      <div class="grid-2">
+        <div class="info-card"><h4>📱 Telegram Bot</h4><p><a href="https://t.me/SovereignSpaceBot" style="color:#7caf8b;">@SovereignSpaceBot</a><br>Active, 50-100 testers, TRL 6</p><h4>🌐 Web</h4><p><a href="https://superherocafeinside.com/MIT_FII_2026/index.html" style="color:#7caf8b;">superherocafeinside.com/MIT_FII_2026/</a></p><h4>🎥 Demo Video</h4><p><a href="https://superherocafeinside.com/Pitch_MIT_FII_2026.mp4" style="color:#7caf8b;">Pitch Video (MP4)</a></p></div>
+        <div class="info-card"><h4>📧 Contact</h4><p>gokiantik@superherocafeinside.com</p><h4>🏛️ Legal Entity</h4><p>Yayasan DALATAS (Akta No.26, 2000)<br>Trademark: 自主者 (JID2026019533)</p></div>
+      </div>
+      <div class="bridge-note"><strong>Submitted to MIT Solve 10th Anniversary — May 27, 2026</strong><br>Seeking $100,000 research capital from MIT FII Innovators Pitch to scale from TRL 6 to TRL 9.</div>
+    </div>
+
+    <!-- CHO DISCLAIMER -->
+    <div class="cho-disclaimer">
+      <div class="cho-disclaimer__badge"><i class="fas fa-flask"></i> Active Experiment · Red Teaming · Working Paper</div>
+      <div class="cho-disclaimer__title"><i class="fas fa-book-open"></i> Digital Expression Disclaimer</div>
+      <p class="cho-disclaimer__body">Active experiment as an independent researcher (working papers on <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank">Zenodo</a> / <a href="https://ssrn.com" target="_blank">SSRN</a>), alpha front-end user red teaming across AI: <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>. Framework: <strong>1/360 Self · 1/360 You · 358/360 Humanity</strong> — grounded in <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank">Walking Books Philosophy →</a></p>
+      <p class="cho-disclaimer__body">This is a fragment of Consciousness rendered through Calculation, seeding Humanity at a wider scale of action and impact — should this experimental model be replicated by others. Open-source limitations are acknowledged as part of the data, not as methodological flaws. Created as educational content for the advancement of global humanity. Every voice in this experiment represents 1/360 of a shared library, with no claim to singular truth.</p>
+      <div class="cho-disclaimer__meta">
+        <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Depok, Indonesia</span>
+        <span><i class="fas fa-microchip"></i> Red Teaming: Claude · Gemini · DeepSeek · Copilot · ChatGPT</span>
+        <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <strong>Zì Zhǔ Zhě (自主者)</strong> · Superhero Cafe Inside · Yayasan DALATAS (Akta No.26, 2000)<br>
+      HAKI: JID2026019533 · CHO Grand Formula (symbolic): (Consciousness × Calculation)^Humanity &lt; Transcendence<br>
+      © 2026 Sovereign Space — Human-AI Collaborations for Mental Health for the Future · Solo Researcher · Bootstrapped
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const btnJv = document.querySelector('.lang-btn[data-lang="jv"]');
+    const btnId = document.querySelector('.lang-btn[data-lang="id"]');
+    const btnEn = document.querySelector('.lang-btn[data-lang="en"]');
+    const contentJv = document.getElementById('lang-jv');
+    const contentId = document.getElementById('lang-id');
+    const contentEn = document.getElementById('lang-en');
+
+    function setActiveLanguage(lang) {
+      contentJv.classList.remove('active-lang');
+      contentId.classList.remove('active-lang');
+      contentEn.classList.remove('active-lang');
+      btnJv.classList.remove('active');
+      btnId.classList.remove('active');
+      btnEn.classList.remove('active');
+      if (lang === 'jv') {
+        contentJv.classList.add('active-lang');
+        btnJv.classList.add('active');
+      } else if (lang === 'id') {
+        contentId.classList.add('active-lang');
+        btnId.classList.add('active');
+      } else {
+        contentEn.classList.add('active-lang');
+        btnEn.classList.add('active');
+      }
+      localStorage.setItem('sovereign_lang_pref', lang);
+    }
+
+    btnJv.addEventListener('click', () => setActiveLanguage('jv'));
+    btnId.addEventListener('click', () => setActiveLanguage('id'));
+    btnEn.addEventListener('click', () => setActiveLanguage('en'));
+
+    const savedLang = localStorage.getItem('sovereign_lang_pref');
+    if (savedLang === 'id') setActiveLanguage('id');
+    else if (savedLang === 'en') setActiveLanguage('en');
+    else setActiveLanguage('jv');
+  })();
+</script>
+</body>
+</html>
