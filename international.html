@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Go Kian Tik (Mbah Hogi Bejo™)">
+<meta name="description" content="GigiMenyanyiBot — International Reader. Three humanity bots through lingua, guiding humans from Ruwet to Sovereign State. Research collaboration & doctoral fellowship inquiry.">
+<meta name="keywords" content="GigiMenyanyiBot, Sarinem.chat, Sovereign Space Bot, CHO Framework, Go Kian Tik, Ruwet OTW Genah, Sovereign State, doctoral fellowship, digital humanities, MIT Solve, Zenodo">
+<title>International Reader · GigiMenyanyiBot · Zì Zhǔ Zhě 自主者</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a18; --ink-mid: #3d3d38; --ink-soft: #6b6b64; --ink-muted: #9b9b92;
+  --paper: #faf9f5; --paper-warm: #f3f1ea; --paper-card: #ffffff;
+  --accent: #8B4513; --accent-light: #c4742a; --accent-pale: #f5ede3;
+  --gold: #b8892a; --gold-light: #e8d5a3;
+  --teal: #2a6b6b; --teal-pale: #e3f0f0;
+  --sage: #4a6741; --sage-pale: #eaf0e8;
+  --border: rgba(0,0,0,0.10); --border-strong: rgba(0,0,0,0.18);
+  --font-serif: 'Lora', Georgia, serif; --font-sans: 'DM Sans', system-ui, sans-serif;
+  --radius: 4px; --radius-lg: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f0ede4; --ink-mid: #ccc9be; --ink-soft: #9e9b90; --ink-muted: #6a6760;
+    --paper: #18180f; --paper-warm: #1e1d14; --paper-card: #252519;
+    --accent: #d4935c; --accent-light: #e8b07a; --accent-pale: #2a1f13;
+    --gold: #d4a84b; --gold-light: #3a2e15;
+    --teal: #5aadad; --teal-pale: #0f2525;
+    --sage: #7fb87a; --sage-pale: #111e10;
+    --border: rgba(255,255,255,0.09); --border-strong: rgba(255,255,255,0.16);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;}
+[data-lang]{display:none;}
+[data-lang].active{display:block;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--border);padding:0.75rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}
+.nav-brand{font-family:var(--font-serif);font-size:1rem;font-style:italic;color:var(--ink-mid);text-decoration:none;}
+.nav-brand span{color:var(--accent);}
+.lang-toggle{display:flex;gap:4px;background:var(--paper-warm);border:1px solid var(--border);border-radius:24px;padding:3px;}
+.lang-btn{background:none;border:none;border-radius:20px;padding:4px 10px;font-size:13px;font-family:var(--font-sans);color:var(--ink-soft);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.18s;white-space:nowrap;}
+.lang-btn:hover{color:var(--ink);background:var(--border);}
+.lang-btn.active{background:var(--paper-card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,0.12);font-weight:500;}
+
+/* HERO */
+.hero{max-width:760px;margin:0 auto;padding:4rem 2rem 2.5rem;text-align:center;}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;}
+.hero h1{font-family:var(--font-serif);font-size:clamp(1.9rem,5vw,3rem);font-weight:600;line-height:1.2;color:var(--ink);margin-bottom:0.75rem;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-sub{font-size:1.05rem;color:var(--ink-mid);max-width:580px;margin:0 auto 2rem;font-style:italic;font-family:var(--font-serif);}
+.hero-meta{display:flex;align-items:center;justify-content:center;gap:1rem;font-size:13px;color:var(--ink-soft);flex-wrap:wrap;}
+.hero-meta .dot{opacity:0.35;}
+.hero-divider{max-width:760px;margin:2rem auto 0;border:none;border-top:1px solid var(--border);}
+
+/* MAIN */
+.main{max-width:760px;margin:0 auto;padding:3rem 2rem 5rem;}
+.section{margin-bottom:3.5rem;}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-light);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+h2{font-family:var(--font-serif);font-size:1.5rem;font-weight:500;color:var(--ink);margin-bottom:0.75rem;line-height:1.3;}
+h3{font-family:var(--font-serif);font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:0.4rem;}
+p{color:var(--ink-mid);margin-bottom:1rem;font-size:0.97rem;}
+p:last-child{margin-bottom:0;}
+
+/* FORMULA */
+.formula-block{background:var(--paper-warm);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0;font-family:var(--font-serif);font-style:italic;font-size:1.05rem;color:var(--ink-mid);text-align:center;}
+.formula-block strong{color:var(--accent);font-style:normal;font-weight:600;}
+
+/* TRAJECTORY — Ruwet → OTW Genah → Sovereign */
+.trajectory{display:flex;align-items:stretch;gap:0;margin:1.5rem 0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
+.traj-step{flex:1;padding:1.1rem 1rem;text-align:center;position:relative;}
+.traj-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:1.2rem;color:var(--ink-muted);z-index:1;}
+.traj-step.ruwet{background:var(--accent-pale);}
+.traj-step.otw{background:var(--gold-light);}
+.traj-step.sovereign{background:var(--sage-pale);}
+.traj-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.traj-step.ruwet .traj-label{color:var(--accent);}
+.traj-step.otw .traj-label{color:var(--gold);}
+.traj-step.sovereign .traj-label{color:var(--sage);}
+.traj-title{font-family:var(--font-serif);font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.traj-desc{font-size:0.75rem;color:var(--ink-soft);line-height:1.4;}
+
+/* 3 BOTS CARDS */
+.bot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:1.25rem;}
+.bot-card{background:var(--paper-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem;position:relative;overflow:hidden;}
+.bot-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.bot-card.bc1::before{background:var(--teal);}
+.bot-card.bc2::before{background:#9b59b6;}
+.bot-card.bc3::before{background:var(--accent);}
+.bot-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-bottom:8px;}
+.bc1 .bot-badge{background:var(--teal-pale);color:var(--teal);}
+.bc2 .bot-badge{background:#f3e8fb;color:#7a3d9e;}
+.bc3 .bot-badge{background:var(--accent-pale);color:var(--accent);}
+@media (prefers-color-scheme: dark){
+  .bc2 .bot-badge{background:#2a1535;color:#c07ae8;}
+}
+.bot-name{font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.bot-desc{font-size:0.8rem;color:var(--ink-soft);line-height:1.5;margin-bottom:8px;}
+.bot-submit{font-size:0.72rem;font-weight:500;color:var(--ink-muted);}
+.bot-submit span{color:var(--sage);font-weight:600;}
+
+/* 6 GAPS TABLE */
+.gaps-intro{font-size:0.9rem;color:var(--ink-soft);font-style:italic;margin-bottom:1rem;}
+.gap-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:0.5rem;}
+.gap-table th{text-align:left;padding:6px 8px;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);border-bottom:1px solid var(--border);}
+.gap-table td{padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--ink-mid);}
+.gap-table tr:last-child td{border-bottom:none;}
+.gap-table td:first-child{font-weight:500;color:var(--ink);width:36%;}
+.dot-primary{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);margin:0 auto;}
+.dot-secondary{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--border-strong);margin:0 auto;opacity:0.5;}
+.dot-cell{text-align:center;}
+.gap-note{font-size:0.75rem;color:var(--ink-muted);margin-top:8px;font-style:italic;}
+
+/* GAP CARDS */
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:1.25rem;}
+.gap-card{background:var(--paper-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;}
+.gap-card .gap-icon{font-size:20px;margin-bottom:6px;display:block;}
+.gap-card h4{font-size:0.82rem;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.gap-card p{font-size:0.78rem;color:var(--ink-soft);line-height:1.5;margin:0;}
+.gap-card .doi-link{display:inline-block;margin-top:6px;font-size:0.72rem;color:var(--teal);text-decoration:none;}
+.gap-card .doi-link:hover{text-decoration:underline;}
+
+/* PUBLICATIONS */
+.pub-list{list-style:none;margin-top:1rem;}
+.pub-list li{border-bottom:1px solid var(--border);padding:0.85rem 0;display:flex;gap:0.75rem;align-items:flex-start;}
+.pub-list li:last-child{border-bottom:none;}
+.pub-tag{font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;white-space:nowrap;margin-top:2px;flex-shrink:0;}
+.pub-tag.foundation{background:var(--accent-pale);color:var(--accent);}
+.pub-tag.sovereignty{background:var(--teal-pale);color:var(--teal);}
+.pub-tag.nlp{background:var(--gold-light);color:var(--gold);}
+.pub-tag.redteam{background:#f0e8f5;color:#7a3d9e;}
+@media (prefers-color-scheme: dark){.pub-tag.redteam{background:#2a1535;color:#c07ae8;}}
+.pub-info{flex:1;}
+.pub-title{font-size:0.87rem;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.pub-doi{font-size:0.78rem;color:var(--teal);text-decoration:none;}
+.pub-doi:hover{text-decoration:underline;}
+
+/* TRL BADGE */
+.trl-badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal-pale);color:var(--teal);border:1px solid var(--teal);border-radius:3px;padding:3px 10px;font-size:11px;font-weight:500;letter-spacing:0.05em;margin-bottom:1rem;}
+
+/* SUBMISSIONS */
+.submit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:1rem;}
+.submit-card{background:var(--paper-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:0.9rem 1rem;}
+.submit-status{font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
+.submit-status.done{color:var(--sage);}
+.submit-status.prep{color:var(--gold);}
+.submit-name{font-size:0.85rem;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.submit-date{font-size:0.75rem;color:var(--ink-muted);}
+
+/* CTA */
+.cta-box{background:var(--paper-card);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:2rem;margin-top:1.5rem;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--teal));}
+.cta-box h3{font-family:var(--font-serif);font-size:1.2rem;margin-bottom:0.6rem;}
+.cta-box p{font-size:0.92rem;color:var(--ink-soft);margin-bottom:1.25rem;}
+.cta-links{display:flex;gap:10px;flex-wrap:wrap;}
+.cta-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;font-size:0.82rem;font-weight:500;text-decoration:none;transition:opacity 0.15s;cursor:pointer;}
+.cta-btn:hover{opacity:0.82;}
+.cta-btn.primary{background:var(--accent);color:#fff;border:none;}
+.cta-btn.secondary{background:none;border:1px solid var(--border-strong);color:var(--ink);}
+
+/* PROFILE */
+.profile-row{display:flex;gap:1.25rem;align-items:flex-start;margin-top:0.75rem;}
+.profile-avatar{width:52px;height:52px;border-radius:50%;background:var(--accent-pale);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:1.1rem;font-style:italic;color:var(--accent);flex-shrink:0;}
+.profile-info p{font-size:0.87rem;margin-bottom:4px;}
+.profile-name{font-weight:500;font-size:0.97rem !important;color:var(--ink) !important;margin-bottom:2px !important;}
+
+/* BACK NAV */
+.back-nav{margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap;font-size:0.83rem;}
+.back-nav a{color:var(--ink-soft);text-decoration:none;}
+.back-nav a:hover{color:var(--accent);text-decoration:underline;}
+
+@media (max-width:600px){
+  nav{padding:0.6rem 1rem;}
+  .hero{padding:2.5rem 1.25rem 1.5rem;}
+  .main{padding:2rem 1.25rem 4rem;}
+  .lang-btn .lang-code{display:none;}
+  .cta-box{padding:1.5rem 1.25rem;}
+  .trajectory{flex-direction:column;}
+  .traj-step:not(:last-child)::after{content:'↓';right:auto;top:auto;bottom:-12px;left:50%;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><span>😁</span> GigiMenyanyiBot</a>
+  <div class="lang-toggle" role="group" aria-label="Language selector">
+    <button class="lang-btn active" onclick="setLang('id')" aria-pressed="true"><span>🇮🇩</span><span class="lang-code">ID</span></button>
+    <button class="lang-btn" onclick="setLang('en')" aria-pressed="false"><span>🇬🇧</span><span class="lang-code">EN</span></button>
+    <button class="lang-btn" onclick="setLang('fr')" aria-pressed="false"><span>🇫🇷</span><span class="lang-code">FR</span></button>
+    <button class="lang-btn" onclick="setLang('cn')" aria-pressed="false"><span>🇨🇳</span><span class="lang-code">CN</span></button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     BAHASA INDONESIA
+══════════════════════════════════════════════════════ -->
+<div data-lang="id" class="active">
+  <div class="hero">
+    <p class="hero-eyebrow">International Reader · Edisi Riset Terbuka</p>
+    <h1>Tiga Bot Kemanusiaan.<br><em>Satu Perjalanan Peradaban.</em></h1>
+    <p class="hero-sub">Dari kekacauan lingua menuju kedaulatan diri — lewat AI, seni suara, dan dignitas tubuh.</p>
+    <div class="hero-meta">
+      <span>Go Kian Tik (Mbah Hogi Bejo™)</span>
+      <span class="dot">·</span>
+      <span>Chief Humanity Officer</span>
+      <span class="dot">·</span>
+      <span>Zì Zhǔ Zhě 自主者</span>
+    </div>
+  </div>
+  <hr class="hero-divider">
+  <div class="main">
+
+    <div class="section">
+      <p class="section-label">Trajectory Peradaban</p>
+      <h2>Ruwet → OTW Genah → Sovereign State</h2>
+      <p>Ketiga bot ini bukan produk yang berdiri sendiri. Mereka adalah satu ekosistem — sebuah jalur yang menuntun manusia melewati tiga fase kesadaran.</p>
+      <div class="trajectory">
+        <div class="traj-step ruwet">
+          <div class="traj-label">Fase 1</div>
+          <div class="traj-title">Ruwet</div>
+          <div class="traj-desc">Kekacauan lingua, kebingungan kognitif, kehilangan arah di tengah banjir informasi</div>
+        </div>
+        <div class="traj-step otw">
+          <div class="traj-label">Fase 2</div>
+          <div class="traj-title">OTW Genah</div>
+          <div class="traj-desc">Navigasi kognitif — mulai melihat pola, menemukan relevansi, membangun kepercayaan diri</div>
+        </div>
+        <div class="traj-step sovereign">
+          <div class="traj-label">Fase 3</div>
+          <div class="traj-title">Sovereign State</div>
+          <div class="traj-desc">Kedaulatan diri — manusia yang berdaya memilih, bertindak, dan tumbuh secara otonom</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        ( Consciousness × Calculation ) <strong>Humanity</strong> &lt; Transcendence
+        <br><small style="font-size:0.8rem;color:var(--ink-muted);font-style:normal;display:block;margin-top:6px;">Grand Formula · Go Kian Tik · 2026 · DOI: 10.5281/zenodo.19002243</small>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Tiga Bot Kemanusiaan</p>
+      <h2>Satu Ekosistem, Tiga Pintu Masuk</h2>
+      <p>Setiap bot adalah pintu masuk yang berbeda ke dalam ekosistem yang sama — disesuaikan dengan habitat dan kebutuhan manusia yang berbeda.</p>
+      <div class="bot-grid">
+        <div class="bot-card bc1">
+          <div class="bot-badge">Bot 1 · Kognitif</div>
+          <div class="bot-name">Sovereign Space Bot</div>
+          <div class="bot-desc">Kesehatan mental melalui lingua higienis. Ruang percakapan privat yang menuntun manusia dari kekacauan kognitif menuju kedaulatan berpikir.</div>
+          <div class="bot-submit"><span>✅ Submitted</span> · MIT FII Innovators Pitch · 27 Mei 2026</div>
+        </div>
+        <div class="bot-card bc2">
+          <div class="bot-badge">Bot 2 · Perlindungan</div>
+          <div class="bot-name">Sarinem.chat</div>
+          <div class="bot-desc">Kesehatan mental dan perlindungan perempuan. AI sebagai pendamping yang aman, non-judgmental, dan memulihkan Decision Power.</div>
+          <div class="bot-submit"><span>✅ Submitted</span> · MIT 10th Anniversary Global Challenge · 20 Mei 2026</div>
+        </div>
+        <div class="bot-card bc3">
+          <div class="bot-badge">Bot 3 · Seni & Tubuh</div>
+          <div class="bot-name">@GigiMenyanyiBot</div>
+          <div class="bot-desc">Kesehatan mental melalui seni suara dan perawatan diri (gigi & mulut). Masuk lewat hobi — keluar dengan dignitas yang pulih.</div>
+          <div class="bot-submit"><span>🚧 Persiapan</span> · Gemini XPRIZE Foundation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Arsitektur Akademik</p>
+      <h2>6 Kesenjangan Peradaban — Tertanam di Setiap Bot</h2>
+      <p class="gaps-intro">Keenam kesenjangan ini tidak ditangani secara terpisah oleh bot yang berbeda. Mereka tertanam secara proporsional-kontekstual-dialektis di dalam arsitektur algoritma ketiga bot sekaligus.</p>
+      <table class="gap-table">
+        <thead>
+          <tr>
+            <th>Kesenjangan</th>
+            <th style="text-align:center">Sovereign</th>
+            <th style="text-align:center">Sarinem</th>
+            <th style="text-align:center">Gigi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>📡 Rogers Diffusion Gap</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>🫂 Sovereignty Gap</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🧠 NLP Deep→Surface Gap</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>📊 Hawkins Consciousness Gap (LoC&lt;200)</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🪟 Johari Blindness Gap</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>💼 Kiyosaki/Maslow Gap</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+        </tbody>
+      </table>
+      <p class="gap-note">● Respons primer &nbsp;·&nbsp; ○ Konteks sekunder &nbsp;·&nbsp; Semua gap tertanam proporsional-kontekstual-dialektis dalam arsitektur algoritma ketiga bot</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Status Global</p>
+      <h2>10% Globalisasi — Biji yang Ditanam di Tanah Global</h2>
+      <div class="submit-grid">
+        <div class="submit-card"><div class="submit-status done">✅ Submitted</div><div class="submit-name">MIT FII Innovators Pitch</div><div class="submit-date">27 Mei 2026 · Sovereign Space Bot</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ Submitted</div><div class="submit-name">MIT 10th Anniversary Global Challenge</div><div class="submit-date">20 Mei 2026 · Sarinem.chat</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ Submitted</div><div class="submit-name">UN Open Source Week</div><div class="submit-date">Working paper · Menunggu hasil</div></div>
+        <div class="submit-card"><div class="submit-status prep">🚧 Persiapan</div><div class="submit-name">Gemini XPRIZE Foundation</div><div class="submit-date">@GigiMenyanyiBot sebagai vehicle</div></div>
+      </div>
+      <div class="trl-badge" style="margin-top:1.25rem;">⚡ BEU Level 3 · 3 Bot Live Simultan · VPS sebagai Tanah Berpijak</div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Publikasi Open Access</p>
+      <h2>Landasan Ilmiah</h2>
+      <p>Seluruh riset diterbitkan terbuka di Zenodo dan SSRN, berlisensi CC BY-NC-ND 4.0.</p>
+      <ul class="pub-list">
+        <li><span class="pub-tag foundation">Fondasi</span><div class="pub-info"><div class="pub-title">From Laggard to Dignity: A CHO Open Source Framework for Closing the Humanity Gap</div><a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19666723</a></div></li>
+        <li><span class="pub-tag foundation">Triadic</span><div class="pub-info"><div class="pub-title">Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence</div><a href="https://doi.org/10.5281/zenodo.19002243" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19002243</a></div></li>
+        <li><span class="pub-tag sovereignty">Sovereignty</span><div class="pub-info"><div class="pub-title">Sarinem.chat: A Living Proof of the CHO Grand Formula</div><a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19938363</a></div></li>
+        <li><span class="pub-tag sovereignty">Sovereignty</span><div class="pub-info"><div class="pub-title">Kupu-Kupu Malam and the Sovereignty Gap: Who Bears the Consequence Without Holding the Choice?</div><a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19152827</a></div></li>
+        <li><span class="pub-tag nlp">NLP & AI</span><div class="pub-info"><div class="pub-title">AIRT::The Master Leveling Prompt: A Front-End User Methodology for Human-AI Cognitive Coherence</div><a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19484926</a></div></li>
+        <li><span class="pub-tag redteam">Red Teaming</span><div class="pub-info"><div class="pub-title">When Intelligence Creates Error: Inconsistency, Over-Reasoning & Sycophantic Confabulation in Multimodal AI</div><a href="https://doi.org/10.5281/zenodo.19652715" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19652715</a></div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Kolaborasi & Pendanaan</p>
+      <h2>Undangan untuk Akademisi & Institusi</h2>
+      <p>Riset ini berkembang dengan model <em>paperwork contribution</em> — kontribusi nyata yang terdokumentasi. Jika institusi Anda melihat potensi dalam ekosistem tiga bot ini untuk pengembangan S3, pendanaan riset digital humanities, atau kemitraan edukasi berbasis AI, ini adalah undangan terbuka untuk memulai percakapan.</p>
+      <div class="cta-box">
+        <h3>Tertarik berkolaborasi?</h3>
+        <p>Buka bot Telegram atau jelajahi semua publikasi di Zenodo Community CHO.</p>
+        <div class="cta-links">
+          <a href="https://t.me/GigiMenyanyiBot" target="_blank" class="cta-btn primary">🚀 @GigiMenyanyiBot</a>
+          <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" class="cta-btn secondary">📚 Zenodo Community</a>
+          <a href="framework.html" class="cta-btn secondary">🧠 CHO Framework</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Pengembang</p>
+      <div class="profile-row">
+        <div class="profile-avatar">GKT</div>
+        <div class="profile-info">
+          <p class="profile-name">Go Kian Tik (Mbah Hogi Bejo™)</p>
+          <p>Chief Humanity Officer · Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+          <p style="font-size:0.8rem;color:var(--ink-muted);">Riset independen: AI, kemanusiaan, pendidikan digital, NLP. Publikasi open access di Zenodo & SSRN. 16 titles · 30+ DOI · 4 global submissions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="back-nav">
+      <a href="index.html">← Beranda</a><a href="about.html">Tentang</a><a href="framework.html">CHO Framework</a><a href="dukung.html">Dukung Riset</a><a href="privacy.html">Privasi</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     ENGLISH
+══════════════════════════════════════════════════════ -->
+<div data-lang="en">
+  <div class="hero">
+    <p class="hero-eyebrow">International Reader · Open Research Edition</p>
+    <h1>Three Humanity Bots.<br><em>One Civilisational Journey.</em></h1>
+    <p class="hero-sub">From linguistic chaos toward sovereign selfhood — through AI, vocal arts, and bodily dignity.</p>
+    <div class="hero-meta">
+      <span>Go Kian Tik (Mbah Hogi Bejo™)</span><span class="dot">·</span>
+      <span>Chief Humanity Officer</span><span class="dot">·</span>
+      <span>Zì Zhǔ Zhě 自主者</span>
+    </div>
+  </div>
+  <hr class="hero-divider">
+  <div class="main">
+
+    <div class="section">
+      <p class="section-label">Civilisational Trajectory</p>
+      <h2>Ruwet → OTW Genah → Sovereign State</h2>
+      <p>These three bots are not standalone products. They form one ecosystem — a pathway guiding humans through three phases of consciousness, drawn from the Triadic Framework of Human Self-Coherence.</p>
+      <div class="trajectory">
+        <div class="traj-step ruwet">
+          <div class="traj-label">Phase 1</div>
+          <div class="traj-title">Ruwet</div>
+          <div class="traj-desc">Linguistic chaos, cognitive confusion, disorientation in the flood of information</div>
+        </div>
+        <div class="traj-step otw">
+          <div class="traj-label">Phase 2</div>
+          <div class="traj-title">OTW Genah</div>
+          <div class="traj-desc">Cognitive navigation — beginning to see patterns, find relevance, rebuild confidence</div>
+        </div>
+        <div class="traj-step sovereign">
+          <div class="traj-label">Phase 3</div>
+          <div class="traj-title">Sovereign State</div>
+          <div class="traj-desc">Self-sovereignty — a human who chooses, acts, and grows autonomously</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        ( Consciousness × Calculation ) <strong>Humanity</strong> &lt; Transcendence
+        <br><small style="font-size:0.8rem;color:var(--ink-muted);font-style:normal;display:block;margin-top:6px;">Grand Formula · Go Kian Tik · 2026 · DOI: 10.5281/zenodo.19002243</small>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Three Humanity Bots</p>
+      <h2>One Ecosystem, Three Entry Points</h2>
+      <p>Each bot is a different entry point into the same ecosystem — tailored to the habitat and needs of different human populations.</p>
+      <div class="bot-grid">
+        <div class="bot-card bc1">
+          <div class="bot-badge">Bot 1 · Cognitive</div>
+          <div class="bot-name">Sovereign Space Bot</div>
+          <div class="bot-desc">Mental health through linguistic hygiene. A private conversational space guiding humans from cognitive chaos toward intellectual sovereignty.</div>
+          <div class="bot-submit"><span>✅ Submitted</span> · MIT FII Innovators Pitch · 27 May 2026</div>
+        </div>
+        <div class="bot-card bc2">
+          <div class="bot-badge">Bot 2 · Protection</div>
+          <div class="bot-name">Sarinem.chat</div>
+          <div class="bot-desc">Mental health and women's protection. AI as a safe, non-judgmental companion that restores Decision Power to those who bear consequences without choices.</div>
+          <div class="bot-submit"><span>✅ Submitted</span> · MIT 10th Anniversary Global Challenge · 20 May 2026</div>
+        </div>
+        <div class="bot-card bc3">
+          <div class="bot-badge">Bot 3 · Art & Body</div>
+          <div class="bot-name">@GigiMenyanyiBot</div>
+          <div class="bot-desc">Mental health through vocal arts and self-care (dental & oral health). Enter through a hobby — exit with restored dignity.</div>
+          <div class="bot-submit"><span>🚧 Preparing</span> · Gemini XPRIZE Foundation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Academic Architecture</p>
+      <h2>6 Civilisational Gaps — Embedded in Every Bot</h2>
+      <p class="gaps-intro">These six gaps are not addressed separately by different bots. They are embedded proportionally, contextually, and dialectically within the algorithmic architecture of all three bots simultaneously.</p>
+      <table class="gap-table">
+        <thead>
+          <tr><th>Gap</th><th style="text-align:center">Sovereign</th><th style="text-align:center">Sarinem</th><th style="text-align:center">Gigi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>📡 Rogers Diffusion Gap</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>🫂 Sovereignty Gap</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🧠 NLP Deep→Surface Gap</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>📊 Hawkins Consciousness Gap (LoC&lt;200)</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🪟 Johari Blindness Gap</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>💼 Kiyosaki/Maslow Gap</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+        </tbody>
+      </table>
+      <p class="gap-note">● Primary response &nbsp;·&nbsp; ○ Secondary context &nbsp;·&nbsp; All gaps embedded proportionally-contextually-dialectically across all three bot architectures</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Global Status</p>
+      <h2>10% Globalisation — Seeds Planted on Global Soil</h2>
+      <div class="submit-grid">
+        <div class="submit-card"><div class="submit-status done">✅ Submitted</div><div class="submit-name">MIT FII Innovators Pitch</div><div class="submit-date">27 May 2026 · Sovereign Space Bot</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ Submitted</div><div class="submit-name">MIT 10th Anniversary Global Challenge</div><div class="submit-date">20 May 2026 · Sarinem.chat</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ Submitted</div><div class="submit-name">UN Open Source Week</div><div class="submit-date">Working paper · Awaiting results</div></div>
+        <div class="submit-card"><div class="submit-status prep">🚧 Preparing</div><div class="submit-name">Gemini XPRIZE Foundation</div><div class="submit-date">@GigiMenyanyiBot as vehicle</div></div>
+      </div>
+      <div class="trl-badge" style="margin-top:1.25rem;">⚡ BEU Level 3 · 3 Bots Live Simultaneously · VPS as Sovereign Ground</div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Open Access Publications</p>
+      <h2>Academic Foundations</h2>
+      <p>All research published openly on Zenodo and SSRN, CC BY-NC-ND 4.0.</p>
+      <ul class="pub-list">
+        <li><span class="pub-tag foundation">Foundation</span><div class="pub-info"><div class="pub-title">From Laggard to Dignity: A CHO Open Source Framework for Closing the Humanity Gap</div><a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19666723</a></div></li>
+        <li><span class="pub-tag foundation">Triadic</span><div class="pub-info"><div class="pub-title">Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence</div><a href="https://doi.org/10.5281/zenodo.19002243" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19002243</a></div></li>
+        <li><span class="pub-tag sovereignty">Sovereignty</span><div class="pub-info"><div class="pub-title">Sarinem.chat: A Living Proof of the CHO Grand Formula</div><a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19938363</a></div></li>
+        <li><span class="pub-tag sovereignty">Sovereignty</span><div class="pub-info"><div class="pub-title">Kupu-Kupu Malam and the Sovereignty Gap: Who Bears the Consequence Without Holding the Choice?</div><a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19152827</a></div></li>
+        <li><span class="pub-tag nlp">NLP & AI</span><div class="pub-info"><div class="pub-title">AIRT::The Master Leveling Prompt: A Front-End User Methodology for Human-AI Cognitive Coherence</div><a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19484926</a></div></li>
+        <li><span class="pub-tag redteam">Red Teaming</span><div class="pub-info"><div class="pub-title">When Intelligence Creates Error: Inconsistency, Over-Reasoning & Sycophantic Confabulation in Multimodal AI</div><a href="https://doi.org/10.5281/zenodo.19652715" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19652715</a></div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Collaboration & Funding</p>
+      <h2>An Invitation to Academics & Institutions</h2>
+      <p>This research operates on a <em>paperwork contribution</em> model — documented, traceable contributions. If your institution sees potential in this three-bot ecosystem for doctoral research, digital humanities funding, or AI-based education partnerships, this is an open invitation to begin a conversation.</p>
+      <p>The researcher is open to doctoral fellowship opportunities (S3/PhD) aligned with this body of work — particularly at institutions with strengths in digital inclusion, human-centred AI, NLP, mental health technology, or global health communication.</p>
+      <div class="cta-box">
+        <h3>Interested in collaboration?</h3>
+        <p>Open the Telegram Bot for a direct conversation, or explore all publications at the Zenodo CHO Community.</p>
+        <div class="cta-links">
+          <a href="https://t.me/GigiMenyanyiBot" target="_blank" class="cta-btn primary">🚀 @GigiMenyanyiBot</a>
+          <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" class="cta-btn secondary">📚 Zenodo Community</a>
+          <a href="framework.html" class="cta-btn secondary">🧠 CHO Framework</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Researcher</p>
+      <div class="profile-row">
+        <div class="profile-avatar">GKT</div>
+        <div class="profile-info">
+          <p class="profile-name">Go Kian Tik (Mbah Hogi Bejo™)</p>
+          <p>Chief Humanity Officer · Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+          <p style="font-size:0.8rem;color:var(--ink-muted);">Independent researcher: AI, humanity studies, digital education, NLP. 16 titles · 30+ DOI · 4 global submissions. Open-access publications on Zenodo & SSRN.</p>
+        </div>
+      </div>
+    </div>
+    <div class="back-nav">
+      <a href="index.html">← Home</a><a href="about.html">About</a><a href="framework.html">CHO Framework</a><a href="dukung.html">Support Research</a><a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FRANÇAIS
+══════════════════════════════════════════════════════ -->
+<div data-lang="fr">
+  <div class="hero">
+    <p class="hero-eyebrow">Lecteur International · Édition Recherche Ouverte</p>
+    <h1>Trois Bots Humanitaires.<br><em>Un Seul Voyage Civilisationnel.</em></h1>
+    <p class="hero-sub">Du chaos linguistique vers la souveraineté de soi — par l'IA, l'art vocal et la dignité corporelle.</p>
+    <div class="hero-meta">
+      <span>Go Kian Tik (Mbah Hogi Bejo™)</span><span class="dot">·</span>
+      <span>Chief Humanity Officer</span><span class="dot">·</span>
+      <span>Zì Zhǔ Zhě 自主者</span>
+    </div>
+  </div>
+  <hr class="hero-divider">
+  <div class="main">
+
+    <div class="section">
+      <p class="section-label">Trajectoire Civilisationnelle</p>
+      <h2>Ruwet → OTW Genah → État Souverain</h2>
+      <p>Ces trois bots ne sont pas des produits indépendants. Ils forment un seul écosystème — un chemin guidant les humains à travers trois phases de conscience, issu du Cadre Triadique de la Cohérence Humaine.</p>
+      <div class="trajectory">
+        <div class="traj-step ruwet">
+          <div class="traj-label">Phase 1</div>
+          <div class="traj-title">Ruwet</div>
+          <div class="traj-desc">Chaos linguistique, confusion cognitive, désorientation dans le flot d'informations</div>
+        </div>
+        <div class="traj-step otw">
+          <div class="traj-label">Phase 2</div>
+          <div class="traj-title">OTW Genah</div>
+          <div class="traj-desc">Navigation cognitive — commencer à voir les schémas, trouver la pertinence, reconstruire la confiance</div>
+        </div>
+        <div class="traj-step sovereign">
+          <div class="traj-label">Phase 3</div>
+          <div class="traj-title">État Souverain</div>
+          <div class="traj-desc">Souveraineté de soi — un être humain qui choisit, agit et grandit de manière autonome</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        ( Conscience × Calcul ) <strong>Humanité</strong> &lt; Transcendance
+        <br><small style="font-size:0.8rem;color:var(--ink-muted);font-style:normal;display:block;margin-top:6px;">Grande Formule · Go Kian Tik · 2026 · DOI : 10.5281/zenodo.19002243</small>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Trois Bots Humanitaires</p>
+      <h2>Un Écosystème, Trois Portes d'Entrée</h2>
+      <p>Chaque bot est une porte d'entrée différente dans le même écosystème — adapté à l'habitat et aux besoins de différentes populations humaines.</p>
+      <div class="bot-grid">
+        <div class="bot-card bc1">
+          <div class="bot-badge">Bot 1 · Cognitif</div>
+          <div class="bot-name">Sovereign Space Bot</div>
+          <div class="bot-desc">Santé mentale par l'hygiène linguistique. Un espace de conversation privé guidant les humains du chaos cognitif vers la souveraineté intellectuelle.</div>
+          <div class="bot-submit"><span>✅ Soumis</span> · MIT FII Innovators Pitch · 27 mai 2026</div>
+        </div>
+        <div class="bot-card bc2">
+          <div class="bot-badge">Bot 2 · Protection</div>
+          <div class="bot-name">Sarinem.chat</div>
+          <div class="bot-desc">Santé mentale et protection des femmes. L'IA comme accompagnatrice sûre, sans jugement, qui restaure le Pouvoir de Décision.</div>
+          <div class="bot-submit"><span>✅ Soumis</span> · MIT 10th Anniversary Global Challenge · 20 mai 2026</div>
+        </div>
+        <div class="bot-card bc3">
+          <div class="bot-badge">Bot 3 · Art & Corps</div>
+          <div class="bot-name">@GigiMenyanyiBot</div>
+          <div class="bot-desc">Santé mentale par l'art vocal et le soin de soi (santé bucco-dentaire). Entrer par le loisir — sortir avec une dignité restaurée.</div>
+          <div class="bot-submit"><span>🚧 Préparation</span> · Gemini XPRIZE Foundation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Architecture Académique</p>
+      <h2>6 Fractures Civilisationnelles — Intégrées dans Chaque Bot</h2>
+      <p class="gaps-intro">Ces six fractures ne sont pas traitées séparément par des bots différents. Elles sont intégrées de manière proportionnelle, contextuelle et dialectique dans l'architecture algorithmique des trois bots simultanément.</p>
+      <table class="gap-table">
+        <thead>
+          <tr><th>Fracture</th><th style="text-align:center">Sovereign</th><th style="text-align:center">Sarinem</th><th style="text-align:center">Gigi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>📡 Fracture Rogers (Diffusion)</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>🫂 Fracture de Souveraineté</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🧠 Fracture NLP Profond→Surface</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>📊 Fracture Hawkins (LoC&lt;200)</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🪟 Fracture Johari (Angle Mort)</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>💼 Fracture Kiyosaki/Maslow</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+        </tbody>
+      </table>
+      <p class="gap-note">● Réponse primaire &nbsp;·&nbsp; ○ Contexte secondaire &nbsp;·&nbsp; Toutes les fractures intégrées proportionnellement-contextuellement-dialectiquement dans les trois architectures</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Statut Global</p>
+      <h2>10% Mondialisation — Graines Plantées sur un Sol Global</h2>
+      <div class="submit-grid">
+        <div class="submit-card"><div class="submit-status done">✅ Soumis</div><div class="submit-name">MIT FII Innovators Pitch</div><div class="submit-date">27 mai 2026 · Sovereign Space Bot</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ Soumis</div><div class="submit-name">MIT 10th Anniversary Global Challenge</div><div class="submit-date">20 mai 2026 · Sarinem.chat</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ Soumis</div><div class="submit-name">UN Open Source Week</div><div class="submit-date">Document de travail · En attente</div></div>
+        <div class="submit-card"><div class="submit-status prep">🚧 Préparation</div><div class="submit-name">Gemini XPRIZE Foundation</div><div class="submit-date">@GigiMenyanyiBot comme véhicule</div></div>
+      </div>
+      <div class="trl-badge" style="margin-top:1.25rem;">⚡ BEU Niveau 3 · 3 Bots Simultanés · VPS comme Terre Souveraine</div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Publications en Accès Ouvert</p>
+      <h2>Fondements Académiques</h2>
+      <p>Toutes les recherches publiées en accès libre sur Zenodo et SSRN, sous licence CC BY-NC-ND 4.0.</p>
+      <ul class="pub-list">
+        <li><span class="pub-tag foundation">Fondation</span><div class="pub-info"><div class="pub-title">From Laggard to Dignity: A CHO Open Source Framework for Closing the Humanity Gap</div><a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" class="pub-doi">DOI : 10.5281/zenodo.19666723</a></div></li>
+        <li><span class="pub-tag foundation">Triadique</span><div class="pub-info"><div class="pub-title">Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence</div><a href="https://doi.org/10.5281/zenodo.19002243" target="_blank" class="pub-doi">DOI : 10.5281/zenodo.19002243</a></div></li>
+        <li><span class="pub-tag sovereignty">Souveraineté</span><div class="pub-info"><div class="pub-title">Sarinem.chat: A Living Proof of the CHO Grand Formula</div><a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" class="pub-doi">DOI : 10.5281/zenodo.19938363</a></div></li>
+        <li><span class="pub-tag sovereignty">Souveraineté</span><div class="pub-info"><div class="pub-title">Kupu-Kupu Malam and the Sovereignty Gap: Who Bears the Consequence Without Holding the Choice?</div><a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" class="pub-doi">DOI : 10.5281/zenodo.19152827</a></div></li>
+        <li><span class="pub-tag nlp">NLP & IA</span><div class="pub-info"><div class="pub-title">AIRT::The Master Leveling Prompt: A Front-End User Methodology for Human-AI Cognitive Coherence</div><a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" class="pub-doi">DOI : 10.5281/zenodo.19484926</a></div></li>
+        <li><span class="pub-tag redteam">Red Teaming</span><div class="pub-info"><div class="pub-title">When Intelligence Creates Error: Inconsistency, Over-Reasoning & Sycophantic Confabulation in Multimodal AI</div><a href="https://doi.org/10.5281/zenodo.19652715" target="_blank" class="pub-doi">DOI : 10.5281/zenodo.19652715</a></div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Collaboration & Financement</p>
+      <h2>Une Invitation aux Académiciens et Institutions</h2>
+      <p>Cette recherche fonctionne sur un modèle de <em>contribution documentée</em> — des apports traçables et concrets. Si votre institution voit un potentiel dans cet écosystème de trois bots pour le développement doctoral, le financement en humanités numériques, ou les partenariats en éducation basée sur l'IA, cette page est une invitation ouverte.</p>
+      <p>Le chercheur est ouvert à des opportunités de bourse doctorale (S3/PhD) alignées avec ce corpus — particulièrement dans les domaines de l'inclusion numérique, l'IA centrée sur l'humain, le NLP, la technologie en santé mentale ou la communication en santé mondiale.</p>
+      <div class="cta-box">
+        <h3>Intéressé par une collaboration ?</h3>
+        <p>Ouvrez le Bot Telegram ou explorez toutes les publications sur la Communauté Zenodo CHO.</p>
+        <div class="cta-links">
+          <a href="https://t.me/GigiMenyanyiBot" target="_blank" class="cta-btn primary">🚀 @GigiMenyanyiBot</a>
+          <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" class="cta-btn secondary">📚 Communauté Zenodo</a>
+          <a href="framework.html" class="cta-btn secondary">🧠 Cadre CHO</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Chercheur</p>
+      <div class="profile-row">
+        <div class="profile-avatar">GKT</div>
+        <div class="profile-info">
+          <p class="profile-name">Go Kian Tik (Mbah Hogi Bejo™)</p>
+          <p>Chief Humanity Officer · Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+          <p style="font-size:0.8rem;color:var(--ink-muted);">Chercheur indépendant : IA, humanités, éducation numérique, NLP. 16 titres · 30+ DOI · 4 soumissions mondiales.</p>
+        </div>
+      </div>
+    </div>
+    <div class="back-nav">
+      <a href="index.html">← Accueil</a><a href="about.html">À propos</a><a href="framework.html">Cadre CHO</a><a href="dukung.html">Soutenir</a><a href="privacy.html">Confidentialité</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     中文（简体）
+══════════════════════════════════════════════════════ -->
+<div data-lang="cn">
+  <div class="hero">
+    <p class="hero-eyebrow">国际读者版 · 开放研究专版</p>
+    <h1>三个人文机器人。<br><em>一段文明旅程。</em></h1>
+    <p class="hero-sub">从语言混沌走向自我主权——通过人工智能、声乐艺术与身体尊严。</p>
+    <div class="hero-meta">
+      <span>Go Kian Tik（Mbah Hogi Bejo™）</span><span class="dot">·</span>
+      <span>首席人文官</span><span class="dot">·</span>
+      <span>Zì Zhǔ Zhě 自主者</span>
+    </div>
+  </div>
+  <hr class="hero-divider">
+  <div class="main">
+
+    <div class="section">
+      <p class="section-label">文明轨迹</p>
+      <h2>Ruwet → OTW Genah → 主权状态</h2>
+      <p>这三个机器人并非独立产品，而是一个完整的生态系统——一条引导人类穿越三个意识阶段的路径，源自《人类自我连贯性三元框架》。</p>
+      <div class="trajectory">
+        <div class="traj-step ruwet">
+          <div class="traj-label">第一阶段</div>
+          <div class="traj-title">Ruwet（混沌）</div>
+          <div class="traj-desc">语言混乱，认知困惑，在信息洪流中迷失方向</div>
+        </div>
+        <div class="traj-step otw">
+          <div class="traj-label">第二阶段</div>
+          <div class="traj-title">OTW Genah（导航）</div>
+          <div class="traj-desc">认知导航——开始看清模式，找到相关性，重建自信</div>
+        </div>
+        <div class="traj-step sovereign">
+          <div class="traj-label">第三阶段</div>
+          <div class="traj-title">主权状态</div>
+          <div class="traj-desc">自我主权——一个能够自主选择、行动和成长的人</div>
+        </div>
+      </div>
+      <div class="formula-block">
+        （意识 × 计算）<strong>人文</strong> &lt; 超越
+        <br><small style="font-size:0.8rem;color:var(--ink-muted);font-style:normal;display:block;margin-top:6px;">大公式 · Go Kian Tik · 2026 · DOI: 10.5281/zenodo.19002243</small>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">三个人文机器人</p>
+      <h2>一个生态系统，三个入口</h2>
+      <p>每个机器人都是进入同一生态系统的不同入口——针对不同人群的栖息地和需求量身定制。</p>
+      <div class="bot-grid">
+        <div class="bot-card bc1">
+          <div class="bot-badge">机器人1 · 认知</div>
+          <div class="bot-name">Sovereign Space Bot</div>
+          <div class="bot-desc">通过语言卫生促进心理健康。一个私密对话空间，引导人类从认知混沌走向思维主权。</div>
+          <div class="bot-submit"><span>✅ 已提交</span> · MIT FII 创新者演讲 · 2026年5月27日</div>
+        </div>
+        <div class="bot-card bc2">
+          <div class="bot-badge">机器人2 · 保护</div>
+          <div class="bot-name">Sarinem.chat</div>
+          <div class="bot-desc">女性心理健康与保护。AI作为安全、无评判的陪伴者，将决策权归还给那些承担后果却无从选择的人。</div>
+          <div class="bot-submit"><span>✅ 已提交</span> · MIT 十周年全球挑战赛 · 2026年5月20日</div>
+        </div>
+        <div class="bot-card bc3">
+          <div class="bot-badge">机器人3 · 艺术与身体</div>
+          <div class="bot-name">@GigiMenyanyiBot</div>
+          <div class="bot-desc">通过声乐艺术和自我护理（口腔健康）促进心理健康。以爱好为入口——以恢复的尊严为出口。</div>
+          <div class="bot-submit"><span>🚧 准备中</span> · Gemini XPRIZE Foundation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">学术架构</p>
+      <h2>6大文明鸿沟——嵌入每个机器人</h2>
+      <p class="gaps-intro">这六大鸿沟并非由不同机器人分别处理，而是以比例性、情境性、辩证性的方式，同时嵌入三个机器人的算法架构之中。</p>
+      <table class="gap-table">
+        <thead>
+          <tr><th>鸿沟</th><th style="text-align:center">Sovereign</th><th style="text-align:center">Sarinem</th><th style="text-align:center">Gigi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>📡 罗杰斯扩散鸿沟</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>🫂 主权鸿沟</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🧠 NLP深层→表层鸿沟</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>📊 霍金斯意识鸿沟（LoC&lt;200）</td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+          <tr><td>🪟 乔哈里盲区鸿沟</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td></tr>
+          <tr><td>💼 清崎/马斯洛鸿沟</td><td class="dot-cell"><span class="dot-secondary"></span></td><td class="dot-cell"><span class="dot-primary"></span></td><td class="dot-cell"><span class="dot-secondary"></span></td></tr>
+        </tbody>
+      </table>
+      <p class="gap-note">● 主要响应 &nbsp;·&nbsp; ○ 次要背景 &nbsp;·&nbsp; 所有鸿沟以比例性-情境性-辩证性方式嵌入三个机器人架构</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">全球进展</p>
+      <h2>全球化10%——播种于全球土壤</h2>
+      <div class="submit-grid">
+        <div class="submit-card"><div class="submit-status done">✅ 已提交</div><div class="submit-name">MIT FII 创新者演讲</div><div class="submit-date">2026年5月27日 · Sovereign Space Bot</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ 已提交</div><div class="submit-name">MIT 十周年全球挑战赛</div><div class="submit-date">2026年5月20日 · Sarinem.chat</div></div>
+        <div class="submit-card"><div class="submit-status done">✅ 已提交</div><div class="submit-name">联合国开源周</div><div class="submit-date">工作论文 · 等待结果</div></div>
+        <div class="submit-card"><div class="submit-status prep">🚧 准备中</div><div class="submit-name">Gemini XPRIZE Foundation</div><div class="submit-date">@GigiMenyanyiBot 作为载体</div></div>
+      </div>
+      <div class="trl-badge" style="margin-top:1.25rem;">⚡ BEU 第3级 · 3个机器人同步运行 · VPS作为主权基础</div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">开放获取出版物</p>
+      <h2>学术基础</h2>
+      <p>所有研究在Zenodo和SSRN公开发表，CC BY-NC-ND 4.0许可证。</p>
+      <ul class="pub-list">
+        <li><span class="pub-tag foundation">基础</span><div class="pub-info"><div class="pub-title">From Laggard to Dignity: A CHO Open Source Framework for Closing the Humanity Gap</div><a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19666723</a></div></li>
+        <li><span class="pub-tag foundation">三元框架</span><div class="pub-info"><div class="pub-title">Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence</div><a href="https://doi.org/10.5281/zenodo.19002243" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19002243</a></div></li>
+        <li><span class="pub-tag sovereignty">主权</span><div class="pub-info"><div class="pub-title">Sarinem.chat: A Living Proof of the CHO Grand Formula</div><a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19938363</a></div></li>
+        <li><span class="pub-tag sovereignty">主权</span><div class="pub-info"><div class="pub-title">Kupu-Kupu Malam and the Sovereignty Gap: Who Bears the Consequence Without Holding the Choice?</div><a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19152827</a></div></li>
+        <li><span class="pub-tag nlp">NLP与AI</span><div class="pub-info"><div class="pub-title">AIRT::The Master Leveling Prompt: A Front-End User Methodology for Human-AI Cognitive Coherence</div><a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19484926</a></div></li>
+        <li><span class="pub-tag redteam">红队测试</span><div class="pub-info"><div class="pub-title">When Intelligence Creates Error: Inconsistency, Over-Reasoning & Sycophantic Confabulation in Multimodal AI</div><a href="https://doi.org/10.5281/zenodo.19652715" target="_blank" class="pub-doi">DOI: 10.5281/zenodo.19652715</a></div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-label">合作与资助</p>
+      <h2>致学术界与机构的邀请</h2>
+      <p>本研究采用<em>论文贡献</em>模式——有据可查的实质性贡献。如果您所在的机构在这三机器人生态系统中看到了博士研究、数字人文资助或基于AI的教育合作潜力，这是一个开放的对话邀请。</p>
+      <p>研究者欢迎探索与本研究方向契合的博士奖学金机会——尤其在数字包容、以人为本的AI、NLP、心理健康技术或全球健康传播领域有优势的机构。</p>
+      <div class="cta-box">
+        <h3>有意合作？</h3>
+        <p>打开Telegram机器人开始直接对话，或在Zenodo CHO社区浏览所有出版物。</p>
+        <div class="cta-links">
+          <a href="https://t.me/GigiMenyanyiBot" target="_blank" class="cta-btn primary">🚀 @GigiMenyanyiBot</a>
+          <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" class="cta-btn secondary">📚 Zenodo 社区</a>
+          <a href="framework.html" class="cta-btn secondary">🧠 CHO 框架</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-label">研究者</p>
+      <div class="profile-row">
+        <div class="profile-avatar">GKT</div>
+        <div class="profile-info">
+          <p class="profile-name">Go Kian Tik（Mbah Hogi Bejo™）</p>
+          <p>首席人文官 · Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+          <p style="font-size:0.8rem;color:var(--ink-muted);">独立研究者：AI、人文学科、数字教育、NLP。16项头衔 · 30余篇DOI · 4项全球提交。</p>
+        </div>
+      </div>
+    </div>
+    <div class="back-nav">
+      <a href="index.html">← 首页</a><a href="about.html">关于</a><a href="framework.html">CHO框架</a><a href="dukung.html">支持研究</a><a href="privacy.html">隐私政策</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function setLang(lang){
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    el.classList.toggle('active', el.dataset.lang===lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach((btn,i)=>{
+    const langs=['id','en','fr','cn'];
+    btn.classList.toggle('active', langs[i]===lang);
+    btn.setAttribute('aria-pressed', langs[i]===lang?'true':'false');
+  });
+  const map={id:'id',en:'en',fr:'fr',cn:'zh-Hans'};
+  document.documentElement.lang=map[lang]||lang;
+}
+try{const s=localStorage.getItem('gigi-lang');if(s)setLang(s);}catch(e){}
+document.querySelectorAll('.lang-btn').forEach((btn,i)=>{
+  const langs=['id','en','fr','cn'];
+  btn.addEventListener('click',()=>{
+    setLang(langs[i]);
+    try{localStorage.setItem('gigi-lang',langs[i]);}catch(e){}
+  });
+});
+</script>
+</body>
+</html>

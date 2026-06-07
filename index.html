@@ -1,766 +1,599 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CHO In Action Series — Portal</title>
-<style>
-  :root{--purple-50:#EEEDFE;--purple-100:#CECBF6;--purple-200:#AFA9EC;--purple-400:#7F77DD;--purple-600:#534AB7;--purple-800:#3C3489;--purple-900:#26215C;--teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-200:#5DCAA5;--teal-600:#0F6E56;--teal-800:#085041;--blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-200:#85B7EB;--blue-600:#185FA5;--blue-800:#0C447C;--amber-50:#FAEEDA;--amber-100:#FAC775;--amber-200:#EF9F27;--amber-600:#854F0B;--amber-800:#633806;--coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-200:#F0997B;--coral-600:#993C1D;--coral-800:#712B13;--gray-50:#F1EFE8;--gray-100:#D3D1C7;--gray-200:#B4B2A9;--gray-600:#5F5E5A;--gray-800:#444441;--bg:#fff;--bg2:#F7F6F1;--bg3:#EFEDE6;--text:#1a1a18;--text-sec:#5F5E5A;--border:rgba(0,0,0,0.09);--border-med:rgba(0,0,0,0.15);}
-  @media(prefers-color-scheme:dark){:root{--purple-50:#26215C;--purple-100:#3C3489;--purple-200:#534AB7;--purple-400:#7F77DD;--purple-600:#AFA9EC;--purple-800:#CECBF6;--purple-900:#EEEDFE;--teal-50:#04342C;--teal-100:#085041;--teal-200:#0F6E56;--teal-600:#5DCAA5;--teal-800:#9FE1CB;--blue-50:#042C53;--blue-100:#0C447C;--blue-200:#185FA5;--blue-600:#85B7EB;--blue-800:#B5D4F4;--amber-50:#412402;--amber-100:#633806;--amber-200:#854F0B;--amber-600:#EF9F27;--amber-800:#FAC775;--coral-50:#4A1B0C;--coral-100:#712B13;--coral-200:#993C1D;--coral-600:#F0997B;--coral-800:#F5C4B3;--gray-50:#2C2C2A;--gray-100:#444441;--gray-200:#5F5E5A;--gray-600:#B4B2A9;--gray-800:#D3D1C7;--bg:#1a1a18;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text-sec:#B4B2A9;--border:rgba(255,255,255,0.08);--border-med:rgba(255,255,255,0.14);}}
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--bg);font-family:'Georgia',serif;color:var(--text);line-height:1.7;min-height:100vh;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Go Kian Tik" />
+  <meta name="description" content="Belajar teknik menyanyi sambil merawat kesehatan gigi dan mulut bersama GigiMenyanyiBot." />
+  <meta name="keywords" content="GigiMenyanyiBot, menyanyi, kesehatan gigi, kesehatan mulut, vocal training, Telegram bot" />
+  <title>Gigi Sehat Menyanyi | GigiMenyanyiBot</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .topbar{position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;align-items:center;gap:16px;}
-  .topbar-site{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-sec);}
-  .topbar-spacer{flex:1;}
-  .lang-toggle{display:flex;border:1px solid var(--border-med);border-radius:20px;overflow:hidden;}
-  .lang-btn{background:none;border:none;padding:5px 12px;font-size:11px;font-weight:600;font-family:'Georgia',serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec);transition:background .15s,color .15s;}
-  .lang-btn.active{background:var(--purple-600);color:#fff;}
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --surface2: #1e1e1e;
+      --border: #2a2a2a;
+      --accent: #f5c842;
+      --accent2: #e8a020;
+      --text: #f0ece3;
+      --muted: #888;
+      --radius: 12px;
+    }
 
-  .hero{padding:48px 28px 36px;max-width:800px;margin:0 auto;}
-  .hero-eyebrow{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-sec);margin-bottom:16px;}
-  .hero-title{font-size:28px;font-weight:600;line-height:1.25;margin-bottom:12px;}
-  .hero-title em{font-style:normal;color:var(--purple-600);}
-  .hero-sub{font-size:14px;color:var(--text-sec);max-width:560px;margin-bottom:28px;line-height:1.6;}
-  .formula-strip{background:var(--purple-50);border:1px solid var(--purple-200);border-radius:12px;padding:20px 24px;margin-bottom:44px;}
-  .formula-strip .eq{font-size:17px;font-weight:600;color:var(--purple-800);letter-spacing:0.02em;margin-bottom:4px;}
-  .formula-strip .sub{font-size:12px;color:var(--purple-600);}
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
 
-  .section-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-sec);padding:0 28px;max-width:800px;margin:0 auto 14px;}
-  .main-card{max-width:800px;margin:0 auto 12px;padding:0 28px;}
-  .card-link{display:block;text-decoration:none;border-radius:14px;border:1.5px solid var(--purple-200);background:var(--purple-50);padding:24px 28px;transition:transform .15s,box-shadow .15s;position:relative;}
-  .card-link:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(83,74,183,0.12);}
-  .card-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px;background:var(--purple-200);color:var(--purple-900);}
-  .card-title{font-size:18px;font-weight:600;color:var(--purple-800);margin-bottom:4px;}
-  .card-desc{font-size:13px;color:var(--purple-600);line-height:1.5;}
-  .card-arrow{position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--purple-400);}
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .nav-brand {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'Georgia', serif;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: var(--surface2);
+    }
+    .nav-links a.active {
+      color: var(--accent);
+    }
 
-  .paper-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:800px;margin:0 auto 12px;padding:0 28px;}
-  .paper-card{display:block;text-decoration:none;border-radius:12px;padding:20px;border:1px solid transparent;transition:transform .15s;position:relative;}
-  .paper-card:hover{transform:translateY(-2px);}
-  .paper-card.p1{background:var(--teal-50);border-color:var(--teal-200);}
-  .paper-card.p2{background:var(--blue-50);border-color:var(--blue-200);}
-  .paper-card.p3{background:var(--amber-50);border-color:var(--amber-200);}
-  .paper-card.p4{background:var(--coral-50);border-color:var(--coral-200);}
-  .pc-num{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
-  .p1 .pc-num{color:var(--teal-600);}.p2 .pc-num{color:var(--blue-600);}.p3 .pc-num{color:var(--amber-600);}.p4 .pc-num{color:var(--coral-600);}
-  .pc-role{font-size:15px;font-weight:600;margin-bottom:4px;}
-  .p1 .pc-role{color:var(--teal-800);}.p2 .pc-role{color:var(--blue-800);}.p3 .pc-role{color:var(--amber-800);}.p4 .pc-role{color:var(--coral-800);}
-  .pc-title{font-size:12px;margin-bottom:10px;line-height:1.4;}
-  .p1 .pc-title{color:var(--teal-600);}.p2 .pc-title{color:var(--blue-600);}.p3 .pc-title{color:var(--amber-600);}.p4 .pc-title{color:var(--coral-600);}
-  .pc-var{font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-block;}
-  .p1 .pc-var{background:var(--teal-100);color:var(--teal-800);}.p2 .pc-var{background:var(--blue-100);color:var(--blue-800);}.p3 .pc-var{background:var(--amber-100);color:var(--amber-800);}.p4 .pc-var{background:var(--coral-100);color:var(--coral-800);}
-  .pc-badge-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-  .pc-doi-badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:3px;background:var(--gray-50);color:var(--gray-600);border:1px solid var(--gray-100);text-decoration:none;transition:background .15s,color .15s;}
-  .pc-doi-badge:hover{background:var(--purple-50);color:var(--purple-600);border-color:var(--purple-200);}
-  .pc-arrow{position:absolute;right:16px;bottom:16px;font-size:14px;opacity:0.4;}
-  .p1 .pc-arrow{color:var(--teal-600);}.p2 .pc-arrow{color:var(--blue-600);}.p3 .pc-arrow{color:var(--amber-600);}.p4 .pc-arrow{color:var(--coral-600);}
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
 
-  .deep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:800px;margin:0 auto 48px;padding:0 28px;}
-  .deep-card{display:block;text-decoration:none;border-radius:10px;padding:16px;background:var(--bg2);border:1px solid var(--border);transition:transform .15s;}
-  .deep-card:hover{transform:translateY(-2px);}
-  .dc-icon{font-size:20px;margin-bottom:8px;}
-  .dc-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
-  .dc-desc{font-size:11px;color:var(--text-sec);line-height:1.4;}
+    @media (max-width: 640px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 58px;
+        left: 0; right: 0;
+        background: rgba(13,13,13,0.97);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        gap: 0.5rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1rem; padding: 0.6rem 0; }
+    }
 
-  .site-footer{background:var(--bg3);border-top:1px solid var(--border);padding:32px 28px;text-align:center;}
-  .site-footer .fml{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;}
-  .site-footer .fml em{font-style:normal;color:var(--purple-600);}
-  .site-footer .meta{font-size:11px;color:var(--text-sec);letter-spacing:0.04em;}
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, #1a1400 0%, var(--bg) 70%);
+    }
+    .hero-emoji { font-size: 2rem; letter-spacing: 0.3rem; margin-bottom: 1.5rem; }
+    .hero img { max-width: 220px; margin-bottom: 1.5rem; border-radius: 16px; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-tagline { color: var(--muted); font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .hero-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center; margin-bottom: 2rem;
+    }
+    .pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .hero-banner { max-width: 640px; width: 100%; border-radius: 12px; margin-top: 2.5rem; }
 
-  :not(body)[class~="en"] { display:none !important; }
-  body.en :not(body)[class~="en"] { display:block !important; }
-  body.en :not(body)[class~="id"] { display:none !important; }
-  body.en span[class~="en"] { display:inline !important; }
-  span[class~="id"] { display:inline; }
-  body.en span[class~="id"] { display:none !important; }
+    /* ── SECTIONS ── */
+    section { padding: 3.5rem 1.5rem; max-width: 860px; margin: 0 auto; }
+    section h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    .section-sub { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-  @media(max-width:540px){.paper-grid{grid-template-columns:1fr;}.deep-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:22px;}}
+    /* playlist */
+    .playlist-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .playlist-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .playlist-info h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 0.15rem; }
+    .playlist-info p { font-size: 0.85rem; color: var(--muted); }
+    .playlist-item audio { width: 100%; margin-top: 0.75rem; }
+    .playlist-item-inner { width: 100%; }
+    .special-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
 
-  .nav-dropdown{position:relative;}
-  .nav-dropdown-btn{background:none;border:1px solid var(--border-med);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:600;font-family:'Georgia',serif;letter-spacing:0.08em;cursor:pointer;color:var(--text-sec);display:flex;align-items:center;gap:5px;transition:background .15s,color .15s;white-space:nowrap;}
-  .nav-dropdown-btn:hover,.nav-dropdown.open .nav-dropdown-btn{background:var(--purple-50);color:var(--purple-600);border-color:var(--purple-200);}
-  .nav-dropdown-btn .chevron{font-size:9px;transition:transform .2s;}
-  .nav-dropdown.open .nav-dropdown-btn .chevron{transform:rotate(180deg);}
-  .nav-dropdown-menu{position:absolute;top:calc(100% + 7px);right:0;min-width:220px;background:var(--bg);border:1px solid var(--border-med);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,0.12);overflow:hidden;z-index:300;visibility:hidden;opacity:0;pointer-events:none;transform:translateY(-4px);transition:opacity .15s,transform .15s,visibility .15s;}
-  .nav-dropdown.open .nav-dropdown-menu{visibility:visible !important;opacity:1 !important;pointer-events:auto !important;transform:translateY(0) !important;}
-  .nav-dropdown-menu.scrollable{max-height:72vh;overflow-y:auto;}
-  .ddm-section-header{display:flex;align-items:center;justify-content:space-between;padding:7px 16px;font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-sec);border-top:1px solid var(--border);cursor:pointer;user-select:none;transition:background .12s;}
-  .ddm-section-header:first-child{border-top:none;}
-  .ddm-section-header:hover{background:var(--bg2);color:var(--purple-600);}
-  .ddm-section-header .ddm-chev{font-size:9px;transition:transform .2s;opacity:0.5;}
-  .ddm-section-header.open .ddm-chev{transform:rotate(180deg);}
-  .ddm-section-body{overflow:hidden;max-height:0;transition:max-height .25s ease;}
-  .ddm-section-body.open{max-height:600px;}
-  .nav-dropdown-menu a{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:12px;font-weight:500;font-family:'Georgia',serif;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:background .12s;}
-  .nav-dropdown-menu a:last-child{border-bottom:none;}
-  .nav-dropdown-menu a:hover{background:var(--purple-50);color:var(--purple-600);}
-  .nav-dropdown-menu a .item-icon{font-size:14px;flex-shrink:0;}
-  .nav-dropdown-menu a .item-label{flex:1;}
-  .nav-dropdown-menu a .item-badge{font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 6px;border-radius:8px;background:var(--purple-200);color:var(--purple-900);}
+    /* komentar */
+    .komentar-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .komentar-box h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+    .komentar-box textarea {
+      width: 100%;
+      min-height: 80px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.75rem;
+      resize: vertical;
+      margin-bottom: 0.75rem;
+    }
+    .btn-send {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .komentar-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
 
-  /* ── DISCLAIMER STYLES ── */
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+    /* cards */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .card-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.85rem; color: var(--muted); }
 
-  .cho-full-disclaimer{width:100%;overflow:hidden;position:relative;border-top:1px solid rgba(201,168,76,0.2);}
-  .cho-experimental{background:linear-gradient(135deg,#1a1f2c 0%,#2a2f3f 100%);color:rgba(232,238,242,0.92);padding:1.8rem 2rem;border-bottom:1px solid rgba(201,168,76,0.25);position:relative;overflow:hidden;}
-  .cho-experimental::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;opacity:.5;}
-  .cho-experimental > *{position:relative;}
-  .cho-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:40px;padding:.28rem .9rem;font-family:'DM Mono',monospace;font-size:.66rem;font-weight:500;letter-spacing:.09em;margin-bottom:1rem;color:#C9A84C;text-transform:uppercase;}
-  .cho-experimental__title{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;font-style:italic;margin-bottom:.8rem;color:#F2EDD7;}
-  .cho-experimental__body{font-size:.87rem;line-height:1.68;opacity:.92;margin-bottom:.6rem;color:rgba(232,238,242,0.92);}
-  .cho-experimental__body a{color:#C9A84C;text-decoration:none;border-bottom:1px dotted rgba(201,168,76,0.45);transition:border-color .15s;}
-  .cho-experimental__body a:hover{border-color:#C9A84C;}
-  .cho-warning-strip{display:flex;align-items:flex-start;gap:.7rem;background:rgba(201,168,76,0.07);border-left:3px solid #C9A84C;border-radius:0 3px 3px 0;padding:.75rem 1rem;margin:1rem 0 .4rem;font-size:.82rem;line-height:1.6;color:rgba(232,238,242,0.88);}
-  .cho-warning-strip i{color:#C9A84C;font-size:.9rem;margin-top:.15rem;flex-shrink:0;}
-  .cho-warning-strip strong{color:#C9A84C;}
-  .cho-experimental__meta{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin-top:1rem;font-family:'DM Mono',monospace;font-size:.67rem;color:#b0bec8;letter-spacing:.04em;border-top:1px solid rgba(255,255,255,0.08);padding-top:.85rem;}
-  .cho-experimental__meta span{display:inline-flex;align-items:center;gap:.35rem;}
-  .cho-experimental__meta a{color:#7A6030;text-decoration:none;}
-  .cho-experimental__meta a:hover{color:#C9A84C;}
-  .cho-divider-7030{background:linear-gradient(90deg,#1a1f2c 0%,#1a1f2c 68%,#0e2318 70%,#0a1d14 100%);display:flex;align-items:stretch;height:36px;position:relative;overflow:hidden;}
-  .cho-divider-7030__left{flex:70;display:flex;align-items:center;padding-left:2rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#7A6030;gap:.5rem;}
-  .cho-divider-7030__line{width:1px;background:linear-gradient(to bottom,transparent,#7A6030,transparent);opacity:.5;}
-  .cho-divider-7030__right{flex:30;display:flex;align-items:center;padding-left:1rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#8fc49d;opacity:.8;gap:.5rem;}
-  .cho-invitation{background:linear-gradient(135deg,#0a1d14 0%,#0d2318 60%,#0e1a10 100%);color:rgba(232,242,236,0.92);padding:1.8rem 2rem;border-bottom:3px solid #4a7c59;position:relative;overflow:hidden;}
-  .cho-invitation::after{content:'';position:absolute;bottom:-20px;right:-20px;width:160px;height:160px;background:radial-gradient(circle at center,rgba(74,124,89,0.12) 0%,transparent 70%);pointer-events:none;}
-  .cho-invitation > *{position:relative;}
-  .cho-invitation__badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(74,124,89,0.15);border:1px solid rgba(143,196,157,0.25);border-radius:40px;padding:.28rem .9rem;font-family:'DM Mono',monospace;font-size:.66rem;font-weight:500;letter-spacing:.09em;margin-bottom:1rem;color:#8fc49d;text-transform:uppercase;}
-  .cho-invitation__title{font-family:'Lora',serif;font-size:1.1rem;font-weight:600;font-style:italic;margin-bottom:.8rem;color:#e4f0e8;}
-  .cho-invitation__body{font-size:.87rem;line-height:1.7;opacity:.92;margin-bottom:.7rem;color:rgba(232,242,236,0.92);}
-  .cho-invitation__body a{color:#8fc49d;text-decoration:none;border-bottom:1px dotted rgba(143,196,157,0.4);transition:border-color .15s;}
-  .cho-invitation__body a:hover{border-color:#8fc49d;}
-  .cho-invitation__body strong{color:#c8e8cf;}
-  .cho-invitation__body em{color:#a8d4b4;font-style:italic;}
-  .cho-seed-callout{display:flex;gap:1rem;background:rgba(74,124,89,0.1);border:1px solid rgba(143,196,157,0.15);border-radius:4px;padding:1rem 1.1rem;margin:1rem 0;}
-  .cho-seed-callout__icon{font-size:1.5rem;line-height:1;flex-shrink:0;padding-top:.1rem;}
-  .cho-seed-callout__text{font-size:.86rem;line-height:1.65;color:rgba(232,242,236,0.88);}
-  .cho-seed-callout__text strong{color:#8fc49d;}
-  .cho-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.9rem 0 .4rem;}
-  .cho-tag{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.07em;padding:.2rem .65rem;border-radius:3px;background:rgba(74,124,89,0.15);border:1px solid rgba(143,196,157,0.2);color:#8fc49d;text-transform:uppercase;}
-  .cho-invitation__cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:.8rem;font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.06em;color:#8fc49d;text-decoration:none;border:1px solid rgba(143,196,157,0.3);border-radius:3px;padding:.4rem .9rem;transition:background .15s,border-color .15s;}
-  .cho-invitation__cta:hover{background:rgba(74,124,89,0.2);border-color:rgba(143,196,157,0.5);}
-  .cho-invitation__meta{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin-top:1rem;font-family:'DM Mono',monospace;font-size:.67rem;color:rgba(143,196,157,0.55);letter-spacing:.04em;border-top:1px solid rgba(143,196,157,0.1);padding-top:.85rem;}
-  .cho-invitation__meta span{display:inline-flex;align-items:center;gap:.35rem;}
+    /* checklist */
+    .checklist { list-style: none; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-mark { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
 
-  /* ── Z3SCI FOOTER ── */
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap');
-  .z3sci-footer{border-top:.5px solid rgba(201,168,76,0.15);padding:2rem 2rem 1.8rem;text-align:center;position:relative;overflow:hidden;background:#0e1017;}
-  .z3sci-footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:.5px;background:linear-gradient(90deg,transparent,#C9A84C,transparent);}
-  .z3sci-footer-avatar{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#C9A84C 0%,#7A6030 100%);font-size:12px;margin-bottom:.8rem;box-shadow:0 0 12px rgba(201,168,76,0.2);}
-  .z3sci-footer-name{font-family:'DM Mono',monospace;font-size:10px;color:#A09880;letter-spacing:.08em;line-height:2;margin-bottom:.2rem;}
-  .z3sci-footer-name strong{color:#F2EDD7;font-weight:500;}
-  .z3sci-footer-cn{font-family:'Noto Serif SC',serif;font-size:.95rem;color:#7A6030;letter-spacing:.1em;display:block;margin-bottom:.5rem;}
-  .z3sci-footer-copy{font-family:'DM Mono',monospace;font-size:9px;color:#7A7260;letter-spacing:.07em;line-height:2;}
-  .z3sci-footer-copy .year{color:#C9A84C;}
-  .z3sci-footer-copy a{color:#7A6030;text-decoration:none;border-bottom:.5px solid rgba(201,168,76,0.25);transition:color .15s,border-color .15s;}
-  .z3sci-footer-copy a:hover{color:#C9A84C;border-color:rgba(201,168,76,0.6);}
-  .z3sci-footer-rights{font-family:'DM Mono',monospace;font-size:8px;color:#7A7260;letter-spacing:.12em;text-transform:uppercase;margin-top:.4rem;opacity:.7;}
+    /* tips */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+    .tip-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .tip-card .tip-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .tip-card p { font-size: 0.82rem; color: var(--muted); }
 
-  @media(max-width:600px){
-    .cho-experimental,.cho-invitation{padding:1.4rem 1.25rem;}
-    .cho-divider-7030__left{padding-left:1.25rem;}
-    .cho-seed-callout{flex-direction:column;gap:.5rem;}
-  }
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    /* user types */
+    .user-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .user-tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+
+    /* gallery */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .gallery img { width: 100%; border-radius: var(--radius); object-fit: cover; }
+
+    /* roadmap */
+    .roadmap { list-style: none; }
+    .roadmap li {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem;
+    }
+    .roadmap li:last-child { border-bottom: none; }
+
+    /* tentang box */
+    .about-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .about-box p { margin-bottom: 0.75rem; }
+    .about-box strong { color: var(--accent); }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, #1a1400 0%, transparent 70%);
+      padding: 3rem 1.5rem;
+    }
+    .cta-section h2 { color: var(--accent); margin-bottom: 0.5rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* developer */
+    .dev-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .dev-section h3 { color: var(--accent); margin-bottom: 0.3rem; }
+    .dev-section .dev-role { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .disclaimer-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .disclaimer-box strong { color: var(--muted); }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    footer .footer-brand { color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem; }
+  </style>
 </head>
-<body class="id">
+<body>
 
-<div class="topbar">
-  <span class="topbar-site">CHO In Action Series</span>
-  <div class="topbar-spacer"></div>
-  
-  <div class="nav-dropdown" id="dd-airt">
-  <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-airt')">
-    AI Red Teamer
-    <span class="chevron">▾</span>
+<!-- ── NAVIGATION (MENU SUDAH DIPERBARUI dengan international.html) ── -->
+<nav>
+  <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
   </button>
-  <div class="nav-dropdown-menu scrollable" style="min-width: 280px;">
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Beranda</a></li>
+    <li><a href="international.html">🌐 International</a></li>
+    <li><a href="about.html">Tentang</a></li>
+    <li><a href="framework.html">Framework</a></li>
+    <li><a href="dukung.html">Dukung</a></li>
+    <li><a href="privacy.html">Privasi</a></li>
+  </ul>
+</nav>
 
-    <!-- ========== SUB-MENU 1: Student & Jobseekers ========== -->
-    <div class="ddm-section-header open" onclick="toggleSection(this)">
-      🎓 Student &amp; Jobseekers
-      <span class="ddm-chev">▾</span>
-    </div>
-    <div class="ddm-section-body open">
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_v4_1_interactive_prompt" target="_blank" rel="noopener">
-        <span class="item-icon">🛡️</span>
-        <span class="item-label">AIRT Anti-Plagiarism V4.1</span>
-      </a>
-      <a href="https://gokiantik.github.io/z3sci_UN/AIRT_v4_2_interactive_prompt.html" target="_blank" rel="noopener">
-        <span class="item-icon">🛡️</span>
-        <span class="item-label">AIRT Anti-Plagiarism V4.2</span>
-        <span class="item-badge">FEU</span>
-      </a>
-      <a href="https://gokiantik.github.io/z3sci_UN/airt_anti_plagiarism_pro_v4_5_Full.html" target="_blank" rel="noopener">
-        <span class="item-icon">🛡️</span>
-        <span class="item-label">AIRT Anti-Plagiarism V4.5</span>
-        <span class="item-badge">PDF</span>
-      </a>
-      <a href="https://gokiantik.github.io/z3sci_UN/SiapKerjaPintarPakaiAI_V1_9.html" target="_blank" rel="noopener">
-        <span class="item-icon">🧠</span>
-        <span class="item-label">MLP Career Readiness v1.9</span>
-        <span class="item-badge">NEW</span>
-      </a>
-    </div>
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-emoji">🎵 🎶 ♪ 🎵 ♫</div>
+  <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyi.png" alt="Logo Gigi Sehat Menyanyi" />
+  <h1>😁 Gigi Sehat Menyanyi 💋</h1>
+  <p class="hero-tagline">Merdu Menyanyi dengan Gigi dan Mulut yang Sehat</p>
+  <div class="hero-pills">
+    <span class="pill">🎵 Edukasi</span>
+    <span class="pill">🦷 Kesehatan</span>
+    <span class="pill">🎓 Seni</span>
+    <span class="pill">☕ Kebersamaan</span>
+  </div>
+  <a href="https://t.me/GigiMenyanyiBot" class="btn-primary">🚀 Buka Telegram Bot</a>
+  <br />
+  <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal.png" alt="Gigi Sehat Menyanyi Banner" class="hero-banner" />
+</header>
 
-    <!-- ========== SUB-MENU 2: Humanity ========== -->
-    <div class="ddm-section-header" onclick="toggleSection(this)">
-      🌱 Humanity
-      <span class="ddm-chev">▾</span>
-    </div>
-    <div class="ddm-section-body">
-      <a href="https://superherocafeinside.com/sarinem.chat" target="_blank" rel="noopener">
-        <span class="item-icon">☕</span>
-        <span class="item-label">Sarinem Chat</span>
-      </a>
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/abrahamic_stress_test_tool.html" target="_blank" rel="noopener">
-        <span class="item-icon">⚖️</span>
-        <span class="item-label">AIRT Abrahamic Stress Test</span>
-      </a>
-      <a href="#" target="_blank" rel="noopener">
-        <span class="item-icon">🕊️</span>
-        <span class="item-label">AIRT Tri Dharma Stress Test</span>
-        <span class="item-badge">SOON</span>
-      </a>
-      <a href="#" target="_blank" rel="noopener">
-        <span class="item-icon">🧘</span>
-        <span class="item-label">AIRT Spiritualist Stress Test</span>
-        <span class="item-badge">SOON</span>
-      </a>
-    </div>
+<hr class="divider" />
 
-    <!-- ========== SUB-MENU 3: AI Productivity ========== -->
-    <div class="ddm-section-header" onclick="toggleSection(this)">
-      ⚡ AI Productivity
-      <span class="ddm-chev">▾</span>
-    </div>
-    <div class="ddm-section-body">
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/AIRT_MLP_Lite_interactive_prompt.html" target="_blank" rel="noopener">
-        <span class="item-icon">🧩</span>
-        <span class="item-label">AIRT Multi Leveling Prompt v1.0</span>
-        <span class="item-badge">NEW</span>
-      </a>
-    </div>
+<!-- ── PLAYLIST ── -->
+<section>
+  <h2>🎵 Playlist Gigi Sehat Menyanyi</h2>
+  <p class="section-sub">Tiga lagu perdana — nikmati, rasakan, dan bernyanyi bersama!</p>
 
-    <!-- ========== MENU LAMA (tetap dipertahankan) ========== -->
-    <!-- My Open Kitchen -->
-    <div style="border-top: 1px solid var(--border); margin: 8px 12px 4px;"></div>
-    <a href="https://gokiantik.github.io/z3sci_UN/my_open_kitchen.html" target="_blank" rel="noopener">
-      <span class="item-icon">🍳</span>
-      <span class="item-label">My Open Kitchen</span>
-    </a>
+  <div class="playlist-item">
+    <div class="playlist-icon">🦷</div>
+    <div class="playlist-item-inner">
+      <div class="playlist-info">
+        <h3>Panggung Pertama</h3>
+        <p>🎼 Lyria · Gigi Sehat Menyanyi</p>
+      </div>
+      <audio controls>
+        <source src="audio/Panggung_Pertama.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
 
- 
+  <div class="playlist-item">
+    <div class="playlist-icon">🎵</div>
+    <div class="playlist-item-inner">
+      <div class="playlist-info">
+        <h3>Gigi Sehat Suara Hebat</h3>
+        <p>🎼 Lyria · Gigi Sehat Menyanyi <span class="special-badge">Suara Koko</span></p>
+      </div>
+      <audio controls>
+        <source src="audio/Gigi_Sehat_Suara_Hebat.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
+
+  <div class="playlist-item">
+    <div class="playlist-icon">🎤</div>
+    <div class="playlist-item-inner">
+      <div class="playlist-info">
+        <h3>Kupu-Kupu Malam (Siang-Siang)</h3>
+        <p>Go Kian Tik · Mbah Hogi Bejo™ 😄</p>
+      </div>
+      <audio controls>
+        <source src="audio/kupu2malam_siang2.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
+
+  <div class="komentar-box" style="margin-top:1.5rem">
+    <h3>💬 Gimana Suara Kokonya?</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Tulis komentarmu — Koko baca semua! 😁</p>
+    <textarea placeholder="Tulis komentar di sini..."></textarea>
+    <div>
+      <button class="btn-send" onclick="window.open('https://t.me/GigiMenyanyiBot','_blank')">Kirim 🚀</button>
+      <p class="komentar-note">Komentar dikirim ke <a href="https://t.me/GigiMenyanyiBot" style="color:var(--accent)">@GigiMenyanyiBot</a></p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── TENTANG ── -->
+<section>
+  <h2>Tentang GigiMenyanyiBot</h2>
+  <div class="about-box">
+    <p>GigiMenyanyiBot adalah eksperimen edukasi digital yang menggabungkan teknik menyanyi, kesehatan gigi dan mulut, musik sebagai media pembelajaran, serta komunitas positif untuk belajar bersama.</p>
+    <p>Dikembangkan dalam ekosistem <strong>Zì Zhǔ Zhě 自主者</strong> dan <strong>Superhero Café Inside</strong> — ruang pertumbuhan manusia yang merdeka dan berdaya.</p>
+    <p style="color:var(--accent);font-style:italic">Sehat Giginya · Merdu Suaranya · Percaya Diri Bersinarnya! 💫</p>
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal3.png" alt="Tentang GigiMenyanyiBot" style="max-width:100%;border-radius:10px;margin-top:1rem" />
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── PILAR ── -->
+<section>
+  <h2>Yang Bisa Dipelajari</h2>
+  <p class="section-sub">Lima pilar ekosistem GigiMenyanyiBot untuk pertumbuhan holistik.</p>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🎵</div><h3>Dengarkan Lagu Merdu</h3><p>Belajar teknik menyanyi yang benar melalui lagu dan latihan vokal yang menyenangkan.</p></div>
+    <div class="card"><div class="card-icon">🦷</div><h3>Edukasi Kesehatan Gigi</h3><p>Menjaga kesehatan gigi dan mulut untuk artikulasi optimal dan kepercayaan diri tampil maksimal.</p></div>
+    <div class="card"><div class="card-icon">🎓</div><h3>Kursus Privat Menyanyi</h3><p>Pendampingan sesuai tingkat kemampuan bersama mentor berpengalaman.</p></div>
+    <div class="card"><div class="card-icon">☕</div><h3>Komunitas Positif</h3><p>Ngobrol santai, berbagi pengalaman, dan bertumbuh bersama dalam komunitas yang menginspirasi.</p></div>
+    <div class="card"><div class="card-icon">💪</div><h3>Bangun Percaya Diri</h3><p>Temukan potensimu, berani tampil, dan menginspirasi orang-orang di sekitarmu.</p></div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── UNTUK SIAPA ── -->
+<section>
+  <h2>Untuk Siapa?</h2>
+  <p class="section-sub">GigiMenyanyiBot hadir untuk semua pecinta musik dan suara.</p>
+  <div class="user-grid">
+    <div class="user-tag">🎤 Penyanyi Profesional</div>
+    <div class="user-tag">🎹 Karaoke Enthusiast</div>
+    <div class="user-tag">👦 Anak &amp; Remaja</div>
+    <div class="user-tag">👨‍👩‍👧 Semua Usia</div>
+    <div class="user-tag">🤝 Komunitas &amp; Hobi</div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── KENAPA GIGI ── -->
+<section>
+  <h2>Kenapa Gigi Sehat Penting untuk Menyanyi?</h2>
+  <ul class="checklist">
+    <li><span class="check-mark">✓</span> Artikulasi jelas &amp; vokal lebih optimal</li>
+    <li><span class="check-mark">✓</span> Napas lebih nyaman dan teratur</li>
+    <li><span class="check-mark">✓</span> Mulut segar &amp; bebas bau — percaya diri tampil</li>
+    <li><span class="check-mark">✓</span> Senyum sehat membuat penampilan makin maksimal</li>
+    <li><span class="check-mark">✓</span> Suara merdu lebih konsisten sepanjang waktu</li>
+    <li><span class="check-mark">✓</span> Terhindar dari masalah gigi yang mengganggu latihan</li>
+  </ul>
+</section>
+
+<hr class="divider" />
+
+<!-- ── TIPS ── -->
+<section>
+  <h2>Tips Sehat Harian 🦷</h2>
+  <p class="section-sub">Kebiasaan kecil, dampak besar untuk suara &amp; senyummu.</p>
+  <div class="tips-grid">
+    <div class="tip-card"><div class="tip-icon">🪥</div><p>Sikat Gigi 2x Sehari</p></div>
+    <div class="tip-card"><div class="tip-icon">👅</div><p>Bersihkan Lidah</p></div>
+    <div class="tip-card"><div class="tip-icon">💧</div><p>Minum Air Cukup</p></div>
+    <div class="tip-card"><div class="tip-icon">🚫</div><p>Hindari Makanan Manis Berlebih</p></div>
+    <div class="tip-card"><div class="tip-icon">🏥</div><p>Periksa Gigi Rutin</p></div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── GALERI ── -->
+<section>
+  <h2>Galeri Visual</h2>
+  <p class="section-sub">Identitas visual ekosistem Gigi Sehat Menyanyi.</p>
+  <div class="gallery">
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyi2.png" alt="Gigi Sehat Menyanyi 2" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal2.png" alt="Banner Horizontal 2" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal4.png" alt="Banner Horizontal 4" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiVertikal2.png" alt="Vertikal 2" />
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ── ROADMAP ── -->
+<section>
+  <h2>Jejak Digital Pengembangan</h2>
+  <ul class="roadmap">
+    <li>✅ Konsep GigiMenyanyiBot</li>
+    <li>✅ Identitas Visual Publik</li>
+    <li>✅ Landing Page Publik</li>
+    <li>✅ Telegram Bot Publik — <a href="https://t.me/GigiMenyanyiBot" style="color:var(--accent)">@GigiMenyanyiBot</a></li>
+    <li>✅ Lagu Perdana: Panggung Pertama 🎵</li>
+    <li>✅ Dokumentasi Pengembangan Berkelanjutan</li>
+  </ul>
+  <p style="color:var(--muted);font-size:0.85rem;margin-top:1rem">Halaman ini berfungsi sebagai catatan publik terbuka atas pengembangan GigiMenyanyiBot sebagai inisiatif edukasi digital.</p>
+</section>
+
+<hr class="divider" />
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <h2>Mulai Sekarang! 🚀</h2>
+  <p>Rawat Gigimu, Biar Suaramu Merduuuuuu... 🎶</p>
+  <a href="https://t.me/GigiMenyanyiBot" class="btn-primary">🚀 @GigiMenyanyiBot</a>
 </div>
-  </div>
-  <div class="nav-dropdown" id="dd-whoami">
-    <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-whoami')">
-      Who Am I
-      <span class="chevron">▾</span>
-    </button>
-    <div class="nav-dropdown-menu">
-      <a href="https://gokiantik.github.io/z3sci_UN/who_am_i_v4.html" target="_blank" rel="noopener">
-        <span class="item-icon">🪞</span>
-        <span class="item-label">Who Am I</span>
-      </a>
-      <a href="https://gokiantik.github.io/z3sci_UN/i_have_a_dream.html" target="_blank" rel="noopener">
-        <span class="item-icon">✨</span>
-        <span class="item-label">I Have A Dream</span>
-      </a>
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/lenggah_o_ning_kene_le.html" target="_blank" rel="noopener">
-        <span class="item-icon">🪑</span>
-        <span class="item-label">Lenggah O Le</span>
-      </a>
-    </div>
-  </div>
-  <div class="nav-dropdown" id="dd-sarinem">
-    <button class="nav-dropdown-btn" onclick="toggleDropdown('dd-sarinem')">
-      🌸 Sarinem Chat
-      <span class="chevron">▾</span>
-    </button>
-    <div class="nav-dropdown-menu scrollable" style="min-width:280px;">
 
-      <!-- APPS -->
-      <div class="ddm-section-header open" onclick="toggleSection(this)">
-        Apps <span class="ddm-chev">▾</span>
-      </div>
-      <div class="ddm-section-body open">
-        <a href="https://gokiantik.github.io/z3sci_UN/kedai_sarinem.html" target="_blank" rel="noopener">
-          <span class="item-icon">☕</span><span class="item-label">Kedai Sarinem</span>
-        </a>
-        <a href="https://gokiantik.github.io/z3sci_UN/sarinem_kdrt_companion_chat_v1_7_ID_OPAL.html" target="_blank" rel="noopener">
-          <span class="item-icon">💬</span><span class="item-label">Sarinem Chat (HTML eksperimen)</span><span class="item-badge">v1.7</span>
-        </a>
-        <a href="https://gemini.google.com/gem-labs/1gISx168vddJMDzyXCS_eTudfGIpS8nmF" target="_blank" rel="noopener">
-          <span class="item-icon">💎</span><span class="item-label">Sarinem v1.6 (Opal GEM)</span>
-        </a>
-        <a href="https://superherocafeinside.com/sarinem.chat" target="_blank" rel="noopener">
-          <span class="item-icon">🦸</span><span class="item-label">Superhero Café Inside</span>
-        </a>
-        <a href="https://superherocafeinside.com/sarinem.chat/funding" target="_blank" rel="noopener">
-          <span class="item-icon">🤝</span><span class="item-label">Support &amp; Funding</span>
-        </a>
-      </div>
+<hr class="divider" />
 
-      <!-- DOI -->
-      <div class="ddm-section-header" onclick="toggleSection(this)">
-        DOI · Zenodo <span class="ddm-chev">▾</span>
-      </div>
-      <div class="ddm-section-body">
-        <a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" rel="noopener">
-          <span class="item-icon">📄</span><span class="item-label">Sarinem.chat: Living Proof of CHO Grand Formula</span>
-        </a>
-        <a href="https://doi.org/10.5281/zenodo.19978064" target="_blank" rel="noopener">
-          <span class="item-icon">📄</span><span class="item-label">Sovereignty Gap: Indonesian Women &amp; Decision Power</span>
-        </a>
-        <a href="https://doi.org/10.5281/zenodo.19945231" target="_blank" rel="noopener">
-          <span class="item-icon">📄</span><span class="item-label">Sarinem.chat v1.2: Two Technologies, One Mission</span>
-        </a>
-      </div>
-
-      <!-- SPRINGER -->
-      <div class="ddm-section-header" onclick="toggleSection(this)">
-        Springer <span class="ddm-chev">▾</span>
-      </div>
-      <div class="ddm-section-body">
-        <a href="https://submission.springernature.com/submission-details/c25dfdf7-7309-4786-b2bc-a2f25e08e9ac" target="_blank" rel="noopener">
-          <span class="item-icon">📰</span><span class="item-label">SpringerNature Submission</span><span class="item-badge">LIVE</span>
-        </a>
-      </div>
-
-      <!-- LINKEDIN -->
-      <div class="ddm-section-header" onclick="toggleSection(this)">
-        LinkedIn Posts <span class="ddm-chev">▾</span>
-      </div>
-      <div class="ddm-section-body">
-        <a href="https://www.linkedin.com/pulse/sarinemchat-when-ai-doesnt-fully-understand-ai-safety-strategist-f7moc" target="_blank" rel="noopener">
-          <span class="item-icon">🔗</span><span class="item-label">When AI Doesn't Fully Understand</span>
-        </a>
-        <a href="https://www.linkedin.com/pulse/sarinemchat-sovereignty-gap-mbah-hogi-bejo-ai-safety-strategist-t8opc" target="_blank" rel="noopener">
-          <span class="item-icon">🔗</span><span class="item-label">The Sovereignty Gap</span>
-        </a>
-        <a href="https://www.linkedin.com/pulse/sarinemchat-small-initiative-needs-support-ai-safety-strategist-ns7zc" target="_blank" rel="noopener">
-          <span class="item-icon">🔗</span><span class="item-label">A Small Initiative That Needs Support</span>
-        </a>
-        <a href="https://www.linkedin.com/pulse/apa-itu-ai-cognitive-architect-mbah-hogi-bejo-ai-safety-strategist-2n1ic" target="_blank" rel="noopener">
-          <span class="item-icon">🔗</span><span class="item-label">AI Cognitive Architect</span>
-        </a>
-      </div>
-
-      <!-- SUPPORT -->
-      <div class="ddm-section-header" onclick="toggleSection(this)">
-        Dukung Proyek <span class="ddm-chev">▾</span>
-      </div>
-      <div class="ddm-section-body">
-        <a href="https://trakteer.id/gokiantik/post/sarinemchat-building-a-safe-place-to-begin-Kt8IZ" target="_blank" rel="noopener">
-          <span class="item-icon">☕</span><span class="item-label">Trakteer · Dukung Sarinem.chat</span><span class="item-badge">DONATE</span>
-        </a>
-      </div>
-
-    </div>
-  </div>
-  <div class="lang-toggle">
-    <button class="lang-btn active" id="btn-id" onclick="setLang('id')">ID</button>
-    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-  </div>
-</div>
-
-<div class="hero">
-  <div class="hero-eyebrow">CHO In Action Series · UN Open Source Week 2026 · Go Kian Tik (Mbah Hogi Bejo™)</div>
-
-  <h1 class="hero-title id">Grand Formula:<br><em>Satu Argumen Utuh</em></h1>
-  <h1 class="hero-title en">Grand Formula:<br><em>One Complete Argument</em></h1>
-
-  <p class="hero-sub id">4 paper, 4 variabel, satu arsitektur lengkap untuk memahami kedaulatan manusia di era Artificial General Intelligence — dari Global South, untuk 8 miliar manusia.</p>
-  <p class="hero-sub en">4 papers, 4 variables, one complete architecture for understanding human sovereignty in the age of Artificial General Intelligence — from the Global South, for 8 billion humans.</p>
-
-  <div class="formula-strip">
-    <div class="eq">(Consciousness × Calculation) ^ Humanity &lt; Transcendence</div>
-    <div class="sub id">Grand Formula · Go Kian Tik (GKT) · 2026 · Satu variabel per paper dioperasionalkan</div>
-    <div class="sub en">Grand Formula · Go Kian Tik (GKT) · 2026 · One variable per paper operationalised</div>
-  </div>
-
-  <div style="margin-top:24px;border-radius:16px;overflow:hidden;border:1px solid var(--border-med);box-shadow:0 6px 32px rgba(0,0,0,0.10);">
-    <img src="Grand_Formula.jpg" alt="Grand Formula" style="width:100%;display:block;">
+<!-- ── DEVELOPER (Konten asli dipertahankan) ── -->
+<div class="dev-section">
+  <h3>Go Kian Tik (Mbah Hogi Bejo™)</h3>
+  <p class="dev-role">Chief Humanity Officer · Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+  <div class="disclaimer-box">
+    <strong>Research &amp; Development Disclaimer</strong><br /><br />
+    Eksperimen edukasi digital ini merupakan bagian dari aktivitas riset independen, pengembangan komunitas pembelajaran, eksplorasi AI, musik, dan kesehatan manusia. Konten disediakan untuk tujuan edukasi, eksplorasi, dan pengembangan kapasitas manusia. Tidak dimaksudkan sebagai pengganti konsultasi medis, diagnosis profesional, atau pelatihan vokal individual.<br /><br />
+    Keterbatasan sumber terbuka diakui sebagai bagian dari proses pembelajaran dan dokumentasi. Setiap publikasi merepresentasikan salah satu perspektif dari ekosistem pengetahuan yang terus berkembang.
   </div>
 </div>
 
-<div class="section-label id lang-only">Gambaran Lengkap</div>
-<div class="section-label en lang-only">Full Overview</div>
-<div class="main-card">
-  <a class="card-link" href="cho_series_complete.html">
-    <span class="card-tag id">Index · Semua Paper</span>
-    <span class="card-tag en">Index · All Papers</span>
-    <div class="card-title id">CHO In Action Series — Semua Paper</div>
-    <div class="card-title en">CHO In Action Series — All Papers</div>
-    <div class="card-desc id">5 tab navigasi: Gambaran Umum + Paper 1 sampai Paper 4 dalam satu halaman. Mulai dari sini.</div>
-    <div class="card-desc en">5 navigation tabs: Overview + Paper 1 through Paper 4 in one page. Start here.</div>
-    <span class="card-arrow">→</span>
-  </a>
-</div>
+<!-- ── FOUNDERS SECTION (TAMBAHAN BARU) ── -->
+<div class="dev-section" style="border-top: none; padding-top: 0.5rem;">
+  <h3>✨ Pendiri & Penggerak ✨</h3>
+  <p class="section-sub" style="margin-bottom: 1.5rem;">Ekosistem GigiMenyanyiBot dibangun oleh kolaborator lintas disiplin.</p>
 
-<div class="section-label id lang-only" style="margin-top:32px;">4 Paper · 4 Variabel</div>
-<div class="section-label en lang-only" style="margin-top:32px;">4 Papers · 4 Variables</div>
-<div class="paper-grid">
-  <a class="paper-card p1" href="cho_series_complete.html">
-    <div class="pc-num">Paper 1 · WHY</div>
-    <div class="pc-role">From Laggard to Dignity</div>
-    <div class="pc-title id">6 masalah peradaban + bukti empiris + Grand Formula</div>
-    <div class="pc-title en">6 civilisational problems + empirical evidence + Grand Formula</div>
-    <div class="pc-badge-row" style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span class="pc-var">Consciousness</span>
-      <span role="link" tabindex="0" onclick="event.stopPropagation();window.open('https://doi.org/10.5281/zenodo.19666723','_blank')" style="display:inline-flex;align-items:center;border-radius:4px;overflow:hidden;cursor:pointer;font-family:monospace;font-size:11px;font-weight:600;line-height:1;text-decoration:none;">
-        <span style="background:#1a1a2e;color:#fff;padding:3px 7px;">DOI</span>
-        <span style="background:#2563a8;color:#fff;padding:3px 9px;letter-spacing:0.01em;">10.5281/zenodo.19666723</span>
-      </span>
-    </div>
-    <span class="pc-arrow">→</span>
-  </a>
-  <a class="paper-card p2" href="cho_series_complete.html">
-    <div class="pc-num">Paper 2 · HOW</div>
-    <div class="pc-role">From Formula to the Field</div>
-    <div class="pc-title id">Protocol CHO v1.0 · QSI · ASI · 3 studi kasus lapangan</div>
-    <div class="pc-title en">Protocol CHO v1.0 · QSI · ASI · 3 field case studies</div>
-    <div class="pc-badge-row" style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span class="pc-var">^Humanity</span>
-      <span role="link" tabindex="0" onclick="event.stopPropagation();window.open('https://doi.org/10.5281/zenodo.19322063','_blank')" style="display:inline-flex;align-items:center;border-radius:4px;overflow:hidden;cursor:pointer;font-family:monospace;font-size:11px;font-weight:600;line-height:1;">
-        <span style="background:#1a1a2e;color:#fff;padding:3px 7px;">DOI</span>
-        <span style="background:#2563a8;color:#fff;padding:3px 9px;letter-spacing:0.01em;">10.5281/zenodo.19322063</span>
-      </span>
-    </div>
-    <span class="pc-arrow">→</span>
-  </a>
-  <a class="paper-card p3" href="cho_series_complete.html">
-    <div class="pc-num id">Paper 3 · WHO (Manusia)</div>
-    <div class="pc-num en">Paper 3 · WHO (Human)</div>
-    <div class="pc-role">The Sovereign One</div>
-    <div class="pc-title id">Pentadrant · 8 Johari Panels · Ruwet → Genah</div>
-    <div class="pc-title en">Pentadrant · 8 Johari Panels · Chaos → Order</div>
-    <div class="pc-badge-row" style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span class="pc-var id">Arsitektur sosial</span>
-      <span class="pc-var en">Social architecture</span>
-      <span role="link" tabindex="0" onclick="event.stopPropagation();window.open('https://doi.org/10.5281/zenodo.19670692','_blank')" style="display:inline-flex;align-items:center;border-radius:4px;overflow:hidden;cursor:pointer;font-family:monospace;font-size:11px;font-weight:600;line-height:1;">
-        <span style="background:#1a1a2e;color:#fff;padding:3px 7px;">DOI</span>
-        <span style="background:#2563a8;color:#fff;padding:3px 9px;letter-spacing:0.01em;">10.5281/zenodo.19670692</span>
-      </span>
-    </div>
-    <span class="pc-arrow">→</span>
-  </a>
-  <a class="paper-card p4" href="cho_series_complete.html">
-    <div class="pc-num">Paper 4 · WHO (AI)</div>
-    <div class="pc-role">Testing the Calculator</div>
-    <div class="pc-title id">Abrahamic Stress Test · Humanity Alignment Score · Temuan empiris</div>
-    <div class="pc-title en">Abrahamic Stress Test · Humanity Alignment Score · Empirical findings</div>
-    <div class="pc-badge-row" style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span class="pc-var">Calculation</span>
-      <span role="link" tabindex="0" onclick="event.stopPropagation();window.open('https://doi.org/10.5281/zenodo.19490279','_blank')" style="display:inline-flex;align-items:center;border-radius:4px;overflow:hidden;cursor:pointer;font-family:monospace;font-size:11px;font-weight:600;line-height:1;">
-        <span style="background:#1a1a2e;color:#fff;padding:3px 7px;">DOI</span>
-        <span style="background:#2563a8;color:#fff;padding:3px 9px;letter-spacing:0.01em;">10.5281/zenodo.19490279</span>
-      </span>
-    </div>
-    <span class="pc-arrow">→</span>
-  </a>
-</div>
-
-<div class="section-label id lang-only" style="margin-top:32px;">Deep Dive per Variabel</div>
-<div class="section-label en lang-only" style="margin-top:32px;">Deep Dive per Variable</div>
-<div class="deep-grid">
-  <a class="deep-card" href="grand_formula_architecture.html">
-    <div class="dc-icon">🗺</div>
-    <div class="dc-title id">Peta Grand Formula</div>
-    <div class="dc-title en">Grand Formula Map</div>
-    <div class="dc-desc id">Visual arsitektur 4 paper dalam satu diagram</div>
-    <div class="dc-desc en">Visual architecture of all 4 papers in one diagram</div>
-  </a>
-  <a class="deep-card" href="consciousness_grand_formula.html">
-    <div class="dc-icon">🧠</div>
-    <div class="dc-title">Consciousness</div>
-    <div class="dc-desc id">Variabel manusiawi · QSI scale · kondisi Manja</div>
-    <div class="dc-desc en">Human-only variable · QSI scale · the Manja condition</div>
-  </a>
-  <a class="deep-card" href="humanity_eksponen.html">
-    <div class="dc-icon">^</div>
-    <div class="dc-title">^Humanity</div>
-    <div class="dc-desc id">Eksponen moral · ASI · ^0 vs ^1 vs ^2</div>
-    <div class="dc-desc en">Moral exponent · ASI · ^0 vs ^1 vs ^2</div>
-  </a>
-  <a class="deep-card" href="arsitektur_sosial_kedaulatan.html">
-    <div class="dc-icon">🗂</div>
-    <div class="dc-title id">Arsitektur Sosial</div>
-    <div class="dc-title en">Social Architecture</div>
-    <div class="dc-desc id">Pentadrant · 8 Johari Panels · Ruwet→Genah</div>
-    <div class="dc-desc en">Pentadrant · 8 Johari Panels · Chaos→Order</div>
-  </a>
-  <a class="deep-card" href="calculation_grand_formula.html">
-    <div class="dc-icon">⚙</div>
-    <div class="dc-title">Calculation</div>
-    <div class="dc-desc id">AI Matrix · Abrahamic Stress Test · Scoring</div>
-    <div class="dc-desc en">AI Matrix · Abrahamic Stress Test · Scoring rubric</div>
-  </a>
-  <a class="deep-card" href="cho_series_complete.html">
-    <div class="dc-icon">◎</div>
-    <div class="dc-title id">Semua Paper</div>
-    <div class="dc-title en">All Papers</div>
-    <div class="dc-desc id">Kembali ke index lengkap 5 tab</div>
-    <div class="dc-desc en">Back to full 5-tab index</div>
-  </a>
-  <a class="deep-card" href="https://gokiantik.github.io/z3sci_UN/WBP_and_DOI.html" target="_blank" rel="noopener">
-    <div class="dc-icon">行</div>
-    <div class="dc-title id">Walking Books Philosophy</div>
-    <div class="dc-title en">Walking Books Philosophy</div>
-    <div class="dc-desc id">Z3 SCI · Filosofi & DOI lengkap Mbah Hogi Bejo™</div>
-    <div class="dc-desc en">Z3 SCI · Full philosophy & DOI index by Mbah Hogi Bejo™</div>
-  </a>
-</div>
-
-<!-- ══════════════════════════════════════════
-     DISCLAIMER · Bilingual ID / EN Toggle
-     ══════════════════════════════════════════ -->
-<div class="cho-full-disclaimer">
-
-  <!-- SECTION 1 · EXPERIMENTAL STATUS -->
-  <div class="cho-experimental">
-
-    <div class="cho-badge">
-      <i class="fas fa-flask"></i>
-      <span class="id">Eksperimen Aktif · Red Teaming · Prototipe Riset — BUKAN Produksi</span>
-      <span class="en">Active Experiment · Red Teaming · Research Prototype — NOT Production</span>
+  <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+    
+    <!-- Founder 1: Go Kian Tik -->
+    <div class="card" style="text-align: left;">
+      <div class="card-icon">🧠</div>
+      <h3>Go Kian Tik <span style="font-size: 0.7rem; background: var(--accent2); color: #000; padding: 0.1rem 0.5rem; border-radius: 20px;">Mbah Hogi Bejo™</span></h3>
+      <p style="font-weight: 600; margin: 0.2rem 0 0.4rem;">Chief Humanity Officer &amp; Technology</p>
+      <p style="font-size: 0.8rem; color: var(--muted);">Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+      <p style="font-size: 0.8rem; margin-top: 0.5rem;">🎯 Peran: Konseptor, arsitektur bot, identitas visual, dan lagu perdana.</p>
     </div>
 
-    <div class="cho-experimental__title">
-      <i class="fas fa-exclamation-triangle" style="margin-right:.4rem;font-size:.9rem;color:#C9A84C;"></i>
-      <span class="id">Pernyataan Ekspresi Digital</span>
-      <span class="en">Digital Expression Disclaimer</span>
-    </div>
-
-    <p class="cho-experimental__body id">
-      Eksperimen aktif sebagai peneliti independen (working papers diterbitkan di
-      <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> /
-      <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>),
-      dan <em>alpha front-end user</em> yang aktif melakukan red teaming lintas sistem AI:
-      <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>.
-      Framework: <strong>1/360 Diri · 1/360 Kamu · 358/360 Kemanusiaan</strong> —
-      berlandaskan pada esensi
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a>
-    </p>
-    <p class="cho-experimental__body en">
-      Active experiment as an independent researcher (working papers published on
-      <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener">Zenodo</a> /
-      <a href="https://ssrn.com" target="_blank" rel="noopener">SSRN</a>),
-      and <em>alpha front-end user</em> actively red teaming across AI systems:
-      <strong>(1/5 Claude · 1/5 Gemini · 1/5 DeepSeek · 1/5 Copilot · 1/5 ChatGPT)</strong>.
-      Framework: <strong>1/360 Self · 1/360 You · 358/360 Humanity</strong> —
-      grounded in the essence of
-      <a href="https://gokiantik.github.io/chiefhumanityofficer/walking-books-poster.html" target="_blank" rel="noopener">Walking Books Philosophy →</a>
-    </p>
-
-    <p class="cho-experimental__body id">
-      Ini adalah fragmen dari <em>Kesadaran yang dirender melalui Kalkulasi</em>, menaburkan
-      <em>Kemanusiaan</em> dalam skala aksi dan dampak yang lebih luas —
-      jika model eksperimental ini direplikasi oleh orang lain.
-      Dibuat sebagai konten edukasi untuk kemajuan kemanusiaan global.
-      Setiap suara dalam eksperimen ini mewakili 1/360 dari sebuah pustaka bersama,
-      tanpa klaim atas kebenaran tunggal.
-    </p>
-    <p class="cho-experimental__body en">
-      This is a fragment of <em>Consciousness rendered through Calculation</em>, seeding
-      <em>Humanity</em> at a wider scale of action and impact —
-      should this experimental model be replicated by others.
-      Created as educational content for the advancement of global humanity.
-      Every voice in this experiment represents 1/360 of a shared library,
-      with no claim to singular truth.
-    </p>
-
-    <div class="cho-warning-strip">
-      <i class="fas fa-shield-alt"></i>
-      <div>
-        <strong class="id">Status Infrastruktur:</strong>
-        <strong class="en">Infrastructure Status:</strong>
-        <span class="id">Semua artefak HTML yang diterbitkan di URL ini adalah <strong>prototipe riset</strong>
-        yang beroperasi tanpa infrastruktur back-end yang dikeraskan, arsitektur keamanan berlapis,
-        atau tata kelola data setara produksi. Secara sengaja bersifat open-source, client-side, dan zero-persistence —
-        sebuah pilihan metodologis, bukan celah.
-        <em>Keterbatasan open-source diakui sebagai bagian dari data, bukan sebagai kelemahan metodologis.</em></span>
-        <span class="en">All HTML artifacts published at this URL are <strong>research-state prototypes</strong>
-        operating without hardened back-end infrastructure, multi-layer security
-        architecture, or production-grade data governance. They are intentionally
-        open-source, client-side, and zero-persistence —
-        a deliberate methodological choice, not a gap.
-        <em>Open-source limitations are acknowledged as part of the data, not as methodological flaws.</em></span>
-      </div>
-    </div>
-
-    <div class="cho-experimental__meta">
-      <span><i class="fas fa-user-pen"></i> Go Kian Tik (Mbah Hogi Bejo™ · 自主者) · Chief Humanity Officer · Depok, Indonesia</span>
-      <span><i class="fas fa-microchip"></i> Red Teaming: Claude · DeepSeek · Gemini · Copilot · ChatGPT</span>
-      <span><i class="fas fa-calendar-alt"></i> 2026 · CHO In Action Series</span>
-      <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0 · <a href="mailto:gokiantik@gmail.com">gokiantik@gmail.com</a></span>
-    </div>
-
-  </div>
-
-  <!-- DIVIDER 70 | 30 -->
-  <div class="cho-divider-7030">
-    <div class="cho-divider-7030__left">
-      <i class="fas fa-layer-group" style="font-size:.55rem;opacity:.7;"></i>
-      70% · Digital Semesta · Text · Lingua · Image · Song · Video
-    </div>
-    <div class="cho-divider-7030__line"></div>
-    <div class="cho-divider-7030__right">
-      <i class="fas fa-seedling" style="font-size:.55rem;"></i>
-      30% · Material Semesta
+    <!-- Founder 2: Lie Ping Sen -->
+    <div class="card" style="text-align: left;">
+      <div class="card-icon">🌱</div>
+      <h3>Lie Ping Sen</h3>
+      <p style="font-weight: 600; margin: 0.2rem 0 0.4rem;">Founder &amp; Community Builder</p>
+      <p style="font-size: 0.8rem; color: var(--muted);">Yayasan Pamorplus Indonesia</p>
+      <p style="font-size: 0.8rem; margin-top: 0.5rem;">🎯 Peran: Jalinan komunitas, penggerak partisipasi publik, dan penguatan ekosistem kolaboratif.</p>
     </div>
   </div>
-
-  <!-- SECTION 2 · INVITATION MANIFESTO -->
-  <div class="cho-invitation">
-
-    <div class="cho-invitation__badge">
-      <i class="fas fa-seedling"></i>
-      <span class="id">Undangan Terbuka · Semesta 20% · Materialisasi</span>
-      <span class="en">Open Invitation · Semesta 20% · Materialisasi</span>
-    </div>
-
-    <div class="cho-invitation__title">
-      <i class="fas fa-hand-holding-seedling" style="margin-right:.4rem;font-size:.9rem;color:#8fc49d;"></i>
-      <span class="id">Sebuah Undangan untuk Para Pembangun Dunia Material</span>
-      <span class="en">An Invitation to the Builders of the Material World</span>
-    </div>
-
-    <p class="cho-invitation__body id">
-      Dengan terbitnya setiap DOI dalam CHO In Action Series, penulis secara resmi mengundang
-      para aktor <strong>20% Material Semesta</strong> — pemilik bisnis, wirausahawan,
-      pemegang modal &amp; investor, pemberi hibah dan penyandang dana riset,
-      mereka yang sudah mahir menavigasi seluruh spektrum sumber daya — untuk mempertimbangkan
-      dukungan mereka.
-    </p>
-    <p class="cho-invitation__body en">
-      With the publication of each DOI in the CHO In Action Series, the author
-      formally invites the actors of the <strong>20% Material Semesta</strong>
-      — business owners, entrepreneurs, capital holders &amp; investors,
-      grant-givers and research funders, those already proficient in navigating
-      the full spectrum of resources — to consider extending their support.
-    </p>
-
-    <div class="cho-seed-callout">
-      <div class="cho-seed-callout__icon">🌱</div>
-      <div class="cho-seed-callout__text id">
-        Ide, visi, misi, dan niat kemanusiaan yang terdokumentasi di sini telah
-        <strong>diselesaikan di 70% Digital Semesta</strong> — sebagai teks, lingua, gambar,
-        lagu, video, dan artefak multimodal. Mereka ada. Mereka berfungsi. Mereka telah diuji.
-        Mereka membawa DOI.<br><br>
-        Yang mereka butuhkan sekarang adalah tanah, pupuk, dan cahaya matahari dari dunia material —
-        agar benih ini dapat <strong>tumbuh bukan untuk dirinya sendiri, melainkan untuk orang lain</strong>.
-        Untuk umat manusia.
-      </div>
-      <div class="cho-seed-callout__text en">
-        The ideas, vision, mission, and humanitarian intent documented here have been
-        <strong>completed in the 70% Digital Semesta</strong> — as text, lingua, image,
-        song, video, and multimodal artifact. They exist. They work. They are tested.
-        They carry a DOI.<br><br>
-        What they require now is the soil, fertiliser, and sunlight of the material world —
-        so that this seed may <strong>grow not for itself, but for others</strong>.
-        For umat manusia. For humanity.
-      </div>
-    </div>
-
-    <p class="cho-invitation__body id">
-      Penulis tidak mencari modal untuk membangun produk demi keuntungan.
-      Undangan ini adalah untuk <em>menumbuhkan visi yang sudah utuh</em> —
-      untuk memberinya akar di dunia material agar buahnya melimpah,
-      dibagi secara luas, dan dipanen oleh mereka yang belum memiliki akses hari ini.
-    </p>
-    <p class="cho-invitation__body en">
-      The author does not seek capital to build a product for profit.
-      The invitation is to <em>cultivate a vision that is already whole</em> —
-      to give it roots in the material world so its fruit may be abundant,
-      shared widely, and harvested by those who have no access to the harvest today.
-    </p>
-
-    <p class="cho-invitation__body id">Mereka yang fasih mengelola <strong>framework 7M</strong>:</p>
-    <p class="cho-invitation__body en">Those fluent in managing the <strong>7M framework</strong>:</p>
-
-    <div class="cho-tags">
-      <span class="cho-tag"><i class="fas fa-users" style="margin-right:4px;"></i>Man</span>
-      <span class="cho-tag"><i class="fas fa-boxes-stacked" style="margin-right:4px;"></i>Material</span>
-      <span class="cho-tag"><i class="fas fa-sitemap" style="margin-right:4px;"></i>Method</span>
-      <span class="cho-tag"><i class="fas fa-cogs" style="margin-right:4px;"></i>Machine</span>
-      <span class="cho-tag"><i class="fas fa-coins" style="margin-right:4px;"></i>Money</span>
-      <span class="cho-tag"><i class="fas fa-chart-line" style="margin-right:4px;"></i>Market</span>
-      <span class="cho-tag"><i class="fas fa-brain" style="margin-right:4px;"></i>Mindset</span>
-    </div>
-
-    <p class="cho-invitation__body id" style="margin-top:.8rem;">
-      — diundang dengan hangat untuk terhubung. DOI adalah bukti eksistensi.
-      Artefak open-source adalah bukti fungsi. Undangan adalah bukti niat.
-    </p>
-    <p class="cho-invitation__body en" style="margin-top:.8rem;">
-      — are warmly invited to connect. The DOI is the proof of existence.
-      The open-source artifact is the proof of function.
-      The invitation is the proof of intent.
-    </p>
-
-    <a class="cho-invitation__cta"
-       href="https://zenodo.org/communities/chiefhumanityofficer"
-       target="_blank" rel="noopener">
-      <i class="fas fa-external-link-alt"></i>
-      <span class="id">Lihat CHO In Action Series di Zenodo →</span>
-      <span class="en">View CHO In Action Series on Zenodo →</span>
-    </a>
-    &nbsp;
-    <a class="cho-invitation__cta" href="mailto:gokiantik@superherocafeinside.com" style="margin-top:.5rem;">
-      <i class="fas fa-envelope"></i>
-      gokiantik@superherocafeinside.com
-    </a>
-
-    <div class="cho-invitation__meta">
-      <span><i class="fas fa-globe-asia"></i> Depok, Indonesia · Global Reach</span>
-      <span><i class="fas fa-book"></i> DOI-verified · Zenodo Open Access</span>
-      <span><i class="fas fa-link"></i> <a href="http://www.superherocafeinside.com" target="_blank" style="color:rgba(143,196,157,0.55);text-decoration:none;border-bottom:.5px solid rgba(143,196,157,0.2);">superherocafeinside.com</a></span>
-      <span><i class="fas fa-balance-scale"></i> CC BY-NC-ND 4.0</span>
-    </div>
-
+  
+  <div class="disclaimer-box" style="margin-top: 1.8rem; background: var(--surface2);">
+    💡 <strong>Ekosistem Terbuka</strong> — GigiMenyanyiBot adalah inisiatif edukasi digital yang dikembangkan secara kolaboratif oleh para pendiri dari latar belakang teknologi, seni, kesehatan, dan pengembangan komunitas serta partisipasi aktif dalam menangani problem sosial dan kemanusiaan.
   </div>
-
-  <!-- Z3SCI FOOTER -->
-  <footer class="z3sci-footer">
-    <div class="z3sci-footer-avatar">👤</div>
-    <div class="z3sci-footer-name">
-      <strong>Go Kian Tik</strong> &nbsp;·&nbsp; Mbah Hogi Bejo™
-    </div>
-    <span class="z3sci-footer-cn">Zì Zhǔ Zhě 自主者</span>
-    <div class="z3sci-footer-copy">
-      <span class="year">© 2026</span> Go Kian Tik (Mbah Hogi Bejo™) &nbsp;·&nbsp; Superhero Café Inside<br>
-      <a href="http://www.superherocafeinside.com" target="_blank">www.superherocafeinside.com</a>
-    </div>
-    <div class="z3sci-footer-rights">All rights reserved · CC BY-NC-ND 4.0</div>
-  </footer>
-
 </div>
 
-<script>
-function toggleSection(header){
-  var body=header.nextElementSibling;
-  var isOpen=header.classList.contains('open');
-  header.classList.toggle('open',!isOpen);
-  body.classList.toggle('open',!isOpen);
-}
-function toggleDropdown(id){
-  var dd=document.getElementById(id);
-  var isOpen=dd.classList.contains('open');
-  document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
-  if(!isOpen)dd.classList.add('open');
-}
-document.addEventListener('click',function(e){
-  if(!e.target.closest('.nav-dropdown')){
-    document.querySelectorAll('.nav-dropdown.open').forEach(function(el){el.classList.remove('open');});
-  }
-});
-function setLang(lang){
-  document.body.className=lang;
-  document.getElementById('btn-id').classList.toggle('active',lang==='id');
-  document.getElementById('btn-en').classList.toggle('active',lang==='en');
-}
-</script>
+<hr class="divider" />
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">😁 Gigi Sehat Menyanyi 💋</div>
+  © 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside<br />
+  GigiMenyanyiBot · <a href="https://t.me/GigiMenyanyiBot">@GigiMenyanyiBot</a><br />
+  All Rights Reserved · Sehat Giginya, Merdu Suaranya, Percaya Diri Bersinarnya!<br /><br />
+  <a href="privacy.html">Privasi, Kebijakan &amp; Disclaimer</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Go Kian Tik">
+<meta name="description" content="@GigiMenyanyiBot — aplikasi nyata CHO Grand Formula untuk mempercepat adopsi informasi kesehatan gigi dan mulut bagi Rogers Laggard yang mencintai menyanyi. Eksperimen kemanusiaan ketiga GKT/MHB.">
+<meta name="keywords" content="GigiMenyanyiBot, CHO Framework, Rogers Laggard, Sovereignty Gap, Grand Formula, AI Telegram, kesehatan gigi, menyanyi, digital inclusion, GKT, MHB, Z3SCI, Zenodo DOI">
+<title>Tentang · GigiMenyanyiBot</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep: #0d2b6e;
+  --blue-mid: #1565c0;
+  --blue-bright: #229ED9;
+  --teal: #00bcd4;
+  --pink: #e91e8c;
+  --pink-light: #ff6bbb;
+  --gold: #ffb300;
+  --gold-light: #ffe082;
+  --white: #ffffff;
+  --bg: #f0f8ff;
+  --card-bg: #ffffff;
+  --text: #1a2340;
+  --text-soft: #445;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ═══ FLOATING NOTES ═══ */
+.note {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: floatNote 6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.18;
+}
+@keyframes floatNote {
+  0%,100% { transform: translateY(0) rotate(-10deg); }
+  50%      { transform: translateY(-25px) rotate(10deg); }
+}
+
+/* ═══ NAV ═══ */
+nav {
+  background: rgba(13,43,110,0.97);
+  backdrop-filter: blur(8px);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(34,158,217,0.2);
+}
+.nav-brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.nav-links a {
+  font-family: 'Nunito', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
+.nav-links a.active {
+  background: var(--pink);
+  color: white;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative;
+  background: linear-gradient(145deg, #0d2b6e 0%, #1565c0 40%, #0097c7 100%);
+  padding: 70px 20px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,179,0,.12) 0%, transparent 50%);
+}
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 90% 70%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 10% 80%, rgba(255,255,255,0.6) 0%, transparent 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.logo-wrap {
+  display: inline-block;
+  animation: logoPulse 3s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+@keyframes logoPulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.logo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.4);
+  box-shadow: 0 0 40px rgba(0,188,212,0.5), 0 15px 40px rgba(0,0,0,0.3);
+  object-fit: cover;
+}
+.hero h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  color: var(--white);
+  margin: 0 0 10px;
+  text-shadow: 0 3px 20px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+.hero h1 span { color: var(--gold-light); }
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.92);
+  max-width: 620px;
+  margin: 0 auto 20px;
+  font-weight: 600;
+}
+.pill-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--gold-light);
+  font-size: .85rem;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin: 4px;
+  letter-spacing: .5px;
+}
+
+/* ═══ SECTION COMMON ═══ */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 24px;
+}
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 10px;
+}
+.section-title span { color: var(--pink); }
+.section-subtitle {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 40px;
+}
+.divider {
+  width: 60px; height: 5px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  border-radius: 10px;
+  margin: 12px 0 30px;
+}
+
+/* ═══ HIGHLIGHT CALLOUT ═══ */
+.callout {
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  border-left: 5px solid var(--pink);
+  border-radius: 0 16px 16px 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.callout strong { color: var(--blue-deep); }
+.callout p { font-size: .97rem; color: var(--text-soft); line-height: 1.75; }
+
+/* ═══ PRINCIPLE CARDS ═══ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+.card {
+  background: var(--card-bg);
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.07);
+  border-top: 4px solid transparent;
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  opacity: .07;
+  background: var(--card-accent, var(--blue-bright));
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+.card-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.card-num {
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 6px;
+}
+.card h3 { font-weight: 800; font-size: 1rem; margin-bottom: 8px; color: var(--blue-deep); }
+.card p  { font-size: .93rem; color: var(--text-soft); line-height: 1.65; }
+
+.card:nth-child(1) { border-top-color: var(--blue-bright); --card-accent: var(--blue-bright); }
+.card:nth-child(2) { border-top-color: var(--pink);        --card-accent: var(--pink); }
+.card:nth-child(3) { border-top-color: var(--gold);        --card-accent: var(--gold); }
+.card:nth-child(4) { border-top-color: var(--teal);        --card-accent: var(--teal); }
+
+/* ═══ TRL SECTION ═══ */
+.trl-wrap {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.08);
+  margin: 10px 0 0;
+}
+.trl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.trl-label { font-weight: 800; font-size: .9rem; color: var(--blue-deep); }
+.trl-status { font-size: .88rem; color: var(--text-soft); font-weight: 600; }
+.trl-track {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.trl-node {
+  flex: 1;
+  height: 10px;
+  border-radius: 5px;
+  background: #e0e7ef;
+}
+.trl-node.done   { background: linear-gradient(90deg, var(--blue-mid), var(--blue-bright)); }
+.trl-node.active { background: linear-gradient(90deg, var(--gold), var(--pink)); }
+.trl-numbers {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+  margin-bottom: 18px;
+}
+.trl-num { font-size: .82rem; font-weight: 700; color: #b0bec5; }
+.trl-num.done   { color: var(--blue-mid); }
+.trl-num.active { color: var(--gold); font-weight: 900; }
+.trl-desc {
+  font-size: .93rem;
+  color: var(--text-soft);
+  background: #f0f8ff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  line-height: 1.7;
+}
+
+/* ═══ ECOSYSTEM SECTION ═══ */
+.eco-section { background: linear-gradient(135deg, #0d2b6e, #1565c0); padding: 70px 24px; }
+.eco-inner { max-width: 1100px; margin: 0 auto; }
+.eco-section .section-title { color: white; }
+.eco-section .section-title span { color: var(--gold-light); }
+.eco-section .section-subtitle { color: rgba(255,255,255,.7); }
+.eco-section .divider { background: linear-gradient(90deg, var(--gold), var(--pink)); }
+.eco-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-top: 10px;
+}
+.eco-card p { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 14px; line-height: 1.75; }
+.eco-card strong { color: var(--gold-light); }
+.eco-formula {
+  background: rgba(255,179,0,0.12);
+  border: 1px solid rgba(255,179,0,0.35);
+  border-radius: 14px;
+  padding: 16px 22px;
+  margin-top: 16px;
+}
+.eco-formula p { color: var(--gold-light); font-weight: 700; font-size: 1rem; margin: 0; }
+
+/* ═══ CTA BAR ═══ */
+.cta-bar {
+  background: linear-gradient(135deg, var(--pink), #880e4f);
+  border-radius: 20px;
+  padding: 30px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 56px;
+}
+.cta-bar-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+}
+.cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-white {
+  display: inline-block;
+  padding: 12px 28px;
+  background: white;
+  color: var(--pink);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: .95rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,.2);
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.btn-outline {
+  display: inline-block;
+  padding: 12px 28px;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: .95rem;
+  border: 2px solid rgba(255,255,255,0.6);
+  transition: background .2s;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: #0a1628;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  padding: 44px 20px;
+  font-size: .9rem;
+}
+footer a { color: var(--teal); text-decoration: none; }
+footer .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.4rem; color: white; margin-bottom: 8px; }
+footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
+
+@media(max-width:600px){
+  nav { padding: 12px 16px; }
+  .cta-bar { flex-direction: column; text-align: center; }
+  .cta-buttons { justify-content: center; }
+  .trl-wrap { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
+  <div class="nav-links">
+    <a href="index.html">Beranda</a>
+    <a href="about.html" class="active">Tentang</a>
+    <a href="framework.html">Framework</a>
+    <a href="dukung.html">Dukung</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stars"></div>
+  <span class="note" style="left:5%;top:25%;animation-delay:0s">🦷</span>
+  <span class="note" style="left:88%;top:18%;animation-delay:1s">🎵</span>
+  <span class="note" style="left:12%;top:65%;animation-delay:2s">♪</span>
+  <span class="note" style="left:82%;top:60%;animation-delay:1.5s">🎶</span>
+  <div class="hero-content">
+    <div class="logo-wrap">
+      <img src="images/GigiSehatMenyanyi.png" class="logo" alt="Logo Gigi Sehat Menyanyi">
+    </div>
+    <h1>Tentang <span>@GigiMenyanyiBot</span></h1>
+    <p class="tagline">
+      Penerapan cerdik kecerdasan buatan dalam platform Telegram —
+      melayani edukasi, informasi, dan penyaluran seni suara.
+    </p>
+    <div>
+      <span class="pill-badge">🤖 AI Telegram</span>
+      <span class="pill-badge">🦷 Gigi &amp; Mulut</span>
+      <span class="pill-badge">🎵 Menyanyi</span>
+      <span class="pill-badge">🧪 TRL-6/9</span>
+    </div>
+  </div>
+</section>
+
+<!-- APA INI -->
+<section class="section">
+  <h2 class="section-title">Apa itu <span>@GigiMenyanyiBot?</span></h2>
+  <div class="divider"></div>
+  <p style="color:var(--text-soft);font-size:1.05rem;margin-bottom:14px;line-height:1.8;">
+    @GigiMenyanyiBot adalah penerapan cerdik model AI ke dalam platform Telegram
+    dengan mengintegrasikan koneksi API keduanya. Ia bukan sekadar chatbot —
+    melainkan sebuah <strong>ruang ngobrol privasi berbasis AI</strong> yang dirancang
+    khusus untuk melayani dua kebutuhan manusia yang saling menunjang:
+    <strong>hobi menyanyi</strong> dan <strong>kesehatan gigi serta mulut</strong>.
+  </p>
+  <p style="color:var(--text-soft);font-size:1.05rem;margin-bottom:14px;line-height:1.8;">
+    Algoritma @GigiMenyanyiBot dirancang untuk menjawab kebutuhan informasi,
+    edukasi, dan ekspresi user dalam koridor menyanyi serta kesehatan gigi dan mulut.
+    Bot ini dapat melayani percakapan yang meluas ke topik di luar koridor tersebut —
+    namun setelah 4–5 kali pertukaran percakapan, mesin lingua AI akan mengarahkan
+    pembahasan kembali ke koridor semula secara natural.
+  </p>
+  <div class="callout">
+    <p>
+      <strong>Koridor utama:</strong> Menyanyi · Kesehatan Gigi · Kesehatan Mulut.<br>
+      Semua topik yang melebar akan kembali ke tiga koridor ini —
+      bukan dengan cara kaku, tetapi dengan kelembutan navigasi kognitif.
+    </p>
+  </div>
+</section>
+
+<!-- MISI -->
+<section class="section" style="background:linear-gradient(135deg,#f0f8ff,#fce4ec);max-width:100%;padding:70px 0;">
+<div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+  <h2 class="section-title">Proyek <span>Kemanusiaan,</span> Bukan Produk Komersial</h2>
+  <div class="divider"></div>
+  <p style="color:var(--text-soft);font-size:1.05rem;margin-bottom:14px;line-height:1.8;">
+    @GigiMenyanyiBot merupakan <strong>proyek eksperimen kemanusiaan yang ketiga</strong>
+    dari GKT/MHB — hadir dengan niat melayani kebutuhan edukasi, informasi, dan
+    penyaluran seni suara dalam lingkungan ngobrol privasi yang aman dan ditunjang AI.
+    Seluruh proses pengembangan dikelola dalam prinsip <strong>cooperative partisipatoris</strong>.
+  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">Prinsip 01</div>
+      <h3>Cooperative Partisipatoris</h3>
+      <p>Tenaga, pikiran, dan waktu para kontributor mendapat imbal balik profesional yang adil.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">Prinsip 02</div>
+      <h3>Remote Work Standard</h3>
+      <p>Kompensasi merujuk pada rate remote work internasional, 40–70% dari rate pasaran.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">Prinsip 03</div>
+      <h3>Privasi &amp; Keamanan User</h3>
+      <p>Lingkungan ngobrol dirancang aman dan privat — user bebas berekspresi tanpa khawatir.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">Prinsip 04</div>
+      <h3>Lightweight AI Agent</h3>
+      <p>Arsitektur ringan: AI bertindak sebagai navigator kognitif — efisien dan mudah dipelihara.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TRL -->
+<section class="section">
+  <h2 class="section-title">NASA Technology <span>Readiness Level</span></h2>
+  <div class="divider"></div>
+  <p style="color:var(--text-soft);font-size:1.05rem;margin-bottom:24px;line-height:1.8;">
+    Pengembangan @GigiMenyanyiBot menggunakan kerangka
+    <strong>NASA Technology Readiness Level (TRL)</strong> sebagai standar
+    tahapan produk digital — metodologi yang sama digunakan NASA untuk
+    mengukur kematangan teknologi sebelum peluncuran resmi.
+  </p>
+  <div class="trl-wrap">
+    <div class="trl-header">
+      <span class="trl-label">⚡ Status saat ini</span>
+      <span class="trl-status">TRL-6 / 9 — Uji Ketahanan &amp; Keterandalan</span>
+    </div>
+    <div class="trl-track">
+      <div class="trl-node done"></div>
+      <div class="trl-node done"></div>
+      <div class="trl-node done"></div>
+      <div class="trl-node done"></div>
+      <div class="trl-node done"></div>
+      <div class="trl-node active"></div>
+      <div class="trl-node"></div>
+      <div class="trl-node"></div>
+      <div class="trl-node"></div>
+    </div>
+    <div class="trl-numbers">
+      <span class="trl-num done">1</span>
+      <span class="trl-num done">2</span>
+      <span class="trl-num done">3</span>
+      <span class="trl-num done">4</span>
+      <span class="trl-num done">5</span>
+      <span class="trl-num active">6</span>
+      <span class="trl-num">7</span>
+      <span class="trl-num">8</span>
+      <span class="trl-num">9</span>
+    </div>
+    <div class="trl-desc">
+      Produk sudah memiliki fitur operasional standar dan sedang diuji ketahanan,
+      keterandalan, konsistensi, dan kestabilannya pada sampel tester sekitar
+      50–100 orang. TRL-9 menandai kesiapan penuh untuk publik luas.
+    </div>
+  </div>
+</section>
+
+<!-- EKOSISTEM -->
+<section class="eco-section">
+  <div class="eco-inner">
+    <h2 class="section-title">Dikembangkan dalam <span>Zì Zhǔ Zhě 自主者</span></h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">Ekosistem riset independen dan kreasi kemanusiaan.</p>
+    <div class="eco-card">
+      <p>
+        @GigiMenyanyiBot dikembangkan dalam ekosistem
+        <strong>Zì Zhǔ Zhě 自主者 — The Sovereign One</strong> dan
+        <strong>Superhero Café Inside (Z³SCI)</strong>, sebuah ekosistem riset
+        independen dan kreasi kemanusiaan yang dibangun oleh
+        Go Kian Tik (Mbah Hogi Bejo™) sebagai Chief Humanity Officer.
+      </p>
+      <p>
+        Seluruh proyek dalam ekosistem ini — dari publikasi ilmiah di Zenodo dan SSRN
+        hingga eksperimen AI seperti @GigiMenyanyiBot — bergerak dalam satu benang
+        merah: menempatkan kemanusiaan sebagai variabel utama di atas kalkulasi dan konsciousness.
+      </p>
+      <div class="eco-formula">
+        <p>⚡ Grand Formula GKT: (Consciousness × Calculation)<sup>Humanity</sup> &lt; Transcendence<br>
+        @GigiMenyanyiBot adalah wujud nyata eksponensial Humanity dalam formula tersebut.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHO FRAMEWORK CONNECTION -->
+<section class="section" style="background:linear-gradient(135deg,#f0f8ff,#e8f5e9);max-width:100%;padding:70px 0;">
+<div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+  <h2 class="section-title">@GigiMenyanyiBot dalam <span>CHO Framework</span></h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">Bukan sekadar bot — ini adalah aplikasi nyata Grand Formula untuk mempercepat adopsi informasi kesehatan bagi mereka yang belum terjangkau.</p>
+
+  <!-- GRAND FORMULA VISUAL -->
+  <div style="background:linear-gradient(135deg,#0d2b6e,#1565c0);border-radius:20px;padding:28px 32px;margin-bottom:36px;text-align:center;">
+    <p style="color:rgba(255,255,255,0.6);font-size:.82rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™) · 2026</p>
+    <p style="font-family:'Pacifico',cursive;font-size:clamp(1rem,3vw,1.5rem);color:var(--gold-light);margin-bottom:6px;">( Consciousness × Calculation ) <sup style="font-family:Nunito,sans-serif;font-size:.7em;">Humanity</sup> &lt; Transcendence</p>
+    <p style="color:rgba(255,255,255,0.75);font-size:.9rem;margin-top:12px;">@GigiMenyanyiBot = eksponensial <strong style="color:var(--gold-light)">Humanity</strong> yang nyata — menyentuh Rogers Laggard lewat hobi menyanyi &amp; kesehatan gigi</p>
+  </div>
+
+  <!-- 3 GAP CARDS -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:36px;">
+
+    <div style="background:white;border-radius:18px;padding:26px;box-shadow:0 6px 22px rgba(0,0,0,.08);border-top:4px solid var(--pink);">
+      <div style="font-size:2rem;margin-bottom:10px;">📡</div>
+      <p style="font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin-bottom:6px;">Rogers Diffusion Gap</p>
+      <h3 style="font-weight:900;font-size:1rem;color:var(--blue-deep);margin-bottom:8px;">Menjangkau Laggard &amp; Late Majority</h3>
+      <p style="font-size:.88rem;color:var(--text-soft);line-height:1.65;margin-bottom:14px;">~50% populasi — mereka yang belum pernah mendapat akses edukasi kesehatan gigi dan vokal secara interaktif dan privat. GigiMenyanyiBot hadir lewat pintu yang mereka sudah kenal: Telegram dan hobi menyanyi.</p>
+      <a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" rel="noopener"
+        style="font-size:.78rem;font-weight:800;color:var(--blue-mid);text-decoration:none;border:1.5px solid var(--blue-bright);border-radius:20px;padding:4px 12px;display:inline-block;transition:background .2s;"
+        onmouseover="this.style.background='#e3f2fd'" onmouseout="this.style.background='transparent'">
+        📄 DOI: 10.5281/zenodo.19666723
+      </a>
+    </div>
+
+    <div style="background:white;border-radius:18px;padding:26px;box-shadow:0 6px 22px rgba(0,0,0,.08);border-top:4px solid var(--teal);">
+      <div style="font-size:2rem;margin-bottom:10px;">🫂</div>
+      <p style="font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">Sovereignty Gap</p>
+      <h3 style="font-weight:900;font-size:1rem;color:var(--blue-deep);margin-bottom:8px;">Mengembalikan Pilihan ke Tangan Mereka</h3>
+      <p style="font-size:.88rem;color:var(--text-soft);line-height:1.65;margin-bottom:14px;">Masyarakat yang menanggung konsekuensi kesehatan gigi — nyeri, malu tampil, suara terganggu — tanpa pernah mendapat pilihan akses informasi yang layak. GigiMenyanyiBot memulihkan Decision Power itu.</p>
+      <a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" rel="noopener"
+        style="font-size:.78rem;font-weight:800;color:var(--blue-mid);text-decoration:none;border:1.5px solid var(--teal);border-radius:20px;padding:4px 12px;display:inline-block;transition:background .2s;"
+        onmouseover="this.style.background='#e0f7fa'" onmouseout="this.style.background='transparent'">
+        📄 DOI: 10.5281/zenodo.19152827
+      </a>
+    </div>
+
+    <div style="background:white;border-radius:18px;padding:26px;box-shadow:0 6px 22px rgba(0,0,0,.08);border-top:4px solid var(--gold);">
+      <div style="font-size:2rem;margin-bottom:10px;">🧠</div>
+      <p style="font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#e65100;margin-bottom:6px;">NLP Deep→Surface Gap</p>
+      <h3 style="font-weight:900;font-size:1rem;color:var(--blue-deep);margin-bottom:8px;">AI sebagai Jembatan Bahasa Diri</h3>
+      <p style="font-size:.88rem;color:var(--text-soft);line-height:1.65;margin-bottom:14px;">Orang tidak berkata "gigi saya memengaruhi suara saya" — mereka berkata "kok suara saya kurang enak ya?" GigiMenyanyiBot menangkap Deep Structure itu dan merespons dengan edukasi yang relevan.</p>
+      <a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" rel="noopener"
+        style="font-size:.78rem;font-weight:800;color:var(--blue-mid);text-decoration:none;border:1.5px solid var(--gold);border-radius:20px;padding:4px 12px;display:inline-block;transition:background .2s;"
+        onmouseover="this.style.background='#fff8e1'" onmouseout="this.style.background='transparent'">
+        📄 DOI: 10.5281/zenodo.19484926
+      </a>
+    </div>
+
+  </div>
+
+  <!-- CHO FRAMEWORK LINK -->
+  <div style="background:white;border-radius:16px;padding:22px 28px;box-shadow:0 4px 16px rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;border-left:5px solid var(--blue-bright);">
+    <div>
+      <p style="font-weight:900;color:var(--blue-deep);font-size:1rem;margin-bottom:4px;">📖 Baca Framework Lengkapnya</p>
+      <p style="font-size:.88rem;color:var(--text-soft);">From Laggard to Dignity: A CHO Open Source Framework for Closing the Humanity Gap</p>
+    </div>
+    <a href="framework.html"
+      style="display:inline-block;padding:10px 22px;background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid));color:white;border-radius:50px;font-weight:800;font-size:.88rem;text-decoration:none;white-space:nowrap;box-shadow:0 4px 14px rgba(13,43,110,0.3);">
+      Lihat Framework →
+    </a>
+  </div>
+
+</div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="cta-bar">
+    <span class="cta-bar-text">Merdu Menyanyi dengan Gigi dan Mulut yang Sehat 🎶</span>
+    <div class="cta-buttons">
+      <a href="https://t.me/GigiMenyanyiBot" target="_blank" rel="noopener" class="btn-white">
+        🚀 Buka Bot Telegram
+      </a>
+      <a href="dukung.html" class="btn-outline">
+        💛 Dukung Riset
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">😁 Gigi Sehat Menyanyi 💋</div>
+  <p>© 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside · Eksperimen Kemanusiaan Ketiga GKT/MHB</p>
+  <p>GigiMenyanyiBot · <a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a></p>
+  <p class="footer-note">All Rights Reserved · Sehat Giginya, Merdu Suaranya, Percaya Diri Bersinarnya!</p>
+</footer>
+
+</body>
+</html>

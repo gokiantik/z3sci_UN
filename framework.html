@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Go Kian Tik">
+<meta name="description" content="CHO Framework — posisi @GigiMenyanyiBot dalam Grand Formula (Consciousness × Calculation)^Humanity. Mempercepat adopsi informasi kesehatan gigi-vokal untuk Rogers Laggard. By Go Kian Tik (Mbah Hogi Bejo™).">
+<meta name="keywords" content="CHO Framework, Grand Formula, Rogers Diffusion Gap, Sovereignty Gap, NLP Gap, GigiMenyanyiBot, digital inclusion, Chief Humanity Officer, Zenodo DOI, Go Kian Tik, Mbah Hogi Bejo, Z3SCI, Zì Zhǔ Zhě">
+<title>CHO Framework · GigiMenyanyiBot</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep: #0d2b6e;
+  --blue-mid: #1565c0;
+  --blue-bright: #229ED9;
+  --teal: #00bcd4;
+  --pink: #e91e8c;
+  --gold: #ffb300;
+  --gold-light: #ffe082;
+  --white: #ffffff;
+  --bg: #f0f8ff;
+  --card-bg: #ffffff;
+  --text: #1a2340;
+  --text-soft: #445;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ═══ FLOATING NOTES ═══ */
+.note {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: floatNote 6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.15;
+}
+@keyframes floatNote {
+  0%,100% { transform: translateY(0) rotate(-10deg); }
+  50%      { transform: translateY(-25px) rotate(10deg); }
+}
+
+/* ═══ NAV ═══ */
+nav {
+  background: rgba(13,43,110,0.97);
+  backdrop-filter: blur(8px);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(34,158,217,0.2);
+}
+.nav-brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.nav-links a {
+  font-size: .88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
+.nav-links a.active { background: var(--pink); color: white; }
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative;
+  background: linear-gradient(145deg, #0d2b6e 0%, #1565c0 40%, #0097c7 100%);
+  padding: 70px 20px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,179,0,.12) 0%, transparent 50%);
+}
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 90% 70%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(2px 2px at 10% 80%, rgba(255,255,255,0.6) 0%, transparent 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.hero h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  color: var(--white);
+  margin-bottom: 10px;
+  text-shadow: 0 3px 20px rgba(0,0,0,0.3);
+  line-height: 1.25;
+}
+.hero h1 span { color: var(--gold-light); }
+.tagline {
+  font-size: clamp(.95rem, 2.5vw, 1.15rem);
+  color: rgba(255,255,255,0.88);
+  max-width: 680px;
+  margin: 0 auto 20px;
+  font-weight: 600;
+}
+.pill-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--gold-light);
+  font-size: .82rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin: 4px;
+}
+.formula-hero {
+  display: inline-block;
+  background: rgba(255,179,0,0.15);
+  border: 1.5px solid rgba(255,179,0,0.45);
+  border-radius: 14px;
+  padding: 14px 28px;
+  margin-top: 22px;
+}
+.formula-hero p {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(.95rem, 2.5vw, 1.3rem);
+  color: var(--gold-light);
+  line-height: 1.5;
+}
+
+/* ═══ SECTION ═══ */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 24px;
+}
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 10px;
+}
+.section-title span { color: var(--pink); }
+.section-subtitle { color: var(--text-soft); font-size: 1rem; margin-bottom: 36px; }
+.divider {
+  width: 60px; height: 5px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  border-radius: 10px;
+  margin: 12px 0 28px;
+}
+
+/* ═══ FORMULA BREAKDOWN ═══ */
+.formula-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+.formula-var {
+  background: white;
+  border-radius: 18px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.07);
+  border-top: 4px solid var(--blue-bright);
+  text-align: center;
+}
+.formula-var.v-calc  { border-top-color: var(--pink); }
+.formula-var.v-hum   { border-top-color: var(--gold); }
+.formula-var.v-trans { border-top-color: var(--teal); }
+.var-symbol {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+.v-cons  .var-symbol { color: var(--blue-bright); }
+.v-calc  .var-symbol { color: var(--pink); }
+.v-hum   .var-symbol { color: var(--gold); }
+.v-trans .var-symbol { color: var(--teal); }
+.var-name { font-weight: 900; font-size: .88rem; color: var(--blue-deep); margin-bottom: 6px; }
+.var-def  { font-size: .82rem; color: var(--text-soft); line-height: 1.6; margin-bottom: 12px; }
+.var-gigi {
+  font-size: .78rem;
+  font-weight: 800;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+.v-cons  .var-gigi { background: var(--blue-bright); }
+.v-calc  .var-gigi { background: var(--pink); }
+.v-hum   .var-gigi { background: linear-gradient(135deg,var(--gold),#e65100); color: #1a2340; }
+.v-trans .var-gigi { background: var(--teal); }
+
+/* ═══ GAP TABLE ═══ */
+.gap-list { display: flex; flex-direction: column; gap: 16px; }
+.gap-item {
+  background: white;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: start;
+  gap: 18px;
+}
+@media(max-width:600px){ .gap-item { grid-template-columns: 1fr; } }
+.gap-icon { font-size: 2rem; text-align: center; padding-top: 3px; }
+.gap-name {
+  font-size: .75rem; font-weight: 900; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--pink); margin-bottom: 4px;
+}
+.gap-title { font-weight: 900; font-size: .97rem; color: var(--blue-deep); margin-bottom: 5px; }
+.gap-gigi  { font-size: .88rem; color: var(--text-soft); line-height: 1.65; }
+.gap-doi a {
+  font-size: .76rem; font-weight: 800; color: var(--blue-mid);
+  text-decoration: none; border: 1.5px solid var(--blue-bright);
+  border-radius: 20px; padding: 4px 10px; white-space: nowrap;
+  display: inline-block; transition: background .2s;
+}
+.gap-doi a:hover { background: #e3f2fd; }
+
+/* ═══ DOI PUBLICATIONS ═══ */
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+.pub-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.07);
+  border-left: 4px solid var(--blue-bright);
+  transition: transform .2s, box-shadow .2s;
+}
+.pub-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.1); }
+.pub-card.ep-primary { border-left-color: var(--pink); }
+.pub-card.ep-sovereignty { border-left-color: var(--teal); }
+.pub-card.ep-nlp { border-left-color: var(--gold); }
+.pub-series {
+  font-size: .72rem; font-weight: 900; letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.ep-primary    .pub-series { color: var(--pink); }
+.ep-sovereignty .pub-series { color: var(--teal); }
+.ep-nlp        .pub-series { color: #e65100; }
+.pub-card:not([class*="ep-"]) .pub-series { color: var(--blue-bright); }
+.pub-title { font-weight: 800; font-size: .92rem; color: var(--blue-deep); margin-bottom: 8px; line-height: 1.4; }
+.pub-doi {
+  font-size: .78rem; font-weight: 700; color: var(--blue-mid);
+}
+.pub-doi a {
+  color: var(--blue-mid); text-decoration: none;
+  border-bottom: 1.5px dashed var(--blue-bright);
+  transition: color .2s;
+}
+.pub-doi a:hover { color: var(--pink); }
+
+/* ═══ CALLOUT ═══ */
+.callout {
+  background: linear-gradient(135deg,#e3f2fd,#fce4ec);
+  border-left: 5px solid var(--pink);
+  border-radius: 0 16px 16px 0;
+  padding: 20px 26px;
+  margin: 24px 0;
+}
+.callout p { font-size: .97rem; color: var(--text-soft); line-height: 1.75; }
+.callout strong { color: var(--blue-deep); }
+
+/* ═══ DARK SECTION ═══ */
+.dark-section { background: linear-gradient(135deg, #0d2b6e, #1565c0); padding: 70px 24px; }
+.dark-inner { max-width: 1100px; margin: 0 auto; }
+.dark-section .section-title { color: white; }
+.dark-section .section-title span { color: var(--gold-light); }
+.dark-section .section-subtitle { color: rgba(255,255,255,.7); }
+.dark-section .divider { background: linear-gradient(90deg, var(--gold), var(--pink)); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: #0a1628;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  padding: 44px 20px;
+  font-size: .9rem;
+}
+footer a { color: var(--teal); text-decoration: none; }
+footer .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.4rem; color: white; margin-bottom: 8px; }
+footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
+
+@media(max-width:600px){
+  nav { padding: 12px 16px; }
+  .formula-hero { padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
+  <div class="nav-links">
+    <a href="index.html">Beranda</a>
+    <a href="about.html">Tentang</a>
+    <a href="framework.html" class="active">Framework</a>
+    <a href="dukung.html">Dukung</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stars"></div>
+  <span class="note" style="left:5%;top:20%;animation-delay:0s">🧠</span>
+  <span class="note" style="left:88%;top:18%;animation-delay:1s">📡</span>
+  <span class="note" style="left:12%;top:68%;animation-delay:2s">🦷</span>
+  <span class="note" style="left:80%;top:62%;animation-delay:1.5s">🎵</span>
+  <span class="note" style="left:50%;top:12%;animation-delay:.7s">⚡</span>
+  <div class="hero-content">
+    <p style="font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:12px;">CHO In Action Series · Z³SCI</p>
+    <h1>CHO <span>Framework</span><br>&amp; GigiMenyanyiBot</h1>
+    <p class="tagline">
+      Posisi @GigiMenyanyiBot dalam Grand Formula —
+      akselerasi adopsi informasi kesehatan gigi-vokal
+      untuk mereka yang belum pernah terjangkau.
+    </p>
+    <div>
+      <span class="pill-badge">📡 Rogers Laggard</span>
+      <span class="pill-badge">🫂 Sovereignty Gap</span>
+      <span class="pill-badge">🧠 NLP Bridge</span>
+      <span class="pill-badge">🌏 Digital Inclusion</span>
+    </div>
+    <div class="formula-hero">
+      <p>( Consciousness × Calculation ) <sup style="font-size:.6em;font-family:Nunito,sans-serif;">Humanity</sup> &lt; Transcendence</p>
+      <p style="font-family:Nunito,sans-serif;font-size:.78rem;color:rgba(255,255,255,0.6);margin-top:6px;">Grand Formula · Go Kian Tik (Mbah Hogi Bejo™) · 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULA BREAKDOWN -->
+<section class="section">
+  <h2 class="section-title">Grand Formula — <span>Dibedah</span></h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">Setiap variabel dalam Grand Formula terwujud secara konkret dalam @GigiMenyanyiBot.</p>
+
+  <div class="formula-grid">
+    <div class="formula-var v-cons">
+      <div class="var-symbol">C</div>
+      <p class="var-name">Consciousness</p>
+      <p class="var-def">Kesadaran kolektif 8 miliar manusia — setiap individu membawa 1/360 pengetahuan uniknya tentang tubuh, suara, dan kesehatan dirinya.</p>
+      <span class="var-gigi">🦷 User yang bertanya ke bot</span>
+    </div>
+    <div class="formula-var v-calc">
+      <div class="var-symbol">×</div>
+      <p class="var-name">Calculation</p>
+      <p class="var-def">Kapasitas AI (Claude, Gemini, dll.) sebagai kalkulator kognitif yang mengolah pertanyaan Deep Structure menjadi jawaban edukatif yang relevan.</p>
+      <span class="var-gigi">🤖 Mesin lingua AI bot</span>
+    </div>
+    <div class="formula-var v-hum">
+      <div class="var-symbol">^H</div>
+      <p class="var-name">Humanity (Exponent)</p>
+      <p class="var-def">Kedewasaan berdaulat — bot dirancang untuk menaikkan derajat user dari Laggard ke Early Adopter lewat pengalaman yang aman, privat, dan bebas penilaian.</p>
+      <span class="var-gigi">🚀 Akselerasi Rogers Laggard</span>
+    </div>
+    <div class="formula-var v-trans">
+      <div class="var-symbol">&lt;T</div>
+      <p class="var-name">Transcendence</p>
+      <p class="var-def">Pengingat struktural bahwa formula ini tidak pernah selesai — GigiMenyanyiBot terus berkembang dari TRL-6 menuju TRL-9 dan seterusnya.</p>
+      <span class="var-gigi">🔄 TRL-6 → 9 → ∞</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>
+      <strong>Tesis inti:</strong> @GigiMenyanyiBot adalah bukti lapangan bahwa Grand Formula bukan sekadar abstraksi —
+      ia bekerja nyata di Telegram, setiap hari, menyentuh mereka yang belum pernah mendapat edukasi kesehatan gigi dan vokal secara interaktif.
+      Ini adalah <strong>eksponensial Humanity yang terukur.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- 6 CIVILIZATIONAL GAPS -->
+<section class="section" style="background:linear-gradient(135deg,#f0f8ff,#fce4ec);max-width:100%;padding:70px 0;">
+<div style="max-width:1100px;margin:0 auto;padding:0 24px;">
+  <h2 class="section-title">6 Gap Peradaban — <span>Respons GigiMenyanyiBot</span></h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">CHO Framework mengidentifikasi 6 kesenjangan yang memperparah atau diperbaiki oleh AI. @GigiMenyanyiBot secara langsung menjawab tiga di antaranya.</p>
+
+  <div class="gap-list">
+
+    <div class="gap-item" style="border-left:4px solid var(--pink);">
+      <div class="gap-icon">📡</div>
+      <div>
+        <p class="gap-name">Rogers Diffusion Gap — <strong style="color:var(--pink);">LANGSUNG DIJAWAB</strong></p>
+        <p class="gap-title">~50% populasi adalah Laggard &amp; Late Majority</p>
+        <p class="gap-gigi">GigiMenyanyiBot masuk lewat pintu yang sudah mereka kenal — Telegram dan hobi menyanyi. Tidak menunggu mereka datang ke klinik atau membuka browser. Bot mendatangi habitat mereka.</p>
+      </div>
+      <div class="gap-doi">
+        <a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" rel="noopener">📄 zenodo.19666723</a>
+      </div>
+    </div>
+
+    <div class="gap-item" style="border-left:4px solid #7c4dff;">
+      <div class="gap-icon">📊</div>
+      <div>
+        <p class="gap-name" style="color:#7c4dff;">Hawkins Consciousness Gap — <strong style="color:#7c4dff;">KONTEKS</strong></p>
+        <p class="gap-title">70–80% manusia beroperasi di LoC &lt;200</p>
+        <p class="gap-gigi">Bot dirancang non-judgmental — tidak ada malu, tidak ada stigma. Koridor yang hangat menurunkan pertahanan psikologis dan membuka ruang untuk menerima informasi baru.</p>
+      </div>
+      <div class="gap-doi">
+        <a href="https://doi.org/10.5281/zenodo.19161186" target="_blank" rel="noopener">📄 zenodo.19161186</a>
+      </div>
+    </div>
+
+    <div class="gap-item" style="border-left:4px solid var(--blue-bright);">
+      <div class="gap-icon">🪟</div>
+      <div>
+        <p class="gap-name" style="color:var(--blue-bright);">Johari Blindness — <strong style="color:var(--blue-bright);">KONTEKS</strong></p>
+        <p class="gap-title">Unknown Arena mendominasi — kita tidak tahu apa yang kita tidak tahu</p>
+        <p class="gap-gigi">Banyak user tidak tahu bahwa kesehatan gigi memengaruhi kualitas suara. Bot membuka Unknown Arena ini lewat percakapan santai yang terasa natural — bukan ceramah.</p>
+      </div>
+      <div class="gap-doi">
+        <a href="https://doi.org/10.5281/zenodo.19322063" target="_blank" rel="noopener">📄 zenodo.19322063</a>
+      </div>
+    </div>
+
+    <div class="gap-item" style="border-left:4px solid var(--teal);">
+      <div class="gap-icon">🫂</div>
+      <div>
+        <p class="gap-name" style="color:var(--teal);">Sovereignty Gap — <strong style="color:var(--teal);">LANGSUNG DIJAWAB</strong></p>
+        <p class="gap-title">Decision Power ≠ Consequence Ownership</p>
+        <p class="gap-gigi">Mereka menanggung konsekuensi gigi berlubang, nafas tak segar, suara terganggu — tanpa pernah mendapat akses informasi pencegahan yang layak. GigiMenyanyiBot mengembalikan Decision Power itu ke tangan mereka.</p>
+      </div>
+      <div class="gap-doi">
+        <a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" rel="noopener">📄 zenodo.19152827</a>
+      </div>
+    </div>
+
+    <div class="gap-item" style="border-left:4px solid var(--gold);">
+      <div class="gap-icon">🧠</div>
+      <div>
+        <p class="gap-name" style="color:#e65100;">NLP Deep→Surface Gap — <strong style="color:#e65100;">LANGSUNG DIJAWAB</strong></p>
+        <p class="gap-title">Deep Structure ≠ Surface Structure — komunikasi manusia kehilangan makna</p>
+        <p class="gap-gigi">"Suara saya kok serak?" adalah Surface Structure. Deep Structure-nya: "Saya tidak tahu bahwa dehidrasi dan karang gigi memengaruhi pita suara saya." Bot menangkap keduanya dan menjembatani dengan edukasi yang relevan.</p>
+      </div>
+      <div class="gap-doi">
+        <a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" rel="noopener">📄 zenodo.19484926</a>
+      </div>
+    </div>
+
+    <div class="gap-item" style="border-left:4px solid #546e7a;">
+      <div class="gap-icon">💼</div>
+      <div>
+        <p class="gap-name" style="color:#546e7a;">Kiyosaki/Maslow Gap — <strong style="color:#546e7a;">KONTEKS</strong></p>
+        <p class="gap-title">1,3 miliar employee mindset — belum punya sovereignty maturity</p>
+        <p class="gap-gigi">Bot menjadi langkah kecil pertama menuju otonomi kognitif — "Saya bisa mencari informasi sendiri, saya tidak perlu menunggu dokter untuk tahu cara menjaga gigi saya."</p>
+      </div>
+      <div class="gap-doi">
+        <a href="https://doi.org/10.5281/zenodo.19265764" target="_blank" rel="noopener">📄 zenodo.19265764</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- PUBLIKASI TERKAIT -->
+<section class="dark-section">
+  <div class="dark-inner">
+    <h2 class="section-title">Publikasi <span>CHO In Action Series</span></h2>
+    <div class="divider"></div>
+    <p class="section-subtitle">Semua diterbitkan open access · CC BY-NC-ND 4.0 · Zenodo &amp; SSRN</p>
+
+    <div class="pub-grid">
+
+      <div class="pub-card ep-primary">
+        <p class="pub-series">📌 Fondasi Framework</p>
+        <p class="pub-title">From Laggard to Dignity: A CHO Open Source Framework for Closing the Humanity Gap</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19666723" target="_blank" rel="noopener">10.5281/zenodo.19666723</a></p>
+      </div>
+
+      <div class="pub-card ep-primary">
+        <p class="pub-series">📌 Fondasi Framework</p>
+        <p class="pub-title">From Formula to the Field: Implementation Protocol of the Open Source CHO Framework</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19322063" target="_blank" rel="noopener">10.5281/zenodo.19322063</a></p>
+      </div>
+
+      <div class="pub-card ep-primary">
+        <p class="pub-series">📌 Fondasi Framework</p>
+        <p class="pub-title">Chief Humanity Officer — The Position Doesn't Exist Yet</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.18935427" target="_blank" rel="noopener">10.5281/zenodo.18935427</a></p>
+      </div>
+
+      <div class="pub-card ep-sovereignty">
+        <p class="pub-series">🫂 Sovereignty Gap</p>
+        <p class="pub-title">Kupu-Kupu Malam and the Sovereignty Gap: Who Bears the Consequence Without Holding the Choice?</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19152827" target="_blank" rel="noopener">10.5281/zenodo.19152827</a></p>
+      </div>
+
+      <div class="pub-card ep-sovereignty">
+        <p class="pub-series">🫂 Sovereignty Gap</p>
+        <p class="pub-title">Sovereignty Gap: When Decision Power Does Not Meet Consequence Ownership — Indonesian Women</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19978064" target="_blank" rel="noopener">10.5281/zenodo.19978064</a></p>
+      </div>
+
+      <div class="pub-card ep-sovereignty">
+        <p class="pub-series">🫂 Sovereignty Gap</p>
+        <p class="pub-title">THE SOVEREIGN ONE: Human Sovereignty in the Pentadrant Ecosystem and the Global Scale Calculator</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19670692" target="_blank" rel="noopener">10.5281/zenodo.19670692</a></p>
+      </div>
+
+      <div class="pub-card ep-nlp">
+        <p class="pub-series">🧠 NLP &amp; AI Methodology</p>
+        <p class="pub-title">AIRT::The Master Leveling Prompt: A Front-End User Methodology for Human-AI Cognitive Coherence</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19484926" target="_blank" rel="noopener">10.5281/zenodo.19484926</a></p>
+      </div>
+
+      <div class="pub-card ep-nlp">
+        <p class="pub-series">🧠 NLP &amp; AI Methodology</p>
+        <p class="pub-title">Testing the Calculator: Abrahamic Moral Wisdom as a Benchmark for AI Humanity Alignment</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19490279" target="_blank" rel="noopener">10.5281/zenodo.19490279</a></p>
+      </div>
+
+      <div class="pub-card ep-nlp">
+        <p class="pub-series">🧠 NLP &amp; AI Methodology</p>
+        <p class="pub-title">AIRT MLP Career Readiness v1.9: A Framework for Human-AI Cognitive Alignment</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19609064" target="_blank" rel="noopener">10.5281/zenodo.19609064</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">📖 Epistemologi</p>
+        <p class="pub-title">Walking Books Philosophy: Toward a Relational Epistemology of Human Identity and Knowledge</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19084212" target="_blank" rel="noopener">10.5281/zenodo.19084212</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">📖 Epistemologi</p>
+        <p class="pub-title">More Than Intelligence: Consciousness as the Exponent — A CHO Response to Day 14</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19161186" target="_blank" rel="noopener">10.5281/zenodo.19161186</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">📖 Koherensi Diri</p>
+        <p class="pub-title">Ruwet, OTW Genah, Genah: A Triadic Framework of Human Self-Coherence</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19002243" target="_blank" rel="noopener">10.5281/zenodo.19002243</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">🔬 AI Red Teaming</p>
+        <p class="pub-title">When Intelligence Creates Error: Inconsistency, Over-Reasoning &amp; Sycophantic Confabulation in Multimodal AI</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19652715" target="_blank" rel="noopener">10.5281/zenodo.19652715</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">🔬 AI Red Teaming</p>
+        <p class="pub-title">Visual Hallucination in a Paid AI System: Documented Case of Multimodal Confabulation by Gemini AI Plus</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19638646" target="_blank" rel="noopener">10.5281/zenodo.19638646</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">🌐 SSRN</p>
+        <p class="pub-title">Rainbow, Billiards, and Neng: A Conversation with Meriel on Algorithms, Bias, and the Chief Humanity Officer</p>
+        <p class="pub-doi">DOI: <a href="https://dx.doi.org/10.2139/ssrn.6428019" target="_blank" rel="noopener">10.2139/ssrn.6428019</a></p>
+      </div>
+
+      <div class="pub-card">
+        <p class="pub-series">🤖 Sarinem.chat</p>
+        <p class="pub-title">Sarinem.chat: A Living Proof of the CHO Grand Formula</p>
+        <p class="pub-doi">DOI: <a href="https://doi.org/10.5281/zenodo.19938363" target="_blank" rel="noopener">10.5281/zenodo.19938363</a></p>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:36px;">
+      <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank" rel="noopener"
+        style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,var(--gold),#e65100);color:#0d2b6e;border-radius:50px;font-weight:900;font-size:.95rem;text-decoration:none;box-shadow:0 6px 20px rgba(255,179,0,0.4);">
+        🌐 Lihat Semua di Zenodo Community →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">😁 Gigi Sehat Menyanyi 💋</div>
+  <p>© 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside · CHO In Action Series</p>
+  <p>
+    <a href="https://zenodo.org/communities/chiefhumanityofficer" target="_blank">Zenodo Community</a> ·
+    <a href="https://github.com/gokiantik/chiefhumanityofficer" target="_blank">GitHub</a> ·
+    <a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a>
+  </p>
+  <p class="footer-note">CC BY-NC-ND 4.0 · All Rights Reserved · Sehat Giginya, Merdu Suaranya, Percaya Diri Bersinarnya!</p>
+</footer>
+
+</body>
+</html>

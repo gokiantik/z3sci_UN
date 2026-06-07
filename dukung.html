@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Go Kian Tik">
+<meta name="description" content="Dukung @GigiMenyanyiBot — akselerasi adopsi kesehatan gigi-vokal untuk Rogers Laggard lewat CHO Framework. Donasi, sponsorship, direktori dokter gigi Geo-Aware. By Go Kian Tik (Mbah Hogi Bejo™).">
+<meta name="keywords" content="GigiMenyanyiBot, donasi, sponsorship, trakteer, dokter gigi, riset AI, CHO Framework, Rogers Laggard, digital inclusion, Sovereignty Gap, Grand Formula, Go Kian Tik, Mbah Hogi Bejo">
+<title>Dukung Riset · GigiMenyanyiBot</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep: #0d2b6e;
+  --blue-mid: #1565c0;
+  --blue-bright: #229ED9;
+  --teal: #00bcd4;
+  --pink: #e91e8c;
+  --pink-light: #ff6bbb;
+  --gold: #ffb300;
+  --gold-light: #ffe082;
+  --white: #ffffff;
+  --bg: #f0f8ff;
+  --card-bg: #ffffff;
+  --text: #1a2340;
+  --text-soft: #445;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ═══ FLOATING NOTES ═══ */
+.note {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: floatNote 6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.18;
+}
+@keyframes floatNote {
+  0%,100% { transform: translateY(0) rotate(-10deg); }
+  50%      { transform: translateY(-25px) rotate(10deg); }
+}
+
+/* ═══ NAV ═══ */
+nav {
+  background: rgba(13,43,110,0.97);
+  backdrop-filter: blur(8px);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(34,158,217,0.2);
+}
+.nav-brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.nav-links a {
+  font-family: 'Nunito', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
+.nav-links a.active {
+  background: var(--pink);
+  color: white;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative;
+  background: linear-gradient(145deg, #0d2b6e 0%, #1565c0 40%, #0097c7 100%);
+  padding: 70px 20px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,179,0,.12) 0%, transparent 50%);
+}
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 90% 70%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 10% 80%, rgba(255,255,255,0.6) 0%, transparent 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.logo-wrap {
+  display: inline-block;
+  animation: logoPulse 3s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+@keyframes logoPulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.logo {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.4);
+  box-shadow: 0 0 40px rgba(0,188,212,0.5), 0 15px 40px rgba(0,0,0,0.3);
+  object-fit: cover;
+}
+.hero h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  color: var(--white);
+  margin: 0 0 10px;
+  text-shadow: 0 3px 20px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+.hero h1 span { color: var(--gold-light); }
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.92);
+  max-width: 580px;
+  margin: 0 auto 14px;
+  font-weight: 600;
+}
+.hero-desc {
+  font-size: .95rem;
+  color: rgba(255,255,255,.72);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.75;
+}
+.pill-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--gold-light);
+  font-size: .85rem;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin: 4px;
+  letter-spacing: .5px;
+}
+
+/* ═══ SECTION COMMON ═══ */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 24px;
+}
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 10px;
+  text-align: center;
+}
+.section-title span { color: var(--pink); }
+.section-subtitle {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.divider {
+  width: 60px; height: 5px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  border-radius: 10px;
+  margin: 12px auto 30px;
+}
+
+/* ═══ TIER CARDS ═══ */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-bottom: 60px;
+}
+.tier-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px 26px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  border-top: 4px solid var(--blue-bright);
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+}
+.tier-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.13); }
+.tier-card.featured {
+  border-top-color: var(--pink);
+  box-shadow: 0 6px 24px rgba(233,30,140,.15);
+}
+.tier-card.sponsor { border-top-color: var(--gold); }
+
+.tier-badge {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--blue-mid);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 14px;
+}
+.tier-card.featured .tier-badge { background: var(--pink); }
+.tier-card.sponsor  .tier-badge { background: linear-gradient(135deg, var(--gold), #ff6f00); color: #1a2340; }
+
+.tier-for {
+  font-size: .83rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+.tier-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 6px;
+}
+.tier-price {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--pink);
+}
+.tier-card.featured .tier-price { color: var(--pink); }
+.tier-card.sponsor  .tier-price { color: #e65100; }
+.tier-period {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-left: 4px;
+}
+.tier-divider {
+  width: 36px; height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  border-radius: 10px;
+  margin: 14px 0;
+}
+.tier-desc {
+  font-size: .92rem;
+  color: var(--text-soft);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+.tier-perks { list-style: none; margin-bottom: 22px; }
+.tier-perks li {
+  font-size: .88rem;
+  color: var(--text-soft);
+  padding: 5px 0 5px 22px;
+  position: relative;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.tier-perks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  color: var(--teal);
+  font-weight: 900;
+  font-size: .85rem;
+}
+.tier-cta {
+  display: block;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: .9rem;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  background: var(--blue-deep);
+  color: white;
+  box-shadow: 0 4px 14px rgba(13,43,110,0.3);
+}
+.tier-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(13,43,110,0.4); }
+.tier-cta.primary {
+  background: linear-gradient(135deg, var(--pink), #880e4f);
+  box-shadow: 0 4px 14px rgba(233,30,140,0.4);
+}
+.tier-cta.primary:hover { box-shadow: 0 8px 22px rgba(233,30,140,0.5); }
+.tier-cta.gold-cta {
+  background: linear-gradient(135deg, var(--gold), #e65100);
+  color: #1a2340;
+  box-shadow: 0 4px 14px rgba(255,179,0,0.4);
+}
+
+/* ═══ FLOW SECTION ═══ */
+.flow-wrap {
+  background: linear-gradient(135deg, #0d2b6e, #1565c0);
+  padding: 70px 24px;
+}
+.flow-inner { max-width: 1100px; margin: 0 auto; }
+.flow-wrap .section-title { color: white; }
+.flow-wrap .section-title span { color: var(--gold-light); }
+.flow-wrap .divider { background: linear-gradient(90deg, var(--gold), var(--pink)); }
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  position: relative;
+  margin-top: 10px;
+}
+.flow-step {
+  text-align: center;
+  padding: 20px 16px;
+  position: relative;
+}
+.flow-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -6px;
+  top: 30px;
+  color: var(--gold-light);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+.flow-num {
+  width: 44px; height: 44px;
+  border: 2px solid rgba(255,179,0,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--gold-light);
+  background: rgba(255,179,0,0.12);
+}
+.flow-step-title {
+  font-weight: 900;
+  font-size: .88rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: white;
+  margin-bottom: 6px;
+}
+.flow-step-desc {
+  font-size: .83rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.55;
+}
+
+/* ═══ ETHICS NOTE ═══ */
+.ethics-note {
+  background: white;
+  border-left: 5px solid var(--teal);
+  border-radius: 0 16px 16px 0;
+  padding: 20px 24px;
+  margin-top: 56px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
+.ethics-note p { font-size: .95rem; color: var(--text-soft); line-height: 1.75; }
+.ethics-note strong { color: var(--blue-deep); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: #0a1628;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  padding: 44px 20px;
+  font-size: .9rem;
+}
+footer a { color: var(--teal); text-decoration: none; }
+footer .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.4rem; color: white; margin-bottom: 8px; }
+footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
+
+@media(max-width:600px){
+  nav { padding: 12px 16px; }
+  .flow-steps { grid-template-columns: 1fr 1fr; }
+  .flow-step:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
+  <div class="nav-links">
+    <a href="index.html">Beranda</a>
+    <a href="about.html">Tentang</a>
+    <a href="framework.html">Framework</a>
+    <a href="dukung.html" class="active">Dukung</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stars"></div>
+  <span class="note" style="left:5%;top:25%;animation-delay:0s">💛</span>
+  <span class="note" style="left:88%;top:18%;animation-delay:1s">🎵</span>
+  <span class="note" style="left:12%;top:65%;animation-delay:2s">🦷</span>
+  <span class="note" style="left:82%;top:60%;animation-delay:1.5s">🎶</span>
+  <div class="hero-content">
+    <div class="logo-wrap">
+      <img src="images/GigiSehatMenyanyi.png" class="logo" alt="Logo Gigi Sehat Menyanyi">
+    </div>
+    <h1>Dukung <span>Riset</span> Bersama</h1>
+    <p class="tagline">Merdu Menyanyi dengan Gigi dan Mulut yang Sehat 🎶</p>
+    <p class="hero-desc">
+      Seluruh dana yang terkumpul mendukung pengembangan AI (TRL‑6/9),
+      direktori dokter gigi nasional berbasis lokasi, dan riset inovasi
+      kesehatan vokal–gigi mulut — dikelola dengan prinsip cooperative partisipatoris.
+    </p>
+    <div>
+      <span class="pill-badge">💛 Trakteer</span>
+      <span class="pill-badge">🦷 Direktori Dokter</span>
+      <span class="pill-badge">🤝 Sponsorship</span>
+    </div>
+  </div>
+</section>
+
+<!-- TIER CARDS -->
+<section class="section">
+  <h2 class="section-title">Tiga Jalur <span>Dukungan</span></h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">Pilih jalur yang paling cocok dengan misimu.</p>
+
+  <div class="tiers">
+
+    <!-- DUKUNG -->
+    <div class="tier-card">
+      <span class="tier-badge">Dukung</span>
+      <p class="tier-for">Khalayak Umum · Pehobi Vokal</p>
+      <h2 class="tier-title">Langganan Trakteer</h2>
+      <div>
+        <span class="tier-price">Rp 5.000+</span>
+        <span class="tier-period">bebas, per bulan</span>
+      </div>
+      <div class="tier-divider"></div>
+      <p class="tier-desc">
+        Dukung pengembangan AI dan riset kesehatan vokal–gigi secara
+        ringan lewat langganan konten eksklusif di Trakteer —
+        nominal bebas, mulai dari Rp 5.000 hingga tak terbatas.
+      </p>
+      <ul class="tier-perks">
+        <li>Akses modul latihan vokal praktis</li>
+        <li>Panduan bernyanyi yang sehat</li>
+        <li>Literasi kesehatan gigi &amp; mulut</li>
+        <li>Komunitas Superhero Café Inside</li>
+      </ul>
+      <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener" class="tier-cta primary">
+        💛 Dukung via Trakteer
+      </a>
+    </div>
+
+    <!-- DONASI DOKTER -->
+    <div class="tier-card featured">
+      <span class="tier-badge">Donasi</span>
+      <p class="tier-for">Dokter Gigi · Kemitraan Klinis</p>
+      <h2 class="tier-title">Donasi Riset Direktori</h2>
+      <div>
+        <span class="tier-price">Rp 120.000</span>
+        <span class="tier-period">sekali selamanya</span>
+      </div>
+      <div class="tier-divider"></div>
+      <p class="tier-desc">
+        Bergabung dalam gerakan kemanusiaan riset AI kesehatan gigi.
+        Profil Anda masuk ke direktori Geo‑Aware @GigiMenyanyiBot secara permanen.
+      </p>
+      <ul class="tier-perks">
+        <li>Nama &amp; alamat praktik di direktori AI</li>
+        <li>Jam praktik &amp; afiliasi RS/klinik</li>
+        <li>Rekomendasi darurat berbasis lokasi (Geo‑Aware)</li>
+        <li>Tercatat sebagai donatur riset kemanusiaan</li>
+      </ul>
+      <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener" class="tier-cta primary">
+        🦷 Daftar &amp; Donasi Sekarang
+      </a>
+    </div>
+
+    <!-- SPONSORSHIP -->
+    <div class="tier-card sponsor">
+      <span class="tier-badge">Sponsorship</span>
+      <p class="tier-for">Korporasi · Farmasi Kesehatan Mulut</p>
+      <h2 class="tier-title">Kemitraan Ekosistem</h2>
+      <div>
+        <span class="tier-price">Rp 1.200.000</span>
+        <span class="tier-period">per tahun</span>
+      </div>
+      <div class="tier-divider"></div>
+      <p class="tier-desc">
+        Produk Anda diindeks ke dalam knowledge base AI @GigiMenyanyiBot.
+        Saat konteks percakapan relevan, produk Anda muncul secara organik
+        sebagai bagian dari edukasi — bukan iklan interruptif.
+      </p>
+      <ul class="tier-perks">
+        <li>Integrasi produk ke algoritma AI</li>
+        <li>Contextual triggering berbasis percakapan</li>
+        <li>Laporan penggunaan per kuartal</li>
+        <li>Branding di laporan riset publik</li>
+      </ul>
+      <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener" class="tier-cta gold-cta">
+        🤝 Ajukan Kemitraan
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ETHICS NOTE -->
+  <div class="ethics-note">
+    <p>
+      <strong>Catatan Etika Kedokteran:</strong> Niat donasi dokter gigi adalah murni mendukung
+      gerakan kemanusiaan riset AI, bukan memasang iklan. Pencantuman profil di direktori
+      merupakan bentuk apresiasi komunitas — disajikan secara faktual dan objektif,
+      sepenuhnya selaras dengan <strong>KODEKGI Pasal 3 Ayat 3</strong> tentang
+      direktori informasi dokter.
+    </p>
+  </div>
+</section>
+
+<!-- ALUR VERIFIKASI -->
+<div class="flow-wrap">
+  <div class="flow-inner">
+    <h2 class="section-title">Alur <span>Verifikasi</span> Database</h2>
+    <div class="divider"></div>
+    <p class="section-subtitle" style="color:rgba(255,255,255,.7);">Bagaimana data donatur masuk ke sistem AI?</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <p class="flow-step-title">Isi Form</p>
+        <p class="flow-step-desc">Donatur mengisi formulir dan mengunggah bukti transfer / tangkap layar Trakteer</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <p class="flow-step-title">Masuk Antrian</p>
+        <p class="flow-step-desc">Data masuk ke database dengan status <em>PENDING</em> — belum aktif</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <p class="flow-step-title">Verifikasi Admin</p>
+        <p class="flow-step-desc">Admin mengkonfirmasi mutasi rekening atau dashboard Trakteer</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <p class="flow-step-title">Tayang Langsung</p>
+        <p class="flow-step-desc">Status diubah ke <em>LIVE</em> — data langsung dapat diakses AI secara Geo‑Aware</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">😁 Gigi Sehat Menyanyi 💋</div>
+  <p>© 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside · Dana dikelola dengan prinsip cooperative partisipatoris.</p>
+  <p>GigiMenyanyiBot · <a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a></p>
+  <p class="footer-note">All Rights Reserved · Sehat Giginya, Merdu Suaranya, Percaya Diri Bersinarnya!</p>
+</footer>
+
+</body>
+</html>
