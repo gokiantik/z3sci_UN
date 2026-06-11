@@ -399,12 +399,17 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
-  <div class="nav-links">
-    <a href="index.html">Beranda</a>
-    <a href="about.html">Tentang</a>
-    <a href="framework.html">Framework</a>
-    <a href="dukung.html" class="active">Dukung</a>
-  </div>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="international.html">🌐 International</a></li>
+    <li><a href="about.html">Tentang</a></li>
+    <li><a href="framework.html">Framework</a></li>
+    <li><a href="dukung.html" class="active">Dukung</a></li>
+    <li><a href="privacy.html">Privasi</a></li>
+  </ul>
 </nav>
 
 <!-- HERO -->
@@ -498,8 +503,8 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
       <p class="tier-for">Korporasi · Farmasi Kesehatan Mulut</p>
       <h2 class="tier-title">Kemitraan Ekosistem</h2>
       <div>
-        <span class="tier-price">Rp 1.200.000</span>
-        <span class="tier-period">per tahun</span>
+        <span class="tier-price">Rp 3.600.000</span>
+        <span class="tier-period">per 2 tahun</span>
       </div>
       <div class="tier-divider"></div>
       <p class="tier-desc">
@@ -508,7 +513,7 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
         sebagai bagian dari edukasi — bukan iklan interruptif.
       </p>
       <ul class="tier-perks">
-        <li>Integrasi produk ke algoritma AI</li>
+        <li>Integrasi 6 item produk ke algoritma AI</li>
         <li>Contextual triggering berbasis percakapan</li>
         <li>Laporan penggunaan per kuartal</li>
         <li>Branding di laporan riset publik</li>

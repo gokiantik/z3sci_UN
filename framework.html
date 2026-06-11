@@ -66,6 +66,7 @@ nav {
 }
 .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
 .nav-links a {
+  font-family: 'Nunito', sans-serif;
   font-size: .88rem;
   font-weight: 700;
   color: rgba(255,255,255,0.7);
@@ -75,7 +76,10 @@ nav {
   transition: background .2s, color .2s;
 }
 .nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
-.nav-links a.active { background: var(--pink); color: white; }
+.nav-links a.active {
+  background: var(--pink);
+  color: white;
+}
 
 /* ═══ HERO ═══ */
 .hero {
@@ -315,12 +319,17 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
-  <div class="nav-links">
-    <a href="index.html">Beranda</a>
-    <a href="about.html">Tentang</a>
-    <a href="framework.html" class="active">Framework</a>
-    <a href="dukung.html">Dukung</a>
-  </div>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="international.html">🌐 International</a></li>
+    <li><a href="about.html">Tentang</a></li>
+    <li><a href="framework.html">Framework</a></li>
+    <li><a href="dukung.html" class="active">Dukung</a></li>
+    <li><a href="privacy.html">Privasi</a></li>
+  </ul>
 </nav>
 
 <!-- HERO -->

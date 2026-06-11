@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Go Kian Tik">
 <meta name="description" content="Kebijakan Privasi, Syarat Penggunaan, dan Disclaimer GigiMenyanyiBot — eksperimen edukasi digital oleh Go Kian Tik (Mbah Hogi Bejo™) dalam ekosistem Zì Zhǔ Zhě 自主者 · Superhero Café Inside.">
-<meta name="keywords" content="GigiMenyanyiBot, privasi, kebijakan, disclaimer, syarat penggunaan, AI Telegram, Go Kian Tik, Mbah Hogi Bejo, Z3SCI">
+<meta name="keywords" content="GigiMenyanyiBot, privasi, kebijakan, disclaimer, syarat penggunaan, AI Telegram, Go Kian Tik, Mbah Hogi Bejo, Z3SCI, hak cipta lagu">
 <title>Privasi, Kebijakan &amp; Disclaimer · GigiMenyanyiBot</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
 <style>
@@ -58,6 +58,8 @@ nav {
   top: 0;
   z-index: 100;
   border-bottom: 1px solid rgba(34,158,217,0.2);
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .nav-brand {
   font-family: 'Pacifico', cursive;
@@ -137,6 +139,18 @@ nav {
   margin: 4px;
   letter-spacing: .5px;
 }
+.version-badge {
+  display: inline-block;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.6);
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-family: monospace;
+}
 
 /* ═══ SECTION COMMON ═══ */
 .section {
@@ -195,6 +209,13 @@ nav {
 .callout-gold strong { color: #e65100; }
 .callout-gold p { color: var(--text-soft); }
 
+.callout-copyright {
+  background: linear-gradient(135deg, #fce4ec, #ffebee);
+  border-left: 5px solid #c62828;
+}
+.callout-copyright strong { color: #b71c1c; }
+.callout-copyright p { color: #5d2c00; }
+
 /* ═══ CARDS ═══ */
 .cards {
   display: grid;
@@ -233,6 +254,8 @@ nav {
 }
 .card h3 { font-weight: 800; font-size: 1rem; margin-bottom: 8px; color: var(--blue-deep); }
 .card p  { font-size: .93rem; color: var(--text-soft); line-height: 1.65; }
+.card ul { font-size: .93rem; color: var(--text-soft); line-height: 1.65; padding-left: 1.2rem; margin-top: 8px; }
+.card li { margin-bottom: 4px; }
 
 /* ═══ TOC ═══ */
 .toc-wrap {
@@ -290,8 +313,8 @@ nav {
   line-height: 1.7;
 }
 .doc-section strong { color: var(--blue-deep); }
-.doc-section a { color: var(--blue-mid); font-weight: 700; }
-.doc-section a:hover { color: var(--pink); }
+.doc-section a { color: var(--blue-mid); font-weight: 700; text-decoration: none; }
+.doc-section a:hover { color: var(--pink); text-decoration: underline; }
 
 /* ═══ DOI LIST ═══ */
 .doi-list { list-style: none; padding: 0; }
@@ -320,6 +343,7 @@ nav {
 .doi-tag.pink  { background: linear-gradient(135deg, #880e4f, var(--pink)); }
 .doi-tag.gold  { background: linear-gradient(135deg, #e65100, var(--gold)); }
 .doi-tag.gray  { background: linear-gradient(135deg, #37474f, #607d8b); }
+.doi-tag.copyright { background: linear-gradient(135deg, #c62828, #e53935); }
 
 /* ═══ HIGHLIGHT BOX ═══ */
 .highlight-box {
@@ -353,6 +377,60 @@ nav {
 }
 .info-row p { font-size: .93rem; color: var(--text-soft); margin: 0; }
 .info-row strong { color: var(--blue-deep); }
+
+/* ═══ PENALTY TABLE ═══ */
+.penalty-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+.penalty-table th {
+  background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+  color: white;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 800;
+  font-size: .85rem;
+}
+.penalty-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e3eaf5;
+  color: var(--text-soft);
+  font-size: .9rem;
+}
+.penalty-table tr:last-child td { border-bottom: none; }
+.penalty-table tr:hover td { background: #f8faff; }
+
+/* ═══ COMPARISON TABLE ═══ */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+.comparison-table th {
+  background: linear-gradient(135deg, var(--teal), #00838f);
+  color: white;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 800;
+  font-size: .85rem;
+}
+.comparison-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e3eaf5;
+  color: var(--text-soft);
+  font-size: .9rem;
+  vertical-align: top;
+}
+.comparison-table tr:last-child td { border-bottom: none; }
 
 /* ═══ SECTION ALT BG ═══ */
 .section-alt {
@@ -442,28 +520,37 @@ footer {
 footer a { color: var(--teal); text-decoration: none; }
 footer .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.4rem; color: white; margin-bottom: 8px; }
 footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
+footer .version-footer { margin-top: 24px; font-size: .7rem; font-family: monospace; opacity: .4; }
 
 @media(max-width:600px){
-  nav { padding: 12px 16px; }
+  nav { padding: 12px 16px; flex-direction: column; align-items: stretch; text-align: center; }
+  .nav-links { justify-content: center; }
   .cta-bar { flex-direction: column; text-align: center; }
   .cta-buttons { justify-content: center; }
   .toc-wrap { padding: 20px 16px; }
   .toc-wrap ol { grid-template-columns: 1fr; }
+  .penalty-table th, .penalty-table td,
+  .comparison-table th, .comparison-table td { padding: 8px 12px; font-size: .8rem; }
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
-  <div class="nav-links">
-    <a href="index.html">Beranda</a>
-    <a href="about.html">Tentang</a>
-    <a href="framework.html">Framework</a>
-    <a href="dukung.html">Dukung</a>
-    <a href="privacy.html" class="active">Privasi</a>
-  </div>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Beranda</a></li>
+    <li><a href="international.html">🌐 International</a></li>
+    <li><a href="about.html">Tentang</a></li>
+    <li><a href="framework.html">Framework</a></li>
+    <li><a href="dukung.html">Dukung</a></li>
+    <li><a href="privacy.html" class="active">Privasi</a></li>
+  </ul>
 </nav>
 
 <!-- HERO -->
@@ -473,6 +560,8 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
   <span class="note" style="left:88%;top:18%;animation-delay:1s">🔒</span>
   <span class="note" style="left:12%;top:65%;animation-delay:2s">📋</span>
   <span class="note" style="left:82%;top:60%;animation-delay:1.5s">🛡️</span>
+  <span class="note" style="left:45%;top:80%;animation-delay:0.8s">🎵</span>
+  <span class="note" style="left:70%;top:35%;animation-delay:2.2s">©️</span>
   <div class="hero-content">
     <h1>Privasi, Kebijakan <span>&amp; Disclaimer</span></h1>
     <p class="tagline">
@@ -484,8 +573,11 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
       <span class="pill-badge">🔒 Privasi User</span>
       <span class="pill-badge">📋 Kebijakan</span>
       <span class="pill-badge">🛡️ Disclaimer</span>
+      <span class="pill-badge">🎵 Hak Cipta Lagu</span>
     </div>
-    <p style="color:rgba(255,255,255,0.45);font-size:.8rem;margin-top:20px;font-weight:600;letter-spacing:.05em;">🗓️ TERAKHIR DIPERBARUI: 4 JUNI 2026</p>
+    <div class="version-badge">
+      📄 VERSI 2.0.0 | 4 JUNI 2026 | 20:30 WIB
+    </div>
   </div>
 </section>
 
@@ -495,7 +587,7 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
   <div class="divider"></div>
   <p class="section-subtitle">Klik untuk langsung menuju bagian yang ingin Anda baca.</p>
   <div class="toc-wrap">
-    <h3>📋 Navigasi Dokumen</h3>
+    <h3>📋 Navigasi Dokumen — 13 Bagian</h3>
     <ol>
       <li><a href="#identitas">Identitas &amp; Status Proyek</a></li>
       <li><a href="#privasi">Kebijakan Privasi</a></li>
@@ -505,6 +597,9 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
       <li><a href="#konten">Kebijakan Konten</a></li>
       <li><a href="#donasi">Transparansi Donasi &amp; Pendanaan</a></li>
       <li><a href="#haki">Hak Kekayaan Intelektual</a></li>
+      <li><a href="#copyright">Disclaimer Hak Cipta Lagu ⭐ BARU</a></li>
+      <li><a href="#takedown">Takedown Policy &amp; Prosedur Pelaporan ⭐ BARU</a></li>
+      <li><a href="#logging">Logging &amp; Penyimpanan Data Submit ⭐ BARU</a></li>
       <li><a href="#riset">Disclaimer Riset &amp; Publikasi</a></li>
       <li><a href="#kontak">Kontak &amp; Pelaporan</a></li>
     </ol>
@@ -523,10 +618,10 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
   <p>Proyek ini bukan entitas korporasi, bukan perusahaan terdaftar, dan bukan produk komersial resmi. GigiMenyanyiBot adalah <strong>inisiatif kemanusiaan independen</strong> yang bergerak dalam koridor riset, edukasi, dan pengembangan kapasitas manusia.</p>
 
   <div class="callout callout-gold">
-    <p><strong>Status TRL saat ini:</strong> TRL-6/9 — Fase uji ketahanan dan keterandalan pada sampel 50–100 tester. Belum dalam fase rilis publik penuh (TRL-9).</p>
+    <p><strong>Status TRL saat ini:</strong> TRL-6/9 — Fase uji ketahanan dan keterandalan pada sampel 50–100 tester. Belum dalam fase rilis publik penuh (TRL-9). Bot masih dalam tahap eksperimen dan pengembangan berkelanjutan.</p>
   </div>
 
-  <h3>Pengembang</h3>
+  <h3>Pengembang &amp; Ekosistem</h3>
   <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:10px;">
     <div class="card" style="border-top-color:var(--blue-bright);--card-accent:var(--blue-bright);">
       <div class="card-icon">👤</div>
@@ -542,7 +637,7 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
     </div>
     <div class="card" style="border-top-color:var(--teal);--card-accent:var(--teal);">
       <div class="card-icon">📬</div>
-      <div class="card-num">Kontak</div>
+      <div class="card-num">Kontak Utama</div>
       <h3>@GigiMenyanyiBot</h3>
       <p>Via Telegram: <a href="https://t.me/GigiMenyanyiBot" target="_blank" rel="noopener">t.me/GigiMenyanyiBot</a></p>
     </div>
@@ -591,7 +686,7 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
   </div>
 
   <h3>Cookies &amp; Website</h3>
-  <p>Halaman web ini (superherocafeinside.com/gigimenyanyibot/) bersifat statis dan <strong>tidak menggunakan cookies pelacak, pixel tracking, atau analytics pihak ketiga</strong>. Tidak ada data pengunjung yang dikumpulkan melalui halaman ini.</p>
+  <p>Halaman web ini (superherocafeinside.com/gigimenyanyibot/) bersifat statis dan <strong>tidak menggunakan cookies pelacak, pixel tracking, atau analytics pihak ketiga</strong>. Tidak ada data pengunjung yang dikumpulkan melalui halaman ini. Server web tidak mencatat alamat IP atau user agent secara permanen.</p>
 </section>
 
 <!-- ══════════════════════════════════════
@@ -774,34 +869,62 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
 </section>
 
 <!-- ══════════════════════════════════════
-  7. TRANSPARANSI DONASI
+  7. TRANSPARANSI DONASI & PENDANAAN
 ══════════════════════════════════════ -->
 <section class="section-alt-teal" id="donasi">
 <div class="section doc-section" style="padding-top:0;padding-bottom:0;max-width:1100px;">
   <h2 class="section-title">7. Transparansi Donasi <span>&amp; Pendanaan</span></h2>
   <div class="divider"></div>
-  <p>@GigiMenyanyiBot dikelola dengan prinsip <strong>cooperative partisipatoris</strong>. Berikut adalah transparansi atas mekanisme pendanaan:</p>
+  <p>@GigiMenyanyiBot dikelola dengan prinsip <strong>cooperative partisipatoris</strong>. Berikut adalah transparansi atas mekanisme pendanaan terkini:</p>
 
   <div class="cards">
     <div class="card" style="border-top-color:var(--gold);--card-accent:var(--gold);">
       <div class="card-icon">💛</div>
       <div class="card-num">Jalur 01</div>
-      <h3>Trakteer</h3>
-      <p>Langganan bulanan sukarela dari komunitas via <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener">trakteer.id/gokiantik</a>. Nominal bebas mulai Rp 5.000.</p>
+      <h3>Trakteer · Dukung Riset</h3>
+      <p>Untuk khalayak umum dan pehobi vokal.<br>
+      <strong>Rp 5.000+ / bulan</strong> (bebas, berlangganan via Trakteer).<br>
+      Akses modul latihan vokal, panduan bernyanyi sehat, literasi kesehatan gigi &amp; mulut.</p>
     </div>
     <div class="card" style="border-top-color:var(--teal);--card-accent:var(--teal);">
       <div class="card-icon">🦷</div>
       <div class="card-num">Jalur 02</div>
-      <h3>Donasi Direktori</h3>
-      <p>Kontribusi sekali seumur hidup (Rp 120.000) dari dokter gigi untuk masuk ke direktori Geo-Aware.</p>
+      <h3>Donasi Direktori · Dokter Gigi</h3>
+      <p>Untuk dokter gigi dan mitra klinis.<br>
+      <strong>Rp 120.000 (sekali seumur hidup)</strong>.<br>
+      Masuk ke direktori Geo-Aware @GigiMenyanyiBot, nama &amp; alamat praktik, jam praktik, tercatat sebagai donatur riset kemanusiaan.</p>
     </div>
     <div class="card" style="border-top-color:var(--blue-bright);--card-accent:var(--blue-bright);">
       <div class="card-icon">🤝</div>
       <div class="card-num">Jalur 03</div>
-      <h3>Sponsorship Ekosistem</h3>
-      <p>Kemitraan tahunan (Rp 1.200.000) dari korporasi atau merek kesehatan mulut untuk integrasi kontekstual.</p>
+      <h3>Sponsorship · Kemitraan Ekosistem</h3>
+      <p>Untuk korporasi, farmasi kesehatan mulut, dan mitra institusi.<br>
+      <strong>Rp 3.600.000 / 2 tahun</strong>.<br>
+      Integrasi produk ke knowledge base AI, contextual triggering berbasis percakapan, laporan penggunaan per kuartal, branding di laporan riset publik.</p>
     </div>
   </div>
+
+  <h3>Penggunaan Dana</h3>
+  <p>Seluruh dana yang terkumpul digunakan untuk:</p>
+  <ul>
+    <li>Pengembangan dan pemeliharaan AI (infrastruktur API, hosting, lisensi)</li>
+    <li>Pengembangan direktori dokter gigi nasional berbasis lokasi (Geo-Aware)</li>
+    <li>Riset dan publikasi open access dalam CHO Framework</li>
+    <li>Kompensasi kontributor berdasarkan prinsip remote work standard (40–70% dari rate pasaran)</li>
+  </ul>
+
+  <div class="callout callout-teal">
+    <p><strong>Prinsip Cooperative Partisipatoris:</strong> Tenaga, pikiran, dan waktu para kontributor mendapat imbal balik profesional yang adil. Kompensasi merujuk pada rate remote work internasional.</p>
+  </div>
+
+  <div class="callout callout-gold">
+    <p><strong>Catatan Etika Kedokteran:</strong> Niat donasi dokter gigi adalah murni mendukung gerakan kemanusiaan riset AI, bukan memasang iklan. Pencantuman profil di direktori merupakan bentuk apresiasi komunitas — disajikan secara faktual dan objektif, sepenuhnya selaras dengan <strong>KODEKGI Pasal 3 Ayat 3</strong> tentang direktori informasi dokter.</p>
+  </div>
+
+  <h3>Bukan Investasi atau Janji Keuntungan</h3>
+  <p>Dukungan ke @GigiMenyanyiBot adalah <strong>donasi untuk gerakan kemanusiaan</strong>, bukan investasi finansial. Tidak ada jaminan keuntungan, dividen, atau imbal hasil finansial bagi pendukung.</p>
+</div>
+</section>
 
   <h3>Penggunaan Dana</h3>
   <p>Seluruh dana yang terkumpul digunakan untuk:</p>
@@ -852,11 +975,146 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
 </section>
 
 <!-- ══════════════════════════════════════
-  9. DISCLAIMER RISET & PUBLIKASI
+  9. DISCLAIMER HAK CIPTA LAGU (TERMASUK WESING→YOUTUBE)
+══════════════════════════════════════ -->
+<section class="section-alt" id="copyright">
+<div class="section doc-section" style="padding-top:0;padding-bottom:0;max-width:1100px;">
+  <h2 class="section-title">9. Disclaimer Hak <span>Cipta Lagu</span></h2>
+  <div class="divider"></div>
+
+  <p>@GigiMenyanyiBot memfasilitasi pengguna untuk berbagi tautan lagu dari berbagai platform, termasuk YouTube dan Wesing. Berikut adalah kebijakan lengkap terkait hak cipta lagu:</p>
+
+  <div class="callout callout-warn">
+    <p><strong>⚠️ PERINGATAN PENTING</strong><br><br>
+    Disclaimer ini bersifat informatif dan bukan merupakan opini hukum formal. Pengguna disarankan berkonsultasi dengan profesional hukum untuk masalah spesifik terkait hak cipta.</p>
+  </div>
+
+  <h3>Posisi @GigiMenyanyiBot</h3>
+  <p>@GigiMenyanyiBot adalah <strong>platform penyedia layanan (service provider)</strong> yang memfasilitasi pengguna untuk berbagi tautan (link) ke konten yang sudah dipublikasikan di platform pihak ketiga. Bot ini <strong>TIDAK</strong>:</p>
+  <ul>
+    <li>Mengunggah, menyimpan, atau mendistribusikan ulang file lagu/musik</li>
+    <li>Memonetisasi atau menarik keuntungan finansial dari tautan lagu yang disubmit pengguna</li>
+    <li>Melakukan modifikasi, adaptasi, atau aransemen ulang atas lagu yang dibagikan</li>
+  </ul>
+
+  <h3>Landasan Hukum (UU No. 28 Tahun 2014 tentang Hak Cipta)</h3>
+  <table class="penalty-table">
+    <thead>
+      <tr><th>Pasal</th><th>Isi</th><th>Ancaman Pidana</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Pasal 9 ayat (1) & (3)</td><td>Hak eksklusif pencipta; izin wajib untuk penggunaan komersial</td><td>-</td></tr>
+      <tr><td>Pasal 113 ayat (2)</td><td>Cover lagu tanpa izin yang digunakan secara komersial</td><td>3 tahun penjara &/atau denda Rp500.000.000</td></tr>
+      <tr><td>Pasal 113 ayat (3)</td><td>Distribusi/pengumuman lagu tanpa izin</td><td>4 tahun penjara &/atau denda Rp1.000.000.000</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SUBSECTION: LAGU DARI WESING KE YOUTUBE -->
+  <h3>Lagu yang Diunggah dari Wesing ke YouTube</h3>
+  <p>Beberapa lagu dalam ekosistem @GigiMenyanyiBot diunggah dari aplikasi Wesing ke platform YouTube. Terhadap lagu-lagu tersebut, berlaku ketentuan sebagai berikut:</p>
+
+  <div class="callout callout-copyright">
+    <p><strong>🎵 Disclaimer Khusus Lagu Repository YouTube (dari Wesing)</strong></p>
+    <ul style="margin-top: 12px;">
+      <li><strong>Sumber Unggahan:</strong> Lagu diunggah dari aplikasi Wesing (<a href="https://wesingapp.com" target="_blank" rel="noopener">wesingapp.com</a>) ke YouTube.</li>
+      <li><strong>Tujuan Penggunaan:</strong> Pengembangan produk @GigiMenyanyiBot dari <strong>TRL-6 (Technology Readiness Level 6)</strong> menuju <strong>TRL-9</strong> — untuk keperluan riset, edukasi teknik vokal &amp; kesehatan gigi/mulut, serta eksperimen kemanusiaan dalam ekosistem Zì Zhǔ Zhě 自主者.</li>
+      <li><strong>Niat Non-Komersial:</strong> Pengembang (Go Kian Tik / Mbah Hogi Bejo™) <strong>TIDAK memiliki niat</strong> untuk memperoleh monetasi (keuntungan finansial) dari penggunaan lagu-lagu ini.</li>
+      <li><strong>Hak Cipta &amp; Monetasi:</strong> Seluruh hak cipta lagu tetap milik pencipta dan pemegang hak cipta yang sah. Mekanisme hak cipta dan monetasi mengikuti <strong>aturan platform YouTube</strong> tempat lagu ini direpository.</li>
+      <li><strong>Kebijakan Takedown:</strong> Pemilik hak cipta yang keberatan dapat menghubungi pengembang melalui Telegram (<a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a>) untuk penghapusan konten dalam waktu maksimal 7×24 jam.</li>
+    </ul>
+  </div>
+
+  <div class="info-row">
+    <div>
+      <p style="margin: 0;"><strong>Referensi Video Contoh:</strong></p>
+      <p style="margin: 4px 0 0; font-size: 0.9rem;">
+        <a href="https://youtu.be/a8CAeP_HX2U" target="_blank" rel="noopener">Jangan Berkata Benci (untuk duet)</a> — 
+        Diunggah 8 Juni 2026
+      </p>
+    </div>
+    <span style="font-size: 2rem;">🎵</span>
+  </div>
+
+  <h3>Kebijakan Takedown (Penghapusan Konten)</h3>
+  <p>Jika Kamu adalah pemilik hak cipta dan menemukan tautan lagu milikmu dibagikan melalui @GigiMenyanyiBot tanpa izin:</p>
+  <ol>
+    <li>Hubungi pengembang melalui <a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a> dengan menyertakan bukti kepemilikan hak cipta.</li>
+    <li>Sertakan informasi lengkap: judul lagu, tautan yang dilaporkan, dan bukti kepemilikan hak.</li>
+    <li>Tautan akan dihapus dari database dalam waktu maksimal 7×24 jam setelah laporan terverifikasi.</li>
+  </ol>
+
+  <div class="callout callout-teal">
+    <p><strong>📝 Catatan Penting:</strong> Lisensi penggunaan lagu di satu platform (misal TikTok atau Wesing) <strong>tidak otomatis berlaku</strong> jika konten diunggah ulang ke platform lain (YouTube). Pengguna wajib memperoleh izin tambahan jika konten dibagikan lintas platform. @GigiMenyanyiBot hanya membagikan tautan ke repository YouTube yang sudah ada.</p>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+  10. TAKEDOWN POLICY & PROSEDUR PELAPORAN
+══════════════════════════════════════ -->
+<section class="section doc-section" id="takedown">
+  <h2 class="section-title">10. Takedown Policy <span>&amp; Prosedur Pelaporan</span></h2>
+  <div class="divider"></div>
+  <p>Kebijakan ini menjelaskan secara rinci prosedur bagi pemilik hak cipta untuk melaporkan konten yang diduga melanggar hak cipta, serta langkah-langkah yang akan diambil oleh pengembang @GigiMenyanyiBot.</p>
+
+  <h3>Informasi yang Wajib Disertakan dalam Laporan</h3>
+  <ul>
+    <li>Identifikasi karya berhak cipta yang diklaim dilanggar (judul, pencipta/pemilik hak).</li>
+    <li>Identifikasi material yang dilaporkan (URL lengkap tautan lagu di YouTube/Wesing).</li>
+    <li>Informasi kontak pelapor (nama, alamat email, nomor telepon).</li>
+    <li>Pernyataan itikad baik bahwa penggunaan material tersebut tidak diizinkan oleh pemilik hak cipta.</li>
+    <li>Pernyataan bahwa informasi dalam laporan akurat, dan pelapor adalah pemilik hak cipta atau orang yang diberi wewenang.</li>
+  </ul>
+
+  <h3>Langkah-langkah yang Akan Diambil</h3>
+  <ol>
+    <li>Konfirmasi penerimaan laporan dalam waktu maksimal 3×24 jam.</li>
+    <li>Verifikasi kelengkapan dan keabsahan laporan (maksimal 5×24 jam).</li>
+    <li>Penghapusan tautan dari database bot jika laporan terbukti valid (maksimal 7×24 jam).</li>
+    <li>Notifikasi kepada pengguna yang mengirimkan tautan tersebut (jika memungkinkan).</li>
+  </ol>
+</section>
+
+<!-- ══════════════════════════════════════
+  11. LOGGING & PENYIMPANAN DATA SUBMIT
+══════════════════════════════════════ -->
+<section class="section-alt" id="logging">
+<div class="section doc-section" style="padding-top:0;padding-bottom:0;max-width:1100px;">
+  <h2 class="section-title">11. Logging <span>&amp; Penyimpanan Data Submit</span></h2>
+  <div class="divider"></div>
+
+  <p>Untuk kepentingan keamanan, akuntabilitas, dan kepatuhan terhadap kebijakan takedown, @GigiMenyanyiBot melakukan pencatatan (logging) atas aktivitas submit lagu oleh pengguna.</p>
+
+  <div class="callout callout-gold">
+    <p><strong>Data yang Dicatat:</strong> ID lagu (auto-generated), judul lagu, URL, ID pengirim, username pengirim, timestamp submit, status persetujuan (PENDING/APPROVED/REJECTED).</p>
+  </div>
+
+  <h3>Tujuan Pencatatan</h3>
+  <ul>
+    <li>Menegakkan kebijakan takedown dengan verifikasi yang akurat.</li>
+    <li>Melindungi pengembang dari tuntutan hukum yang tidak berdasar.</li>
+    <li>Menyediakan bukti historis jika terjadi sengketa hak cipta.</li>
+  </ul>
+
+  <h3>Periode Penyimpanan</h3>
+  <p>Data log disimpan selama proyek aktif. Data yang telah dihapus (karena takedown atau permintaan pengguna) tidak akan digunakan lagi untuk kepentingan apapun.</p>
+
+  <div class="info-row">
+    <div>
+      <p style="margin:0;"><strong>Informasi Lebih Lanjut:</strong></p>
+      <p style="margin:4px 0 0;font-size:.9rem;">Pertanyaan terkait data logging dapat diajukan melalui <a href="https://t.me/GigiMenyanyiBot">@GigiMenyanyiBot</a>.</p>
+    </div>
+    <span style="font-size:2rem;">📝</span>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+  12. DISCLAIMER RISET & PUBLIKASI
 ══════════════════════════════════════ -->
 <section class="section-eco" id="riset">
   <div class="eco-inner" style="max-width:1100px;margin:0 auto;">
-    <h2 class="section-title">9. Disclaimer Riset <span>&amp; Publikasi</span></h2>
+    <h2 class="section-title">12. Disclaimer Riset <span>&amp; Publikasi</span></h2>
     <div class="divider"></div>
     <p class="section-subtitle">Riset independen tanpa afiliasi institusional — transparan dan open access.</p>
 
@@ -903,10 +1161,10 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
 </section>
 
 <!-- ══════════════════════════════════════
-  10. KONTAK & PELAPORAN
+  13. KONTAK & PELAPORAN
 ══════════════════════════════════════ -->
 <section class="section doc-section" id="kontak">
-  <h2 class="section-title">10. Kontak <span>&amp; Pelaporan</span></h2>
+  <h2 class="section-title">13. Kontak <span>&amp; Pelaporan</span></h2>
   <div class="divider"></div>
   <p>Untuk pertanyaan, permintaan terkait data pribadi, pelaporan konten bermasalah, atau kebutuhan kemitraan, silakan hubungi melalui:</p>
 
@@ -967,6 +1225,7 @@ footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
   <p>© 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside · Eksperimen Kemanusiaan Ketiga GKT/MHB</p>
   <p>GigiMenyanyiBot · <a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a></p>
   <p class="footer-note">CC BY-NC-ND 4.0 (Publikasi) · All Rights Reserved (Produk &amp; Brand) · Sehat Giginya, Merdu Suaranya, Percaya Diri Bersinarnya!</p>
+  <div class="version-footer">📄 Versi Dokumen: 2.0.0 | Terakhir Diperbarui: 4 Juni 2026 | 20:30 WIB</div>
 </footer>
 
 </body>
