@@ -19,6 +19,7 @@
       --accent2: #e8a020;
       --text: #f0ece3;
       --muted: #888;
+      --pink: #e91e8c;
       --radius: 12px;
     }
 
@@ -152,8 +153,8 @@
     .hero-banner { max-width: 640px; width: 100%; border-radius: 12px; margin-top: 2.5rem; }
 
     /* ── SECTIONS ── */
-    section { padding: 3.5rem 1.5rem; max-width: 860px; margin: 0 auto; }
-    section h2 {
+    section, .section { padding: 3.5rem 1.5rem; max-width: 860px; margin: 0 auto; }
+    section h2, .section h2 {
       font-size: clamp(1.4rem, 3vw, 2rem);
       color: var(--accent);
       margin-bottom: 0.4rem;
@@ -223,8 +224,8 @@
     }
     .komentar-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
 
-    /* cards */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    /* cards & grids */
+    .card-grid, .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -234,6 +235,10 @@
     .card-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
     .card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
     .card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* image support classes */
+    .banner-img { width: 100%; max-width: 100%; border-radius: var(--radius); margin: 1.5rem auto; display: block; }
+    .embedded-img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 0.75rem; display: block; }
 
     /* checklist */
     .checklist { list-style: none; }
@@ -301,7 +306,7 @@
     .cta-section h2 { color: var(--accent); margin-bottom: 0.5rem; }
     .cta-section p { color: var(--muted); margin-bottom: 1.5rem; }
 
-    /* developer */
+    /* developer & disclaimer */
     .dev-section {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -338,7 +343,6 @@
 </head>
 <body>
 
-<!-- ── NAVIGATION (MENU SUDAH DIPERBARUI dengan international.html) ── -->
 <nav>
   <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
@@ -351,10 +355,10 @@
     <li><a href="framework.html">Framework</a></li>
     <li><a href="dukung.html">Dukung</a></li>
     <li><a href="privacy.html">Privasi</a></li>
+    <li><a href="behind.html">Behind The Scene</a></li>
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
 <header class="hero">
   <div class="hero-emoji">🎵 🎶 ♪ 🎵 ♫</div>
   <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyi.png" alt="Logo Gigi Sehat Menyanyi" />
@@ -373,10 +377,9 @@
 
 <hr class="divider" />
 
-<!-- ── PLAYLIST ── -->
 <section>
   <h2>🎵 Playlist Gigi Sehat Menyanyi</h2>
-  <p class="section-sub">Tiga lagu perdana — nikmati, rasakan, dan bernyanyi bersama!</p>
+  <p class="section-sub">Nikmati, rasakan, dan bernyanyi bersama ekosistem kita!</p>
 
   <div class="playlist-item">
     <div class="playlist-icon">🦷</div>
@@ -417,6 +420,23 @@
     </div>
   </div>
 
+  <div class="playlist-item" style="border: 1px solid var(--pink); background: rgba(233, 30, 140, 0.03); border-radius: var(--radius); padding: 1.2rem;">
+    <div class="playlist-icon">❤️🩹</div>
+    <div class="playlist-item-inner">
+      <div class="playlist-info">
+        <h3>Nobody's Child</h3>
+        <p>🎼 Karen Young ft. Mbah Hogi Bejo™ · <span class="special-badge" style="background: var(--pink); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;">Mental Health Sanctuary</span></p>
+      </div>
+      <p style="font-size: 1.05rem; color: var(--accent); margin: 0.6rem 0; font-style: italic; font-weight: 600; line-height: 1.5;">
+        "Selagi aku masih hidup, bernapas dan fungsional tak akan kubiarkan kalian mati dalam keadaan tertindas, agar kalian sempat hidup dalam kemerdekaan, kedaulatan diri... sovereignty."
+      </p>
+      <p style="font-size: 0.88rem; color: var(--muted); margin: 0;">
+        Merespons laporan krisis krisis psikososial kerja global ILO 2026. Jembatan pandangan rasa untuk gerakan kesehatan mental dunia (Elias Mugambi, WHO). Hadir sebagai jendela penunda waktu terminal bagi jiwa yang terpojok.
+      </p>
+      <audio controls><source src="audio/Nobodys_Child.mp3" type="audio/mpeg" /></audio>
+    </div>
+  </div>
+
   <div class="komentar-box" style="margin-top:1.5rem">
     <h3>💬 Gimana Suara Kokonya?</h3>
     <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Tulis komentarmu — Koko baca semua! 😁</p>
@@ -430,7 +450,6 @@
 
 <hr class="divider" />
 
-<!-- ── TENTANG ── -->
 <section>
   <h2>Tentang GigiMenyanyiBot</h2>
   <div class="about-box">
@@ -443,7 +462,6 @@
 
 <hr class="divider" />
 
-<!-- ── PILAR ── -->
 <section>
   <h2>Yang Bisa Dipelajari</h2>
   <p class="section-sub">Lima pilar ekosistem GigiMenyanyiBot untuk pertumbuhan holistik.</p>
@@ -458,7 +476,6 @@
 
 <hr class="divider" />
 
-<!-- ── UNTUK SIAPA ── -->
 <section>
   <h2>Untuk Siapa?</h2>
   <p class="section-sub">GigiMenyanyiBot hadir untuk semua pecinta musik dan suara.</p>
@@ -473,7 +490,6 @@
 
 <hr class="divider" />
 
-<!-- ── KENAPA GIGI ── -->
 <section>
   <h2>Kenapa Gigi Sehat Penting untuk Menyanyi?</h2>
   <ul class="checklist">
@@ -488,7 +504,6 @@
 
 <hr class="divider" />
 
-<!-- ── TIPS ── -->
 <section>
   <h2>Tips Sehat Harian 🦷</h2>
   <p class="section-sub">Kebiasaan kecil, dampak besar untuk suara &amp; senyummu.</p>
@@ -503,24 +518,60 @@
 
 <hr class="divider" />
 
-<!-- ── GALERI ── -->
+<section>
+  <h2>Tata Kelola Keuangan Koperatif Partisipatoris</h2>
+  <p class="section-sub">Skema keterbukaan kontribusi publik untuk mendukung ekosistem berkelanjutan.</p>
+  
+  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    
+    <div class="card" style="text-align: left;">
+      <img src="images/dukung%20penelitian.png" alt="Dukung Penelitian" class="embedded-img" />
+      <h3>🌱 Dukungan Publik</h3>
+      <p style="font-size: 0.82rem; color: var(--muted);">Mulai Rp 5.000 via Trakteer...</p>
+    </div>
+
+    <div class="card" style="text-align: left;">
+      <img src="images/dukung%20direktori%20drg.png" alt="Dukung Direktori Dokter Gigi" class="embedded-img" />
+      <h3>💉 Donasi Dokter Gigi</h3>
+      <p style="font-size: 0.82rem; color: var(--muted);">Rp 120.000 (Sekali Selamanya)...</p>
+    </div>
+
+    <div class="card" style="text-align: left;">
+      <img src="images/dukung%20kemitraan.png" alt="Dukung Kemitraan" class="embedded-img" />
+      <h3>🏢 Sponsorship Korporat</h3>
+      <p style="font-size: 0.82rem; color: var(--muted);">Paket Level "Genah" (Rp 3,6 Juta/Tahun)...</p>
+    </div>
+
+  </div>
+  <img src="images/dukung.png" alt="Dukung Ekosistem" class="banner-img" />
+</section>
+
+<hr class="divider" />
+
 <section>
   <h2>Galeri Visual</h2>
   <p class="section-sub">Identitas visual ekosistem Gigi Sehat Menyanyi.</p>
   <div class="gallery">
     <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyi2.png" alt="Gigi Sehat Menyanyi 2" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiVertikal.png" alt="Vertikal 1" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiVertikal2.png" alt="Vertikal 2" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/Linkedin_ke_drg.png" alt="Dr Gigi" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal3.png" alt="Banner Horizontal 3" />
     <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal2.png" alt="Banner Horizontal 2" />
     <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiHorisontal4.png" alt="Banner Horizontal 4" />
-    <img src="https://superherocafeinside.com/gigimenyanyibot/images/GigiSehatMenyanyiVertikal2.png" alt="Vertikal 2" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/dukung.png" alt="Skema Partisipasi Publik" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/dukung%20penelitian.png" alt="Dukung Penelitian" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/dukung%20direktori%20drg.png" alt="Donasi Dokter Gigi" />
+    <img src="https://superherocafeinside.com/gigimenyanyibot/images/dukung%20kemitraan.png" alt="Sponsorship Korporasi" />   
   </div>
 </section>
 
 <hr class="divider" />
 
-<!-- ── ROADMAP ── -->
 <section>
   <h2>Jejak Digital Pengembangan</h2>
   <ul class="roadmap">
+    <li>🕊️ Transendensi Kemanusiaan (12 Juni 2026): Maklumat perlindungan #MentalHealth. Komitmen eksplisit untuk kedaulatan diri (sovereignty) bagi jiwa yang terpojok tekanan kerja lewat perilisan lagu penolak waktu terminal "Nobody's Child".</li>
     <li>✅ Konsep GigiMenyanyiBot</li>
     <li>✅ Identitas Visual Publik</li>
     <li>✅ Landing Page Publik</li>
@@ -533,7 +584,6 @@
 
 <hr class="divider" />
 
-<!-- ── CTA ── -->
 <div class="cta-section">
   <h2>Mulai Sekarang! 🚀</h2>
   <p>Rawat Gigimu, Biar Suaramu Merduuuuuu... 🎶</p>
@@ -542,10 +592,35 @@
 
 <hr class="divider" />
 
-<!-- ── DEVELOPER (Konten asli dipertahankan) ── -->
-<div class="dev-section">
-  <h3>Go Kian Tik (Mbah Hogi Bejo™)</h3>
-  <p class="dev-role">Chief Humanity Officer · Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+<section class="section">
+  <h2>Aliansi Strategis Para Pendiri</h2>
+  
+  <img src="images/LPS%20GKT%20horisontal%203%20logo%20PP.png" alt="Aliansi Horisontal Pendiri" class="banner-img" />
+
+  <div class="grid">
+    <div class="card" style="text-align: left;">
+      <div class="card-icon">👑</div>
+      <h3>Go Kian Tik</h3>
+      <p style="font-weight: 600; margin: 0.2rem 0 0.4rem; color: var(--accent);">Founder &amp; Chief Humanity Officer</p>
+      <p style="font-size: 0.85rem; color: var(--muted);">Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
+      <p style="font-size: 0.85rem; margin-top: 0.5rem;">🎯 Peran: Konseptor makro, arsitektur infrastruktur cloud, penjaga regulasi Lingua Higienis, dan maestro lagu perdana.</p>
+    </div>
+
+    <div class="card" style="text-align: left;">
+      <div class="card-icon">🌱</div>
+      <h3>Lie Ping Sen</h3>
+      <p style="font-weight: 600; margin: 0.2rem 0 0.4rem; color: var(--accent);">Co-Founder &amp; Community Builder</p>
+      <p style="font-size: 0.85rem; color: var(--muted);">Yayasan Pamorplus Indonesia Usaka</p>
+      <p style="font-size: 0.85rem; margin-top: 0.5rem;">🎯 Peran: Jalinan komunitas, penggerak partisipasi publik, dan penguatan ekosistem kolaboratif Pamor Plus.</p>
+    </div>
+  </div>
+</section>
+
+<div class="dev-section" style="border-top: none; padding-top: 0.5rem;">
+  <div class="disclaimer-box" style="margin-top: 0rem; background: var(--surface2);">
+    💡 <strong>Ekosistem Terbuka</strong> — GigiMenyanyiBot adalah inisiatif edukasi digital yang dikembangkan secara kolaboratif oleh para pendiri dari latar belakang teknologi, seni, kesehatan, dan pengembangan komunitas serta partisipasi aktif dalam menangani problem sosial dan kemanusiaan.
+  </div>
+  
   <div class="disclaimer-box">
     <strong>Research &amp; Development Disclaimer</strong><br /><br />
     Eksperimen edukasi digital ini merupakan bagian dari aktivitas riset independen, pengembangan komunitas pembelajaran, eksplorasi AI, musik, dan kesehatan manusia. Konten disediakan untuk tujuan edukasi, eksplorasi, dan pengembangan kapasitas manusia. Tidak dimaksudkan sebagai pengganti konsultasi medis, diagnosis profesional, atau pelatihan vokal individual.<br /><br />
@@ -553,40 +628,8 @@
   </div>
 </div>
 
-<!-- ── FOUNDERS SECTION (TAMBAHAN BARU) ── -->
-<div class="dev-section" style="border-top: none; padding-top: 0.5rem;">
-  <h3>✨ Pendiri & Penggerak ✨</h3>
-  <p class="section-sub" style="margin-bottom: 1.5rem;">Ekosistem GigiMenyanyiBot dibangun oleh kolaborator lintas disiplin.</p>
-
-  <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
-    
-    <!-- Founder 1: Go Kian Tik -->
-    <div class="card" style="text-align: left;">
-      <div class="card-icon">🧠</div>
-      <h3>Go Kian Tik <span style="font-size: 0.7rem; background: var(--accent2); color: #000; padding: 0.1rem 0.5rem; border-radius: 20px;">Mbah Hogi Bejo™</span></h3>
-      <p style="font-weight: 600; margin: 0.2rem 0 0.4rem;">Chief Humanity Officer &amp; Technology</p>
-      <p style="font-size: 0.8rem; color: var(--muted);">Zì Zhǔ Zhě 自主者 · Superhero Café Inside</p>
-      <p style="font-size: 0.8rem; margin-top: 0.5rem;">🎯 Peran: Konseptor, arsitektur bot, identitas visual, dan lagu perdana.</p>
-    </div>
-
-    <!-- Founder 2: Lie Ping Sen -->
-    <div class="card" style="text-align: left;">
-      <div class="card-icon">🌱</div>
-      <h3>Lie Ping Sen</h3>
-      <p style="font-weight: 600; margin: 0.2rem 0 0.4rem;">Founder &amp; Community Builder</p>
-      <p style="font-size: 0.8rem; color: var(--muted);">Yayasan Pamorplus Indonesia</p>
-      <p style="font-size: 0.8rem; margin-top: 0.5rem;">🎯 Peran: Jalinan komunitas, penggerak partisipasi publik, dan penguatan ekosistem kolaboratif.</p>
-    </div>
-  </div>
-  
-  <div class="disclaimer-box" style="margin-top: 1.8rem; background: var(--surface2);">
-    💡 <strong>Ekosistem Terbuka</strong> — GigiMenyanyiBot adalah inisiatif edukasi digital yang dikembangkan secara kolaboratif oleh para pendiri dari latar belakang teknologi, seni, kesehatan, dan pengembangan komunitas serta partisipasi aktif dalam menangani problem sosial dan kemanusiaan.
-  </div>
-</div>
-
 <hr class="divider" />
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-brand">😁 Gigi Sehat Menyanyi 💋</div>
   © 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside<br />

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Go Kian Tik">
+<meta name="description" content="Support @GigiMenyanyiBot — accelerate adoption of oral-vocal health for Rogers Laggards through the CHO Framework. Donation, sponsorship, geo-aware dentist directory. By Go Kian Tik (Mbah Hogi Bejo™).">
+<meta name="keywords" content="GigiMenyanyiBot, donation, sponsorship, dentist directory, AI research, CHO Framework, Rogers Laggard, digital inclusion, Sovereignty Gap, Grand Formula, Go Kian Tik, Mbah Hogi Bejo">
+<title>Support the Mission · GigiMenyanyiBot</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep: #0d2b6e;
+  --blue-mid: #1565c0;
+  --blue-bright: #229ED9;
+  --teal: #00bcd4;
+  --pink: #e91e8c;
+  --pink-light: #ff6bbb;
+  --gold: #ffb300;
+  --gold-light: #ffe082;
+  --white: #ffffff;
+  --bg: #f0f8ff;
+  --card-bg: #ffffff;
+  --text: #1a2340;
+  --text-soft: #445;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ═══ FLOATING NOTES ═══ */
+.note {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: floatNote 6s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.18;
+}
+@keyframes floatNote {
+  0%,100% { transform: translateY(0) rotate(-10deg); }
+  50%      { transform: translateY(-25px) rotate(10deg); }
+}
+
+/* ═══ NAV ═══ */
+nav {
+  background: rgba(13,43,110,0.97);
+  backdrop-filter: blur(8px);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(34,158,217,0.2);
+}
+.nav-brand {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-decoration: none;
+}
+.nav-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px; }
+.nav-toggle span { width: 22px; height: 2px; background: white; border-radius: 2px; }
+.nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.nav-links a {
+  font-family: 'Nunito', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background .2s, color .2s;
+}
+.nav-links a:hover { background: rgba(255,255,255,0.12); color: white; }
+.nav-links a.active {
+  background: var(--pink);
+  color: white;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative;
+  background: linear-gradient(145deg, #0d2b6e 0%, #1565c0 40%, #0097c7 100%);
+  padding: 70px 20px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(255,179,0,.12) 0%, transparent 50%);
+}
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 15% 20%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 90% 70%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(2px 2px at 10% 80%, rgba(255,255,255,0.6) 0%, transparent 100%);
+}
+.hero-content { position: relative; z-index: 2; }
+.logo-wrap {
+  display: inline-block;
+  animation: logoPulse 3s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+@keyframes logoPulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.logo {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.4);
+  box-shadow: 0 0 40px rgba(0,188,212,0.5), 0 15px 40px rgba(0,0,0,0.3);
+  object-fit: cover;
+}
+.hero h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  color: var(--white);
+  margin: 0 0 10px;
+  text-shadow: 0 3px 20px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+.hero h1 span { color: var(--gold-light); }
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.92);
+  max-width: 580px;
+  margin: 0 auto 14px;
+  font-weight: 600;
+}
+.hero-desc {
+  font-size: .95rem;
+  color: rgba(255,255,255,.72);
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.75;
+}
+.pill-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--gold-light);
+  font-size: .85rem;
+  font-weight: 700;
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin: 4px;
+  letter-spacing: .5px;
+}
+
+/* ═══ SECTION COMMON ═══ */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 24px;
+}
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 10px;
+  text-align: center;
+}
+.section-title span { color: var(--pink); }
+.section-subtitle {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.divider {
+  width: 60px; height: 5px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  border-radius: 10px;
+  margin: 12px auto 30px;
+}
+
+/* ═══ TIER CARDS ═══ */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-bottom: 60px;
+}
+.tier-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px 26px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  border-top: 4px solid var(--blue-bright);
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+}
+.tier-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.13); }
+.tier-card.featured {
+  border-top-color: var(--pink);
+  box-shadow: 0 6px 24px rgba(233,30,140,.15);
+}
+.tier-card.sponsor { border-top-color: var(--gold); }
+
+.tier-badge {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--blue-mid);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 14px;
+}
+.tier-card.featured .tier-badge { background: var(--pink); }
+.tier-card.sponsor  .tier-badge { background: linear-gradient(135deg, var(--gold), #ff6f00); color: #1a2340; }
+
+.tier-for {
+  font-size: .83rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+.tier-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 6px;
+}
+.tier-price {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--pink);
+}
+.tier-card.featured .tier-price { color: var(--pink); }
+.tier-card.sponsor  .tier-price { color: #e65100; }
+.tier-period {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-left: 4px;
+}
+.tier-divider {
+  width: 36px; height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  border-radius: 10px;
+  margin: 14px 0;
+}
+.tier-desc {
+  font-size: .92rem;
+  color: var(--text-soft);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+.tier-perks { list-style: none; margin-bottom: 22px; }
+.tier-perks li {
+  font-size: .88rem;
+  color: var(--text-soft);
+  padding: 5px 0 5px 22px;
+  position: relative;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.tier-perks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  color: var(--teal);
+  font-weight: 900;
+  font-size: .85rem;
+}
+.tier-cta {
+  display: block;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: .9rem;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  background: var(--blue-deep);
+  color: white;
+  box-shadow: 0 4px 14px rgba(13,43,110,0.3);
+}
+.tier-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(13,43,110,0.4); }
+.tier-cta.primary {
+  background: linear-gradient(135deg, var(--pink), #880e4f);
+  box-shadow: 0 4px 14px rgba(233,30,140,0.4);
+}
+.tier-cta.primary:hover { box-shadow: 0 8px 22px rgba(233,30,140,0.5); }
+.tier-cta.gold-cta {
+  background: linear-gradient(135deg, var(--gold), #e65100);
+  color: #1a2340;
+  box-shadow: 0 4px 14px rgba(255,179,0,0.4);
+}
+
+/* ═══ ETHICS NOTE ═══ */
+.ethics-note {
+  background: white;
+  border-left: 5px solid var(--teal);
+  border-radius: 0 16px 16px 0;
+  padding: 20px 24px;
+  margin-top: 56px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.06);
+}
+.ethics-note p { font-size: .95rem; color: var(--text-soft); line-height: 1.75; }
+.ethics-note strong { color: var(--blue-deep); }
+
+/* ═══ FLOW SECTION ═══ */
+.flow-wrap {
+  background: linear-gradient(135deg, #0d2b6e, #1565c0);
+  padding: 70px 24px;
+}
+.flow-inner { max-width: 1100px; margin: 0 auto; }
+.flow-wrap .section-title { color: white; }
+.flow-wrap .section-title span { color: var(--gold-light); }
+.flow-wrap .divider { background: linear-gradient(90deg, var(--gold), var(--pink)); }
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  position: relative;
+  margin-top: 10px;
+}
+.flow-step {
+  text-align: center;
+  padding: 20px 16px;
+  position: relative;
+}
+.flow-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -6px;
+  top: 30px;
+  color: var(--gold-light);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+.flow-num {
+  width: 44px; height: 44px;
+  border: 2px solid rgba(255,179,0,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--gold-light);
+  background: rgba(255,179,0,0.12);
+}
+.flow-step-title {
+  font-weight: 900;
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: white;
+  margin-bottom: 6px;
+}
+.flow-step-desc {
+  font-size: .82rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.55;
+}
+
+/* ═══ FAQ CARDS (from about.html cards) ═══ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+.card {
+  background: var(--card-bg);
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.07);
+  border-top: 4px solid transparent;
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+.card-num {
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 6px;
+}
+.card h3 { font-weight: 800; font-size: 1rem; margin-bottom: 8px; color: var(--blue-deep); }
+.card p  { font-size: .93rem; color: var(--text-soft); line-height: 1.65; }
+.card:nth-child(1) { border-top-color: var(--blue-bright); }
+.card:nth-child(2) { border-top-color: var(--pink); }
+.card:nth-child(3) { border-top-color: var(--gold); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: #0a1628;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  padding: 44px 20px;
+  font-size: .9rem;
+}
+footer a { color: var(--teal); text-decoration: none; }
+footer .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.4rem; color: white; margin-bottom: 8px; }
+footer .footer-note { margin-top: 16px; font-size: .78rem; opacity: .5; }
+
+@media(max-width:600px){
+  nav { padding: 12px 16px; }
+  .flow-steps { grid-template-columns: 1fr 1fr; }
+  .flow-step:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">😁 GigiMenyanyiBot</a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="international.html">🌐 International</a>
+    <a href="about.html">About</a>
+    <a href="framework.html">Framework</a>
+    <a href="dukung_EN.html" class="active">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="behind.html">Behind the Scenes</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stars"></div>
+  <span class="note" style="left:5%;top:25%;animation-delay:0s">💛</span>
+  <span class="note" style="left:88%;top:18%;animation-delay:1s">🎵</span>
+  <span class="note" style="left:12%;top:65%;animation-delay:2s">🦷</span>
+  <span class="note" style="left:82%;top:60%;animation-delay:1.5s">🎶</span>
+  <div class="hero-content">
+    <div class="logo-wrap">
+      <img src="images/GigiSehatMenyanyi.png" class="logo" alt="Gigi Sehat Menyanyi Logo">
+    </div>
+    <h1>Support the <span>Mission</span> Together</h1>
+    <p class="tagline">Healthy Teeth • Beautiful Singing • Responsible AI 🎶</p>
+    <p class="hero-desc">
+      GigiMenyanyiBot is an independent initiative exploring oral health,
+      singing wellbeing, community participation, multilingual communication,
+      and responsible AI experimentation. Contributions help support
+      documentation, experimentation, infrastructure, directory development,
+      and educational outreach.
+    </p>
+    <div>
+      <span class="pill-badge">❤️ AI Humanity</span>
+      <span class="pill-badge">🦷 Pro Directory</span>
+      <span class="pill-badge">🤝 Partnership</span>
+    </div>
+  </div>
+</section>
+
+<!-- TIER CARDS -->
+<section class="section">
+  <h2 class="section-title">Three Ways to <span>Support</span></h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">Choose the path that best fits your mission.</p>
+
+  <div class="tiers">
+
+    <!-- AI HUMANITY CONTRIBUTION -->
+    <div class="tier-card">
+      <span class="tier-badge">Contribution</span>
+      <p class="tier-for">General Public · Supporters</p>
+      <h2 class="tier-title">❤️ AI Humanity Contribution</h2>
+      <div>
+        <span class="tier-price">US$3</span>
+        <span class="tier-period">one-time</span>
+      </div>
+      <div class="tier-divider"></div>
+      <p class="tier-desc">
+        A simple way to support AI-for-humanity research and the public
+        documentation behind GigiMenyanyiBot — open to anyone, anywhere
+        in the world.
+      </p>
+      <ul class="tier-perks">
+        <li>Support AI Humanity Research</li>
+        <li>Support Public Documentation</li>
+        <li>Support Community Experiments</li>
+        <li>Optional Name on Gratitude Wall</li>
+      </ul>
+      <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener" class="tier-cta primary">
+        ❤️ Contribute Now
+      </a>
+    </div>
+
+    <!-- PROFESSIONAL DIRECTORY -->
+    <div class="tier-card featured">
+      <span class="tier-badge">Directory</span>
+      <p class="tier-for">Dental Professionals · Clinical Partnership</p>
+      <h2 class="tier-title">🦷 Professional Directory</h2>
+      <div>
+        <span class="tier-price">US$7</span>
+        <span class="tier-period">lifetime listing</span>
+      </div>
+      <div class="tier-divider"></div>
+      <p class="tier-desc">
+        Join the humanitarian AI oral-health research movement. Your
+        profile becomes part of the Geo-Aware @GigiMenyanyiBot directory
+        — permanently.
+      </p>
+      <ul class="tier-perks">
+        <li>Professional Profile</li>
+        <li>Practice Information</li>
+        <li>Contact Information</li>
+        <li>Directory Visibility</li>
+        <li>Support Oral Health Innovation</li>
+      </ul>
+      <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener" class="tier-cta primary">
+        🦷 Register &amp; Join Directory
+      </a>
+    </div>
+
+    <!-- ECOSYSTEM PARTNERSHIP -->
+    <div class="tier-card sponsor">
+      <span class="tier-badge">Partnership</span>
+      <p class="tier-for">Corporations · Oral Health &amp; Pharma</p>
+      <h2 class="tier-title">🤝 Ecosystem Partnership</h2>
+      <div>
+        <span class="tier-price">US$220</span>
+        <span class="tier-period">24-month collaboration</span>
+      </div>
+      <div class="tier-divider"></div>
+      <p class="tier-desc">
+        Your brand becomes part of the @GigiMenyanyiBot knowledge base.
+        When a conversation is contextually relevant, your products
+        surface organically as part of the education — never as an
+        interruptive ad.
+      </p>
+      <ul class="tier-perks">
+        <li>Partnership Profile</li>
+        <li>Ecosystem Collaboration Opportunities</li>
+        <li>Research Mention</li>
+        <li>Knowledge Base Integration</li>
+        <li>Community Support Branding</li>
+      </ul>
+      <a href="https://trakteer.id/gokiantik" target="_blank" rel="noopener" class="tier-cta gold-cta">
+        🤝 Apply for Partnership
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ETHICS NOTE -->
+  <div class="ethics-note">
+    <p>
+      <strong>Medical Ethics &amp; Transparency:</strong> Participation supports
+      public-interest research, community service, documentation, and
+      responsible AI experimentation. No rankings are sold. No medical
+      claims are sold. Directory information is intended only to improve
+      discoverability and accessibility.
+    </p>
+  </div>
+</section>
+
+<!-- VERIFICATION WORKFLOW -->
+<div class="flow-wrap">
+  <div class="flow-inner">
+    <h2 class="section-title">Verification <span>Workflow</span></h2>
+    <div class="divider"></div>
+    <p class="section-subtitle" style="color:rgba(255,255,255,.7);">How does contributor data enter the AI system?</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <p class="flow-step-title">Submit Information</p>
+        <p class="flow-step-desc">Contributors fill in the form and upload proof of payment / screenshot</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <p class="flow-step-title">Contribution Recorded</p>
+        <p class="flow-step-desc">Data enters the database with <em>PENDING</em> status — not yet active</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <p class="flow-step-title">Manual Verification</p>
+        <p class="flow-step-desc">Admin confirms the account statement or payment dashboard</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <p class="flow-step-title">Approval Process</p>
+        <p class="flow-step-desc">Reviewed entry is approved and queued for publication</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <p class="flow-step-title">Published to System</p>
+        <p class="flow-step-desc">Status changes to <em>LIVE</em> — data becomes accessible to the AI Geo-Aware directory</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="section">
+  <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">A few quick answers about the pricing tiers.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">FAQ 01</div>
+      <h3>Why US$3?</h3>
+      <p>To keep participation accessible for supporters worldwide, regardless of currency or income level.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">FAQ 02</div>
+      <h3>Why US$7?</h3>
+      <p>To make a lifetime professional directory listing affordable for dental practitioners everywhere.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">FAQ 03</div>
+      <h3>Why US$220?</h3>
+      <p>Because ecosystem partnerships involve a 24-month collaboration with ongoing knowledge-base integration and reporting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">😁 Gigi Sehat Menyanyi 💋</div>
+  <p>© 2026 Zì Zhǔ Zhě 自主者 · Superhero Café Inside · Funds managed under participatory cooperative principles.</p>
+  <p>GigiMenyanyiBot · <a href="https://t.me/GigiMenyanyiBot" target="_blank">@GigiMenyanyiBot</a></p>
+  <p class="footer-note">All Rights Reserved · Healthy Teeth. Beautiful Singing. Confident Smiles.</p>
+</footer>
+
+</body>
+</html>
