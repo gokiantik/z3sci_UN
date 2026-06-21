@@ -284,6 +284,19 @@
             </div>
         </div>
 
+        <!-- Card TG: Sarinem Chat di Telegram -->
+        <div class="card" id="cardTG">
+            <div class="card-header">
+                <h2><span id="cardTGIcon">✈️</span> <span id="cardTGTitle">Sarinem di Telegram</span> <span class="badge" id="cardTGBadge">Live Bot</span></h2>
+            </div>
+            <div class="card-body">
+                <p id="cardTGDesc">Versi <strong>siap pakai sehari-hari</strong> — antarmuka chat Telegram yang akrab, langsung dari ponsel. Cocok untuk pendamping yang ingin akses cepat tanpa buka browser.</p>
+                <ul class="link-list">
+                    <li><a href="https://t.me/sarinemchat_bot" target="_blank"><span class="link-icon">✈️</span> <span id="cardTGLink1">Sarinem Chat Bot (Telegram) →</span></a></li>
+                </ul>
+            </div>
+        </div>
+
         <!-- SECTION PANDUAN 5 SKENARIO UJI (BILINGUAL) -->
         <div class="test-guide-section" style="grid-column: 1 / -1; background: linear-gradient(135deg, #1a1f2c 0%, #2a2f3f 100%); border-radius: 28px; padding: 28px; margin: 0 0 24px 0; border: 1px solid rgba(201,168,76,0.3);">
             <h3 style="color: #c9a84c; font-size: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
@@ -452,6 +465,12 @@
         card2Desc: { id: "Full Bahasa Indonesia, <strong>clickable links darurat</strong>, LoC Hawkins scoring, NLP + Hipnoterapi + Neurosains. Bisa diakses publik dengan share link.", en: "Full Indonesian language, <strong>clickable emergency links</strong>, LoC Hawkins scoring, NLP + Hypnotherapy + Neuroscience. Publicly accessible via share link." },
         card2Link1: { id: "Sarinem v1.6 (Opal) →", en: "Sarinem v1.6 (Opal) →" },
         
+        // Card TG (Telegram)
+        cardTGTitle: { id: "Sarinem di Telegram", en: "Sarinem on Telegram" },
+        cardTGBadge: { id: "Live Bot", en: "Live Bot" },
+        cardTGDesc: { id: "Versi <strong>siap pakai sehari-hari</strong> — antarmuka chat Telegram yang akrab, langsung dari ponsel. Cocok untuk pendamping yang ingin akses cepat tanpa buka browser.", en: "The <strong>everyday ready-to-use</strong> version — a familiar Telegram chat interface, straight from the phone. Suited for companions who want quick access without opening a browser." },
+        cardTGLink1: { id: "Sarinem Chat Bot (Telegram) →", en: "Sarinem Chat Bot (Telegram) →" },
+        
         // Guide Section
         guideTitle: { id: "🧪 Panduan Penggunaan 5 Skenario Uji", en: "🧪 Guide: Using the 5 Test Scenarios" },
         guideDesc: { id: "Agar Anda nyaman melakukan pengujian terhadap prototipe ini, sudah saya sediakan <strong>5 skenario kekerasan dalam relasi keluarga</strong> di kartu berjudul <strong>'Alat Uji Publik'</strong>.", en: "For your convenience in testing this prototype, I have prepared <strong>5 scenarios of family relationship violence</strong> in the card labeled <strong>'Public Testing Tool'</strong>." },
@@ -527,6 +546,12 @@
         document.getElementById("card2Badge").innerHTML = texts.card2Badge[currentLang];
         document.getElementById("card2Desc").innerHTML = texts.card2Desc[currentLang];
         document.getElementById("card2Link1").innerHTML = texts.card2Link1[currentLang];
+        
+        // Card TG
+        document.getElementById("cardTGTitle").innerHTML = texts.cardTGTitle[currentLang];
+        document.getElementById("cardTGBadge").innerHTML = texts.cardTGBadge[currentLang];
+        document.getElementById("cardTGDesc").innerHTML = texts.cardTGDesc[currentLang];
+        document.getElementById("cardTGLink1").innerHTML = texts.cardTGLink1[currentLang];
         
         // Guide Section
         document.getElementById("guideTitle").innerHTML = texts.guideTitle[currentLang];
